@@ -90,8 +90,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   weekText: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 45,
     fontFamily: 'AppleSDGothicNeo-Light',
   },
 });
