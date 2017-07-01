@@ -1,0 +1,2163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xbel version="1.0">
+    <folder folded="yes">
+       <title>C$50 Finance</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/finance/finance.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/finance/finance.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/finance/lang/en/finance.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/finance/lang/en/finance.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/finance/finance-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/finance/finance-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/finance/finance-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/finance/finance-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=Fq2FkZ5_kL0">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>C$50 Finance / buy</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/buy/buy.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/buy/buy.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/buy/lang/en/buy.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/buy/lang/en/buy.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/buy/buy-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/buy/buy-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/buy/buy-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/buy/buy-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=ZSutCgmQLJY">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>C$50 Finance / history</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/history/history.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/history/history.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/history/lang/en/history.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/history/lang/en/history.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/history/history-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/history/history-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/history/history-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/history/history-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=uQ1hKsOHdLs">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>C$50 Finance / index</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/index/index.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/index/index.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/index/lang/en/index.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/index/lang/en/index.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/index/index-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/index/index-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/index/index-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/index/index-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=F6OFrimxBmI">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>C$50 Finance / personal touch</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/personal_touch/personal_touch.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/personal_touch/personal_touch.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/personal_touch/lang/en/personal_touch.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/personal_touch/lang/en/personal_touch.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/personal_touch/personal_touch-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/personal_touch/personal_touch-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/personal_touch/personal_touch-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/personal_touch/personal_touch-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=MyI8-hUVtZw">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>C$50 Finance / quote</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/quote/quote.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/quote/quote.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/quote/lang/en/quote.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/quote/lang/en/quote.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/quote/quote-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/quote/quote-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/quote/quote-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/quote/quote-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=Ug4A_gKrSYA">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>C$50 Finance / register</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/register/register.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/register/register.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/register/lang/en/register.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/register/lang/en/register.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/register/register-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/register/register-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/register/register-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/register/register-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=6GJwTHp40cs">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>C$50 Finance / sell</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/sell/sell.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/sell/sell.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/sell/lang/en/sell.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/sell/lang/en/sell.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/sell/sell-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/sell/sell-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/sell/sell-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/finance/sell/sell-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=w5oU_hL22Iw">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>caesar</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/caesar/c/caesar.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/caesar/c/caesar.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/caesar/c/lang/en/caesar.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/caesar/c/lang/en/caesar.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/caesar/c/caesar-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/caesar/c/caesar-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/caesar/c/caesar-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/caesar/c/caesar-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=2hZTmgDg7RY">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>caesar (Python)</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/caesar/python/caesar.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/caesar/python/caesar.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/caesar/python/lang/en/caesar.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/caesar/python/lang/en/caesar.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/caesar/python/caesar-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/caesar/python/caesar-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/caesar/python/caesar-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/caesar/python/caesar-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://youtu.be/5I7QqTTolHE">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>crack</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/crack/c/crack.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/crack/c/crack.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/crack/c/lang/en/crack.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/crack/c/lang/en/crack.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/crack/c/crack-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/crack/c/crack-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/crack/c/crack-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/crack/c/crack-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://youtu.be/w78QYcmpA8o">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>crack (Python)</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/crack/python/crack.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/crack/python/crack.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/crack/python/lang/en/crack.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/crack/python/lang/en/crack.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/crack/python/crack-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/crack/python/crack-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/crack/python/crack-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/crack/python/crack-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://youtu.be/5B1tK_4y-gI">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>credit</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/credit/c/credit.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/credit/c/credit.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/credit/c/lang/en/credit.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/credit/c/lang/en/credit.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/credit/c/credit-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/credit/c/credit-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/credit/c/credit-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/credit/c/credit-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=06wNhN54P6k">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>credit (Python)</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/credit/python/credit.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/credit/python/credit.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/credit/python/lang/en/credit.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/credit/python/lang/en/credit.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/credit/python/credit-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/credit/python/credit-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/credit/python/credit-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/credit/python/credit-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=o2nVBm9S3iw">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>fifteen</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/fifteen/fifteen.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/fifteen/fifteen.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/fifteen/lang/en/fifteen.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/fifteen/lang/en/fifteen.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/fifteen/fifteen-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/fifteen/fifteen-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/fifteen/fifteen-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/fifteen/fifteen-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=Rx_FJb3vr9U">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>greedy</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/greedy/c/greedy.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/greedy/c/greedy.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/greedy/c/lang/en/greedy.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/greedy/c/lang/en/greedy.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/greedy/c/greedy-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/greedy/c/greedy-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/greedy/c/greedy-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/greedy/c/greedy-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=6w7Tws0seJk">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>greedy (Python)</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/greedy/python/greedy.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/greedy/python/greedy.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/greedy/python/lang/en/greedy.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/greedy/python/lang/en/greedy.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/greedy/python/greedy-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/greedy/python/greedy-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/greedy/python/greedy-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/greedy/python/greedy-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=f3iMmGry05Q">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>hello</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/hello/c/hello.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/hello/c/hello.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/hello/c/lang/en/hello.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/hello/c/lang/en/hello.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/hello/c/hello-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/hello/c/hello-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/hello/c/hello-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/hello/c/hello-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=6w7Tws0seJk">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>hello (Python)</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/hello/python/hello.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/hello/python/hello.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/hello/python/lang/en/hello.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/hello/python/lang/en/hello.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/hello/python/hello-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/hello/python/hello-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/hello/python/hello-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/hello/python/hello-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=5ueXMnDE-y8">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>initials (less comfortable)</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/initials/less/initials-less.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/initials/less/initials-less.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/initials/less/lang/en/initials-less.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/initials/less/lang/en/initials-less.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/initials/less/initials-less-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/initials/less/initials-less-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/initials/less/initials-less-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/initials/less/initials-less-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=UItYCp0Ivqg">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>initials (more comfortable)</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/initials/more/initials-more.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/initials/more/initials-more.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/initials/more/lang/en/initials-more.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/initials/more/lang/en/initials-more.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/initials/more/initials-more-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/initials/more/initials-more-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/initials/more/initials-more-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/initials/more/initials-more-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=ThYAsCFB6aM">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>mario (less comfortable)</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/less/c/mario-less.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/less/c/mario-less.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/less/c/lang/en/mario-less.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/less/c/lang/en/mario-less.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/less/c/mario-less-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/less/c/mario-less-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/less/c/mario-less-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/less/c/mario-less-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=EGWRG5e1O2s">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>mario (less comfortable) (Python)</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/less/python/mario-less.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/less/python/mario-less.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/less/python/lang/en/mario-less.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/less/python/lang/en/mario-less.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/less/python/mario-less-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/less/python/mario-less-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/less/python/mario-less-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/less/python/mario-less-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=syt3NZhllwc">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>mario (more comfortable)</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/more/c/mario-more.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/more/c/mario-more.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/more/c/lang/en/mario-more.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/more/c/lang/en/mario-more.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/more/c/mario-more-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/more/c/mario-more-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/more/c/mario-more-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/more/c/mario-more-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=xX7DQGkEG48">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>mario (more comfortable) (Python)</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/more/python/mario-more.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/more/python/mario-more.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/more/python/lang/en/mario-more.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/more/python/lang/en/mario-more.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/more/python/mario-more-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/more/python/mario-more-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/more/python/mario-more-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mario/more/python/mario-more-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=gqS876f0lk0">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>Mashup</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mashup/mashup/mashup.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mashup/caesar.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mashup/mashup/lang/en/mashup.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mashup/mashup/lang/en/mashup.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mashup/mashup/mashup-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mashup/mashup/mashup-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mashup/mashup/mashup-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mashup/mashup/mashup-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=LGOXIN87giE">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>Mashup / application.py</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mashup/application.py/mashup_application_py.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mashup/application.py/mashup_application.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mashup/application.py/lang/en/mashup_application_py.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mashup/application.py/lang/en/mashup_application_py.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mashup/application.py/mashup_application_py-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mashup/application.py/mashup_application_py-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mashup/application.py/mashup_application_py-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mashup/application.py/mashup_application_py-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=TGFC4VaG8lg">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>Mashup / scripts.js</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mashup/scripts.js/mashup_scripts_js.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mashup/scripts.js/mashup_scripts.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mashup/scripts.js/lang/en/mashup_scripts_js.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mashup/scripts.js/lang/en/mashup_scripts_js.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mashup/scripts.js/mashup_scripts_js-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mashup/scripts.js/mashup_scripts_js-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mashup/scripts.js/mashup_scripts_js-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/mashup/scripts.js/mashup_scripts_js-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=knROcTlc6Zo">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>recover</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/recover/recover.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/recover/recover.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/recover/lang/en/recover.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/recover/lang/en/recover.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/recover/recover-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/recover/recover-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/recover/recover-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/recover/recover-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=hOWYGowwId0">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>resize (less comfortable)</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/resize/less/resize-less.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/resize/less/resize-less.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/resize/less/lang/en/resize-less.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/resize/less/lang/en/resize-less.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/resize/less/resize-less-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/resize/less/resize-less-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/resize/less/resize-less-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/resize/less/resize-less-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=zOylgRdzv_U">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>resize (more comfortable)</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/resize/more/resize-more.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/resize/more/resize-more.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/resize/more/lang/en/resize-more.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/resize/more/lang/en/resize-more.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/resize/more/resize-more-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/resize/more/resize-more-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/resize/more/resize-more-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/resize/more/resize-more-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=TKD7Ot_kt8w">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>search</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/find/search/search.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/find/search/search.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/find/search/lang/en/search.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/find/search/lang/en/search.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/find/search/search-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/find/search/search-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/find/search/search-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/find/search/search-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=TezZrZ8oCfw">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>Sentiments / analyzer.py</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/sentiments/analyzer.py/analyzer.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/sentiments/analyzer.py/analyzer.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/sentiments/analyzer.py/lang/en/analyzer.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/sentiments/analyzer.py/lang/en/analyzer.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/sentiments/analyzer.py/analyzer-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/sentiments/analyzer.py/analyzer-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/sentiments/analyzer.py/analyzer-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/sentiments/analyzer.py/analyzer-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=_rBWbyoJmaU">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>Sentiments / application.py</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/sentiments/application.py/application.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/sentiments/application.py/application.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/sentiments/application.py/lang/en/application.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/sentiments/application.py/lang/en/application.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/sentiments/application.py/application-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/sentiments/application.py/application-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/sentiments/application.py/application-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/sentiments/application.py/application-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=XTqxVUm4ZXg">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>Sentiments / tweets</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/sentiments/tweets/tweets.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/sentiments/tweets/tweets.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/sentiments/tweets/lang/en/tweets.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/sentiments/tweets/lang/en/tweets.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/sentiments/tweets/tweets-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/sentiments/tweets/tweets-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/sentiments/tweets/tweets-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/sentiments/tweets/tweets-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=j3SbCsLGwtk">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>sort (less comfortable)</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/find/sort/less/sort-less.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/find/sort/less/sort-less.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/find/sort/less/lang/en/sort-less.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/find/sort/less/lang/en/sort-less.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/find/sort/less/sort-less-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/find/sort/less/sort-less-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/find/sort/less/sort-less-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/find/sort/less/sort-less-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=eXeP__gBMrM">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>sort (more comfortable)</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/find/sort/more/sort-more.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/find/sort/more/sort-more.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/find/sort/more/lang/en/sort-more.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/find/sort/more/lang/en/sort-more.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/find/sort/more/sort-more-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/find/sort/more/sort-more-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/find/sort/more/sort-more-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/find/sort/more/sort-more-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=59daM3aTWho">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>speller</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/speller.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/speller/speller.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/lang/en/speller.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/lang/en/speller.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/speller-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/speller-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/speller-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/speller-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=u9-1U1Rgo1o">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>speller / load</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/load/load.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/load/load.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/load/lang/en/load.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/load/lang/en/load.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/load/load-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/load/load-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/load/load-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/load/load-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=okH8f9xl0uY">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>speller / check</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/check/check.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/check/check.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/check/lang/en/check.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/check/lang/en/check.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/check/check-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/check/check-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/check/check-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/check/check-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=hsruECgJJVQ">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>speller / unload</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/unload/unload.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/unload/unload.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/unload/lang/en/unload.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/unload/lang/en/unload.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/unload/unload-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/unload/unload-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/unload/unload-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/speller/unload/unload-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=O3tErLhuEmY">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>vigenere</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/vigenere/c/vigenere.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/vigenere/c/vigenere.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/vigenere/c/lang/en/vigenere.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/vigenere/c/lang/en/vigenere.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/vigenere/c/vigenere-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/vigenere/c/vigenere-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/vigenere/c/vigenere-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/vigenere/c/vigenere-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=-SWThsve-Hk">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>vigenere (Python)</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/vigenere/python/vigenere.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/vigenere/python/vigenere.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/vigenere/python/lang/en/vigenere.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/vigenere/python/lang/en/vigenere.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/vigenere/python/vigenere-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/vigenere/python/vigenere-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/vigenere/python/vigenere-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/vigenere/python/vigenere-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://youtu.be/2CjOWavpMTY">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>water</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/water/water.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/water/water.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/water/lang/en/water.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/water/lang/en/water.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/water/water-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/water/water-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/water/water-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/water/water-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=oAcVHgmjTHE">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+    <folder folded="yes">
+       <title>whodunit</title>
+       <folder folded="yes">
+          <title>Audio</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/whodunit/whodunit.mp3">
+             <title>MP3</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Slides</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/whodunit/whodunit.pdf">
+             <title>PDF</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Subtitles</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/whodunit/lang/en/whodunit.srt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Transcripts</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/whodunit/lang/en/whodunit.txt">
+             <title>English</title>
+          </bookmark>
+       </folder>
+       <folder folded="yes">
+          <title>Video</title>
+          <folder folded="yes">
+             <title>MP4</title>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/whodunit/whodunit-240p.mp4">
+                <title>240p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/whodunit/whodunit-360p.mp4">
+                <title>360p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/whodunit/whodunit-720p.mp4">
+                <title>720p</title>
+             </bookmark>
+             <bookmark href="http://cdn.cs50.net/2016/fall/walkthroughs/whodunit/whodunit-1080p.mp4">
+                <title>1080p</title>
+             </bookmark>
+          </folder>
+          <bookmark href="https://www.youtube.com/watch?v=Igsa7V5ouzg">
+             <title>YouTube</title>
+          </bookmark>
+       </folder>
+    </folder>
+</xbel>

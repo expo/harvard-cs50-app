@@ -1,0 +1,841 @@
+<xbel version="1.0">
+  <folder folded="yes">
+    <title>Week 0</title>
+    <desc>Scratch</desc>
+    <folder folded="yes">
+      <title>Audio</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/0/week0.mp3">
+        <title>MP3</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Notes</title>
+      <bookmark href="http://docs.cs50.net/2016/fall/notes/0/week0.html">
+        <title>HTML</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Slides</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/0/week0.pdf">
+        <title>PDF</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Source Code</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/0/src0/">
+        <title>index</title>
+      </bookmark>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/0/src0.zip">
+        <title>ZIP</title>
+      </bookmark>
+    </folder>
+    <folder>
+      <title>Subtitles</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/0/lang/en/week0.srt">
+        <title>English</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Syllabus</title>
+      <bookmark href="http://docs.cs50.net/2016/fall/syllabus/cs50.html">
+        <title>HTML</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Videos</title>
+      <folder folded="yes">
+        <title>MP4</title>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/0/week0-240p.mp4">
+          <title>240p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/0/week0-360p.mp4">
+          <title>360p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/0/week0-720p.mp4">
+          <title>720p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/0/week0-1080p.mp4">
+          <title>1080p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/0/week0-4k.mp4">
+          <title>4K</title>
+        </bookmark>
+      </folder>
+      <bookmark href="https://www.youtube.com/watch?v=M-XlYymh714">
+        <title>YouTube</title>
+      </bookmark>
+    </folder>
+  </folder>
+  <folder folded="yes">
+    <title>Week 0 at Yale</title>
+    <desc>Scratch</desc>
+    <folder folded="yes">
+      <title>Audio</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/0/yale/week0.mp3">
+        <title>MP3</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Notes</title>
+      <bookmark href="http://docs.cs50.net/2016/fall/notes/0/week0.html">
+        <title>HTML</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Slides</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/0/yale/week0.pdf">
+        <title>PDF</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Source Code</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/0/yale/src0/">
+        <title>index</title>
+      </bookmark>
+    <bookmark href="http://cdn.cs50.net/2016/fall/lectures/0/yale/src0.zip">
+        <title>ZIP</title>
+      </bookmark>
+    </folder>
+    <folder>
+      <title>Subtitles</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/0/yale/lang/en/week0.srt">
+        <title>English</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Syllabus</title>
+      <bookmark href="http://docs.cs50.net/2016/fall/syllabus/cs50.html">
+        <title>HTML</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Videos</title>
+      <folder folded="yes">
+        <title>MP4</title>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/0/yale/week0-240p.mp4">
+          <title>240p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/0/yale/week0-360p.mp4">
+          <title>360p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/0/yale/week0-720p.mp4">
+          <title>720p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/0/yale/week0-1080p.mp4">
+          <title>1080p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/0/yale/week0-4k.mp4">
+          <title>4K</title>
+        </bookmark>
+      </folder>
+      <bookmark href="https://www.youtube.com/watch?v=s3jOQos72-A">
+        <title>YouTube</title>
+      </bookmark>
+    </folder>
+  </folder>
+  <folder folded="yes">
+    <title>Week 1</title>
+    <desc>C</desc>
+    <folder folded="yes">
+      <title>Audio</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/1/week1.mp3">
+        <title>MP3</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Notes</title>
+      <bookmark href="http://docs.cs50.net/2016/fall/notes/1/week1.html">
+        <title>HTML</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Slides</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/1/week1.pdf">
+        <title>PDF</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Source Code</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/1/src1/">
+        <title>index</title>
+      </bookmark>
+    <bookmark href="http://cdn.cs50.net/2016/fall/lectures/1/src1.zip">
+        <title>ZIP</title>
+      </bookmark>
+    </folder>
+    <folder>
+      <title>Subtitles</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/1/lang/en/week1.srt">
+        <title>English</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Videos</title>
+      <folder folded="yes">
+        <title>MP4</title>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/1/week1-240p.mp4">
+          <title>240p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/1/week1-360p.mp4">
+          <title>360p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/1/week1-720p.mp4">
+          <title>720p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/1/week1-1080p.mp4">
+          <title>1080p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/1/week1-4k.mp4">
+          <title>4K</title>
+        </bookmark>
+      </folder>
+      <bookmark href="https://www.youtube.com/watch?v=_8ablljnDBw">
+        <title>YouTube</title>
+      </bookmark>
+    </folder>
+  </folder>
+  <folder folded="yes">
+    <title>Week 2</title>
+    <desc>Arrays</desc>
+    <folder folded="yes">
+      <title>Audio</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/2/week2.mp3">
+        <title>MP3</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Notes</title>
+      <bookmark href="http://docs.cs50.net/2016/fall/notes/2/week2.html">
+        <title>HTML</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Slides</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/2/week2.pdf">
+        <title>PDF</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Source Code</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/2/src2/">
+        <title>index</title>
+      </bookmark>
+    <bookmark href="http://cdn.cs50.net/2016/fall/lectures/2/src2.zip">
+        <title>ZIP</title>
+      </bookmark>
+    </folder>
+    <folder>
+      <title>Subtitles</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/2/lang/en/week2.srt">
+        <title>English</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Videos</title>
+      <folder folded="yes">
+        <title>MP4</title>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/2/week2-240p.mp4">
+          <title>240p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/2/week2-360p.mp4">
+          <title>360p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/2/week2-720p.mp4">
+          <title>720p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/2/week2-1080p.mp4">
+          <title>1080p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/2/week2-4k.mp4">
+          <title>4K</title>
+        </bookmark>
+      </folder>
+      <bookmark href="https://www.youtube.com/watch?v=K2L6xXJrpq4">
+        <title>YouTube</title>
+      </bookmark>
+    </folder>
+  </folder>
+  <folder folded="yes">
+    <title>Week 3</title>
+    <desc>Algorithms</desc>
+    <folder folded="yes">
+      <title>Audio</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/3/week3.mp3">
+        <title>MP3</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Notes</title>
+      <bookmark href="http://docs.cs50.net/2016/fall/notes/3/week3.html">
+        <title>HTML</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Slides</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/3/week3.pdf">
+        <title>PDF</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Source Code</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/3/src3/">
+        <title>index</title>
+      </bookmark>
+    <bookmark href="http://cdn.cs50.net/2016/fall/lectures/3/src3.zip">
+        <title>ZIP</title>
+      </bookmark>
+    </folder>
+    <folder>
+      <title>Subtitles</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/3/lang/en/week3.srt">
+        <title>English</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Videos</title>
+      <folder folded="yes">
+        <title>MP4</title>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/3/week3-240p.mp4">
+          <title>240p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/3/week3-360p.mp4">
+          <title>360p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/3/week3-720p.mp4">
+          <title>720p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/3/week3-1080p.mp4">
+          <title>1080p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/3/week3-4k.mp4">
+          <title>4K</title>
+        </bookmark>
+      </folder>
+      <bookmark href="https://www.youtube.com/watch?v=t_gxXV3s04I">
+        <title>YouTube</title>
+      </bookmark>
+    </folder>
+  </folder>
+  <folder folded="yes">
+    <title>Week 4</title>
+    <desc>Memory</desc>
+    <folder folded="yes">
+      <title>Audio</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/4/week4.mp3">
+        <title>MP3</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Notes</title>
+      <bookmark href="http://docs.cs50.net/2016/fall/notes/4/week4.html">
+        <title>HTML</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Slides</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/4/week4.pdf">
+        <title>PDF</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Source Code</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/4/src4/">
+        <title>index</title>
+      </bookmark>
+    <bookmark href="http://cdn.cs50.net/2016/fall/lectures/4/src4.zip">
+        <title>ZIP</title>
+      </bookmark>
+    </folder>
+    <folder>
+      <title>Subtitles</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/4/lang/en/week4.srt">
+        <title>English</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Videos</title>
+      <folder folded="yes">
+        <title>MP4</title>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/4/week4-240p.mp4">
+          <title>240p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/4/week4-360p.mp4">
+          <title>360p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/4/week4-720p.mp4">
+          <title>720p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/4/week4-1080p.mp4">
+          <title>1080p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/4/week4-4k.mp4">
+          <title>4K</title>
+        </bookmark>
+      </folder>
+      <bookmark href="https://www.youtube.com/watch?v=dfZwCCvGQ5E">
+        <title>YouTube</title>
+      </bookmark>
+    </folder>
+  </folder>
+  <folder folded="yes">
+    <title>Week 5</title>
+    <desc>Data Structures</desc>
+    <folder folded="yes">
+      <title>Audio</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/5/week5.mp3">
+        <title>MP3</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Notes</title>
+      <bookmark href="http://docs.cs50.net/2016/fall/notes/5/week5.html">
+        <title>HTML</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Slides</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/5/week5.pdf">
+        <title>PDF</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Source Code</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/5/src5/">
+        <title>index</title>
+      </bookmark>
+    <bookmark href="http://cdn.cs50.net/2016/fall/lectures/5/src5.zip">
+        <title>ZIP</title>
+      </bookmark>
+    </folder>
+    <folder>
+      <title>Subtitles</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/5/lang/en/week5.srt">
+        <title>English</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Videos</title>
+      <folder folded="yes">
+        <title>MP4</title>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/5/week5-240p.mp4">
+          <title>240p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/5/week5-360p.mp4">
+          <title>360p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/5/week5-720p.mp4">
+          <title>720p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/5/week5-1080p.mp4">
+          <title>1080p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/5/week5-4k.mp4">
+          <title>4K</title>
+        </bookmark>
+      </folder>
+      <bookmark href="https://www.youtube.com/watch?v=s85sDt-NGVg">
+        <title>YouTube</title>
+      </bookmark>
+    </folder>
+  </folder>
+  <folder folded="yes">
+    <title>Week 6</title>
+    <desc>HTTP</desc>
+    <folder folded="yes">
+      <title>Audio</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/6/week6.mp3">
+        <title>MP3</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Notes</title>
+      <bookmark href="http://docs.cs50.net/2016/fall/notes/6/week6.html">
+        <title>HTML</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Slides</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/6/week6.pdf">
+        <title>PDF</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Source Code</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/6/src6/">
+        <title>index</title>
+      </bookmark>
+    <bookmark href="http://cdn.cs50.net/2016/fall/lectures/6/src6.zip">
+        <title>ZIP</title>
+      </bookmark>
+    </folder>
+    <folder>
+      <title>Subtitles</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/6/lang/en/week6.srt">
+        <title>English</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Videos</title>
+      <folder folded="yes">
+        <title>MP4</title>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/6/week6-240p.mp4">
+          <title>240p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/6/week6-360p.mp4">
+          <title>360p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/6/week6-720p.mp4">
+          <title>720p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/6/week6-1080p.mp4">
+          <title>1080p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/6/week6-4k.mp4">
+          <title>4K</title>
+        </bookmark>
+      </folder>
+      <bookmark href="https://www.youtube.com/watch?v=IJWR1disUlA">
+        <title>YouTube</title>
+      </bookmark>
+    </folder>
+  </folder>
+  <folder folded="yes">
+    <title>Week 7</title>
+    <desc>Machine Learning</desc>
+    <folder folded="yes">
+      <title>Audio</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/7/week7.mp3">
+        <title>MP3</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Notes</title>
+      <bookmark href="http://docs.cs50.net/2016/fall/notes/7/week7.html">
+        <title>HTML</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Slides</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/7/week7.pdf">
+        <title>PDF</title>
+      </bookmark>
+    </folder>
+    <folder>
+      <title>Subtitles</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/7/lang/en/week7.srt">
+        <title>English</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Videos</title>
+      <folder folded="yes">
+        <title>MP4</title>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/7/week7-240p.mp4">
+          <title>240p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/7/week7-360p.mp4">
+          <title>360p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/7/week7-720p.mp4">
+          <title>720p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/7/week7-1080p.mp4">
+          <title>1080p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/7/week7-4k.mp4">
+          <title>4K</title>
+        </bookmark>
+      </folder>
+      <bookmark href="https://www.youtube.com/watch?v=th4-Lxdtdqo">
+        <title>YouTube</title>
+      </bookmark>
+    </folder>
+  </folder>
+  <folder folded="yes">
+    <title>Week 8</title>
+    <desc>Python</desc>
+    <folder folded="yes">
+      <title>Audio</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/8/week8.mp3">
+        <title>MP3</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Notes</title>
+      <bookmark href="http://docs.cs50.net/2016/fall/notes/8/week8.html">
+        <title>HTML</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Slides</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/8/week8.pdf">
+        <title>PDF</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Source Code</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/8/src8/">
+        <title>index</title>
+      </bookmark>
+    <bookmark href="http://cdn.cs50.net/2016/fall/lectures/8/src8.zip">
+        <title>ZIP</title>
+      </bookmark>
+    </folder>
+    <folder>
+      <title>Subtitles</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/8/lang/en/week8.srt">
+        <title>English</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Videos</title>
+      <folder folded="yes">
+        <title>MP4</title>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/8/week8-240p.mp4">
+          <title>240p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/8/week8-360p.mp4">
+          <title>360p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/8/week8-720p.mp4">
+          <title>720p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/8/week8-1080p.mp4">
+          <title>1080p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/8/week8-4k.mp4">
+          <title>4K</title>
+        </bookmark>
+      </folder>
+      <bookmark href="https://www.youtube.com/watch?v=HfaCXlEL_fM">
+        <title>YouTube</title>
+      </bookmark>
+    </folder>
+  </folder>
+  <folder folded="yes">
+    <title>Week 9</title>
+    <desc>SQL</desc>
+    <folder folded="yes">
+      <title>Audio</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/9/week9.mp3">
+        <title>MP3</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Notes</title>
+      <bookmark href="http://docs.cs50.net/2016/fall/notes/9/week9.html">
+        <title>HTML</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Slides</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/9/week9.pdf">
+        <title>PDF</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Source Code</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/9/src9/">
+        <title>index</title>
+      </bookmark>
+    <bookmark href="http://cdn.cs50.net/2016/fall/lectures/9/src9.zip">
+        <title>ZIP</title>
+      </bookmark>
+    </folder>
+    <folder>
+      <title>Subtitles</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/9/lang/en/week9.srt">
+        <title>English</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Videos</title>
+      <folder folded="yes">
+        <title>MP4</title>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/9/week9-240p.mp4">
+          <title>240p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/9/week9-360p.mp4">
+          <title>360p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/9/week9-720p.mp4">
+          <title>720p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/9/week9-1080p.mp4">
+          <title>1080p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/9/week9-4k.mp4">
+          <title>4K</title>
+        </bookmark>
+      </folder>
+      <bookmark href="https://www.youtube.com/watch?v=zWvkg-qqOzU">
+        <title>YouTube</title>
+      </bookmark>
+    </folder>
+  </folder>
+  <folder folded="yes">
+    <title>Week 10</title>
+    <desc>JavaScript</desc>
+    <folder folded="yes">
+      <title>Audio</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/10/week10.mp3">
+        <title>MP3</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Notes</title>
+      <bookmark href="http://docs.cs50.net/2016/fall/notes/10/week10.html">
+        <title>HTML</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Slides</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/10/week10.pdf">
+        <title>PDF</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Source Code</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/10/src10/">
+        <title>index</title>
+      </bookmark>
+    <bookmark href="http://cdn.cs50.net/2016/fall/lectures/10/src10.zip">
+        <title>ZIP</title>
+      </bookmark>
+    </folder>
+    <folder>
+      <title>Subtitles</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/10/lang/en/week10.srt">
+        <title>English</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Videos</title>
+      <folder folded="yes">
+        <title>MP4</title>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/10/week10-240p.mp4">
+          <title>240p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/10/week10-360p.mp4">
+          <title>360p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/10/week10-720p.mp4">
+          <title>720p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/10/week10-1080p.mp4">
+          <title>1080p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/10/week10-4k.mp4">
+          <title>4K</title>
+        </bookmark>
+      </folder>
+      <bookmark href="https://www.youtube.com/watch?v=M04t-EjKZAQ">
+        <title>YouTube</title>
+      </bookmark>
+    </folder>
+  </folder>
+  <folder folded="yes">
+    <title>Week 11</title>
+    <desc>The End</desc>
+    <folder folded="yes">
+      <title>Audio</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/11/week11.mp3">
+        <title>MP3</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Notes</title>
+      <bookmark href="http://docs.cs50.net/2016/fall/notes/11/week11.html">
+        <title>HTML</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Slides</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/11/week11.pdf">
+        <title>PDF</title>
+      </bookmark>
+    </folder>
+    <folder>
+      <title>Subtitles</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/11/lang/en/week11.srt">
+        <title>English</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Videos</title>
+      <folder folded="yes">
+        <title>MP4</title>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/11/week11-240p.mp4">
+          <title>240p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/11/week11-360p.mp4">
+          <title>360p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/11/week11-720p.mp4">
+          <title>720p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/11/week11-1080p.mp4">
+          <title>1080p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/11/week11-4k.mp4">
+          <title>4K</title>
+        </bookmark>
+      </folder>
+      <bookmark href="https://www.youtube.com/watch?v=VKmOXCEq-6A">
+        <title>YouTube</title>
+      </bookmark>
+    </folder>
+  </folder>
+  <folder folded="yes">
+    <title>Week 11 at Yale</title>
+    <desc>The End</desc>
+    <folder folded="yes">
+      <title>Audio</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/11/yale/week11.mp3">
+        <title>MP3</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Notes</title>
+      <bookmark href="http://docs.cs50.net/2016/fall/notes/11/yale/week11.html">
+        <title>HTML</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Slides</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/11/yale/week11.pdf">
+        <title>PDF</title>
+      </bookmark>
+    </folder>
+    <folder>
+      <title>Subtitles</title>
+      <bookmark href="http://cdn.cs50.net/2016/fall/lectures/11/yale/lang/en/week11.srt">
+        <title>English</title>
+      </bookmark>
+    </folder>
+    <folder folded="yes">
+      <title>Videos</title>
+      <folder folded="yes">
+        <title>MP4</title>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/11/yale/week11-240p.mp4">
+          <title>240p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/11/yale/week11-360p.mp4">
+          <title>360p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/11/yale/week11-720p.mp4">
+          <title>720p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/11/yale/week11-1080p.mp4">
+          <title>1080p</title>
+        </bookmark>
+        <bookmark href="http://cdn.cs50.net/2016/fall/lectures/11/yale/week11-4k.mp4">
+          <title>4K</title>
+        </bookmark>
+      </folder>
+      <bookmark href="https://www.youtube.com/watch?v=miyE3Y2FcOs">
+        <title>YouTube</title>
+      </bookmark>
+    </folder>
+  </folder>
+</xbel>

@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "name": "harvard-cs50-expo",
+    "description": "An empty new project",
+    "slug": "harvard-cs50-expo",
+    "privacy": "public",
+    "sdkVersion": "UNVERSIONED",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "primaryColor": "#cccccc",
+    "icon": "./assets/icons/app.png",
+    "loading": {
+      "icon": "./assets/icons/loading.png",
+      "hideExponentText": false
+    },
+    "packagerOpts": {
+      "assetExts": ["ttf", "mp4", "xml"]
+    },
+    "ios": {
+      "supportsTablet": true
+    }
+  }
+}

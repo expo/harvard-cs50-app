@@ -1,0 +1,170 @@
+<xbel version="1.0">
+  <folder folded="yes">
+    <title>Problem Set 0: Scratch</title>
+      <folder folded="yes">
+        <title>Specification</title>
+        <bookmark href="http://docs.cs50.net/2016/fall/psets/0/pset0.html">
+          <title>HTML</title>
+        </bookmark>
+      </folder>
+      <folder folded="yes">
+        <title>Studios</title>
+        <bookmark href="http://scratch.mit.edu/projects/26329354/">
+          <title>Pikachu's Pastry Catch</title>
+        </bookmark>
+        <bookmark href="https://scratch.mit.edu/projects/71161586/">
+          <title>Oscartime</title>
+        </bookmark>
+      </folder>
+  </folder>
+  <folder folded="yes">
+    <title>Problem Set 1: C</title>
+      <folder folded="yes">
+        <title>Specification</title>
+        <bookmark href="http://docs.cs50.net/2016/fall/psets/1/pset1.html">
+          <title>HTML</title>
+        </bookmark>
+      </folder>
+  </folder>
+  <folder folded="yes">
+    <title>Problem Set 2: Crypto</title>
+      <folder folded="yes">
+        <title>Specification</title>
+        <bookmark href="http://docs.cs50.net/2016/fall/psets/2/pset2.html">
+          <title>HTML</title>
+        </bookmark>
+      </folder>
+  </folder>
+  <folder folded="yes">
+    <title>Problem Set 3: Game of Fifteen</title>
+      <folder folded="yes">
+      <title>Source Code</title>
+          <folder folded="yes">
+              <title>fifteen</title>
+              <bookmark href="http://cdn.cs50.net/2016/fall/problems/fifteen/fifteen/">
+                  <title>index</title>
+              </bookmark>
+              <bookmark href="http://cdn.cs50.net/2016/fall/problems/fifteen/fifteen.zip">
+                  <title>ZIP</title>
+              </bookmark>
+          </folder>
+          <folder folded="yes">
+              <title>find</title>
+              <bookmark href="http://cdn.cs50.net/2016/fall/problems/find/find/">
+                  <title>index</title>
+              </bookmark>
+              <bookmark href="http://cdn.cs50.net/2016/fall/problems/find/find.zip">
+                  <title>ZIP</title>
+              </bookmark>
+          </folder>
+      </folder>
+      <folder folded="yes">
+        <title>Specification</title>
+        <bookmark href="http://docs.cs50.net/2016/fall/psets/3/pset3.html">
+          <title>HTML</title>
+        </bookmark>
+      </folder>
+    </folder>
+  <folder folded="yes">
+    <title>Problem Set 4: Forensics</title>
+      <folder folded="yes">
+          <title>Source Code</title>
+          <folder folded="yes">
+              <title>resize</title>
+              <bookmark href="http://cdn.cs50.net/2016/fall/problems/resize/resize/">
+                  <title>index</title>
+              </bookmark>
+              <bookmark href="http://cdn.cs50.net/2016/fall/problems/resize/resize.zip">
+                  <title>ZIP</title>
+              </bookmark>
+          </folder>
+          <folder folded="yes">
+              <title>whodunit</title>
+              <bookmark href="http://cdn.cs50.net/2016/fall/problems/whodunit/whodunit/">
+                  <title>index</title>
+              </bookmark>
+              <bookmark href="http://cdn.cs50.net/2016/fall/problems/whodunit/whodunit.zip">
+                  <title>ZIP</title>
+              </bookmark>
+          </folder>
+        </folder>
+      <folder folded="yes">
+        <title>Specification</title>
+        <bookmark href="http://docs.cs50.net/2016/fall/psets/4/pset4.html">
+          <title>HTML</title>
+        </bookmark>
+      </folder>
+    </folder>
+  <folder folded="yes">
+    <title>Problem Set 5: Mispellings</title>
+      <folder folded="yes">
+          <title>Source Code</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/problems/speller/speller/">
+              <title>index</title>
+          </bookmark>
+          <bookmark href="http://cdn.cs50.net/2016/fall/problems/speller/speller.zip">
+              <title>ZIP</title>
+          </bookmark>
+      </folder>
+      <folder folded="yes">
+        <title>Specification</title>
+        <bookmark href="http://docs.cs50.net/2016/fall/psets/5/pset5.html">
+          <title>HTML</title>
+        </bookmark>
+      </folder>
+    </folder>
+  <folder folded="yes">
+    <title>Problem Set 6: Sentimental</title>
+      <folder folded="yes">
+          <title>Source Code</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/problems/sentiments/sentiments/">
+               <title>index</title>
+          </bookmark>
+          <bookmark href="http://cdn.cs50.net/2016/fall/problems/sentiments/sentiments.zip">
+              <title>ZIP</title>
+          </bookmark>
+      </folder>
+      <folder folded="yes">
+        <title>Specification</title>
+        <bookmark href="http://docs.cs50.net/2016/fall/psets/6/pset6.html">
+          <title>HTML</title>
+        </bookmark>
+      </folder>
+  </folder>
+  <folder folded="yes">
+    <title>Problem Set 7: C$50 Finance</title>
+      <folder folded="yes">
+          <title>Source Code</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/problems/finance/finance/">
+              <title>index</title>
+          </bookmark>
+          <bookmark href="http://cdn.cs50.net/2016/fall/problems/finance/finance.zip">
+              <title>ZIP</title>
+          </bookmark>
+      </folder>
+      <folder folded="yes">
+        <title>Specification</title>
+        <bookmark href="http://docs.cs50.net/2016/fall/psets/7/pset7.html">
+          <title>HTML</title>
+        </bookmark>
+      </folder>
+    </folder>
+  <folder folded="yes">
+    <title>Problem Set 8: Mashup</title>
+      <folder folded="yes">
+          <title>Source Code</title>
+          <bookmark href="http://cdn.cs50.net/2016/fall/problems/mashup/mashup/">
+              <title>index</title>
+          </bookmark>
+          <bookmark href="http://cdn.cs50.net/2016/fall/problems/mashup/mashup.zip">
+              <title>ZIP</title>
+          </bookmark>
+      </folder>
+      <folder folded="yes">
+        <title>Specification</title>
+        <bookmark href="http://docs.cs50.net/2016/fall/psets/8/pset8.html">
+          <title>HTML</title>
+        </bookmark>
+      </folder>
+    </folder>
+</xbel>
