@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, ListView } from 'react-native';
+import { StyleSheet, Text, View, ListView, TouchableHighlight, Dimensions } from 'react-native';
 import Expo, { FileSystem as FS } from 'expo';
 
 const XMLParser = require('react-xml-parser');
-var classes = [''];
+var classes = [];
 
 export default class App extends React.Component {
 
@@ -41,12 +41,30 @@ export default class App extends React.Component {
     }
   }
 
+  onWeekPress(rowData) {
+
+  }
+
+  renderRowView(rowData) {
+      return (
+        <TouchableHighlight
+          style={styles.weekButton}
+          onPress={this.onWeekPress(rowData)}
+          >
+          <Text style={styles.weekText}>
+            {rowData}
+          </Text>
+        </TouchableHighlight>
+      );
+  }
+
   render() {
     return (
-      <View>
+      <View style={styles.container}>
+      <Text></Text>
         <ListView
           dataSource={this.state.dataSource}
-          renderRow={(rowData) => <Text>{rowData}</Text>}
+          renderRow={this.renderRowView.bind(this)}
         />
       </View>
     );
@@ -54,10 +72,26 @@ export default class App extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  weekButton: {
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#eee',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    height: (Dimensions.get('window').height / 6),
+    width: Dimensions.get('window').width,
+    paddingVertical: 15,
+    paddingLeft: 20,
+    backgroundColor: '#fff',
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  weekText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    fontFamily: 'AppleSDGothicNeo-Light',
   },
 });
