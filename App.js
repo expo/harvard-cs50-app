@@ -26,9 +26,10 @@ export default class App extends React.Component {
     var xml = new XMLParser().parseFromString(text);
     // var file = await FS.readAsStringAsync('./xml/lectures.txt', {});
     //console.log(xml);
-    for (var i = 0; i < 13; i++) {
-      var c = xml.children;
-      var n = c[i].children;
+    var curr = 0;
+    var c = xml.children;
+    while (c[curr].children) {
+      var n = c[curr].children;
       console.log(n[0].value);
       var newArray = this.state.db.slice();
       newArray.push(n[0].value);
@@ -36,6 +37,7 @@ export default class App extends React.Component {
           dataSource: this.state.dataSource.cloneWithRows(newArray),
           db: newArray,
       });
+      curr++;
     }
   }
 
