@@ -1,6 +1,18 @@
 import React from 'react';
-import { StyleSheet, Text, View, ListView, TouchableHighlight, Dimensions, Image } from 'react-native';
-import Expo, { FileSystem as FS } from 'expo';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ListView,
+  TouchableHighlight,
+  Dimensions,
+  Image,
+  StatusBar
+} from 'react-native';
+import Expo, {
+  FileSystem as FS,
+  LinearGradient,
+ } from 'expo';
 import {
   Card,
   CardImage,
@@ -72,13 +84,15 @@ export default class App extends React.Component {
   }
   render() {
     return (
-      <View style={styles.container}>
-      <Text></Text>
+      <LinearGradient
+        colors={['#a73737', '#7a2828']}
+        style={styles.container}
+      >
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this.renderRowView.bind(this)}
         />
-      </View>
+      </LinearGradient>
     );
   }
 }
@@ -97,9 +111,9 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: 20,
   },
   weekText: {
     fontSize: 25,
