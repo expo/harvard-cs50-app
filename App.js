@@ -7,10 +7,10 @@ import {
   TouchableHighlight,
   Dimensions,
   Image,
-  StatusBar
+  StatusBar,
+  Button
 } from 'react-native';
 import Expo, {
-  FileSystem as FS,
   LinearGradient,
  } from 'expo';
 import {
@@ -49,7 +49,6 @@ export default class App extends React.Component {
     var c = xml.children;
     while (c[curr].children) {
       var n = c[curr].children;
-      console.log(n[0].value);
       var newArray = this.state.db.slice();
       newArray.push(n[0].value);
       this.setState({
@@ -60,17 +59,33 @@ export default class App extends React.Component {
     }
   }
 
-  onWeekPress(rowData) {
-
+  onWeekPress() {
+    console.log('cool');
   }
+
+  /*renderRowView(rowData) {
+      return (
+        <Card>
+          <CardImage>
+            <TouchableHighlight onPress={this.onWeekPress(rowData)}>
+              <Image style={styles.weekImage} source={{uri: 'http://i.imgur.com/J2gBY7D.jpg'}}>
+                <Text style={styles.weekText}>{rowData}</Text>
+              </Image>
+            </TouchableHighlight>
+          </CardImage>
+        </Card>
+      );
+  }*/
 
   renderRowView(rowData) {
       return (
         <Card>
           <CardImage>
-            <Image style={styles.weekImage} source={{uri: 'http://i.imgur.com/J2gBY7D.jpg'}}>
-              <Text style={styles.weekText}>{rowData}</Text>
-            </Image>
+            <TouchableHighlight onPress={this.onWeekPress.bind(this)}>
+              <Image style={styles.weekImage} source={{uri: 'http://i.imgur.com/J2gBY7D.jpg'}}>
+                <Text style={styles.weekText}>{rowData}</Text>
+              </Image>
+            </TouchableHighlight>
           </CardImage>
         </Card>
       );
@@ -109,24 +124,51 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     backgroundColor: '#fff',
   },
+  card: {
+    height: (Dimensions.get('window').height / 7),
+    width: Dimensions.get('window').width - 40,
+  },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 20,
+    paddingTop: 30,
   },
   weekText: {
     fontSize: 25,
-    fontFamily: 'AppleSDGothicNeo-Light',
     color: 'white',
     fontWeight: 'bold',
     backgroundColor: 'transparent',
     alignSelf: 'flex-start',
   },
+  weekTextArrow: {
+    fontSize: 25,
+    color: 'white',
+    fontWeight: 'bold',
+    backgroundColor: 'transparent',
+    textAlign: 'right',
+  },
+  weekContentText: {
+    color: 'gray',
+    textAlign: 'left',
+  },
   weekImage: {
-    height: (Dimensions.get('window').height / 6),
+    height: (Dimensions.get('window').height / 8),
     width: Dimensions.get('window').width - 40,
     justifyContent: 'center',
     paddingLeft: 30,
+  },
+  weekButton: {
+    height: (Dimensions.get('window').height / 16),
+    width: Dimensions.get('window').width - 40,
+    justifyContent: 'center',
+    paddingLeft: 30,
+  },
+  weekContent: {
+    height: (Dimensions.get('window').height / 20),
+    width: Dimensions.get('window').width - 40,
+    justifyContent: 'center',
+    paddingLeft: 30,
+    backgroundColor: 'red',
   }
 });

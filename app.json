@@ -4,7 +4,7 @@
     "description": "An empty new project",
     "slug": "harvard-cs50-expo",
     "privacy": "public",
-    "sdkVersion": "UNVERSIONED",
+    "sdkVersion": "18.0.0",
     "version": "1.0.0",
     "orientation": "portrait",
     "primaryColor": "#cccccc",
