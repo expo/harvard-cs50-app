@@ -1,6 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, View, ListView, TouchableHighlight, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, ListView, TouchableHighlight, Dimensions, Image } from 'react-native';
 import Expo, { FileSystem as FS } from 'expo';
+import {
+  Card,
+  CardImage,
+  CardTitle,
+  CardContent,
+  CardAction
+} from 'react-native-card-view';
 
 const XMLParser = require('react-xml-parser');
 var classes = [];
@@ -47,17 +54,22 @@ export default class App extends React.Component {
 
   renderRowView(rowData) {
       return (
-        <TouchableHighlight
-          style={styles.weekButton}
-          onPress={this.onWeekPress(rowData)}
-          >
-          <Text style={styles.weekText}>
-            {rowData}
-          </Text>
-        </TouchableHighlight>
+        <Card>
+          <CardImage>
+            <Image style={styles.weekImage} source={{uri: 'http://i.imgur.com/J2gBY7D.jpg'}}>
+              <Text style={styles.weekText}>{rowData}</Text>
+            </Image>
+          </CardImage>
+        </Card>
       );
   }
 
+  render() {
+    return (
+      <View style={styles.container}>
+      </View>
+    )
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -90,7 +102,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   weekText: {
-    fontSize: 45,
+    fontSize: 25,
     fontFamily: 'AppleSDGothicNeo-Light',
+    color: 'white',
+    fontWeight: 'bold',
+    backgroundColor: 'transparent',
+    alignSelf: 'flex-start',
   },
+  weekImage: {
+    height: (Dimensions.get('window').height / 6),
+    width: Dimensions.get('window').width - 40,
+    justifyContent: 'center',
+    paddingLeft: 30,
+  }
 });

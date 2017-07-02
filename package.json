@@ -9,8 +9,12 @@
     "expo": "^18.0.4",
     "react": "16.0.0-alpha.12",
     "react-native": "https://github.com/expo/react-native/archive/sdk-18.0.1.tar.gz",
+    "react-native-card-view": "^0.0.3",
+    "react-native-fade-in-image": "^1.0.3",
     "react-native-filesystem": "^0.1.0",
     "react-native-fs": "^2.3.3",
+    "react-native-platform-touchable": "^1.1.1",
+    "react-navigation": "^1.0.0-beta.11",
     "react-xml-parser": "^1.0.2"
   }
 }
