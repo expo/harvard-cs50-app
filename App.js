@@ -8,7 +8,8 @@ import {
   Dimensions,
   Image,
   StatusBar,
-  Button
+  Button,
+  Platform
 } from 'react-native';
 import Expo, {
   LinearGradient,
@@ -41,7 +42,9 @@ class WeekScreen extends React.Component {
     title: 'CS50 Week by Week',
     headerTintColor: 'white',
     headerStyle: {
-      backgroundColor:'#821c21'
+      backgroundColor:'#821c21',
+      paddingTop: 20,
+      height: (Platform.OS === 'ios') ? 80 : 100,
     }
   };
 
@@ -106,12 +109,12 @@ class WeekScreen extends React.Component {
         <LinearGradient
           colors={['#a73737', '#7a2828']}
         >
-        <View style={styles.listViewView}>
-          <ListView
-            dataSource={this.state.dataSource}
-            renderRow={this.renderRowView.bind(this)}
-          />
-        </View>
+          <View style={styles.listViewView}>
+            <ListView
+              dataSource={this.state.dataSource}
+              renderRow={this.renderRowView.bind(this)}
+            />
+          </View>
         </LinearGradient>
       </View>
     );
@@ -123,7 +126,9 @@ class LectureScreen extends React.Component {
     title: 'Lecture Details',
     headerTintColor: 'white',
     headerStyle: {
-      backgroundColor:'#821c21'
+      backgroundColor:'#821c21',
+      paddingTop: 20,
+      height: (Platform.OS === 'ios') ? 80 : 100,
     }
   };
 
