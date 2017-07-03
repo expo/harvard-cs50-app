@@ -76,15 +76,19 @@ export default class App extends React.Component {
 
   renderRowView(rowData) {
       return (
-        <Card styles={{card: {width: styles.weekImage.width}}}>
-          <CardImage>
-            <TouchableHighlight onPress={this.onWeekPress.bind(this)}>
-              <Image style={styles.weekImage} source={{uri: 'http://i.imgur.com/J2gBY7D.jpg'}}>
-                <Text style={styles.weekText}>{rowData}</Text>
-              </Image>
-            </TouchableHighlight>
-          </CardImage>
-        </Card>
+        <View style={{ paddingTop: 10, paddingBottom: 0 }}>
+          <Card styles={{
+            card: {width: styles.weekImage.width},
+          }}>
+            <CardImage>
+              <TouchableHighlight onPress={this.onWeekPress.bind(this)}>
+                <Image style={styles.weekImage} source={{uri: 'http://i.imgur.com/J2gBY7D.jpg'}}>
+                  <Text style={styles.weekText}>{rowData}</Text>
+                </Image>
+              </TouchableHighlight>
+            </CardImage>
+          </Card>
+        </View>
       );
   }
 
@@ -112,7 +116,9 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   listViewView: {
-    paddingTop: 5
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 140
   },
   weekButton: {
     borderBottomWidth: StyleSheet.hairlineWidth,
