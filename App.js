@@ -78,8 +78,8 @@ class WeekScreen extends React.Component {
     }
   }
 
-  onWeekPress() {
-    console.log('cool');
+  onWeekPress = () => {
+    this.props.navigation.navigate('Lecture');
   }
 
   renderRowView(rowData) {
@@ -89,7 +89,7 @@ class WeekScreen extends React.Component {
             card: {width: styles.weekImage.width},
           }}>
             <CardImage>
-              <TouchableHighlight onPress={this.onWeekPress.bind(this)}>
+              <TouchableHighlight onPress={this.onWeekPress}>
                 <Image style={styles.weekImage} source={{uri: 'http://i.imgur.com/J2gBY7D.jpg'}}>
                   <Text style={styles.weekText}>{rowData}</Text>
                 </Image>
@@ -118,11 +118,30 @@ class WeekScreen extends React.Component {
   }
 }
 
+class LectureScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Lecture Details',
+    headerTintColor: 'white',
+    headerStyle: {
+      backgroundColor:'#821c21'
+    }
+  };
+
+  render() {
+    return (
+      <View></View>
+    );
+  }
+}
+
 export default StackNavigator({
   Week: {
     screen: WeekScreen,
     headerTintColor: 'red',
   },
+  Lecture: {
+    screen: LectureScreen,
+  }
 });
 
 const styles = StyleSheet.create({
