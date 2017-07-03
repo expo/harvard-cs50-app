@@ -20,6 +20,7 @@ import {
   CardContent,
   CardAction
 } from 'react-native-card-view';
+import { StackNavigator } from 'react-navigation';
 
 import NavigationBar from 'react-native-navbar';
 const XMLParser = require('react-xml-parser');
@@ -35,7 +36,14 @@ const titleConfig = {
   tintColor: 'white'
 };
 
-export default class App extends React.Component {
+class WeekScreen extends React.Component {
+  static navigationOptions = {
+    title: 'CS50 Week by Week',
+    headerTintColor: 'white',
+    headerStyle: {
+      backgroundColor:'#821c21'
+    }
+  };
 
   constructor() {
     super();
@@ -95,10 +103,6 @@ export default class App extends React.Component {
   render() {
     return (
       <View>
-        <NavigationBar
-          title={titleConfig}
-          tintColor={'#821c21'}
-        />
         <LinearGradient
           colors={['#a73737', '#7a2828']}
         >
@@ -114,11 +118,17 @@ export default class App extends React.Component {
   }
 }
 
+export default StackNavigator({
+  Week: {
+    screen: WeekScreen,
+    headerTintColor: 'red',
+  },
+});
+
 const styles = StyleSheet.create({
   listViewView: {
     paddingLeft: 20,
     paddingRight: 20,
-    paddingBottom: 140
   },
   weekButton: {
     borderBottomWidth: StyleSheet.hairlineWidth,

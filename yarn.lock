@@ -2494,6 +2494,12 @@ mute-stream@0.0.5:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.5.tgz#8fbfabb0a98a253d3184331f9e8deb7372fac6c0"
 
+native-navigation@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/native-navigation/-/native-navigation-0.2.1.tgz#347cf890a3085aef46df6d9bbfc94e58e98c3d26"
+  dependencies:
+    react-native-safe-module "^1.1.0"
+
 negotiator@0.5.3:
   version "0.5.3"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.5.3.tgz#269d5c476810ec92edbe7b6c2f28316384f9a7e8"
