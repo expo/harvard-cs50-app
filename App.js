@@ -21,8 +21,19 @@ import {
   CardAction
 } from 'react-native-card-view';
 
+import NavigationBar from 'react-native-navbar';
 const XMLParser = require('react-xml-parser');
 var classes = [];
+
+/*const rightButtonConfig = {
+  title: 'Next',
+  handler: () => alert('hello!'),
+};*/
+
+const titleConfig = {
+  title: 'CS50 Week by Week',
+  tintColor: 'white'
+};
 
 export default class App extends React.Component {
 
@@ -63,23 +74,9 @@ export default class App extends React.Component {
     console.log('cool');
   }
 
-  /*renderRowView(rowData) {
-      return (
-        <Card>
-          <CardImage>
-            <TouchableHighlight onPress={this.onWeekPress(rowData)}>
-              <Image style={styles.weekImage} source={{uri: 'http://i.imgur.com/J2gBY7D.jpg'}}>
-                <Text style={styles.weekText}>{rowData}</Text>
-              </Image>
-            </TouchableHighlight>
-          </CardImage>
-        </Card>
-      );
-  }*/
-
   renderRowView(rowData) {
       return (
-        <Card>
+        <Card styles={{card: {width: styles.weekImage.width}}}>
           <CardImage>
             <TouchableHighlight onPress={this.onWeekPress.bind(this)}>
               <Image style={styles.weekImage} source={{uri: 'http://i.imgur.com/J2gBY7D.jpg'}}>
@@ -93,26 +90,30 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-      </View>
-    )
-  }
-  render() {
-    return (
-      <LinearGradient
-        colors={['#a73737', '#7a2828']}
-        style={styles.container}
-      >
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={this.renderRowView.bind(this)}
+      <View>
+        <NavigationBar
+          title={titleConfig}
+          tintColor={'#821c21'}
         />
-      </LinearGradient>
+        <LinearGradient
+          colors={['#a73737', '#7a2828']}
+        >
+        <View style={styles.listViewView}>
+          <ListView
+            dataSource={this.state.dataSource}
+            renderRow={this.renderRowView.bind(this)}
+          />
+        </View>
+        </LinearGradient>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  listViewView: {
+    paddingTop: 5
+  },
   weekButton: {
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: '#eee',
@@ -127,6 +128,7 @@ const styles = StyleSheet.create({
   card: {
     height: (Dimensions.get('window').height / 7),
     width: Dimensions.get('window').width - 40,
+    alignItems: 'flex-start',
   },
   container: {
     flex: 1,
@@ -154,7 +156,7 @@ const styles = StyleSheet.create({
   },
   weekImage: {
     height: (Dimensions.get('window').height / 8),
-    width: Dimensions.get('window').width - 40,
+    width: Dimensions.get('window').width - 10,
     justifyContent: 'center',
     paddingLeft: 30,
   },
