@@ -72,7 +72,7 @@ class WeekScreen extends React.Component {
     while (c[curr].children) {
       var n = c[curr].children;
       var newArray = this.state.db.slice();
-      newArray.push(n[0].value);
+      newArray.push(n[0]);
       this.setState({
           dataSource: this.state.dataSource.cloneWithRows(newArray),
           db: newArray,
@@ -81,8 +81,8 @@ class WeekScreen extends React.Component {
     }
   }
 
-  onWeekPress = () => {
-    this.props.navigation.navigate('Lecture');
+  onWeekPress = (weekData) => {
+    this.props.navigation.navigate('Lecture', { data: weekData });
   }
 
   renderRowView(rowData) {
@@ -92,9 +92,13 @@ class WeekScreen extends React.Component {
             card: {width: styles.weekImage.width},
           }}>
             <CardImage>
-              <TouchableHighlight onPress={this.onWeekPress}>
-                <Image style={styles.weekImage} source={{uri: 'http://i.imgur.com/J2gBY7D.jpg'}}>
-                  <Text style={styles.weekText}>{rowData}</Text>
+              <TouchableHighlight
+                onPress={() => {
+                  this.onWeekPress(rowData);
+                }}
+                >
+                <Image style={styles.weekImage} source={require('./assets/bluewave.gif')}>
+                  <Text style={styles.weekText}>{rowData.value}</Text>
                 </Image>
               </TouchableHighlight>
             </CardImage>
@@ -122,6 +126,7 @@ class WeekScreen extends React.Component {
 }
 
 class LectureScreen extends React.Component {
+
   static navigationOptions = {
     title: 'Lecture Details',
     headerTintColor: 'white',
@@ -133,8 +138,9 @@ class LectureScreen extends React.Component {
   };
 
   render() {
+    const { params } = this.props.navigation.state;
     return (
-      <View></View>
+      <View><Text>Details for the lecture in {params.data.value}</Text></View>
     );
   }
 }
