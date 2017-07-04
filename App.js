@@ -66,13 +66,13 @@ class WeekScreen extends React.Component {
     // console.log('contents: ', text);
     var xml = new XMLParser().parseFromString(text);
     // var file = await FS.readAsStringAsync('./xml/lectures.txt', {});
-    //console.log(xml);
+    console.log(xml);
     var curr = 0;
     var c = xml.children;
     while (c[curr].children) {
       var n = c[curr].children;
       var newArray = this.state.db.slice();
-      newArray.push(n[0]);
+      newArray.push(n);
       this.setState({
           dataSource: this.state.dataSource.cloneWithRows(newArray),
           db: newArray,
@@ -98,7 +98,7 @@ class WeekScreen extends React.Component {
                 }}
                 >
                 <Image style={styles.weekImage} source={require('./assets/bluewave.gif')}>
-                  <Text style={styles.weekText}>{rowData.value}</Text>
+                  <Text style={styles.weekText}>{rowData[0].value}</Text>
                 </Image>
               </TouchableHighlight>
             </CardImage>
@@ -128,7 +128,7 @@ class WeekScreen extends React.Component {
 class LectureScreen extends React.Component {
 
   static navigationOptions = {
-    title: 'Lecture Details',
+    title: 'Week Details',
     headerTintColor: 'white',
     headerStyle: {
       backgroundColor:'#821c21',
@@ -140,7 +140,17 @@ class LectureScreen extends React.Component {
   render() {
     const { params } = this.props.navigation.state;
     return (
-      <View><Text>Details for the lecture in {params.data.value}</Text></View>
+      <View>
+        <Text>Details for the lecture in {params.data[0].value}</Text>
+        <Text>Topic of the week: {params.data[1].value}</Text>
+        <Text>Link to {params.data[2].children[0].value}: {params.data[2].children[1].attributes.href}</Text>
+        <Text>Link to {params.data[3].children[0].value}: {params.data[3].children[1].attributes.href}</Text>
+        <Text>Link to {params.data[4].children[0].value}: {params.data[4].children[1].attributes.href}</Text>
+        <Text>Link to {params.data[5].children[0].value}: {params.data[5].children[1].attributes.href}</Text>
+        <Text>Link to {params.data[6].children[0].value}: {params.data[6].children[1].attributes.href}</Text>
+        <Text>Link to {params.data[7].children[0].value}: {params.data[7].children[1].attributes.href}</Text>
+        <Text>Link to {params.data[8].children[0].value}: {params.data[8].children[1].children[2].attributes.href}</Text>
+      </View>
     );
   }
 }
