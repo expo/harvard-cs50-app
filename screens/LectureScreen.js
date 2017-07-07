@@ -13,6 +13,7 @@ import {
 class LectureScreen extends React.Component {
   state = {
     url: null,
+    videoIndex: 8,
   };
 
   static navigationOptions = {
@@ -37,7 +38,6 @@ class LectureScreen extends React.Component {
     this.props.navigation.navigate('Web', { url: url });
   };
 
-  // Jeff: I realised that theres a seperate xml for psets after i coded this. will fix later
   _getPSetURL(url) {
     var length = url.length;
     var week = url.charAt(length - 6);
@@ -63,9 +63,19 @@ class LectureScreen extends React.Component {
     );
   }
 
+  _getVideoIndex(params) {
+    if (params.data[6].children[0].value == 'Videos') {
+      return 6;
+    } else if (params.data[7].children[0].value == 'Videos') {
+      return 7;
+    } else {
+      return 8;
+    }
+  }
+
   render() {
     const { params } = this.props.navigation.state;
-
+    //this.setVideoIndex(params);
     return (
       <View
         style={{
@@ -126,7 +136,9 @@ class LectureScreen extends React.Component {
           }}>
           <Video
             source={{
-              uri: params.data[8].children[1].children[2].attributes.href,
+              uri:
+                params.data[this._getVideoIndex(params)].children[1].children[2]
+                  .attributes.href,
             }}
             resizeMode={Video.RESIZE_MODE_CONTAIN}
             style={{ width: 300, height: 300 }}
