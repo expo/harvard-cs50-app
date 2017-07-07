@@ -1,11 +1,12 @@
 {
-  "name": "harvard-cs50-expo",
+  "name": "Harvard CS50",
   "version": "0.0.0",
-  "description": "Hello Expo!",
+  "description": "Harvard's CS50 application.",
   "author": "Expo",
   "private": true,
   "main": "node_modules/expo/AppEntry.js",
   "dependencies": {
+    "eslint-plugin-prettier": "^2.1.1",
     "expo": "^18.0.4",
     "native-navigation": "^0.2.1",
     "react": "16.0.0-alpha.12",
@@ -17,12 +18,11 @@
     "react-native-navbar": "^1.7.1",
     "react-native-platform-touchable": "^1.1.1",
     "react-navigation": "^1.0.0-beta.11",
-    "react-xml-parser": "^1.0.2",
-    "eslint-plugin-prettier": "^2.1.1"
+    "react-xml-parser": "^1.0.2"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
-    "eslint": "^3.19.0",
+    "eslint": "^4.1.1",
     "eslint-config-exponent": "^5.0.1",
     "eslint-config-prettier": "^2.1.1",
     "eslint-plugin-babel": "^4.1.1",

@@ -14,7 +14,7 @@ class WebScreen extends React.Component {
 
   render() {
     const { params } = this.props.navigation.state;
-    return <WebView source={{ uri: params.url }} style={{ marginTop: 0 }} />;
+    return <WebView source={{ uri: params.url }} />;
   }
 }
 

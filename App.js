@@ -13,6 +13,6 @@ export default StackNavigator({
   },
   Web: {
     screen: WebScreen,
-    headerMode: 'float'
-  }
+    headerMode: 'float',
+  },
 });
