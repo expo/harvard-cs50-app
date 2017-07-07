@@ -44,10 +44,10 @@ class WeekScreen extends React.Component {
     // console.log('contents: ', text);
     var xml = new XMLParser().parseFromString(text);
     // var file = await FS.readAsStringAsync('./xml/lectures.txt', {});
-    console.log(xml);
+
     var curr = 0;
     var c = xml.children;
-    while (c[curr].children) {
+    while (c[curr]) {
       var n = c[curr].children;
       var newArray = this.state.db.slice();
       newArray.push(n);
@@ -97,6 +97,7 @@ class WeekScreen extends React.Component {
             <ListView
               dataSource={this.state.dataSource}
               renderRow={this.renderRowView.bind(this)}
+              enableEmptySections={true}
             />
           </View>
         </LinearGradient>
