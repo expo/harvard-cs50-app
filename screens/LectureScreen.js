@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, Platform } from 'react-native';
+import { Video } from 'expo';
 
 class LectureScreen extends React.Component {
   static navigationOptions = {
@@ -14,6 +15,7 @@ class LectureScreen extends React.Component {
 
   render() {
     const { params } = this.props.navigation.state;
+
     return (
       <View>
         <Text>
@@ -50,6 +52,24 @@ class LectureScreen extends React.Component {
           Link to {params.data[8].children[0].value}:{' '}
           {params.data[8].children[1].children[2].attributes.href}
         </Text>
+
+        <View
+          style={{
+            flex: 1,
+            padding: 10,
+            marginTop: 200,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <Video
+            source={{
+              uri: params.data[8].children[1].children[2].attributes.href,
+            }}
+            resizeMode={Video.RESIZE_MODE_CONTAIN}
+            style={{ width: 300, height: 300 }}
+            shouldPlay={true}
+          />
+        </View>
       </View>
     );
   }
