@@ -1,4 +1,5 @@
 {
   "eslint.enable": true,
-  "prettier.eslintIntegration": true
+  "prettier.eslintIntegration": true,
+  "eslint.autoFixOnSave": true
 }
