@@ -77,7 +77,7 @@ class WeekScreen extends React.Component {
               }}>
               <Image
                 style={styles.weekImage}
-                source={require('../assets/bluewave.gif')}>
+                source={require('../assets/harvard.jpg')}>
                 <Text style={styles.weekText}>
                   {rowData[0].value}
                 </Text>
