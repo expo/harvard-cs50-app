@@ -1,0 +1,19 @@
+[
+    {   
+        "week": "1",
+        "description": "Scratch",
+        "notes": "http://docs.cs50.net/2016/fall/notes/0/week0.html",
+        "audio": "http://cdn.cs50.net/2016/fall/lectures/0/week0.mp3",
+        "subtitles": "http://cdn.cs50.net/2016/fall/lectures/0/lang/en/week0.srt",
+        "slides": "",
+        "code": "",
+        "videos": {
+            "240p": "http://cdn.cs50.net/2016/fall/lectures/0/week0-240p.mp4",
+            "360p": "http://cdn.cs50.net/2016/fall/lectures/0/week0-360p.mp4",
+            "720p": "http://cdn.cs50.net/2016/fall/lectures/0/week0-720p.mp4",
+            "1080p": "http://cdn.cs50.net/2016/fall/lectures/0/week0-1080p.mp4",
+            "4k": "http://cdn.cs50.net/2016/fall/lectures/0/week0-4k.mp4"
+        },
+        "youtube": "https://www.youtube.com/watch?v=M-XlYymh714"
+    }
+]
