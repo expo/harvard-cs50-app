@@ -15,6 +15,8 @@ const XMLParser = require('react-xml-parser');
 
 var classes = [];
 
+var bgImage = require('../assets/harvard.jpg');
+
 class WeekScreen extends React.Component {
   static navigationOptions = {
     title: 'CS50 Week by Week',
@@ -92,7 +94,9 @@ class WeekScreen extends React.Component {
       <View style={{ paddingTop: 10, paddingBottom: 0 }}>
         <Card
           styles={{
-            card: { width: styles.weekImage.width },
+            height: Dimensions.get('window').height / 7,
+            width: Dimensions.get('window').width - 40,
+            alignItems: 'flex-start',
           }}>
           <CardImage>
             <TouchableHighlight
@@ -100,9 +104,21 @@ class WeekScreen extends React.Component {
                 this.onWeekPress(rowData);
               }}>
               <Image
-                style={styles.weekImage}
-                source={require('../assets/harvard.jpg')}>
-                <Text style={styles.weekText}>
+                style={{
+                  height: Dimensions.get('window').height / 8,
+                  width: Dimensions.get('window').width - 10,
+                  justifyContent: 'center',
+                  paddingLeft: 30,
+                }}
+                source={bgImage}>
+                <Text
+                  style={{
+                    fontSize: 25,
+                    color: 'white',
+                    fontWeight: 'bold',
+                    backgroundColor: 'transparent',
+                    alignSelf: 'flex-start',
+                  }}>
                   {rowData.title}
                 </Text>
               </Image>
@@ -117,7 +133,11 @@ class WeekScreen extends React.Component {
     return (
       <View>
         <LinearGradient colors={['#a73737', '#7a2828']}>
-          <View style={styles.listViewView}>
+          <View
+            style={{
+              paddingLeft: 20,
+              paddingRight: 20,
+            }}>
             <ListView
               dataSource={this.state.dataSource}
               renderRow={this.renderRowView.bind(this)}
@@ -129,71 +149,5 @@ class WeekScreen extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  listViewView: {
-    paddingLeft: 20,
-    paddingRight: 20,
-  },
-  weekButton: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#eee',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    height: Dimensions.get('window').height / 6,
-    width: Dimensions.get('window').width,
-    paddingVertical: 15,
-    paddingLeft: 20,
-    backgroundColor: '#fff',
-  },
-  card: {
-    height: Dimensions.get('window').height / 7,
-    width: Dimensions.get('window').width - 40,
-    alignItems: 'flex-start',
-  },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 30,
-  },
-  weekText: {
-    fontSize: 25,
-    color: 'white',
-    fontWeight: 'bold',
-    backgroundColor: 'transparent',
-    alignSelf: 'flex-start',
-  },
-  weekTextArrow: {
-    fontSize: 25,
-    color: 'white',
-    fontWeight: 'bold',
-    backgroundColor: 'transparent',
-    textAlign: 'right',
-  },
-  weekContentText: {
-    color: 'gray',
-    textAlign: 'left',
-  },
-  weekImage: {
-    height: Dimensions.get('window').height / 8,
-    width: Dimensions.get('window').width - 10,
-    justifyContent: 'center',
-    paddingLeft: 30,
-  },
-  weekButton: {
-    height: Dimensions.get('window').height / 16,
-    width: Dimensions.get('window').width - 40,
-    justifyContent: 'center',
-    paddingLeft: 30,
-  },
-  weekContent: {
-    height: Dimensions.get('window').height / 20,
-    width: Dimensions.get('window').width - 40,
-    justifyContent: 'center',
-    paddingLeft: 30,
-    backgroundColor: 'red',
-  },
-});
 
 export default WeekScreen;

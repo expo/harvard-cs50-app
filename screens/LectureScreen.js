@@ -7,7 +7,6 @@ import {
   View,
   Platform,
   TouchableHighlight,
-  Image,
 } from 'react-native';
 
 class LectureScreen extends React.Component {
@@ -58,6 +57,15 @@ class LectureScreen extends React.Component {
   render() {
     const { params } = this.props.navigation.state;
     //this.setVideoIndex(params);
+
+    const linkStyle = {
+      fontSize: 25,
+      color: 'black',
+      fontWeight: 'bold',
+      backgroundColor: 'transparent',
+      alignSelf: 'center',
+    };
+
     return (
       <View
         style={{
@@ -65,47 +73,6 @@ class LectureScreen extends React.Component {
           justifyContent: 'center',
           paddingTop: 20,
         }}>
-        <TouchableHighlight
-          onPress={() => {
-            this.onButtonPress(params.data.Notes);
-          }}>
-          <Image
-            style={styles.lectureImage}
-            source={require('../assets/notes.png')}>
-            <Text style={styles.lectureText}>
-              Notes for {params.data.title}
-            </Text>
-          </Image>
-        </TouchableHighlight>
-        <Text />
-        <Text />
-        <TouchableHighlight
-          onPress={() => {
-            this.onButtonPress(this._getPSetURL(params.data.Notes));
-          }}>
-          <Image
-            style={styles.lectureImage}
-            source={require('../assets/pset.png')}>
-            <Text style={styles.lectureText}>
-              Problem Set for {params.data.title}
-            </Text>
-          </Image>
-        </TouchableHighlight>
-        <Text />
-        <Text />
-        <TouchableHighlight
-          onPress={() => {
-            this.onButtonPress(params.data['Source Code']);
-          }}>
-          <Image
-            style={styles.lectureImage}
-            source={require('../assets/scode.jpg')}>
-            <Text style={styles.lectureText}>
-              Source Code for {params.data.title}
-            </Text>
-          </Image>
-        </TouchableHighlight>
-
         <View
           style={{
             flex: 1,
@@ -123,103 +90,37 @@ class LectureScreen extends React.Component {
             shouldPlay={true}
           />
         </View>
+        <TouchableHighlight
+          onPress={() => {
+            this.onButtonPress(params.data.Notes);
+          }}>
+          <Text style={linkStyle}>
+            Notes for {params.data.title}
+          </Text>
+        </TouchableHighlight>
+        <Text />
+        <Text />
+        <TouchableHighlight
+          onPress={() => {
+            this.onButtonPress(this._getPSetURL(params.data.Notes));
+          }}>
+          <Text style={linkStyle}>
+            Problem Set for {params.data.title}
+          </Text>
+        </TouchableHighlight>
+        <Text />
+        <Text />
+        <TouchableHighlight
+          onPress={() => {
+            this.onButtonPress(params.data['Source Code']);
+          }}>
+          <Text style={linkStyle}>
+            Source Code for {params.data.title}
+          </Text>
+        </TouchableHighlight>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  listViewView: {
-    paddingLeft: 20,
-    paddingRight: 20,
-  },
-  weekButton: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#eee',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    height: Dimensions.get('window').height / 6,
-    width: Dimensions.get('window').width,
-    paddingVertical: 15,
-    paddingLeft: 20,
-    backgroundColor: '#fff',
-  },
-  card: {
-    height: Dimensions.get('window').height / 7,
-    width: Dimensions.get('window').width - 40,
-    alignItems: 'flex-start',
-  },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 30,
-  },
-  weekText: {
-    fontSize: 25,
-    color: 'white',
-    fontWeight: 'bold',
-    backgroundColor: 'transparent',
-    alignSelf: 'flex-start',
-  },
-  lectureText: {
-    fontSize: 25,
-    color: 'white',
-    fontWeight: 'bold',
-    backgroundColor: 'transparent',
-    alignSelf: 'center',
-  },
-  weekTextArrow: {
-    fontSize: 25,
-    color: 'white',
-    fontWeight: 'bold',
-    backgroundColor: 'transparent',
-    textAlign: 'right',
-  },
-  weekContentText: {
-    color: 'gray',
-    textAlign: 'left',
-  },
-  weekImage: {
-    height: Dimensions.get('window').height / 8,
-    width: Dimensions.get('window').width - 10,
-    justifyContent: 'center',
-    paddingLeft: 30,
-  },
-  lectureImage: {
-    height: Dimensions.get('window').height / 7,
-    width: Dimensions.get('window').width - 40,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  weekButton: {
-    height: Dimensions.get('window').height / 16,
-    width: Dimensions.get('window').width - 40,
-    justifyContent: 'center',
-    paddingLeft: 30,
-  },
-  weekContent: {
-    height: Dimensions.get('window').height / 20,
-    width: Dimensions.get('window').width - 40,
-    justifyContent: 'center',
-    paddingLeft: 30,
-    backgroundColor: 'red',
-  },
-  button: {
-    height: 45,
-    alignSelf: 'stretch',
-    backgroundColor: '#05A5D1',
-    marginTop: 10,
-    marginLeft: 10,
-    marginRight: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonText: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#FAFAFA',
-  },
-});
 
 export default LectureScreen;
