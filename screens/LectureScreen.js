@@ -26,14 +26,6 @@ class LectureScreen extends React.Component {
     },
   };
 
-  renderRowView(rowData) {
-    return (
-      <Text>
-        {rowData.children[0].value}
-      </Text>
-    );
-  }
-
   onButtonPress = url => {
     this.props.navigation.navigate('Web', { url: url });
   };
@@ -63,16 +55,6 @@ class LectureScreen extends React.Component {
     );
   }
 
-  _getVideoIndex(params) {
-    if (params.data[6].children[0].value == 'Videos') {
-      return 6;
-    } else if (params.data[7].children[0].value == 'Videos') {
-      return 7;
-    } else {
-      return 8;
-    }
-  }
-
   render() {
     const { params } = this.props.navigation.state;
     //this.setVideoIndex(params);
@@ -85,13 +67,13 @@ class LectureScreen extends React.Component {
         }}>
         <TouchableHighlight
           onPress={() => {
-            this.onButtonPress(params.data[3].children[1].attributes.href);
+            this.onButtonPress(params.data.Notes);
           }}>
           <Image
             style={styles.lectureImage}
             source={require('../assets/notes.png')}>
             <Text style={styles.lectureText}>
-              Notes for {params.data[0].value}
+              Notes for {params.data.title}
             </Text>
           </Image>
         </TouchableHighlight>
@@ -99,15 +81,13 @@ class LectureScreen extends React.Component {
         <Text />
         <TouchableHighlight
           onPress={() => {
-            this.onButtonPress(
-              this._getPSetURL(params.data[3].children[1].attributes.href)
-            );
+            this.onButtonPress(this._getPSetURL(params.data.Notes));
           }}>
           <Image
             style={styles.lectureImage}
             source={require('../assets/pset.png')}>
             <Text style={styles.lectureText}>
-              Problem Set for {params.data[0].value}
+              Problem Set for {params.data.title}
             </Text>
           </Image>
         </TouchableHighlight>
@@ -115,13 +95,13 @@ class LectureScreen extends React.Component {
         <Text />
         <TouchableHighlight
           onPress={() => {
-            this.onButtonPress(params.data[5].children[1].attributes.href);
+            this.onButtonPress(params.data['Source Code']);
           }}>
           <Image
             style={styles.lectureImage}
             source={require('../assets/scode.jpg')}>
             <Text style={styles.lectureText}>
-              Source Code for {params.data[0].value}
+              Source Code for {params.data.title}
             </Text>
           </Image>
         </TouchableHighlight>
@@ -136,9 +116,7 @@ class LectureScreen extends React.Component {
           }}>
           <Video
             source={{
-              uri:
-                params.data[this._getVideoIndex(params)].children[1].children[2]
-                  .attributes.href,
+              uri: params.data.Videos['240p'],
             }}
             resizeMode={Video.RESIZE_MODE_CONTAIN}
             style={{ width: 300, height: 300 }}
