@@ -79,6 +79,9 @@ class WeekScreen extends React.Component {
       });
       curr++;
     }
+
+    // Note (Abi): Uncomment to debug the video screen
+    //this.onWeekPress(this.state.dataSource.getRowData(0, 0));
   }
 
   onWeekPress = weekData => {
