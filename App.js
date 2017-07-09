@@ -47,7 +47,12 @@ class AppContainer extends React.Component {
   async _loadAssetsAsync() {
     const imageAssets = cacheImages([require('./assets/harvard.jpg')]);
 
-    const fontAssets = cacheFonts([]);
+    const fontAssets = cacheFonts([
+      {
+        'roboto-light': require('./assets/fonts/Roboto-Light.ttf'),
+        'roboto-bold': require('./assets/fonts/Roboto-Bold.ttf'),
+      },
+    ]);
 
     await Promise.all([...imageAssets, ...fontAssets]);
 

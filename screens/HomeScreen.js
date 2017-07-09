@@ -112,6 +112,7 @@ class HomeScreen extends React.Component {
                 source={bgImage}>
                 <Text
                   style={{
+                    fontFamily: 'roboto-light',
                     fontSize: 25,
                     color: 'white',
                     fontWeight: 'bold',
