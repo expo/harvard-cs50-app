@@ -4,29 +4,36 @@ import _ from 'lodash';
 import { Text, View, Platform, TouchableHighlight } from 'react-native';
 
 class VideoSection extends React.Component {
+  constructor() {
+    super();
+    this.saveToDisk = this.saveToDisk.bind(this);
+  }
+  saveToDisk(url) {
+    console.log('Save to disk', url);
+  }
+
   render() {
     console.log('SOURCES : ', this.props.sources);
+
     return (
       <View
         style={{
-          flex: 1,
-          padding: 10,
-          marginTop: 80,
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: 300,
-          height: 300,
-          borderColor: 'black',
-          borderWidth: 2,
+          marginBottom: 20,
         }}>
         <Video
           source={{
             uri: this.props.sources['240p'],
           }}
           resizeMode={Video.RESIZE_MODE_CONTAIN}
-          style={{ width: 300, height: 300 }}
+          style={{ width: 300, height: 200 }}
           shouldPlay={true}
         />
+        <TouchableHighlight
+          onPress={() => {
+            this.saveToDisk(this.props.sources['240p']);
+          }}>
+          <Text>save for offline</Text>
+        </TouchableHighlight>
       </View>
     );
   }
@@ -94,6 +101,7 @@ class LectureScreen extends React.Component {
           style={{
             fontSize: 20,
             color: 'black',
+            marginBottom: 10,
           }}>
           {props.name}
         </Text>
@@ -102,12 +110,17 @@ class LectureScreen extends React.Component {
     return (
       <View
         style={{
-          alignItems: 'center',
-          justifyContent: 'center',
+          alignItems: 'flex-start',
+          justifyContent: 'space-between',
+          flexDirection: 'column',
           paddingTop: 20,
+          marginLeft: 20,
+          marginRight: 20,
         }}>
         <VideoSection sources={data.videos} />
-        <Text> course materials</Text>
+        <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 20 }}>
+          course materials
+        </Text>
         {_.map(links, (url, name) => {
           return <Link key={url} name={name} url={url} />;
         })}
