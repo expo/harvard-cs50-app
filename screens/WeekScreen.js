@@ -1,5 +1,5 @@
 import React from 'react';
-import { Video } from 'expo';
+import { Video, ScreenOrientation } from 'expo';
 import _ from 'lodash';
 import {
   Text,
@@ -24,6 +24,15 @@ class VideoSection extends React.Component {
   togglePlay() {
     console.log('Stop playing');
     this.videoEl.pauseAsync();
+  }
+
+  // Only on this screen, allow landscape orientations
+  componentDidMount() {
+    ScreenOrientation.allow(ScreenOrientation.Orientation.ALL);
+  }
+
+  componentWillUnmount() {
+    ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
   }
 
   render() {
