@@ -45,4 +45,29 @@ async function loadData() {
   return data;
 }
 
+var getPSetURL = function(url) {
+  var length = url.length;
+  var week = url.charAt(length - 6);
+  if (!isNaN(url.charAt(length - 7))) {
+    week = week + 10;
+  }
+  var season;
+  if (url.charAt(26) == 'f') {
+    season = 'fall';
+  } else if (url.charAt(26) == 's') {
+    season = 'spring';
+  } else {
+    season = 'winter';
+  }
+  return (
+    'http://docs.cs50.net/2016/' +
+    season +
+    '/psets/' +
+    week +
+    '/pset' +
+    week +
+    '.html'
+  );
+};
+
 export default loadData;

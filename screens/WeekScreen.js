@@ -107,32 +107,6 @@ class WeekScreen extends React.Component {
     this.props.navigation.navigate('Link', { url: url });
   };
 
-  // TODO: Move this to teh data processing layer
-  _getPSetURL(url) {
-    var length = url.length;
-    var week = url.charAt(length - 6);
-    if (!isNaN(url.charAt(length - 7))) {
-      week = week + 10;
-    }
-    var season;
-    if (url.charAt(26) == 'f') {
-      season = 'fall';
-    } else if (url.charAt(26) == 's') {
-      season = 'spring';
-    } else {
-      season = 'winter';
-    }
-    return (
-      'http://docs.cs50.net/2016/' +
-      season +
-      '/psets/' +
-      week +
-      '/pset' +
-      week +
-      '.html'
-    );
-  }
-
   render() {
     const { params } = this.props.navigation.state;
     const data = params.data;
