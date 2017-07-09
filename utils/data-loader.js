@@ -31,10 +31,14 @@ async function loadData() {
 
   var data = [];
 
+  var titlesToExclude = ['Week 0 at Yale', 'Week 11 at Yale'];
+
   while (c[curr]) {
     var n = c[curr].children;
-    var json = parseWeek(n);
-    data.push(json);
+    var weekObj = parseWeek(n);
+    if (!titlesToExclude.includes(weekObj.title)) {
+      data.push(weekObj);
+    }
     curr++;
   }
 

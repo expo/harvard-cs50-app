@@ -12,8 +12,6 @@ import { LinearGradient } from 'expo';
 import { Card, CardImage } from 'react-native-card-view';
 import loadData from '../utils/data-loader';
 
-var classes = [];
-
 var BG_IMAGE = require('../assets/harvard.jpg');
 
 class HomeScreen extends React.Component {
@@ -34,7 +32,7 @@ class HomeScreen extends React.Component {
       rowHasChanged: (row1, row2) => row1 !== row2,
     });
     this.state = {
-      dataSource: ds.cloneWithRows(classes),
+      dataSource: ds.cloneWithRows([]),
     };
   }
 

@@ -23,8 +23,6 @@ class VideoPlayer extends React.Component {
   }
 
   render() {
-    console.log('SOURCES : ', this.props.sources);
-
     var videoWidth = Dimensions.get('window').width - 40;
     var videoHeight = videoWidth * (9 / 16);
 
