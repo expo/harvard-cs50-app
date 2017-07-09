@@ -1,19 +1,36 @@
 import React from 'react';
 import { Video } from 'expo';
 import _ from 'lodash';
-import { Text, View, Platform, TouchableHighlight } from 'react-native';
+import {
+  Text,
+  View,
+  Platform,
+  TouchableHighlight,
+  Dimensions,
+  Button,
+} from 'react-native';
 
 class VideoSection extends React.Component {
   constructor() {
     super();
     this.saveToDisk = this.saveToDisk.bind(this);
+    this.togglePlay = this.togglePlay.bind(this);
   }
+
   saveToDisk(url) {
     console.log('Save to disk', url);
   }
 
+  togglePlay() {
+    console.log('Stop playing');
+    this.videoEl.pauseAsync();
+  }
+
   render() {
     console.log('SOURCES : ', this.props.sources);
+
+    var videoWidth = Dimensions.get('window').width - 40;
+    var videoHeight = videoWidth * (9 / 16);
 
     return (
       <View
@@ -24,8 +41,14 @@ class VideoSection extends React.Component {
           source={{
             uri: this.props.sources['240p'],
           }}
+          ref={video => {
+            this.videoEl = video;
+          }}
           resizeMode={Video.RESIZE_MODE_CONTAIN}
-          style={{ width: 300, height: 200 }}
+          style={{
+            width: videoWidth,
+            height: videoHeight,
+          }}
           shouldPlay={true}
         />
         <TouchableHighlight
@@ -34,6 +57,17 @@ class VideoSection extends React.Component {
           }}>
           <Text>save for offline</Text>
         </TouchableHighlight>
+
+        <View
+          style={{
+            position: 'absolute',
+            top: 80,
+            left: 80,
+            backgroundColor: 'black',
+            transform: [{ translate: [0, 0, 1] }],
+          }}>
+          <Button title="Play" color="white" onPress={this.togglePlay} />
+        </View>
       </View>
     );
   }
@@ -118,12 +152,19 @@ class WeekScreen extends React.Component {
           marginRight: 20,
         }}>
         <VideoSection sources={data.videos} />
-        <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 20 }}>
-          course materials
-        </Text>
-        {_.map(links, (url, name) => {
-          return <Link key={url} name={name} url={url} />;
-        })}
+        <View
+          style={{
+            alignItems: 'flex-start',
+            justifyContent: 'space-between',
+            flexDirection: 'column',
+          }}>
+          <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 20 }}>
+            course materials
+          </Text>
+          {_.map(links, (url, name) => {
+            return <Link key={url} name={name} url={url} />;
+          })}
+        </View>
       </View>
     );
   }

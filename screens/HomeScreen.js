@@ -45,7 +45,7 @@ class HomeScreen extends React.Component {
     });
 
     // Note (Abi): Uncomment to debug the video screen
-    //this.onWeekPress(this.state.dataSource.getRowData(0, 0));
+    // this.onWeekPress(this.state.dataSource.getRowData(0, 0));
   }
 
   onWeekPress = weekData => {
@@ -79,7 +79,6 @@ class HomeScreen extends React.Component {
                     fontFamily: 'roboto-light',
                     fontSize: 25,
                     color: 'white',
-                    fontWeight: 'bold',
                     backgroundColor: 'transparent',
                     alignSelf: 'flex-start',
                   }}>
