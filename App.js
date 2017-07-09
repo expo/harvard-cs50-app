@@ -1,18 +1,18 @@
 import { StackNavigator } from 'react-navigation';
+import HomeScreen from './screens/HomeScreen';
 import WeekScreen from './screens/WeekScreen';
-import LectureScreen from './screens/LectureScreen';
-import WebScreen from './screens/WebScreen';
+import LinkScreen from './screens/LinkScreen';
 
 export default StackNavigator({
-  Week: {
-    screen: WeekScreen,
+  Home: {
+    screen: HomeScreen,
     headerTintColor: 'red',
   },
-  Lecture: {
-    screen: LectureScreen,
+  Week: {
+    screen: WeekScreen,
   },
-  Web: {
-    screen: WebScreen,
+  Link: {
+    screen: LinkScreen,
     headerMode: 'float',
   },
 });

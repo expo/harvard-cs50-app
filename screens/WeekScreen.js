@@ -1,25 +1,52 @@
 import React from 'react';
-import {
-  Text,
-  Image,
-  View,
-  ListView,
-  TouchableHighlight,
-  Platform,
-  StyleSheet,
-  Dimensions,
-} from 'react-native';
-import { LinearGradient } from 'expo';
-import { Card, CardImage } from 'react-native-card-view';
-const XMLParser = require('react-xml-parser');
+import { Video } from 'expo';
+import _ from 'lodash';
+import { Text, View, Platform, TouchableHighlight } from 'react-native';
 
-var classes = [];
+class VideoSection extends React.Component {
+  constructor() {
+    super();
+    this.saveToDisk = this.saveToDisk.bind(this);
+  }
+  saveToDisk(url) {
+    console.log('Save to disk', url);
+  }
 
-var bgImage = require('../assets/harvard.jpg');
+  render() {
+    console.log('SOURCES : ', this.props.sources);
+
+    return (
+      <View
+        style={{
+          marginBottom: 20,
+        }}>
+        <Video
+          source={{
+            uri: this.props.sources['240p'],
+          }}
+          resizeMode={Video.RESIZE_MODE_CONTAIN}
+          style={{ width: 300, height: 200 }}
+          shouldPlay={true}
+        />
+        <TouchableHighlight
+          onPress={() => {
+            this.saveToDisk(this.props.sources['240p']);
+          }}>
+          <Text>save for offline</Text>
+        </TouchableHighlight>
+      </View>
+    );
+  }
+}
 
 class WeekScreen extends React.Component {
+  state = {
+    url: null,
+    videoIndex: 8,
+  };
+
   static navigationOptions = {
-    title: 'CS50 Week by Week',
+    title: 'Week Details',
     headerTintColor: 'white',
     headerStyle: {
       backgroundColor: '#821c21',
@@ -28,122 +55,75 @@ class WeekScreen extends React.Component {
     },
   };
 
-  constructor() {
-    super();
-    this.readXml();
-    var ds = new ListView.DataSource({
-      rowHasChanged: (row1, row2) => row1 !== row2,
-    });
-    this.state = {
-      dataSource: ds.cloneWithRows(classes),
-      db: classes,
-    };
-  }
-
-  _createJSON(data) {
-    var json = {};
-    for (var i = 0; i < data.length - 1; i++) {
-      if (i < 2) {
-        json[data[i].name.toLowerCase()] = data[i].value;
-      } else {
-        var title = data[i].children[0].value;
-        var link = data[i].children[1].attributes.href;
-        json[title.toLowerCase()] = link;
-      }
-    }
-    var videos = {};
-    var videoData = data[data.length - 1].children[1].children;
-    for (var i = 1; i < videoData.length; i++) {
-      var link = videoData[i].attributes.href;
-      var type = videoData[i].children[0].value;
-      videos[type.toLowerCase()] = link;
-    }
-    json[data[data.length - 1].children[0].value.toLowerCase()] = videos;
-    return json;
-  }
-
-  async readXml() {
-    const asset = Expo.Asset.fromModule(require('../xml/lectures.xml'));
-    const text = await (await fetch(asset.uri)).text();
-    var xml = new XMLParser().parseFromString(text);
-    var curr = 0;
-    var c = xml.children;
-    while (c[curr]) {
-      var n = c[curr].children;
-      var json = this._createJSON(n);
-      var newArray = this.state.db.slice();
-      newArray.push(json);
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(newArray),
-        db: newArray,
-      });
-      curr++;
-    }
-
-    // Note (Abi): Uncomment to debug the video screen
-    //this.onWeekPress(this.state.dataSource.getRowData(0, 0));
-  }
-
-  onWeekPress = weekData => {
-    this.props.navigation.navigate('Lecture', { data: weekData });
+  onButtonPress = url => {
+    this.props.navigation.navigate('Link', { url: url });
   };
 
-  renderRowView(rowData) {
+  // TODO: Move this to teh data processing layer
+  _getPSetURL(url) {
+    var length = url.length;
+    var week = url.charAt(length - 6);
+    if (!isNaN(url.charAt(length - 7))) {
+      week = week + 10;
+    }
+    var season;
+    if (url.charAt(26) == 'f') {
+      season = 'fall';
+    } else if (url.charAt(26) == 's') {
+      season = 'spring';
+    } else {
+      season = 'winter';
+    }
     return (
-      <View style={{ paddingTop: 10, paddingBottom: 0 }}>
-        <Card
-          styles={{
-            height: Dimensions.get('window').height / 7,
-            width: Dimensions.get('window').width - 40,
-            alignItems: 'flex-start',
-          }}>
-          <CardImage>
-            <TouchableHighlight
-              onPress={() => {
-                this.onWeekPress(rowData);
-              }}>
-              <Image
-                style={{
-                  height: Dimensions.get('window').height / 8,
-                  width: Dimensions.get('window').width - 10,
-                  justifyContent: 'center',
-                  paddingLeft: 30,
-                }}
-                source={bgImage}>
-                <Text
-                  style={{
-                    fontSize: 25,
-                    color: 'white',
-                    fontWeight: 'bold',
-                    backgroundColor: 'transparent',
-                    alignSelf: 'flex-start',
-                  }}>
-                  {rowData.title}
-                </Text>
-              </Image>
-            </TouchableHighlight>
-          </CardImage>
-        </Card>
-      </View>
+      'http://docs.cs50.net/2016/' +
+      season +
+      '/psets/' +
+      week +
+      '/pset' +
+      week +
+      '.html'
     );
   }
 
   render() {
+    const { params } = this.props.navigation.state;
+    const data = params.data;
+
+    var linkKeys = ['slides', 'source code', 'notes'];
+    var links = _.pickBy(data, (v, k) => linkKeys.includes(k));
+
+    const Link = props =>
+      <TouchableHighlight
+        onPress={() => {
+          this.onButtonPress(props.url);
+        }}>
+        <Text
+          style={{
+            fontSize: 20,
+            color: 'black',
+            marginBottom: 10,
+          }}>
+          {props.name}
+        </Text>
+      </TouchableHighlight>;
+
     return (
-      <View>
-        <LinearGradient colors={['#a73737', '#7a2828']}>
-          <View
-            style={{
-              paddingLeft: 20,
-              paddingRight: 20,
-            }}>
-            <ListView
-              dataSource={this.state.dataSource}
-              renderRow={this.renderRowView.bind(this)}
-              enableEmptySections={true}
-            />
-          </View>
-        </LinearGradient>
+      <View
+        style={{
+          alignItems: 'flex-start',
+          justifyContent: 'space-between',
+          flexDirection: 'column',
+          paddingTop: 20,
+          marginLeft: 20,
+          marginRight: 20,
+        }}>
+        <VideoSection sources={data.videos} />
+        <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 20 }}>
+          course materials
+        </Text>
+        {_.map(links, (url, name) => {
+          return <Link key={url} name={name} url={url} />;
+        })}
       </View>
     );
   }

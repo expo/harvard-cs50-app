@@ -1,7 +1,7 @@
 import React from 'react';
 import { Platform, WebView } from 'react-native';
 
-class WebScreen extends React.Component {
+class LinkScreen extends React.Component {
   static navigationOptions = {
     title: 'Return to Week Details',
     headerTintColor: 'white',
@@ -18,4 +18,4 @@ class WebScreen extends React.Component {
   }
 }
 
-export default WebScreen;
+export default LinkScreen;
