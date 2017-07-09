@@ -8,31 +8,18 @@ import {
   TouchableHighlight,
   Dimensions,
   Button,
+  ScrollView,
 } from 'react-native';
 
-class VideoSection extends React.Component {
+class VideoPlayer extends React.Component {
   constructor() {
     super();
-    this.saveToDisk = this.saveToDisk.bind(this);
     this.togglePlay = this.togglePlay.bind(this);
-  }
-
-  saveToDisk(url) {
-    console.log('Save to disk', url);
   }
 
   togglePlay() {
     console.log('Stop playing');
     this.videoEl.pauseAsync();
-  }
-
-  // Only on this screen, allow landscape orientations
-  componentDidMount() {
-    ScreenOrientation.allow(ScreenOrientation.Orientation.ALL);
-  }
-
-  componentWillUnmount() {
-    ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
   }
 
   render() {
@@ -60,13 +47,6 @@ class VideoSection extends React.Component {
           }}
           shouldPlay={true}
         />
-        <TouchableHighlight
-          onPress={() => {
-            this.saveToDisk(this.props.sources['240p']);
-          }}>
-          <Text>save for offline</Text>
-        </TouchableHighlight>
-
         <View
           style={{
             position: 'absolute',
@@ -86,6 +66,7 @@ class WeekScreen extends React.Component {
   state = {
     url: null,
     videoIndex: 8,
+    isPortrait: true,
   };
 
   static navigationOptions = {
@@ -97,6 +78,32 @@ class WeekScreen extends React.Component {
       height: Platform.OS === 'ios' ? 80 : 100,
     },
   };
+
+  constructor() {
+    super();
+    this.orientationChangeHandler = this.orientationChangeHandler.bind(this);
+    this.saveToDisk = this.saveToDisk.bind(this);
+  }
+
+  saveToDisk(url) {
+    console.log('Save to disk', url);
+  }
+
+  orientationChangeHandler(dims) {
+    const { width, height } = dims.window;
+    this.setState({ isPortrait: height > width });
+  }
+
+  // Only on this screen, allow landscape orientations
+  componentDidMount() {
+    ScreenOrientation.allow(ScreenOrientation.Orientation.ALL);
+    Dimensions.addEventListener('change', this.orientationChangeHandler);
+  }
+
+  componentWillUnmount() {
+    ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+    Dimensions.removeEventListener('change', this.orientationChangeHandler);
+  }
 
   onButtonPress = url => {
     this.props.navigation.navigate('Link', { url: url });
@@ -151,8 +158,8 @@ class WeekScreen extends React.Component {
       </TouchableHighlight>;
 
     return (
-      <View
-        style={{
+      <ScrollView
+        containerStyle={{
           alignItems: 'flex-start',
           justifyContent: 'space-between',
           flexDirection: 'column',
@@ -160,12 +167,27 @@ class WeekScreen extends React.Component {
           marginLeft: 20,
           marginRight: 20,
         }}>
-        <VideoSection sources={data.videos} />
+        <View>
+          <VideoPlayer
+            sources={data.videos}
+            isPortrait={this.state.isPortrait}
+          />
+          <TouchableHighlight
+            style={{ display: this.state.isPortrait ? 'flex' : 'none' }}
+            onPress={() => {
+              this.saveToDisk(this.props.sources['240p']);
+            }}>
+            <Text>
+              save for offline {this.state.isPortrait.toString()}
+            </Text>
+          </TouchableHighlight>
+        </View>
         <View
           style={{
             alignItems: 'flex-start',
             justifyContent: 'space-between',
             flexDirection: 'column',
+            display: this.state.isPortrait ? 'flex' : 'none',
           }}>
           <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 20 }}>
             course materials
@@ -174,7 +196,7 @@ class WeekScreen extends React.Component {
             return <Link key={url} name={name} url={url} />;
           })}
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
