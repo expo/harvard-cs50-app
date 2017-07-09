@@ -6,16 +6,15 @@ import {
   ListView,
   TouchableHighlight,
   Platform,
-  StyleSheet,
   Dimensions,
 } from 'react-native';
 import { LinearGradient } from 'expo';
 import { Card, CardImage } from 'react-native-card-view';
-const XMLParser = require('react-xml-parser');
+import loadData from '../utils/data-loader';
 
 var classes = [];
 
-var bgImage = require('../assets/harvard.jpg');
+var BG_IMAGE = require('../assets/harvard.jpg');
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -30,55 +29,20 @@ class HomeScreen extends React.Component {
 
   constructor() {
     super();
-    this.readXml();
+    this.loadData_();
     var ds = new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2,
     });
     this.state = {
       dataSource: ds.cloneWithRows(classes),
-      db: classes,
     };
   }
 
-  _createJSON(data) {
-    var json = {};
-    for (var i = 0; i < data.length - 1; i++) {
-      if (i < 2) {
-        json[data[i].name.toLowerCase()] = data[i].value;
-      } else {
-        var title = data[i].children[0].value;
-        var link = data[i].children[1].attributes.href;
-        json[title.toLowerCase()] = link;
-      }
-    }
-    var videos = {};
-    var videoData = data[data.length - 1].children[1].children;
-    for (var i = 1; i < videoData.length; i++) {
-      var link = videoData[i].attributes.href;
-      var type = videoData[i].children[0].value;
-      videos[type.toLowerCase()] = link;
-    }
-    json[data[data.length - 1].children[0].value.toLowerCase()] = videos;
-    return json;
-  }
-
-  async readXml() {
-    const asset = Expo.Asset.fromModule(require('../xml/lectures.xml'));
-    const text = await (await fetch(asset.uri)).text();
-    var xml = new XMLParser().parseFromString(text);
-    var curr = 0;
-    var c = xml.children;
-    while (c[curr]) {
-      var n = c[curr].children;
-      var json = this._createJSON(n);
-      var newArray = this.state.db.slice();
-      newArray.push(json);
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(newArray),
-        db: newArray,
-      });
-      curr++;
-    }
+  async loadData_() {
+    var data = await loadData();
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(data),
+    });
 
     // Note (Abi): Uncomment to debug the video screen
     //this.onWeekPress(this.state.dataSource.getRowData(0, 0));
@@ -109,7 +73,7 @@ class HomeScreen extends React.Component {
                   justifyContent: 'center',
                   paddingLeft: 30,
                 }}
-                source={bgImage}>
+                source={BG_IMAGE}>
                 <Text
                   style={{
                     fontFamily: 'roboto-light',
