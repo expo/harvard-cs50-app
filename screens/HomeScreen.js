@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Text,
+  View,
   ListView,
   TouchableHighlight,
   Platform,
@@ -8,8 +8,10 @@ import {
   ScrollView,
 } from 'react-native';
 import { Card, CardImage } from 'react-native-card-view';
-import { View } from 'react-native-animatable';
+import { Text } from 'react-native-animatable';
 import loadData from '../utils/data-loader';
+import * as Animatable from 'react-native-animatable';
+
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -57,6 +59,7 @@ class HomeScreen extends React.Component {
       this.setState({
         weekNumber: this.state.weekNumber - 1,
       });
+      this.refs.text.fadeInLeft(800);
     }
   }
 
@@ -65,6 +68,7 @@ class HomeScreen extends React.Component {
       this.setState({
         weekNumber: this.state.weekNumber + 1,
       });
+      this.refs.text.fadeInRight(800);
     }
   }
 
@@ -118,9 +122,10 @@ class HomeScreen extends React.Component {
           }}>
           this is
         </Text>
-        <TouchableHighlight onPress={this.onViewMaterialsPress}>
-          <View animation="fadeInLeft">
+        <TouchableHighlight onPress={this.onViewMaterialsPress.bind(this)}>
+          <View>
             <Text
+              ref="text"
               style={{
                 paddingTop: 5,
                 alignSelf: 'center',
