@@ -17,9 +17,9 @@ var BG_IMAGE = require('../assets/harvard.jpg');
 class HomeScreen extends React.Component {
   static navigationOptions = {
     title: 'CS50 Week by Week',
-    headerTintColor: 'white',
+    headerTintColor: 'black',
     headerStyle: {
-      backgroundColor: '#821c21',
+      backgroundColor: '#bababa',
       paddingTop: 20,
       height: Platform.OS === 'ios' ? 80 : 100,
     },
@@ -93,19 +93,17 @@ class HomeScreen extends React.Component {
   render() {
     return (
       <View>
-        <LinearGradient colors={['#a73737', '#7a2828']}>
-          <View
-            style={{
-              paddingLeft: 20,
-              paddingRight: 20,
-            }}>
-            <ListView
-              dataSource={this.state.dataSource}
-              renderRow={this.renderRowView.bind(this)}
-              enableEmptySections={true}
-            />
-          </View>
-        </LinearGradient>
+        <View
+          style={{
+            paddingLeft: 20,
+            paddingRight: 20,
+          }}>
+          <ListView
+            dataSource={this.state.dataSource}
+            renderRow={this.renderRowView.bind(this)}
+            enableEmptySections={true}
+          />
+        </View>
       </View>
     );
   }
