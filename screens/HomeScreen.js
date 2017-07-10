@@ -59,7 +59,7 @@ class HomeScreen extends React.Component {
       this.setState({
         weekNumber: this.state.weekNumber - 1,
       });
-      this.refs.text.fadeInLeft(800);
+      this.text.fadeInLeft(800);
     }
   }
 
@@ -68,7 +68,7 @@ class HomeScreen extends React.Component {
       this.setState({
         weekNumber: this.state.weekNumber + 1,
       });
-      this.refs.text.fadeInRight(800);
+      this.text.fadeInRight(800);
     }
   }
 
@@ -125,7 +125,7 @@ class HomeScreen extends React.Component {
         <TouchableHighlight onPress={this.onViewMaterialsPress.bind(this)}>
           <View>
             <Text
-              ref="text"
+              ref={c => (this.text = c)}
               style={{
                 paddingTop: 5,
                 alignSelf: 'center',
