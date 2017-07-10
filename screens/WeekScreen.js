@@ -24,7 +24,6 @@ class VideoPlayer extends React.Component {
   }
 
   _playbackCallback(playbackStatus) {
-    console.log('callback');
     if (!playbackStatus.isLoaded) {
       // Update your UI for the unloaded state
       if (playbackStatus.error) {
@@ -35,7 +34,7 @@ class VideoPlayer extends React.Component {
       }
     } else {
       // Update your UI for the loaded state
-      console.log('Now playing ', playbackStatus.positionMillis());
+      console.log('Now playing ', playbackStatus.positionMillis);
 
       if (playbackStatus.isPlaying) {
         // Update your UI for the playing state
@@ -57,14 +56,6 @@ class VideoPlayer extends React.Component {
     this._playbackObject.pauseAsync();
   }
 
-  componentDidMount() {
-    console.log('comp did mount');
-    // Setup callback for media playback
-    this._playbackObject.setCallback(() => {
-      console.log('hi');
-    });
-  }
-
   render() {
     var videoWidth = Dimensions.get('window').width - 40;
     var videoHeight = videoWidth * (9 / 16);
@@ -80,6 +71,7 @@ class VideoPlayer extends React.Component {
           }}
           ref={this._handleVideoRef}
           resizeMode={Video.RESIZE_MODE_CONTAIN}
+          callback={this._playbackCallback}
           style={{
             width: videoWidth,
             height: videoHeight,
