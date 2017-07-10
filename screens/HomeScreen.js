@@ -7,8 +7,8 @@ import {
   TouchableHighlight,
   Platform,
   Dimensions,
+  ScrollView,
 } from 'react-native';
-import { LinearGradient } from 'expo';
 import { Card, CardImage } from 'react-native-card-view';
 import loadData from '../utils/data-loader';
 
@@ -16,7 +16,7 @@ var BG_IMAGE = require('../assets/harvard.jpg');
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: 'CS50 Week by Week',
+    title: 'CS50',
     headerTintColor: 'black',
     headerStyle: {
       backgroundColor: '#bababa',
@@ -32,6 +32,7 @@ class HomeScreen extends React.Component {
       rowHasChanged: (row1, row2) => row1 !== row2,
     });
     this.state = {
+      weekNumber: 0,
       dataSource: ds.cloneWithRows([]),
     };
   }
@@ -49,6 +50,10 @@ class HomeScreen extends React.Component {
   onWeekPress = weekData => {
     this.props.navigation.navigate('Week', { data: weekData });
   };
+
+  onViewMaterialsPress() {
+    //
+  }
 
   renderRowView(rowData) {
     return (
@@ -92,7 +97,36 @@ class HomeScreen extends React.Component {
 
   render() {
     return (
-      <View>
+      <ScrollView>
+        <Text
+          style={{
+            paddingTop: 30,
+            paddingLeft: 30,
+            fontFamily: 'roboto-bold',
+            fontSize: 20,
+          }}>
+          this is
+        </Text>
+        <Text
+          style={{
+            paddingTop: 5,
+            alignSelf: 'center',
+            fontFamily: 'roboto-bold',
+            fontSize: 50,
+          }}>
+          Week {this.state.weekNumber}
+        </Text>
+        <TouchableHighlight onPress={this.onViewMaterialsPress}>
+          <Text
+            style={{
+              fontSize: 20,
+              alignSelf: 'center',
+              fontFamily: 'roboto-light',
+            }}
+            underlayColor="white">
+            view course materials
+          </Text>
+        </TouchableHighlight>
         <View
           style={{
             paddingLeft: 20,
@@ -104,7 +138,7 @@ class HomeScreen extends React.Component {
             enableEmptySections={true}
           />
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
