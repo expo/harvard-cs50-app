@@ -14,12 +14,55 @@ import {
 class VideoPlayer extends React.Component {
   constructor() {
     super();
-    this.togglePlay = this.togglePlay.bind(this);
+    this._togglePlay = this._togglePlay.bind(this);
+    this._handleVideoRef = this._handleVideoRef.bind(this);
   }
 
-  togglePlay() {
-    console.log('Stop playing');
-    this.videoEl.pauseAsync();
+  _handleVideoRef(component) {
+    this._playbackObject = component;
+    console.log('Handle video ref');
+  }
+
+  _playbackCallback(playbackStatus) {
+    console.log('callback');
+    if (!playbackStatus.isLoaded) {
+      // Update your UI for the unloaded state
+      if (playbackStatus.error) {
+        console.log(
+          `Encountered a fatal error during playback: ${playbackStatus.error}`
+        );
+        // Send Expo team the error on Slack or the forums so we can help you debug!
+      }
+    } else {
+      // Update your UI for the loaded state
+      console.log('Now playing ', playbackStatus.positionMillis());
+
+      if (playbackStatus.isPlaying) {
+        // Update your UI for the playing state
+      } else {
+        // Update your UI for the paused state
+      }
+
+      if (playbackStatus.isBuffering) {
+        // Update your UI for the buffering state
+      }
+
+      if (playbackStatus.didJustFinish && !playbackStatus.isLooping) {
+        // The player has just finished playing and will stop. Maybe you want to play something else?
+      }
+    }
+  }
+
+  _togglePlay() {
+    this._playbackObject.pauseAsync();
+  }
+
+  componentDidMount() {
+    console.log('comp did mount');
+    // Setup callback for media playback
+    this._playbackObject.setCallback(() => {
+      console.log('hi');
+    });
   }
 
   render() {
@@ -35,9 +78,7 @@ class VideoPlayer extends React.Component {
           source={{
             uri: this.props.sources['240p'],
           }}
-          ref={video => {
-            this.videoEl = video;
-          }}
+          ref={this._handleVideoRef}
           resizeMode={Video.RESIZE_MODE_CONTAIN}
           style={{
             width: videoWidth,
@@ -53,7 +94,7 @@ class VideoPlayer extends React.Component {
             backgroundColor: 'black',
             transform: [{ translate: [0, 0, 1] }],
           }}>
-          <Button title="Play" color="white" onPress={this.togglePlay} />
+          <Button title="Play" color="white" onPress={this._togglePlay} />
         </View>
       </View>
     );
