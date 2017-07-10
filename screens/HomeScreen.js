@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Text,
-  View,
   ListView,
   TouchableHighlight,
   Platform,
@@ -9,6 +8,7 @@ import {
   ScrollView,
 } from 'react-native';
 import { Card, CardImage } from 'react-native-card-view';
+import { View } from 'react-native-animatable';
 import loadData from '../utils/data-loader';
 
 class HomeScreen extends React.Component {
@@ -119,7 +119,7 @@ class HomeScreen extends React.Component {
           this is
         </Text>
         <TouchableHighlight onPress={this.onViewMaterialsPress}>
-          <View>
+          <View animation="fadeInLeft">
             <Text
               style={{
                 paddingTop: 5,
