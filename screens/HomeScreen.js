@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Text,
-  Image,
   View,
   ListView,
   TouchableHighlight,
@@ -11,8 +10,6 @@ import {
 } from 'react-native';
 import { Card, CardImage } from 'react-native-card-view';
 import loadData from '../utils/data-loader';
-
-var BG_IMAGE = require('../assets/harvard.jpg');
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -55,6 +52,22 @@ class HomeScreen extends React.Component {
     //
   }
 
+  onLastPress() {
+    if (this.state.weekNumber != 0) {
+      this.setState({
+        weekNumber: this.state.weekNumber - 1,
+      });
+    }
+  }
+
+  onNextPress() {
+    if (this.state.weekNumber != 11) {
+      this.setState({
+        weekNumber: this.state.weekNumber + 1,
+      });
+    }
+  }
+
   renderRowView(rowData) {
     return (
       <View style={{ paddingTop: 10, paddingBottom: 0 }}>
@@ -68,26 +81,24 @@ class HomeScreen extends React.Component {
             <TouchableHighlight
               onPress={() => {
                 this.onWeekPress(rowData);
+              }}
+              style={{
+                backgroundColor: '#bababa',
+                height: Dimensions.get('window').height / 8,
+                width: Dimensions.get('window').width - 10,
+                paddingLeft: 30,
+                justifyContent: 'center',
               }}>
-              <Image
+              <Text
                 style={{
-                  height: Dimensions.get('window').height / 8,
-                  width: Dimensions.get('window').width - 10,
-                  justifyContent: 'center',
-                  paddingLeft: 30,
-                }}
-                source={BG_IMAGE}>
-                <Text
-                  style={{
-                    fontFamily: 'roboto-light',
-                    fontSize: 25,
-                    color: 'white',
-                    backgroundColor: 'transparent',
-                    alignSelf: 'flex-start',
-                  }}>
-                  {rowData.title}
-                </Text>
-              </Image>
+                  fontFamily: 'roboto-light',
+                  fontSize: 25,
+                  color: '#555556',
+                  backgroundColor: 'transparent',
+                  alignSelf: 'flex-start',
+                }}>
+                {rowData.title}
+              </Text>
             </TouchableHighlight>
           </CardImage>
         </Card>
@@ -107,26 +118,116 @@ class HomeScreen extends React.Component {
           }}>
           this is
         </Text>
+        <TouchableHighlight onPress={this.onViewMaterialsPress}>
+          <View>
+            <Text
+              style={{
+                paddingTop: 5,
+                alignSelf: 'center',
+                fontFamily: 'roboto-bold',
+                fontSize: 50,
+              }}>
+              Week {this.state.weekNumber}
+            </Text>
+            <Text
+              style={{
+                fontSize: 20,
+                alignSelf: 'center',
+                fontFamily: 'roboto-light',
+                color: '#555556',
+              }}
+              underlayColor="white">
+              view course materials
+            </Text>
+          </View>
+        </TouchableHighlight>
+        <View
+          style={{
+            justifyContent: 'space-between',
+            flexDirection: 'row',
+            paddingLeft: 25,
+            paddingRight: 25,
+            paddingTop: 10,
+            paddingBottom: 10,
+          }}>
+          <TouchableHighlight
+            style={{
+              flex: 0.9,
+              paddingLeft: 5,
+              paddingRight: 5,
+              height: 100,
+              backgroundColor: '#bababa',
+              alignItems: 'flex-start',
+              justifyContent: 'flex-end',
+            }}
+            onPress={this.onLastPress.bind(this)}>
+            <View>
+              <Text
+                style={{
+                  fontFamily: 'roboto-light',
+                  fontSize: 20,
+                  color: '#555556',
+                  paddingLeft: 7,
+                }}>
+                last
+              </Text>
+              <Text
+                style={{
+                  fontFamily: 'roboto-light',
+                  fontSize: 20,
+                  color: '#555556',
+                  paddingBottom: 7,
+                  paddingLeft: 7,
+                }}>
+                week
+              </Text>
+            </View>
+          </TouchableHighlight>
+          <Text> </Text>
+          <Text> </Text>
+          <Text> </Text>
+          <TouchableHighlight
+            style={{
+              flex: 0.9,
+              height: 100,
+              backgroundColor: '#bababa',
+              justifyContent: 'flex-end',
+            }}
+            onPress={this.onNextPress.bind(this)}>
+            <View>
+              <Text
+                style={{
+                  fontFamily: 'roboto-light',
+                  fontSize: 20,
+                  color: '#555556',
+                  paddingRight: 10,
+                  textAlign: 'right',
+                }}>
+                next
+              </Text>
+              <Text
+                style={{
+                  fontFamily: 'roboto-light',
+                  fontSize: 20,
+                  color: '#555556',
+                  paddingBottom: 7,
+                  paddingRight: 10,
+                  textAlign: 'right',
+                }}>
+                week
+              </Text>
+            </View>
+          </TouchableHighlight>
+        </View>
         <Text
           style={{
-            paddingTop: 5,
-            alignSelf: 'center',
+            paddingTop: 30,
+            paddingLeft: 40,
             fontFamily: 'roboto-bold',
-            fontSize: 50,
+            fontSize: 20,
           }}>
-          Week {this.state.weekNumber}
+          all weeks
         </Text>
-        <TouchableHighlight onPress={this.onViewMaterialsPress}>
-          <Text
-            style={{
-              fontSize: 20,
-              alignSelf: 'center',
-              fontFamily: 'roboto-light',
-            }}
-            underlayColor="white">
-            view course materials
-          </Text>
-        </TouchableHighlight>
         <View
           style={{
             paddingLeft: 20,
