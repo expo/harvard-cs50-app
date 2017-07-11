@@ -166,7 +166,7 @@ class HomeScreen extends React.Component {
           }}>
           <TouchableHighlight
             style={{
-              flex: 0.9,
+              flex: 0.86,
               paddingLeft: 5,
               paddingRight: 5,
               height: 100,
