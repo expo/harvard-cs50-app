@@ -4,9 +4,9 @@ import { Platform, WebView } from 'react-native';
 class LinkScreen extends React.Component {
   static navigationOptions = {
     title: 'Return to Week Details',
-    headerTintColor: 'white',
+    headerTintColor: 'black',
     headerStyle: {
-      backgroundColor: '#821c21',
+      backgroundColor: '#bababa',
       paddingTop: 20,
       height: Platform.OS === 'ios' ? 80 : 100,
     },
