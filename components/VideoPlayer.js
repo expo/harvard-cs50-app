@@ -1,5 +1,5 @@
 import React from 'react';
-import { Audio, Video, ScreenOrientation } from 'expo';
+import { Audio, Video } from 'expo';
 import _ from 'lodash';
 import { View, Dimensions, Button } from 'react-native';
 import StoredValue from '../utils/StoredValue';

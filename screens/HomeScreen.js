@@ -169,8 +169,9 @@ class HomeScreen extends React.Component {
               flex: 0.9,
               paddingLeft: 5,
               paddingRight: 5,
+              marginRight: 40,
               height: 100,
-              backgroundColor: '#bababa',
+              backgroundColor: 'black',
               alignItems: 'flex-start',
               justifyContent: 'flex-end',
             }}
@@ -197,9 +198,6 @@ class HomeScreen extends React.Component {
               </Text>
             </View>
           </TouchableHighlight>
-          <Text> </Text>
-          <Text> </Text>
-          <Text> </Text>
           <TouchableHighlight
             style={{
               flex: 0.9,
@@ -233,9 +231,10 @@ class HomeScreen extends React.Component {
             </View>
           </TouchableHighlight>
         </View>
+        {/* All weeks section */}
         <Text
           style={{
-            paddingTop: 30,
+            paddingTop: 60,
             paddingLeft: 40,
             fontFamily: 'roboto-bold',
             fontSize: 20,
