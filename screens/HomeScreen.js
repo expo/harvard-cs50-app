@@ -10,8 +10,6 @@ import {
 import { Card, CardImage } from 'react-native-card-view';
 import { Text } from 'react-native-animatable';
 import loadData from '../utils/data-loader';
-import * as Animatable from 'react-native-animatable';
-
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -26,18 +24,20 @@ class HomeScreen extends React.Component {
 
   constructor() {
     super();
-    this.loadData_();
+    this._loadData();
     var ds = new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2,
     });
     this.state = {
       weekNumber: 0,
       dataSource: ds.cloneWithRows([]),
+      data: null,
     };
   }
 
-  async loadData_() {
+  async _loadData() {
     var data = await loadData();
+    this.setState({ data });
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(data),
     });
@@ -51,7 +51,9 @@ class HomeScreen extends React.Component {
   };
 
   onViewMaterialsPress() {
-    //
+    var num = this.state.weekNumber;
+    var weekData = this.state.data;
+    this.props.navigation.navigate('Week', { data: weekData[num] });
   }
 
   onLastPress() {
