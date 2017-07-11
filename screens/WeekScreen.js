@@ -1,5 +1,5 @@
 import React from 'react';
-import { Video, ScreenOrientation } from 'expo';
+import { Audio, Video, ScreenOrientation } from 'expo';
 import _ from 'lodash';
 import {
   Text,
@@ -11,87 +11,7 @@ import {
   ScrollView,
 } from 'react-native';
 
-class VideoPlayer extends React.Component {
-  constructor() {
-    super();
-    this._togglePlay = this._togglePlay.bind(this);
-    this._handleVideoRef = this._handleVideoRef.bind(this);
-  }
-
-  _handleVideoRef(component) {
-    this._playbackObject = component;
-    console.log('Handle video ref');
-  }
-
-  _playbackCallback(playbackStatus) {
-    if (!playbackStatus.isLoaded) {
-      // Update your UI for the unloaded state
-      if (playbackStatus.error) {
-        console.log(
-          `Encountered a fatal error during playback: ${playbackStatus.error}`
-        );
-        // Send Expo team the error on Slack or the forums so we can help you debug!
-      }
-    } else {
-      // Update your UI for the loaded state
-      console.log('Now playing ', playbackStatus.positionMillis);
-
-      if (playbackStatus.isPlaying) {
-        // Update your UI for the playing state
-      } else {
-        // Update your UI for the paused state
-      }
-
-      if (playbackStatus.isBuffering) {
-        // Update your UI for the buffering state
-      }
-
-      if (playbackStatus.didJustFinish && !playbackStatus.isLooping) {
-        // The player has just finished playing and will stop. Maybe you want to play something else?
-      }
-    }
-  }
-
-  _togglePlay() {
-    this._playbackObject.pauseAsync();
-  }
-
-  render() {
-    var videoWidth = Dimensions.get('window').width - 40;
-    var videoHeight = videoWidth * (9 / 16);
-
-    return (
-      <View
-        style={{
-          marginBottom: 20,
-        }}>
-        <Video
-          source={{
-            uri: this.props.sources['240p'],
-          }}
-          ref={this._handleVideoRef}
-          resizeMode={Video.RESIZE_MODE_CONTAIN}
-          callback={this._playbackCallback}
-          style={{
-            width: videoWidth,
-            height: videoHeight,
-          }}
-          shouldPlay={true}
-        />
-        <View
-          style={{
-            position: 'absolute',
-            top: 80,
-            left: 80,
-            backgroundColor: 'black',
-            transform: [{ translate: [0, 0, 1] }],
-          }}>
-          <Button title="Play" color="white" onPress={this._togglePlay} />
-        </View>
-      </View>
-    );
-  }
-}
+import VideoPlayer from '../components/VideoPlayer';
 
 class WeekScreen extends React.Component {
   state = {
@@ -175,6 +95,7 @@ class WeekScreen extends React.Component {
         <View>
           <VideoPlayer
             sources={data.videos}
+            id={data.title}
             isPortrait={this.state.isPortrait}
           />
           <TouchableHighlight
