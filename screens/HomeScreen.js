@@ -84,7 +84,7 @@ class HomeScreen extends React.Component {
 
   renderRowView(rowData) {
     return (
-      <View style={{ paddingTop: 10, paddingBottom: 0 }}>
+      <View style={{ paddingTop: 10, paddingBottom: 0, paddingLeft: 5 }}>
         <Card
           styles={{
             height: Dimensions.get('window').height / 7,
@@ -105,7 +105,7 @@ class HomeScreen extends React.Component {
               <Text
                 style={{
                   fontFamily: 'roboto-bold',
-                  fontSize: 40,
+                  fontSize: 45,
                   color: '#555556',
                   backgroundColor: 'transparent',
                   alignSelf: 'center',
@@ -244,14 +244,15 @@ class HomeScreen extends React.Component {
         </Text>
         <View
           style={{
-            paddingLeft: 20,
-            paddingRight: 20,
+            paddingLeft: 10,
+            paddingRight: 10,
             paddingBottom: 10,
           }}>
           <ListView
             contentContainerStyle={{
               flexDirection: 'row',
               flexWrap: 'wrap',
+              justifyContent: 'center',
             }}
             dataSource={this.state.dataSource}
             renderRow={this.renderRowView.bind(this)}
