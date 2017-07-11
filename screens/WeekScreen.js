@@ -20,15 +20,15 @@ class WeekScreen extends React.Component {
     isPortrait: true,
   };
 
-  static navigationOptions = {
-    title: 'Week Details',
+  static navigationOptions = ({ navigation }) => ({
+    title: `Week ${navigation.state.params.weekNum}`,
     headerTintColor: 'black',
     headerStyle: {
       backgroundColor: '#bababa',
       paddingTop: 20,
       height: Platform.OS === 'ios' ? 80 : 100,
     },
-  };
+  });
 
   constructor() {
     super();
@@ -61,8 +61,7 @@ class WeekScreen extends React.Component {
   };
 
   render() {
-    const { params } = this.props.navigation.state;
-    const data = params.data;
+    const data = this.props.navigation.state.params.data;
 
     var linkKeys = ['slides', 'source code', 'notes'];
     var links = _.pickBy(data, (v, k) => linkKeys.includes(k));
@@ -89,15 +88,17 @@ class WeekScreen extends React.Component {
           justifyContent: 'space-between',
           flexDirection: 'column',
           paddingTop: 20,
-          marginLeft: 20,
-          marginRight: 20,
         }}>
-        <View>
-          <VideoPlayer
-            sources={data.videos}
-            id={data.title}
-            isPortrait={this.state.isPortrait}
-          />
+        <VideoPlayer
+          sources={data.videos}
+          id={data.title}
+          isPortrait={this.state.isPortrait}
+        />
+        <View
+          style={{
+            marginLeft: 20,
+            marginRight: 20,
+          }}>
           <TouchableHighlight
             style={{ display: this.state.isPortrait ? 'flex' : 'none' }}
             onPress={() => {
@@ -114,6 +115,8 @@ class WeekScreen extends React.Component {
             justifyContent: 'space-between',
             flexDirection: 'column',
             display: this.state.isPortrait ? 'flex' : 'none',
+            marginLeft: 20,
+            marginRight: 20,
           }}>
           <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 20 }}>
             course materials
