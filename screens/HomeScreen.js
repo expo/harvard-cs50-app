@@ -74,14 +74,22 @@ class HomeScreen extends React.Component {
     }
   }
 
+  getWeekNumber(title) {
+    var num = title.charAt(title.length - 1);
+    if (title.charAt(title.length - 2) === '1') {
+      num = '1' + num;
+    }
+    return num;
+  }
+
   renderRowView(rowData) {
     return (
       <View style={{ paddingTop: 10, paddingBottom: 0 }}>
         <Card
           styles={{
             height: Dimensions.get('window').height / 7,
-            width: Dimensions.get('window').width - 40,
-            alignItems: 'flex-start',
+            width: Dimensions.get('window').width / 3 - 40,
+            alignItems: 'center',
           }}>
           <CardImage>
             <TouchableHighlight
@@ -91,19 +99,18 @@ class HomeScreen extends React.Component {
               style={{
                 backgroundColor: '#bababa',
                 height: Dimensions.get('window').height / 8,
-                width: Dimensions.get('window').width - 10,
-                paddingLeft: 30,
+                width: Dimensions.get('window').width / 3.5 - 10,
                 justifyContent: 'center',
               }}>
               <Text
                 style={{
-                  fontFamily: 'roboto-light',
-                  fontSize: 25,
+                  fontFamily: 'roboto-bold',
+                  fontSize: 40,
                   color: '#555556',
                   backgroundColor: 'transparent',
-                  alignSelf: 'flex-start',
+                  alignSelf: 'center',
                 }}>
-                {rowData.title}
+                {this.getWeekNumber(rowData.title)}
               </Text>
             </TouchableHighlight>
           </CardImage>
@@ -239,8 +246,13 @@ class HomeScreen extends React.Component {
           style={{
             paddingLeft: 20,
             paddingRight: 20,
+            paddingBottom: 10,
           }}>
           <ListView
+            contentContainerStyle={{
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+            }}
             dataSource={this.state.dataSource}
             renderRow={this.renderRowView.bind(this)}
             enableEmptySections={true}
