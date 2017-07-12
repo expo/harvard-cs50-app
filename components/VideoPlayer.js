@@ -18,7 +18,7 @@ export default class VideoPlayer extends React.Component {
     Audio.setAudioModeAsync({
       allowsRecordingIOS: false,
       interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
-      playsInSilentModeIOS: debug.muteVideo ? false : true, // TODO(Abi): Switch this to true in production
+      playsInSilentModeIOS: debug.muteVideo ? false : true,
       shouldDuckAndroid: true, // TODO(Abi): Is this the common behavior on Android?
       interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
     });
@@ -29,7 +29,9 @@ export default class VideoPlayer extends React.Component {
       const value = await this.storedPlaybackTime.get();
       if (value !== null) {
         console.log('Setting the playback start to ', value);
-        this._playbackObject.playFromPositionAsync(parseInt(value));
+        if (debug.autoplayVideo) {
+          this._playbackObject.playFromPositionAsync(parseInt(value));
+        }
       } else {
         console.log('No storedPlaybackTime exists.');
       }
@@ -102,7 +104,7 @@ export default class VideoPlayer extends React.Component {
             width: videoWidth,
             height: videoHeight,
           }}
-          shouldPlay={true}
+          shouldPlay={debug.autoplayVideo}
         />
         {/*<View
           style={{
