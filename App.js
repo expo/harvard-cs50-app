@@ -5,6 +5,7 @@ import React from 'react';
 import HomeScreen from './screens/HomeScreen';
 import WeekScreen from './screens/WeekScreen';
 import LinkScreen from './screens/LinkScreen';
+import ResourcesScreen from './screens/ResourcesScreen';
 
 const AppNavigator = StackNavigator({
   Home: {
@@ -16,6 +17,9 @@ const AppNavigator = StackNavigator({
   Link: {
     screen: LinkScreen,
     headerMode: 'float',
+  },
+  Resources: {
+    screen: ResourcesScreen,
   },
 });
 

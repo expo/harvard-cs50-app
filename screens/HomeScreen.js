@@ -33,8 +33,7 @@ class HomeScreen extends React.Component {
         <Button
           title={'Resources'}
           onPress={() => {
-            console.log('hey');
-            // NavigationActions.navigate({ routeName: 'Resources' });
+            navigation.navigate('Resources');
           }}
         />
       ),
@@ -63,6 +62,10 @@ class HomeScreen extends React.Component {
 
     if (debug.secondScreen) {
       this.onWeekPress(0);
+    }
+
+    if (debug.resourcesScreen) {
+      this.props.navigation.navigate('Resources');
     }
   }
 
