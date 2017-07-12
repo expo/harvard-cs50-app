@@ -94,6 +94,7 @@ class WeekScreen extends React.Component {
           id={data.title}
           isPortrait={this.state.isPortrait}
         />
+        {/*
         <View
           style={{
             marginLeft: 20,
@@ -108,7 +109,7 @@ class WeekScreen extends React.Component {
               save for offline {this.state.isPortrait.toString()}
             </Text>
           </TouchableHighlight>
-        </View>
+        </View>*/}
         <View
           style={{
             alignItems: 'flex-start',

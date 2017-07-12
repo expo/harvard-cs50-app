@@ -3,6 +3,7 @@ import { Audio, Video } from 'expo';
 import _ from 'lodash';
 import { View, Dimensions, Button } from 'react-native';
 import StoredValue from '../utils/StoredValue';
+import debug from '../utils/debug';
 
 export default class VideoPlayer extends React.Component {
   constructor() {
@@ -17,7 +18,7 @@ export default class VideoPlayer extends React.Component {
     Audio.setAudioModeAsync({
       allowsRecordingIOS: false,
       interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
-      playsInSilentModeIOS: false, // TODO(Abi): Switch this to true in production
+      playsInSilentModeIOS: debug.muteVideo ? false : true, // TODO(Abi): Switch this to true in production
       shouldDuckAndroid: true, // TODO(Abi): Is this the common behavior on Android?
       interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
     });
@@ -81,7 +82,7 @@ export default class VideoPlayer extends React.Component {
   }
 
   render() {
-    var videoWidth = Dimensions.get('window').width - 40;
+    var videoWidth = Dimensions.get('window').width;
     var videoHeight = videoWidth * (9 / 16);
 
     return (
@@ -103,7 +104,7 @@ export default class VideoPlayer extends React.Component {
           }}
           shouldPlay={true}
         />
-        <View
+        {/*<View
           style={{
             position: 'absolute',
             top: 80,
@@ -112,7 +113,7 @@ export default class VideoPlayer extends React.Component {
             transform: [{ translate: [0, 0, 1] }],
           }}>
           <Button title="Play" color="white" onPress={this._togglePlay} />
-        </View>
+        </View>*/}
       </View>
     );
   }

@@ -6,21 +6,39 @@ import {
   Platform,
   Dimensions,
   ScrollView,
+  Button,
 } from 'react-native';
 import { Card, CardImage } from 'react-native-card-view';
 import { Text } from 'react-native-animatable';
 import loadData from '../utils/data-loader';
 import { colors, fontSize } from '../styles/style';
+import debug from '../utils/debug';
+import { NavigationActions } from 'react-navigation';
+import Expo from 'expo';
 
 class HomeScreen extends React.Component {
-  static navigationOptions = {
-    title: 'CS50',
-    headerTintColor: 'black',
-    headerStyle: {
-      backgroundColor: '#bababa',
-      paddingTop: 20,
-      height: Platform.OS === 'ios' ? 80 : 100,
-    },
+  static navigationOptions = ({ navigation }) => {
+    const { state, setParams } = navigation;
+    return {
+      title: 'CS50',
+      headerTintColor: 'black',
+      headerBackTitle: 'Back',
+      headerStyle: {
+        //display: 'none', // Experiment
+        backgroundColor: '#bababa',
+        paddingTop: 20,
+        height: Platform.OS === 'ios' ? 80 : 100,
+      },
+      headerRight: (
+        <Button
+          title={'Resources'}
+          onPress={() => {
+            console.log('hey');
+            // NavigationActions.navigate({ routeName: 'Resources' });
+          }}
+        />
+      ),
+    };
   };
 
   constructor() {
@@ -43,11 +61,12 @@ class HomeScreen extends React.Component {
       dataSource: this.state.dataSource.cloneWithRows(data),
     });
 
-    // Note (Abi): Uncomment to debug the video screen
-    // this.onWeekPress(this.state.dataSource.getRowData(0, 0));
+    if (debug.secondScreen) {
+      this.onWeekPress(this.state.dataSource.getRowData(0, 0), 0);
+    }
   }
 
-  onWeekPress = (weekData, sectionID, rowID) => {
+  onWeekPress = (weekData, rowID) => {
     this.props.navigation.navigate('Week', { data: weekData, weekNum: rowID });
   };
 
@@ -86,7 +105,7 @@ class HomeScreen extends React.Component {
     return num;
   }
 
-  renderRowView(rowData) {
+  renderRowView(rowData, sectionID, rowID) {
     return (
       <View
         style={{
@@ -105,7 +124,7 @@ class HomeScreen extends React.Component {
           <CardImage>
             <TouchableHighlight
               onPress={() => {
-                this.onWeekPress(rowData);
+                this.onWeekPress(rowData, rowID);
               }}
               style={{
                 backgroundColor: colors.primary,
@@ -194,52 +213,54 @@ class HomeScreen extends React.Component {
       </TouchableHighlight>;
 
     return (
-      <ScrollView contentContainerStyle={{ marginLeft: 20, marginRight: 20 }}>
-        <CurrentWeekSection weekNumber={this.state.weekNumber} />
-        <View
-          style={{
-            justifyContent: 'space-between',
-            flexDirection: 'row',
-            marginTop: 60,
-            marginBottom: 10,
-          }}>
-          <AdjacentWeekButton
-            text="last week"
-            align="left"
-            onPress={this.onLastPress.bind(this)}
-          />
-          <AdjacentWeekButton
-            text="next week"
-            align="right"
-            onPress={this.onNextPress.bind(this)}
-          />
-        </View>
-        {/* All weeks section */}
-        <View style={{ marginTop: 60 }}>
-          <Text
-            style={{
-              fontFamily: 'roboto-bold',
-              fontSize: 20,
-            }}>
-            all weeks
-          </Text>
+      <View style={{ marginTop: Expo.Constants.statusBarHeight }}>
+        <ScrollView contentContainerStyle={{ marginLeft: 20, marginRight: 20 }}>
+          <CurrentWeekSection weekNumber={this.state.weekNumber} />
           <View
             style={{
-              paddingBottom: 10,
+              justifyContent: 'space-between',
+              flexDirection: 'row',
+              marginTop: 60,
+              marginBottom: 10,
             }}>
-            <ListView
-              contentContainerStyle={{
-                flexDirection: 'row',
-                flexWrap: 'wrap',
-                justifyContent: 'space-between',
-              }}
-              dataSource={this.state.dataSource}
-              renderRow={this.renderRowView.bind(this)}
-              enableEmptySections={true}
+            <AdjacentWeekButton
+              text="last week"
+              align="left"
+              onPress={this.onLastPress.bind(this)}
+            />
+            <AdjacentWeekButton
+              text="next week"
+              align="right"
+              onPress={this.onNextPress.bind(this)}
             />
           </View>
-        </View>
-      </ScrollView>
+          {/* All weeks section */}
+          <View style={{ marginTop: 60 }}>
+            <Text
+              style={{
+                fontFamily: 'roboto-bold',
+                fontSize: 20,
+              }}>
+              all weeks
+            </Text>
+            <View
+              style={{
+                paddingBottom: 10,
+              }}>
+              <ListView
+                contentContainerStyle={{
+                  flexDirection: 'row',
+                  flexWrap: 'wrap',
+                  justifyContent: 'space-between',
+                }}
+                dataSource={this.state.dataSource}
+                renderRow={this.renderRowView.bind(this)}
+                enableEmptySections={true}
+              />
+            </View>
+          </View>
+        </ScrollView>
+      </View>
     );
   }
 }
