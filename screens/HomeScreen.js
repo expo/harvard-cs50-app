@@ -74,14 +74,6 @@ class HomeScreen extends React.Component {
     });
   }
 
-  getWeekNumber(title) {
-    var num = title.charAt(title.length - 1);
-    if (title.charAt(title.length - 2) === '1') {
-      num = '1' + num;
-    }
-    return num;
-  }
-
   renderRowView(rowData, sectionID, rowID) {
     return (
       <View
@@ -117,7 +109,7 @@ class HomeScreen extends React.Component {
                   backgroundColor: 'transparent',
                   alignSelf: 'center',
                 }}>
-                {this.getWeekNumber(rowData.title)}
+                {rowData.weekNumber}
               </Text>
             </TouchableHighlight>
           </CardImage>

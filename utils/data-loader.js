@@ -1,6 +1,39 @@
 const XMLParser = require('react-xml-parser');
 
-var parseWeek = function(data) {
+const getWeekNumber = title => {
+  var num = title.charAt(title.length - 1);
+  if (title.charAt(title.length - 2) === '1') {
+    num = '1' + num;
+  }
+  return num;
+};
+
+const getPSetURL = url => {
+  var length = url.length;
+  var week = url.charAt(length - 6);
+  if (!isNaN(url.charAt(length - 7))) {
+    week = week + 10;
+  }
+  var season;
+  if (url.charAt(26) == 'f') {
+    season = 'fall';
+  } else if (url.charAt(26) == 's') {
+    season = 'spring';
+  } else {
+    season = 'winter';
+  }
+  return (
+    'http://docs.cs50.net/2016/' +
+    season +
+    '/psets/' +
+    week +
+    '/pset' +
+    week +
+    '.html'
+  );
+};
+
+const parseWeek = data => {
   var json = {};
   for (var i = 0; i < data.length - 1; i++) {
     if (i < 2) {
@@ -18,6 +51,7 @@ var parseWeek = function(data) {
     var type = videoData[i].children[0].value;
     videos[type.toLowerCase()] = link;
   }
+  json['weekNumber'] = parseInt(getWeekNumber(json.title));
   json[data[data.length - 1].children[0].value.toLowerCase()] = videos;
   return json;
 };
@@ -44,30 +78,5 @@ async function loadData() {
 
   return data;
 }
-
-var getPSetURL = function(url) {
-  var length = url.length;
-  var week = url.charAt(length - 6);
-  if (!isNaN(url.charAt(length - 7))) {
-    week = week + 10;
-  }
-  var season;
-  if (url.charAt(26) == 'f') {
-    season = 'fall';
-  } else if (url.charAt(26) == 's') {
-    season = 'spring';
-  } else {
-    season = 'winter';
-  }
-  return (
-    'http://docs.cs50.net/2016/' +
-    season +
-    '/psets/' +
-    week +
-    '/pset' +
-    week +
-    '.html'
-  );
-};
 
 export default loadData;
