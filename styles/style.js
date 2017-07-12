@@ -12,3 +12,5 @@ export const fontSize = n => {
 // TODO: Add font families
 
 // TODO: Something for vertical rhythm
+
+// Setup default fontFamily for all <Text> to be Roboto-Light

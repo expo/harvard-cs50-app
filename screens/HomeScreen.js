@@ -48,7 +48,7 @@ class HomeScreen extends React.Component {
       rowHasChanged: (row1, row2) => row1 !== row2,
     });
     this.state = {
-      weekNumber: 0,
+      weekNumber: 1,
       dataSource: ds.cloneWithRows([]),
       data: null,
     };
@@ -166,7 +166,7 @@ class HomeScreen extends React.Component {
         </TouchableHighlight>
       </View>;
 
-    const AdjacentWeekButton = ({ text, align, onPress }) =>
+    const AdjacentWeekButton = ({ text, align, disabled, onPress }) =>
       <TouchableHighlight
         style={{
           paddingLeft: 25,
@@ -174,12 +174,12 @@ class HomeScreen extends React.Component {
           paddingBottom: 25,
           paddingTop: 45,
           height: 100,
-          backgroundColor: colors.primary,
+          backgroundColor: disabled ? colors.secondary : colors.primary,
           alignItems: 'flex-start',
           justifyContent: 'flex-end',
           borderRadius: 5,
         }}
-        onPress={onPress}>
+        onPress={disabled ? void 0 : onPress}>
         <Text
           style={{
             fontFamily: 'roboto-light',
@@ -206,6 +206,7 @@ class HomeScreen extends React.Component {
             <AdjacentWeekButton
               text="last week"
               align="left"
+              disabled={this.state.weekNumber - 1 < 0}
               onPress={() => {
                 this.onWeekPress(this.state.weekNumber - 1);
               }}
@@ -213,6 +214,10 @@ class HomeScreen extends React.Component {
             <AdjacentWeekButton
               text="next week"
               align="right"
+              disabled={
+                this.state.data &&
+                this.state.weekNumber + 1 > this.state.data.length
+              }
               onPress={() => {
                 this.onWeekPress(this.state.weekNumber + 1);
               }}
