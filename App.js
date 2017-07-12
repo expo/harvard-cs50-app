@@ -1,7 +1,6 @@
 import { StackNavigator } from 'react-navigation';
-import { AppLoading } from 'expo';
+import Expo, { AppLoading } from 'expo';
 import React from 'react';
-import { AppRegistry } from 'react-native';
 
 import HomeScreen from './screens/HomeScreen';
 import WeekScreen from './screens/WeekScreen';
@@ -10,7 +9,6 @@ import LinkScreen from './screens/LinkScreen';
 const AppNavigator = StackNavigator({
   Home: {
     screen: HomeScreen,
-    headerTintColor: 'red',
   },
   Week: {
     screen: WeekScreen,
@@ -21,20 +19,6 @@ const AppNavigator = StackNavigator({
   },
 });
 
-function cacheImages(images) {
-  return images.map(image => {
-    if (typeof image === 'string') {
-      return Image.prefetch(image);
-    } else {
-      return Expo.Asset.fromModule(image).downloadAsync();
-    }
-  });
-}
-
-function cacheFonts(fonts) {
-  return fonts.map(font => Expo.Font.loadAsync(font));
-}
-
 class AppContainer extends React.Component {
   state = {
     appIsReady: false,
@@ -44,10 +28,24 @@ class AppContainer extends React.Component {
     this._loadAssetsAsync();
   }
 
-  async _loadAssetsAsync() {
-    const imageAssets = cacheImages([require('./assets/harvard.jpg')]);
+  _cacheFonts(fonts) {
+    return fonts.map(font => Expo.Font.loadAsync(font));
+  }
 
-    const fontAssets = cacheFonts([
+  _cacheImages(images) {
+    return images.map(image => {
+      if (typeof image === 'string') {
+        return Image.prefetch(image);
+      } else {
+        return Expo.Asset.fromModule(image).downloadAsync();
+      }
+    });
+  }
+
+  async _loadAssetsAsync() {
+    const imageAssets = this._cacheImages([require('./assets/harvard.jpg')]);
+
+    const fontAssets = this._cacheFonts([
       {
         'roboto-light': require('./assets/fonts/Roboto-Light.ttf'),
         'roboto-bold': require('./assets/fonts/Roboto-Bold.ttf'),
