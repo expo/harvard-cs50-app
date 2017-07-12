@@ -62,39 +62,16 @@ class HomeScreen extends React.Component {
     });
 
     if (debug.secondScreen) {
-      this.onWeekPress(this.state.dataSource.getRowData(0, 0), 0);
+      this.onWeekPress(0);
     }
   }
 
-  onWeekPress = (weekData, rowID) => {
-    this.props.navigation.navigate('Week', { data: weekData, weekNum: rowID });
-  };
-
-  onViewMaterialsPress() {
-    var num = this.state.weekNumber;
-    var weekData = this.state.data;
+  onWeekPress(weekNumber) {
+    var weekData = this.state.data[weekNumber];
     this.props.navigation.navigate('Week', {
-      data: weekData[num],
-      weekNum: num,
+      data: weekData,
+      weekNum: weekNumber,
     });
-  }
-
-  onLastPress() {
-    if (this.state.weekNumber != 0) {
-      this.setState({
-        weekNumber: this.state.weekNumber - 1,
-      });
-      this.text.fadeInLeft(800);
-    }
-  }
-
-  onNextPress() {
-    if (this.state.weekNumber != 11) {
-      this.setState({
-        weekNumber: this.state.weekNumber + 1,
-      });
-      this.text.fadeInRight(800);
-    }
   }
 
   getWeekNumber(title) {
@@ -124,7 +101,7 @@ class HomeScreen extends React.Component {
           <CardImage>
             <TouchableHighlight
               onPress={() => {
-                this.onWeekPress(rowData, rowID);
+                this.onWeekPress(rowID);
               }}
               style={{
                 backgroundColor: colors.primary,
@@ -159,7 +136,10 @@ class HomeScreen extends React.Component {
           }}>
           this is
         </Text>
-        <TouchableHighlight onPress={this.onViewMaterialsPress.bind(this)}>
+        <TouchableHighlight
+          onPress={() => {
+            this.onWeekPress(weekNumber);
+          }}>
           <View>
             <Text
               ref={c => (this.text = c)}
@@ -226,12 +206,16 @@ class HomeScreen extends React.Component {
             <AdjacentWeekButton
               text="last week"
               align="left"
-              onPress={this.onLastPress.bind(this)}
+              onPress={() => {
+                this.onWeekPress(this.state.weekNumber - 1);
+              }}
             />
             <AdjacentWeekButton
               text="next week"
               align="right"
-              onPress={this.onNextPress.bind(this)}
+              onPress={() => {
+                this.onWeekPress(this.state.weekNumber + 1);
+              }}
             />
           </View>
           {/* All weeks section */}
