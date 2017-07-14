@@ -6,6 +6,7 @@ import HomeScreen from './screens/HomeScreen';
 import WeekScreen from './screens/WeekScreen';
 import LinkScreen from './screens/LinkScreen';
 import ResourcesScreen from './screens/ResourcesScreen';
+import { fonts } from './styles/style.js';
 
 const AppNavigator = StackNavigator({
   Home: {
@@ -49,12 +50,7 @@ class AppContainer extends React.Component {
   async _loadAssetsAsync() {
     const imageAssets = this._cacheImages([require('./assets/harvard.jpg')]);
 
-    const fontAssets = this._cacheFonts([
-      {
-        'roboto-light': require('./assets/fonts/Roboto-Light.ttf'),
-        'roboto-bold': require('./assets/fonts/Roboto-Bold.ttf'),
-      },
-    ]);
+    const fontAssets = this._cacheFonts([fonts]);
 
     await Promise.all([...imageAssets, ...fontAssets]);
 

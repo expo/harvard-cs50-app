@@ -21,13 +21,12 @@ class HomeScreen extends React.Component {
     const { state, setParams } = navigation;
     return {
       title: 'CS50',
-      headerTintColor: 'black',
+      headerTintColor: colors.tertiary,
       headerBackTitle: 'Back',
       headerStyle: {
-        //display: 'none', // Experiment
-        backgroundColor: '#bababa',
+        backgroundColor: colors.primary,
         paddingTop: 20,
-        height: Platform.OS === 'ios' ? 80 : 100,
+        height: Platform.OS === 'ios' ? 60 : 100,
       },
       headerRight: (
         <Button
@@ -79,169 +78,70 @@ class HomeScreen extends React.Component {
 
   renderRowView(rowData, sectionID, rowID) {
     return (
-      <View
+      <TouchableHighlight
+        onPress={() => {
+          this.onWeekPress(rowID);
+        }}
         style={{
-          paddingTop: 10,
-          paddingLeft: 0,
-          paddingRight: 0,
-          marginLeft: 0,
-          marginRight: 0,
+          justifyContent: 'center',
+          paddingTop: 20,
+          paddingBottom: 20,
+          borderBottomWidth: 1,
+          borderBottomColor: colors.primary,
         }}>
-        <Card
-          styles={{
-            height: Dimensions.get('window').height / 7,
-            width: (Dimensions.get('window').width - 50) / 3,
-            alignItems: 'center',
+        <Text
+          style={{
+            fontFamily: 'roboto-light',
+            fontSize: fontSize(1),
+            color: colors.secondary,
+            alignSelf: 'flex-start',
           }}>
-          <CardImage>
-            <TouchableHighlight
-              onPress={() => {
-                this.onWeekPress(rowID);
-              }}
-              style={{
-                backgroundColor: colors.primary,
-                height: Dimensions.get('window').height / 8,
-                width: Dimensions.get('window').width / 3.5 - 20,
-                justifyContent: 'center',
-              }}>
-              <Text
-                style={{
-                  fontFamily: 'roboto-light',
-                  fontSize: fontSize(3),
-                  color: colors.secondary,
-                  backgroundColor: 'transparent',
-                  alignSelf: 'center',
-                }}>
-                {rowData.weekNumber}
-              </Text>
-            </TouchableHighlight>
-          </CardImage>
-        </Card>
-      </View>
+          {rowData.title} / {rowData.desc}
+        </Text>
+      </TouchableHighlight>
     );
   }
 
   render() {
-    const CurrentWeekSection = ({ weekNumber }) =>
-      <View style={{ marginTop: 60 }}>
+    const BrowseSection = ({ weekNumber }) =>
+      <View style={{ marginTop: 40 }}>
         <Text
           style={{
-            fontFamily: 'roboto-bold',
-            fontSize: 20,
+            fontSize: fontSize(2),
+            letterSpacing: -1,
+            color: colors.primary,
+            fontFamily: 'roboto-black',
           }}>
-          this is
+          Browse Lectures
         </Text>
-        <TouchableHighlight
-          onPress={() => {
-            this.onWeekPress(weekNumber);
-          }}>
-          <View>
-            <Text
-              ref={c => (this.text = c)}
-              style={{
-                paddingTop: 10,
-                alignSelf: 'center',
-                fontFamily: 'roboto-bold',
-                fontSize: 50,
-              }}>
-              Week {weekNumber}
-            </Text>
-            <Text
-              style={{
-                paddingTop: 20,
-                fontSize: 16,
-                alignSelf: 'center',
-                fontFamily: 'roboto-light',
-                color: colors.primary,
-              }}
-              underlayColor="white">
-              view course materials
-            </Text>
-          </View>
-        </TouchableHighlight>
       </View>;
-
-    const AdjacentWeekButton = ({ text, align, disabled, onPress }) =>
-      <TouchableHighlight
-        style={{
-          paddingLeft: 25,
-          paddingRight: 25,
-          paddingBottom: 25,
-          paddingTop: 45,
-          height: 100,
-          backgroundColor: disabled ? colors.secondary : colors.primary,
-          alignItems: 'flex-start',
-          justifyContent: 'flex-end',
-          borderRadius: 5,
-        }}
-        onPress={disabled ? void 0 : onPress}>
-        <Text
-          style={{
-            fontFamily: 'roboto-light',
-            fontSize: 20,
-            color: colors.secondary,
-            paddingLeft: 7,
-            textAlign: align,
-          }}>
-          {text}
-        </Text>
-      </TouchableHighlight>;
 
     return (
       <View style={{ marginTop: Expo.Constants.statusBarHeight }}>
         <ScrollView contentContainerStyle={{ marginLeft: 20, marginRight: 20 }}>
-          <CurrentWeekSection weekNumber={this.state.weekNumber} />
-          <View
-            style={{
-              justifyContent: 'space-between',
-              flexDirection: 'row',
-              marginTop: 60,
-              marginBottom: 10,
-            }}>
-            <AdjacentWeekButton
-              text="last week"
-              align="left"
-              disabled={this.state.weekNumber - 1 < 0}
-              onPress={() => {
-                this.onWeekPress(this.state.weekNumber - 1);
-              }}
-            />
-            <AdjacentWeekButton
-              text="next week"
-              align="right"
-              disabled={
-                this.state.data &&
-                this.state.weekNumber + 1 > this.state.data.length
-              }
-              onPress={() => {
-                this.onWeekPress(this.state.weekNumber + 1);
-              }}
-            />
-          </View>
+          <BrowseSection weekNumber={this.state.weekNumber} />
           {/* All weeks section */}
           <View style={{ marginTop: 60 }}>
             <Text
               style={{
-                fontFamily: 'roboto-bold',
-                fontSize: 20,
+                fontFamily: 'roboto-black',
+                fontSize: fontSize(1),
+                color: colors.primary,
+                paddingBottom: 10,
+                borderBottomWidth: 1,
+                borderBottomColor: colors.primary,
               }}>
               all weeks
             </Text>
-            <View
-              style={{
-                paddingBottom: 10,
-              }}>
-              <ListView
-                contentContainerStyle={{
-                  flexDirection: 'row',
-                  flexWrap: 'wrap',
-                  justifyContent: 'space-between',
-                }}
-                dataSource={this.state.dataSource}
-                renderRow={this.renderRowView.bind(this)}
-                enableEmptySections={true}
-              />
-            </View>
+            <ListView
+              contentContainerStyle={{
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+              }}
+              dataSource={this.state.dataSource}
+              renderRow={this.renderRowView.bind(this)}
+              enableEmptySections={true}
+            />
           </View>
         </ScrollView>
       </View>
