@@ -78,29 +78,50 @@ class HomeScreen extends React.Component {
   }
 
   renderRowView(rowData, sectionID, rowID) {
+    class Row extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { pressed: false };
+      }
+
+      render() {
+        return (
+          <TouchableHighlight
+            onPress={this.props.onPress}
+            underlayColor={colors.primary}
+            onPressIn={() => {
+              this.setState({ pressed: true });
+            }}
+            onPressOut={() => {
+              this.setState({ pressed: false });
+            }}
+            style={{
+              justifyContent: 'center',
+              paddingTop: 20,
+              paddingBottom: 20,
+              borderBottomWidth: 1,
+              borderBottomColor: colors.primary,
+            }}>
+            <Text
+              style={{
+                fontFamily: 'roboto-light',
+                fontSize: fontSize(1),
+                color: this.state.pressed ? 'white' : colors.secondary,
+                alignSelf: 'flex-start',
+              }}>
+              {this.props.rowData.title} / {this.props.rowData.desc}
+            </Text>
+          </TouchableHighlight>
+        );
+      }
+    }
+
     return (
-      <TouchableHighlight
-        onPress={() => {
-          this.onWeekPress(rowID);
-        }}
-        underlayColor={colors.primary}
-        style={{
-          justifyContent: 'center',
-          paddingTop: 20,
-          paddingBottom: 20,
-          borderBottomWidth: 1,
-          borderBottomColor: colors.primary,
-        }}>
-        <Text
-          style={{
-            fontFamily: 'roboto-light',
-            fontSize: fontSize(1),
-            color: colors.secondary,
-            alignSelf: 'flex-start',
-          }}>
-          {rowData.title} / {rowData.desc}
-        </Text>
-      </TouchableHighlight>
+      <Row
+        rowData={rowData}
+        rowID={rowID}
+        onPress={() => this.onWeekPress(rowID)}
+      />
     );
   }
 
