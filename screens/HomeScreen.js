@@ -17,6 +17,45 @@ import { NavigationActions } from 'react-navigation';
 import Expo from 'expo';
 import Button from '../components/Button';
 
+class Row extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { pressed: false };
+  }
+
+  render() {
+    return (
+      <TouchableHighlight
+        onPress={this.props.onPress}
+        underlayColor={colors.primary}
+        onPressIn={() => {
+          this.setState({ pressed: true });
+        }}
+        onPressOut={() => {
+          this.setState({ pressed: false });
+        }}
+        style={{
+          justifyContent: 'center',
+          paddingTop: 20,
+          paddingBottom: 20,
+          marginLeft: styles.mainViewStyle.marginLeft,
+          borderBottomWidth: 1,
+          borderBottomColor: colors.primary,
+        }}>
+        <Text
+          style={{
+            fontFamily: 'roboto-light',
+            fontSize: fontSize(1),
+            color: this.state.pressed ? 'white' : colors.secondary,
+            alignSelf: 'flex-start',
+          }}>
+          {this.props.rowData.title} / {this.props.rowData.desc}
+        </Text>
+      </TouchableHighlight>
+    );
+  }
+}
+
 class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
@@ -73,44 +112,6 @@ class HomeScreen extends React.Component {
   }
 
   renderRowView(rowData, sectionID, rowID) {
-    class Row extends React.Component {
-      constructor(props) {
-        super(props);
-        this.state = { pressed: false };
-      }
-
-      render() {
-        return (
-          <TouchableHighlight
-            onPress={this.props.onPress}
-            underlayColor={colors.primary}
-            onPressIn={() => {
-              this.setState({ pressed: true });
-            }}
-            onPressOut={() => {
-              this.setState({ pressed: false });
-            }}
-            style={{
-              justifyContent: 'center',
-              paddingTop: 20,
-              paddingBottom: 20,
-              borderBottomWidth: 1,
-              borderBottomColor: colors.primary,
-            }}>
-            <Text
-              style={{
-                fontFamily: 'roboto-light',
-                fontSize: fontSize(1),
-                color: this.state.pressed ? 'white' : colors.secondary,
-                alignSelf: 'flex-start',
-              }}>
-              {this.props.rowData.title} / {this.props.rowData.desc}
-            </Text>
-          </TouchableHighlight>
-        );
-      }
-    }
-
     return (
       <Row
         rowData={rowData}
@@ -122,7 +123,7 @@ class HomeScreen extends React.Component {
 
   render() {
     const BrowseSection = ({ weekNumber }) =>
-      <View style={{ marginTop: 40 }}>
+      <View style={[{ marginTop: 40 }, styles.mainViewStyle]}>
         <Text
           style={{
             fontSize: fontSize(2),
@@ -136,19 +137,22 @@ class HomeScreen extends React.Component {
 
     return (
       <View>
-        <ScrollView contentContainerStyle={{ marginLeft: 20, marginRight: 20 }}>
+        <ScrollView>
           <BrowseSection weekNumber={this.state.weekNumber} />
           {/* All weeks section */}
           <View style={{ marginTop: 60 }}>
             <Text
-              style={{
-                fontFamily: 'roboto-black',
-                fontSize: fontSize(1),
-                color: colors.primary,
-                paddingBottom: 10,
-                borderBottomWidth: 1,
-                borderBottomColor: colors.primary,
-              }}>
+              style={[
+                {
+                  fontFamily: 'roboto-black',
+                  fontSize: fontSize(1),
+                  color: colors.primary,
+                  paddingBottom: 10,
+                  borderBottomWidth: 1,
+                  borderBottomColor: colors.primary,
+                },
+                styles.mainViewStyle,
+              ]}>
               all weeks
             </Text>
             <ListView
