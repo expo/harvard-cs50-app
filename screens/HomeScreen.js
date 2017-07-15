@@ -83,6 +83,7 @@ class HomeScreen extends React.Component {
         onPress={() => {
           this.onWeekPress(rowID);
         }}
+        underlayColor={colors.primary}
         style={{
           justifyContent: 'center',
           paddingTop: 20,
