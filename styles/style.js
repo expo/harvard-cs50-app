@@ -17,10 +17,11 @@ export const fonts = {
   'roboto-black': require('../assets/fonts/Roboto-Black.ttf'),
 };
 
+export const headerTintColor = colors.tertiary;
+
 export const headerStyle = {
-  backgroundColor: '#bababa',
-  paddingTop: 20,
-  height: Platform.OS === 'ios' ? 80 : 100,
+  backgroundColor: colors.primary,
+  height: Platform.OS === 'ios' ? 60 : 100,
 };
 
 export const mainViewStyle = {
@@ -33,3 +34,12 @@ export const mainViewStyle = {
 // TODO: Something for vertical rhythm
 
 // Setup default fontFamily for all <Text> to be Roboto-Light
+
+export default (styles = {
+  colors,
+  fontSize,
+  fonts,
+  headerTintColor,
+  headerStyle,
+  mainViewStyle,
+});

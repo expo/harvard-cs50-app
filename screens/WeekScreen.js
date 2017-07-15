@@ -10,7 +10,7 @@ import {
   Button,
   ScrollView,
 } from 'react-native';
-
+import styles from '../styles/style';
 import VideoPlayer from '../components/VideoPlayer';
 
 class WeekScreen extends React.Component {
@@ -22,12 +22,8 @@ class WeekScreen extends React.Component {
 
   static navigationOptions = ({ navigation }) => ({
     title: `Week ${navigation.state.params.weekNum}`,
-    headerTintColor: 'black',
-    headerStyle: {
-      backgroundColor: '#bababa',
-      paddingTop: 20,
-      height: Platform.OS === 'ios' ? 80 : 100,
-    },
+    headerTintColor: styles.headerTintColor,
+    headerStyle: styles.headerStyle,
   });
 
   constructor() {

@@ -11,7 +11,7 @@ import {
 import { Card, CardImage } from 'react-native-card-view';
 import { Text } from 'react-native-animatable';
 import loadData from '../utils/data-loader';
-import { colors, fontSize } from '../styles/style';
+import styles, { colors, fontSize } from '../styles/style';
 import debug from '../utils/debug';
 import { NavigationActions } from 'react-navigation';
 import Expo from 'expo';
@@ -19,16 +19,11 @@ import Button from '../components/Button';
 
 class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
-    const { state, setParams } = navigation;
     return {
       title: 'CS50',
-      headerTintColor: colors.tertiary,
+      headerTintColor: styles.headerTintColor,
       headerBackTitle: 'Back',
-      headerStyle: {
-        backgroundColor: colors.primary,
-        paddingTop: 20,
-        height: Platform.OS === 'ios' ? 60 : 100,
-      },
+      headerStyle: styles.headerStyle,
       headerRight: (
         <RNButton
           title={'Resources'}
