@@ -1,15 +1,12 @@
 import React from 'react';
 import { Platform, WebView } from 'react-native';
+import styles from '../styles/style';
 
 class LinkScreen extends React.Component {
   static navigationOptions = {
     title: 'Return to Resources',
-    headerTintColor: 'black',
-    headerStyle: {
-      backgroundColor: '#bababa',
-      paddingTop: 20,
-      height: Platform.OS === 'ios' ? 80 : 100,
-    },
+    headerTintColor: styles.headerTintColor,
+    headerStyle: styles.headerStyle,
   };
 
   render() {

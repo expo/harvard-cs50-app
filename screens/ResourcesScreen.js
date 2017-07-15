@@ -8,14 +8,15 @@ import {
 } from 'react-native';
 import { Text } from 'react-native-animatable';
 import loadData from '../utils/data-loader';
-import { colors, fontSize, headerStyle, mainViewStyle } from '../styles/style';
+import styles, { colors, fontSize, mainViewStyle } from '../styles/style';
 import React from 'react';
 import _ from 'lodash';
 
 class ResourcesScreen extends React.Component {
   static navigationOptions = {
     title: 'Resources',
-    headerStyle: headerStyle,
+    headerTintColor: styles.headerTintColor,
+    headerStyle: styles.headerStyle,
   };
 
   onButtonPress = url => {
