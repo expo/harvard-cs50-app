@@ -7,16 +7,17 @@ import {
   Dimensions,
   ScrollView,
   Button as RNButton,
+  Image,
 } from 'react-native';
-import { Card, CardImage } from 'react-native-card-view';
 import { Text } from 'react-native-animatable';
 import loadData from '../utils/data-loader';
 import styles, { colors, fontSize } from '../styles/style';
 import debug from '../utils/debug';
-import { NavigationActions } from 'react-navigation';
 import Expo from 'expo';
 import Button from '../components/Button';
 import { Ionicons } from '@expo/vector-icons';
+
+import Carousel from 'react-native-snap-carousel';
 
 class Row extends React.Component {
   constructor(props) {
@@ -124,18 +125,95 @@ class HomeScreen extends React.Component {
   }
 
   render() {
-    const BrowseSection = ({ weekNumber }) =>
-      <View style={[{ marginTop: 40 }, styles.mainViewStyle]}>
-        <Text
-          style={{
-            fontSize: fontSize(2),
-            letterSpacing: -1,
-            color: colors.primary,
-            fontFamily: 'roboto-black',
-          }}>
-          Browse Lectures
-        </Text>
-      </View>;
+    const BrowseSection = ({ weekNumber }) => {
+      const textStyle = { color: colors.primary, fontSize: fontSize(2) };
+      const itemHorizontalMargin = 10;
+      const itemWidth =
+        Dimensions.get('window').width + itemHorizontalMargin * 2 - 80;
+      return (
+        <View style={{ marginTop: 40 }}>
+          <Text
+            style={[
+              {
+                fontSize: fontSize(2),
+                letterSpacing: -1,
+                color: colors.primary,
+                fontFamily: 'roboto-black',
+              },
+              styles.mainViewStyle,
+            ]}>
+            Browse Lectures
+          </Text>
+          {this.state.data &&
+            <Carousel
+              containerCustomStyle={{ marginTop: 20 }}
+              ref={carousel => {
+                this._carousel = carousel;
+              }}
+              inactiveSlideOpacity={1}
+              inactiveSlideScale={1}
+              enableMomentum={false}
+              firstItem={4}
+              sliderWidth={Dimensions.get('window').width}
+              itemWidth={itemWidth}>
+              {this.state.data.map((week, index) =>
+                <View
+                  key={week.title}
+                  style={{
+                    borderTopColor: colors.primary,
+                    borderTopWidth: 1,
+                    width: itemWidth,
+                    paddingHorizontal: itemHorizontalMargin,
+                  }}>
+                  <Text style={{ color: colors.primary, marginTop: 10 }}>
+                    THIS WEEK
+                  </Text>
+                  <TouchableHighlight
+                    onPress={() => this.onWeekPress(week.weekNumber)}>
+                    <View
+                      key={`entry-${index}`}
+                      style={{
+                        paddingTop: 50,
+                        paddingBottom: 50,
+                        marginTop: 10,
+                        borderRadius: 5,
+                        borderWidth: 2,
+                        borderColor: colors.primary,
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                      }}>
+                      <View
+                        style={{
+                          width: (itemWidth - itemHorizontalMargin * 2) * 1 / 3,
+                          alignItems: 'center',
+                        }}>
+                        <Image
+                          source={require('../assets/memory.png')}
+                          fadeDuration={0}
+                          style={{ width: 50, height: 60 }}
+                        />
+                      </View>
+                      <View
+                        style={{
+                          width: (itemWidth - itemHorizontalMargin * 2) * 2 / 3,
+                          alignItems: 'flex-start',
+                        }}>
+                        <Text style={textStyle} numberOfLines={1}>
+                          {week.title.toLowerCase()}
+                        </Text>
+                        <Text style={textStyle} numberOfLines={1}>
+                          {week.desc.toLowerCase()}
+                        </Text>
+                      </View>
+                    </View>
+                  </TouchableHighlight>
+                </View>
+              )}
+            </Carousel>}
+        </View>
+      );
+    };
 
     return (
       <View>

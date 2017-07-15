@@ -20,6 +20,7 @@
     "react-native-navbar": "^1.7.1",
     "react-native-platform-stylesheet": "0.0.6",
     "react-native-platform-touchable": "^1.1.1",
+    "react-native-snap-carousel": "^2.3.1",
     "react-navigation": "^1.0.0-beta.11",
     "react-xml-parser": "^1.0.2"
   },

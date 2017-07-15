@@ -48,7 +48,7 @@ class AppContainer extends React.Component {
   }
 
   async _loadAssetsAsync() {
-    const imageAssets = this._cacheImages([require('./assets/harvard.jpg')]);
+    const imageAssets = this._cacheImages([require('./assets/memory.png')]);
 
     const fontAssets = this._cacheFonts([fonts]);
 
