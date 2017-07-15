@@ -6,7 +6,7 @@ import {
   Platform,
   Dimensions,
   ScrollView,
-  Button,
+  Button as RNButton,
 } from 'react-native';
 import { Card, CardImage } from 'react-native-card-view';
 import { Text } from 'react-native-animatable';
@@ -15,6 +15,7 @@ import { colors, fontSize } from '../styles/style';
 import debug from '../utils/debug';
 import { NavigationActions } from 'react-navigation';
 import Expo from 'expo';
+import Button from '../components/Button';
 
 class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -29,7 +30,7 @@ class HomeScreen extends React.Component {
         height: Platform.OS === 'ios' ? 60 : 100,
       },
       headerRight: (
-        <Button
+        <RNButton
           title={'Resources'}
           onPress={() => {
             navigation.navigate('Resources');
@@ -117,7 +118,7 @@ class HomeScreen extends React.Component {
       </View>;
 
     return (
-      <View style={{ marginTop: Expo.Constants.statusBarHeight }}>
+      <View>
         <ScrollView contentContainerStyle={{ marginLeft: 20, marginRight: 20 }}>
           <BrowseSection weekNumber={this.state.weekNumber} />
           {/* All weeks section */}
