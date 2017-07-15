@@ -16,6 +16,7 @@ import debug from '../utils/debug';
 import { NavigationActions } from 'react-navigation';
 import Expo from 'expo';
 import Button from '../components/Button';
+import { Ionicons } from '@expo/vector-icons';
 
 class Row extends React.Component {
   constructor(props) {
@@ -64,12 +65,13 @@ class HomeScreen extends React.Component {
       headerBackTitle: 'Back',
       headerStyle: styles.headerStyle,
       headerRight: (
-        <RNButton
-          title={'Resources'}
+        <TouchableHighlight
+          style={{ paddingRight: 20 }}
           onPress={() => {
             navigation.navigate('Resources');
-          }}
-        />
+          }}>
+          <Ionicons name="md-list-box" size={28} color={colors.tertiary} />
+        </TouchableHighlight>
       ),
     };
   };

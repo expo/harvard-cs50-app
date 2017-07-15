@@ -21,7 +21,7 @@ export const headerTintColor = colors.tertiary;
 
 export const headerStyle = {
   backgroundColor: colors.primary,
-  height: Platform.OS === 'ios' ? 60 : 100,
+  height: Platform.OS === 'ios' ? 80 : 100,
 };
 
 export const mainViewStyle = {
