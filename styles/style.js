@@ -6,6 +6,7 @@ export const colors = {
   primary: '#6E001C', // crimson
   secondary: '#A41034',
   tertiary: '#FD9E71',
+  complementary: '#FFFFFF',
 };
 
 // Fonts

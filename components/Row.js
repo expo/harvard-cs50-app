@@ -1,6 +1,7 @@
 import React from 'react';
-import { Text, TouchableHighlight } from 'react-native';
+import { Text, TouchableHighlight, View } from 'react-native';
 import styles, { colors, fontSize } from '../styles/style';
+import { EvilIcons } from '@expo/vector-icons';
 
 class Row extends React.Component {
   constructor(props) {
@@ -27,15 +28,28 @@ class Row extends React.Component {
           borderBottomWidth: 1,
           borderBottomColor: colors.primary,
         }}>
-        <Text
+        <View
           style={{
-            fontFamily: 'roboto-light',
-            fontSize: fontSize(1),
-            color: this.state.pressed ? 'white' : colors.secondary,
-            alignSelf: 'flex-start',
+            justifyContent: 'space-between',
+            flexDirection: 'row',
           }}>
-          {this.props.text}
-        </Text>
+          <Text
+            style={{
+              fontFamily: 'roboto-light',
+              fontSize: fontSize(1),
+              color: this.state.pressed
+                ? colors.complementary
+                : colors.secondary,
+              alignSelf: 'flex-start',
+            }}>
+            {this.props.text}
+          </Text>
+          <EvilIcons
+            name="chevron-right"
+            size={32}
+            color={this.state.pressed ? colors.complementary : colors.secondary}
+          />
+        </View>
       </TouchableHighlight>
     );
   }
