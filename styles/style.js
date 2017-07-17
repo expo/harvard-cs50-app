@@ -1,9 +1,14 @@
 import { Platform } from 'react-native';
+
+// Colors
+
 export const colors = {
-  primary: '#6E001C',
+  primary: '#6E001C', // crimson
   secondary: '#A41034',
   tertiary: '#FD9E71',
 };
+
+// Fonts
 
 export const fontSize = n => {
   const baseFontSize = 12;
@@ -17,6 +22,11 @@ export const fonts = {
   'roboto-black': require('../assets/fonts/Roboto-Black.ttf'),
 };
 
+// TODO: Add font families
+// Setup default fontFamily for all <Text> to be Roboto-Light
+
+// Header styles
+
 export const headerTintColor = colors.tertiary;
 
 export const headerStyle = {
@@ -24,16 +34,14 @@ export const headerStyle = {
   height: Platform.OS === 'ios' ? 80 : 100,
 };
 
+// Margins for all views
+
 export const mainViewStyle = {
   marginLeft: 20,
   marginRight: 20,
 };
 
-// TODO: Add font families
-
 // TODO: Something for vertical rhythm
-
-// Setup default fontFamily for all <Text> to be Roboto-Light
 
 export default (styles = {
   colors,
