@@ -12,51 +12,14 @@ import {
 import { Text } from 'react-native-animatable';
 import loadData from '../utils/data-loader';
 import styles, { colors, fontSize } from '../styles/style';
-import debug from '../utils/debug';
+import config from '../utils/config';
 import Expo from 'expo';
 import Button from '../components/Button';
+import Row from '../components/Row';
 import { Ionicons } from '@expo/vector-icons';
 
 import Carousel from 'react-native-snap-carousel';
 
-class Row extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { pressed: false };
-  }
-
-  render() {
-    return (
-      <TouchableHighlight
-        onPress={this.props.onPress}
-        underlayColor={colors.primary}
-        onPressIn={() => {
-          this.setState({ pressed: true });
-        }}
-        onPressOut={() => {
-          this.setState({ pressed: false });
-        }}
-        style={{
-          justifyContent: 'center',
-          paddingTop: 20,
-          paddingBottom: 20,
-          marginLeft: styles.mainViewStyle.marginLeft,
-          borderBottomWidth: 1,
-          borderBottomColor: colors.primary,
-        }}>
-        <Text
-          style={{
-            fontFamily: 'roboto-light',
-            fontSize: fontSize(1),
-            color: this.state.pressed ? 'white' : colors.secondary,
-            alignSelf: 'flex-start',
-          }}>
-          {this.props.rowData.title} / {this.props.rowData.desc}
-        </Text>
-      </TouchableHighlight>
-    );
-  }
-}
 
 class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -97,11 +60,11 @@ class HomeScreen extends React.Component {
       dataSource: this.state.dataSource.cloneWithRows(data),
     });
 
-    if (debug.secondScreen) {
+    if (config.secondScreen) {
       this.onWeekPress(0);
     }
 
-    if (debug.resourcesScreen) {
+    if (config.resourcesScreen) {
       this.props.navigation.navigate('Resources');
     }
   }
@@ -117,8 +80,7 @@ class HomeScreen extends React.Component {
   renderRowView(rowData, sectionID, rowID) {
     return (
       <Row
-        rowData={rowData}
-        rowID={rowID}
+        text={rowData.title + ' / ' + rowData.desc}
         onPress={() => this.onWeekPress(rowID)}
       />
     );

@@ -1,22 +1,13 @@
 import React from 'react';
-import { Audio, Video, ScreenOrientation } from 'expo';
+import { ScreenOrientation } from 'expo';
 import _ from 'lodash';
-import {
-  Text,
-  View,
-  Platform,
-  TouchableHighlight,
-  Dimensions,
-  Button,
-  ScrollView,
-} from 'react-native';
+import { Text, View, Dimensions, ScrollView } from 'react-native';
 import styles from '../styles/style';
 import VideoPlayer from '../components/VideoPlayer';
+import Row from '../components/Row';
 
 class WeekScreen extends React.Component {
   state = {
-    url: null,
-    videoIndex: 8,
     isPortrait: true,
   };
 
@@ -62,21 +53,6 @@ class WeekScreen extends React.Component {
     var linkKeys = ['slides', 'source code', 'notes'];
     var links = _.pickBy(data, (v, k) => linkKeys.includes(k));
 
-    const Link = props =>
-      <TouchableHighlight
-        onPress={() => {
-          this.onButtonPress(props.url);
-        }}>
-        <Text
-          style={{
-            fontSize: 20,
-            color: 'black',
-            marginBottom: 10,
-          }}>
-          {props.name}
-        </Text>
-      </TouchableHighlight>;
-
     return (
       <ScrollView
         containerStyle={{
@@ -119,7 +95,13 @@ class WeekScreen extends React.Component {
             course materials
           </Text>
           {_.map(links, (url, name) => {
-            return <Link key={url} name={name} url={url} />;
+            return (
+              <Row
+                key={url}
+                text={name}
+                onPress={() => this.onButtonPress(url)}
+              />
+            );
           })}
         </View>
       </ScrollView>

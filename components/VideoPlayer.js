@@ -3,7 +3,7 @@ import { Audio, Video } from 'expo';
 import _ from 'lodash';
 import { View, Dimensions, Button } from 'react-native';
 import StoredValue from '../utils/StoredValue';
-import debug from '../utils/debug';
+import config from '../utils/config';
 
 export default class VideoPlayer extends React.Component {
   constructor() {
@@ -18,7 +18,7 @@ export default class VideoPlayer extends React.Component {
     Audio.setAudioModeAsync({
       allowsRecordingIOS: false,
       interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
-      playsInSilentModeIOS: debug.muteVideo ? false : true,
+      playsInSilentModeIOS: config.muteVideo ? false : true,
       shouldDuckAndroid: true, // TODO(Abi): Is this the common behavior on Android?
       interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
     });
@@ -29,7 +29,7 @@ export default class VideoPlayer extends React.Component {
       const value = await this.storedPlaybackTime.get();
       if (value !== null) {
         console.log('Setting the playback start to ', value);
-        if (debug.autoplayVideo) {
+        if (config.autoplayVideo) {
           this._playbackObject.playFromPositionAsync(parseInt(value));
         }
       } else {
@@ -104,7 +104,7 @@ export default class VideoPlayer extends React.Component {
             width: videoWidth,
             height: videoHeight,
           }}
-          shouldPlay={debug.autoplayVideo}
+          shouldPlay={config.autoplayVideo}
         />
         {/*<View
           style={{
