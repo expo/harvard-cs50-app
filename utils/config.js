@@ -11,7 +11,7 @@ const config = {
   secondScreen: false,
   resourcesScreen: false,
   muteVideo: true,
-  autoplayVideo: false,
+  autoplayVideo: true,
 };
 
 export default config;

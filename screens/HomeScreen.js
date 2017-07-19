@@ -14,12 +14,13 @@ import loadData from '../utils/data-loader';
 import styles, { colors, fontSize } from '../styles/style';
 import config from '../utils/config';
 import Expo from 'expo';
+
 import Button from '../components/Button';
 import Row from '../components/Row';
+import AnimatedIcon from '../components/AnimatedIcon';
 import { Ionicons } from '@expo/vector-icons';
 
 import Carousel from 'react-native-snap-carousel';
-
 
 class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -155,6 +156,7 @@ class HomeScreen extends React.Component {
                           fadeDuration={0}
                           style={{ width: 50, height: 60 }}
                         />
+                        {/* <AnimatedIcon /> */}
                       </View>
                       <View
                         style={{
