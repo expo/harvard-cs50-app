@@ -144,7 +144,7 @@ export default class VideoPlayer extends React.Component {
   _onSeekSliderValueChange = value => {
     if (this._playbackObject != null && !this.state.isSeeking) {
       this.setState({ isSeeking: true });
-      this.shouldPlayAtEndOfSeek = this.state.shouldPlay;
+      this.setState({ shouldPlayAtEndOfSeek: this.state.shouldPlay });
       this._playbackObject.pauseAsync();
     }
   };
@@ -153,7 +153,7 @@ export default class VideoPlayer extends React.Component {
     if (this._playbackObject != null) {
       this.setState({ isSeeking: false });
       const seekPosition = value * this.state.playbackInstanceDuration;
-      if (this.shouldPlayAtEndOfSeek) {
+      if (this.state.shouldPlayAtEndOfSeek) {
         this._playbackObject.playFromPositionAsync(seekPosition);
       } else {
         this._playbackObject.setPositionAsync(seekPosition);
@@ -203,6 +203,12 @@ export default class VideoPlayer extends React.Component {
       this.state.isBuffering ||
       this.state.isLoading ||
       (this.state.shouldPlay && !this.state.isPlaying);
+
+    const hidePlayPauseButton = this.state.isSeeking;
+
+    const showPauseButton =
+      this.state.isPlaying ||
+      (this.state.isSeeking && this.state.shouldPlayAtEndOfSeek);
 
     // Example HLS url: https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8
 
@@ -258,6 +264,7 @@ export default class VideoPlayer extends React.Component {
           />
 
           {!showSpinner &&
+            !hidePlayPauseButton &&
             <Animated.View
               style={{
                 opacity: this.state.controlsOpacity,
@@ -267,7 +274,7 @@ export default class VideoPlayer extends React.Component {
               }}>
               <Control callback={() => this._togglePlay()}>
                 <Foundation
-                  name={this.state.isPlaying ? 'pause' : 'play'}
+                  name={showPauseButton ? 'pause' : 'play'}
                   size={48}
                   color={colors.complementary}
                 />
