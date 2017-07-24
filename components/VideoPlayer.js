@@ -15,7 +15,7 @@ import {
 import StoredValue from '../utils/StoredValue';
 import config from '../utils/config';
 import { colors, fontSize } from '../styles/style';
-import { Foundation, EvilIcons } from '@expo/vector-icons';
+import { Foundation, FontAwesome } from '@expo/vector-icons';
 
 class Spinner extends React.Component {
   state = { rotate: new Animated.Value(0) };
@@ -39,7 +39,7 @@ class Spinner extends React.Component {
 
     return (
       <Animated.View style={{ transform: [{ rotate: spin }] }}>
-        <EvilIcons name="spinner-3" size={48} color={colors.complementary} />
+        <FontAwesome name="spinner" size={48} color={colors.complementary} />
       </Animated.View>
     );
   }
@@ -226,6 +226,11 @@ export default class VideoPlayer extends React.Component {
     var videoWidth = Dimensions.get('window').width;
     var videoHeight = videoWidth * (9 / 16);
 
+    const showSpinner =
+      this.state.isBuffering ||
+      this.state.isLoading ||
+      (this.state.shouldPlay && !this.state.isPlaying);
+
     // Example HLS url: https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8
 
     const overlayTextStyle = {
@@ -272,12 +277,12 @@ export default class VideoPlayer extends React.Component {
               position: 'absolute',
               left: videoWidth / 2 - 24,
               top: videoHeight / 2 - 24,
-              opacity: this.state.isBuffering || this.state.isLoading ? 1 : 0,
+              opacity: showSpinner ? 1 : 0,
             }}>
             <Spinner />
           </View>
 
-          {!(this.state.isBuffering || this.state.isLoading) &&
+          {!showSpinner &&
             <Animated.View
               style={{
                 opacity: this.state.controlsOpacity,
