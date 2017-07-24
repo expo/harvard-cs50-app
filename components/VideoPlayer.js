@@ -10,11 +10,40 @@ import {
   Animated,
   Text,
   Slider,
+  Easing,
 } from 'react-native';
 import StoredValue from '../utils/StoredValue';
 import config from '../utils/config';
 import { colors, fontSize } from '../styles/style';
 import { Foundation, EvilIcons } from '@expo/vector-icons';
+
+class Spinner extends React.Component {
+  state = { rotate: new Animated.Value(0) };
+
+  componentDidMount() {
+    this.spinnerAnimation = Animated.timing(this.state.rotate, {
+      toValue: 1,
+      duration: 1000,
+      easing: Easing.linear,
+      useNativeDriver: true,
+    });
+    this.spinnerLoop = Animated.loop(this.spinnerAnimation);
+    this.spinnerLoop.start();
+  }
+
+  render() {
+    const spin = this.state.rotate.interpolate({
+      inputRange: [0, 1],
+      outputRange: ['0deg', '360deg'],
+    });
+
+    return (
+      <Animated.View style={{ transform: [{ rotate: spin }] }}>
+        <EvilIcons name="spinner-3" size={48} color={colors.complementary} />
+      </Animated.View>
+    );
+  }
+}
 
 export default class VideoPlayer extends React.Component {
   constructor() {
@@ -92,7 +121,6 @@ export default class VideoPlayer extends React.Component {
         );
       }
     } else {
-      console.log('isBuffering', playbackStatus.isBuffering);
       this.setState({
         playbackInstancePosition: playbackStatus.positionMillis,
         playbackInstanceDuration: playbackStatus.durationMillis,
@@ -161,8 +189,6 @@ export default class VideoPlayer extends React.Component {
   };
 
   _showControls = () => {
-    console.log('show controls');
-
     Animated.timing(this.state.controlsOpacity, {
       toValue: 1,
       duration: 200,
@@ -178,10 +204,22 @@ export default class VideoPlayer extends React.Component {
     if (this.controlsTimer) {
       clearTimeout(this.controlsTimer);
     }
-    Animated.timing(this.state.controlsOpacity, {
+    this.hideAnimation = Animated.timing(this.state.controlsOpacity, {
       toValue: 0,
       duration: 2000,
-    }).start();
+    });
+    this.hideAnimation.start();
+  };
+
+  _resetControlsTimer = () => {
+    if (this.controlsTimer) {
+      clearTimeout(this.controlsTimer);
+    }
+    if (this.hideAnimation) {
+      this.hideAnimation.stop();
+    }
+    this.setState({ controlsOpacity: new Animated.Value(1) });
+    this.controlsTimer = setTimeout(this._hideControls.bind(this), 4000);
   };
 
   render() {
@@ -203,7 +241,7 @@ export default class VideoPlayer extends React.Component {
         hitSlop={{ top: 10, left: 10, bottom: 10, right: 10 }}
         activeOpacity={0.3}
         onPress={() => {
-          // this.resetControlTimeout();
+          this._resetControlsTimer();
           callback();
         }}>
         {children}
@@ -229,27 +267,32 @@ export default class VideoPlayer extends React.Component {
             }}
             shouldPlay={config.autoplayVideo}
           />
-          <Animated.View
+          <View
             style={{
-              opacity: this.state.controlsOpacity,
               position: 'absolute',
               left: videoWidth / 2 - 24,
               top: videoHeight / 2 - 24,
+              opacity: this.state.isBuffering || this.state.isLoading ? 1 : 0,
             }}>
-            <Control callback={() => this._togglePlay()}>
-              {this.state.isBuffering || this.state.isLoading
-                ? <EvilIcons
-                    name="spinner-3"
-                    size={48}
-                    color={colors.complementary}
-                  />
-                : <Foundation
-                    name={this.state.isPlaying ? 'pause' : 'play'}
-                    size={48}
-                    color={colors.complementary}
-                  />}
-            </Control>
-          </Animated.View>
+            <Spinner />
+          </View>
+
+          {!(this.state.isBuffering || this.state.isLoading) &&
+            <Animated.View
+              style={{
+                opacity: this.state.controlsOpacity,
+                position: 'absolute',
+                left: videoWidth / 2 - 24,
+                top: videoHeight / 2 - 24,
+              }}>
+              <Control callback={() => this._togglePlay()}>
+                <Foundation
+                  name={this.state.isPlaying ? 'pause' : 'play'}
+                  size={48}
+                  color={colors.complementary}
+                />
+              </Control>
+            </Animated.View>}
           <Animated.View
             style={{
               alignItems: 'stretch',
