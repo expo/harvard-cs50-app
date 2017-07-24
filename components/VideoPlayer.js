@@ -11,39 +11,12 @@ import {
   Text,
   Slider,
   Easing,
+  ActivityIndicator,
 } from 'react-native';
 import StoredValue from '../utils/StoredValue';
 import config from '../utils/config';
 import { colors, fontSize } from '../styles/style';
 import { Foundation, FontAwesome } from '@expo/vector-icons';
-
-class Spinner extends React.Component {
-  state = { rotate: new Animated.Value(0) };
-
-  componentDidMount() {
-    this.spinnerAnimation = Animated.timing(this.state.rotate, {
-      toValue: 1,
-      duration: 1000,
-      easing: Easing.linear,
-      useNativeDriver: true,
-    });
-    this.spinnerLoop = Animated.loop(this.spinnerAnimation);
-    this.spinnerLoop.start();
-  }
-
-  render() {
-    const spin = this.state.rotate.interpolate({
-      inputRange: [0, 1],
-      outputRange: ['0deg', '360deg'],
-    });
-
-    return (
-      <Animated.View style={{ transform: [{ rotate: spin }] }}>
-        <FontAwesome name="spinner" size={48} color={colors.complementary} />
-      </Animated.View>
-    );
-  }
-}
 
 export default class VideoPlayer extends React.Component {
   constructor() {
@@ -272,15 +245,17 @@ export default class VideoPlayer extends React.Component {
             }}
             shouldPlay={config.autoplayVideo}
           />
-          <View
+
+          <ActivityIndicator
+            animating={showSpinner}
+            color={colors.complementary}
+            size={'large'}
             style={{
               position: 'absolute',
-              left: videoWidth / 2 - 24,
-              top: videoHeight / 2 - 24,
-              opacity: showSpinner ? 1 : 0,
-            }}>
-            <Spinner />
-          </View>
+              left: videoWidth / 2 - 36 / 2,
+              top: videoHeight / 2 - 36 / 2,
+            }}
+          />
 
           {!showSpinner &&
             <Animated.View
