@@ -1,15 +1,40 @@
 import React from 'react';
-import { Audio, Video } from 'expo';
+import { Audio, Video, Asset } from 'expo';
 import _ from 'lodash';
-import { View, Dimensions, Button } from 'react-native';
+import {
+  View,
+  Dimensions,
+  Image,
+  TouchableHighlight,
+  TouchableWithoutFeedback,
+  Animated,
+  Text,
+  Slider,
+} from 'react-native';
 import StoredValue from '../utils/StoredValue';
 import config from '../utils/config';
+import { colors, fontSize } from '../styles/style';
+import { Foundation, EvilIcons } from '@expo/vector-icons';
 
 export default class VideoPlayer extends React.Component {
   constructor() {
     super();
     this._togglePlay = this._togglePlay.bind(this);
     this._playbackCallback = this._playbackCallback.bind(this);
+    this.state = {
+      muted: false,
+      playbackInstancePosition: null,
+      playbackInstanceDuration: null,
+      shouldPlay: false,
+      isPlaying: false,
+      isBuffering: false,
+      isLoading: true,
+      volume: 1.0,
+      poster: false,
+      fullscreen: false,
+      isSeeking: false,
+      controlsOpacity: new Animated.Value(0),
+    };
   }
 
   async componentDidMount() {
@@ -17,7 +42,7 @@ export default class VideoPlayer extends React.Component {
     // TODO: Handle rejection of the returned promise
     Audio.setAudioModeAsync({
       allowsRecordingIOS: false,
-      interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
+      interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_MIX_WITH_OTHERS, // TODO(Abi): Switch back to INTERRUPTION_MODE_IOS_DO_NOT_MIX
       playsInSilentModeIOS: config.muteVideo ? false : true,
       shouldDuckAndroid: true, // TODO(Abi): Is this the common behavior on Android?
       interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
@@ -31,6 +56,7 @@ export default class VideoPlayer extends React.Component {
         console.log('Setting the playback start to ', value);
         if (config.autoplayVideo) {
           this._playbackObject.playFromPositionAsync(parseInt(value));
+          this._playbackObject.setStatusAsync({ isMuted: true }); // TODO: Convert to settings
         }
       } else {
         console.log('No storedPlaybackTime exists.');
@@ -42,6 +68,21 @@ export default class VideoPlayer extends React.Component {
     }
   }
 
+  _getMMSSFromMillis(millis) {
+    const totalSeconds = millis / 1000;
+    const seconds = Math.floor(totalSeconds % 60);
+    const minutes = Math.floor(totalSeconds / 60);
+
+    const padWithZero = number => {
+      const string = number.toString();
+      if (number < 10) {
+        return '0' + string;
+      }
+      return string;
+    };
+    return padWithZero(minutes) + ':' + padWithZero(seconds);
+  }
+
   _playbackCallback(playbackStatus) {
     if (!playbackStatus.isLoaded) {
       // Update your UI for the unloaded state
@@ -51,8 +92,19 @@ export default class VideoPlayer extends React.Component {
         );
       }
     } else {
+      console.log('isBuffering', playbackStatus.isBuffering);
+      this.setState({
+        playbackInstancePosition: playbackStatus.positionMillis,
+        playbackInstanceDuration: playbackStatus.durationMillis,
+        isLoading: false,
+        shouldPlay: playbackStatus.shouldPlay,
+        isPlaying: playbackStatus.isPlaying,
+        isBuffering: playbackStatus.isBuffering,
+        muted: playbackStatus.isMuted,
+        volume: playbackStatus.volume,
+      });
+
       var currentPos = playbackStatus.positionMillis.toString();
-      //   console.log('Now playing ', currentPos);
       this.storedPlaybackTime
         .set(currentPos)
         .then(val => {
@@ -62,17 +114,6 @@ export default class VideoPlayer extends React.Component {
           console.log('Error in saving stored value', error);
         });
 
-      if (playbackStatus.isPlaying) {
-        // Update your UI for the playing state
-      } else {
-        // Update your UI for the paused state
-      }
-
-      if (playbackStatus.isBuffering) {
-        // Update your UI for the buffering state
-        console.log('is buffering');
-      }
-
       if (playbackStatus.didJustFinish && !playbackStatus.isLooping) {
         // The player has just finished playing and will stop. Maybe you want to play something else?
       }
@@ -80,8 +121,68 @@ export default class VideoPlayer extends React.Component {
   }
 
   _togglePlay() {
-    this._playbackObject.pauseAsync();
+    this.state.isPlaying
+      ? this._playbackObject.pauseAsync()
+      : this._playbackObject.playAsync();
   }
+
+  _getSeekSliderPosition() {
+    if (
+      this._playbackObject != null &&
+      this.state.playbackInstancePosition != null &&
+      this.state.playbackInstanceDuration != null
+    ) {
+      return (
+        this.state.playbackInstancePosition /
+        this.state.playbackInstanceDuration
+      );
+    }
+    return 0;
+  }
+
+  _onSeekSliderValueChange = value => {
+    if (this._playbackObject != null && !this.state.isSeeking) {
+      this.setState({ isSeeking: true });
+      this.shouldPlayAtEndOfSeek = this.state.shouldPlay;
+      this._playbackObject.pauseAsync();
+    }
+  };
+
+  _onSeekSliderSlidingComplete = async value => {
+    if (this._playbackObject != null) {
+      this.setState({ isSeeking: false });
+      const seekPosition = value * this.state.playbackInstanceDuration;
+      if (this.shouldPlayAtEndOfSeek) {
+        this._playbackObject.playFromPositionAsync(seekPosition);
+      } else {
+        this._playbackObject.setPositionAsync(seekPosition);
+      }
+    }
+  };
+
+  _showControls = () => {
+    console.log('show controls');
+
+    Animated.timing(this.state.controlsOpacity, {
+      toValue: 1,
+      duration: 200,
+    }).start();
+
+    if (this.controlsTimer) {
+      clearTimeout(this.controlsTimer);
+    }
+    this.controlsTimer = setTimeout(this._hideControls.bind(this), 4000);
+  };
+
+  _hideControls = () => {
+    if (this.controlsTimer) {
+      clearTimeout(this.controlsTimer);
+    }
+    Animated.timing(this.state.controlsOpacity, {
+      toValue: 0,
+      duration: 2000,
+    }).start();
+  };
 
   render() {
     var videoWidth = Dimensions.get('window').width;
@@ -89,36 +190,101 @@ export default class VideoPlayer extends React.Component {
 
     // Example HLS url: https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8
 
-    return (
-      <View
-        style={{
-          marginBottom: 20,
-          backgroundColor: 'black',
+    const overlayTextStyle = {
+      color: colors.complementary,
+      fontFamily: 'roboto-light',
+      fontSize: fontSize(0),
+    };
+
+    const Control = ({ callback, children, ...otherProps }) =>
+      <TouchableHighlight
+        {...otherProps}
+        underlayColor="transparent"
+        hitSlop={{ top: 10, left: 10, bottom: 10, right: 10 }}
+        activeOpacity={0.3}
+        onPress={() => {
+          // this.resetControlTimeout();
+          callback();
         }}>
-        <Video
-          source={{
-            uri: this.props.sources['240p'],
-          }}
-          ref={component => (this._playbackObject = component)}
-          resizeMode={Video.RESIZE_MODE_CONTAIN}
-          callback={this._playbackCallback}
+        {children}
+      </TouchableHighlight>;
+
+    return (
+      <TouchableWithoutFeedback onPress={() => this._showControls()}>
+        <View
           style={{
-            width: videoWidth,
-            height: videoHeight,
-          }}
-          shouldPlay={config.autoplayVideo}
-        />
-        {/*<View
-          style={{
-            position: 'absolute',
-            top: 80,
-            left: 80,
+            marginBottom: 20,
             backgroundColor: 'black',
-            transform: [{ translate: [0, 0, 1] }],
           }}>
-          <Button title="Play" color="white" onPress={this._togglePlay} />
-        </View>*/}
-      </View>
+          <Video
+            source={{
+              uri: this.props.sources['240p'],
+            }}
+            ref={component => (this._playbackObject = component)}
+            resizeMode={Video.RESIZE_MODE_CONTAIN}
+            callback={this._playbackCallback}
+            style={{
+              width: videoWidth,
+              height: videoHeight,
+            }}
+            shouldPlay={config.autoplayVideo}
+          />
+          <Animated.View
+            style={{
+              opacity: this.state.controlsOpacity,
+              position: 'absolute',
+              left: videoWidth / 2 - 24,
+              top: videoHeight / 2 - 24,
+            }}>
+            <Control callback={() => this._togglePlay()}>
+              {this.state.isBuffering || this.state.isLoading
+                ? <EvilIcons
+                    name="spinner-3"
+                    size={48}
+                    color={colors.complementary}
+                  />
+                : <Foundation
+                    name={this.state.isPlaying ? 'pause' : 'play'}
+                    size={48}
+                    color={colors.complementary}
+                  />}
+            </Control>
+          </Animated.View>
+          <Animated.View
+            style={{
+              alignItems: 'stretch',
+              flex: 2,
+              justifyContent: 'flex-start',
+              width: videoWidth,
+              position: 'absolute',
+              bottom: 0,
+              opacity: this.state.controlsOpacity,
+            }}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}>
+              <Text style={[overlayTextStyle, { marginLeft: 5 }]}>
+                {this._getMMSSFromMillis(this.state.playbackInstancePosition)}
+              </Text>
+              <Slider
+                style={{ flex: 2, marginRight: 10, marginLeft: 10 }}
+                trackImage={require('../assets/icons/track.png')}
+                thumbImage={require('../assets/icons/thumb.png')}
+                value={this._getSeekSliderPosition()}
+                onValueChange={this._onSeekSliderValueChange}
+                onSlidingComplete={this._onSeekSliderSlidingComplete}
+                disabled={this.state.isLoading}
+              />
+              <Text style={[overlayTextStyle, { marginRight: 5 }]}>
+                {this._getMMSSFromMillis(this.state.playbackInstanceDuration)}
+              </Text>
+            </View>
+          </Animated.View>
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 }

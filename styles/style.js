@@ -14,7 +14,13 @@ export const colors = {
 export const fontSize = n => {
   const baseFontSize = 12;
   const multiplier = 1.618;
-  return baseFontSize * (multiplier * n);
+  if (n > 0) {
+    return baseFontSize * (multiplier * n);
+  } else if (n === 0) {
+    return baseFontSize;
+  } else {
+    return baseFontSize / (multiplier * Math.abs(n));
+  }
 };
 
 export const fonts = {
