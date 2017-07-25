@@ -168,7 +168,7 @@ export default class VideoPlayer extends React.Component {
     Animated.timing(this.state.controlsOpacity, {
       toValue: 1,
       duration: 200,
-      // useNativeDriver: true,
+      useNativeDriver: true,
     }).start();
 
     if (this.controlsTimer) {
@@ -184,7 +184,7 @@ export default class VideoPlayer extends React.Component {
     this.hideAnimation = Animated.timing(this.state.controlsOpacity, {
       toValue: 0,
       duration: 2000,
-      // useNativeDriver: true,
+      useNativeDriver: true,
     });
     this.hideAnimation.start(({ finished }) => {
       if (finished) {
@@ -275,12 +275,12 @@ export default class VideoPlayer extends React.Component {
           {!showSpinner &&
             !hidePlayPauseButton &&
             <Animated.View
+              pointerEvents={this.state.controlsActive ? 'auto' : 'none'}
               style={{
                 opacity: this.state.controlsOpacity,
                 position: 'absolute',
                 left: videoWidth / 2 - 24,
                 top: videoHeight / 2 - 24,
-                display: this.state.controlsActive ? 'flex' : 'none',
               }}>
               <Control callback={() => this._togglePlay()}>
                 <Foundation
@@ -291,6 +291,7 @@ export default class VideoPlayer extends React.Component {
               </Control>
             </Animated.View>}
           <Animated.View
+            pointerEvents={this.state.controlsActive ? 'auto' : 'none'}
             style={{
               alignItems: 'stretch',
               flex: 2,
@@ -299,7 +300,6 @@ export default class VideoPlayer extends React.Component {
               position: 'absolute',
               bottom: 0,
               opacity: this.state.controlsOpacity,
-              display: this.state.controlsActive ? 'flex' : 'none',
             }}>
             <View
               style={{
