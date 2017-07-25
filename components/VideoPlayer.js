@@ -12,6 +12,7 @@ import {
   Slider,
   Easing,
   ActivityIndicator,
+  Platform,
 } from 'react-native';
 import StoredValue from '../utils/StoredValue';
 import config from '../utils/config';
@@ -311,6 +312,12 @@ export default class VideoPlayer extends React.Component {
               <Text style={[overlayTextStyle, { marginRight: 5 }]}>
                 {this._getMMSSFromMillis(this.state.playbackInstanceDuration)}
               </Text>
+              {Platform.OS === 'ios' &&
+                <Control
+                  callback={() =>
+                    this._playbackObject.presentIOSFullscreenPlayer()}>
+                  <Text style={[overlayTextStyle, { marginRight: 5 }]}>FS</Text>
+                </Control>}
             </View>
           </Animated.View>
         </View>
