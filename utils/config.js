@@ -8,7 +8,7 @@
 
 // Debug
 const config = {
-  secondScreen: true,
+  secondScreen: false,
   resourcesScreen: false,
   muteVideo: false,
   autoplayVideo: true,
