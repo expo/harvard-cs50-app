@@ -32,6 +32,7 @@ export default class VideoPlayer extends React.Component {
       isPlaying: false,
       isBuffering: false,
       isLoading: true,
+      controlsActive: false,
       volume: 1.0,
       poster: false,
       fullscreen: false,
@@ -163,9 +164,11 @@ export default class VideoPlayer extends React.Component {
   };
 
   _showControls = () => {
+    this.setState({ controlsActive: true });
     Animated.timing(this.state.controlsOpacity, {
       toValue: 1,
       duration: 200,
+      // useNativeDriver: true,
     }).start();
 
     if (this.controlsTimer) {
@@ -181,8 +184,13 @@ export default class VideoPlayer extends React.Component {
     this.hideAnimation = Animated.timing(this.state.controlsOpacity, {
       toValue: 0,
       duration: 2000,
+      // useNativeDriver: true,
     });
-    this.hideAnimation.start();
+    this.hideAnimation.start(({ finished }) => {
+      if (finished) {
+        this.setState({ controlsActive: false });
+      }
+    });
   };
 
   _resetControlsTimer = () => {
@@ -272,6 +280,7 @@ export default class VideoPlayer extends React.Component {
                 position: 'absolute',
                 left: videoWidth / 2 - 24,
                 top: videoHeight / 2 - 24,
+                display: this.state.controlsActive ? 'flex' : 'none',
               }}>
               <Control callback={() => this._togglePlay()}>
                 <Foundation
@@ -290,6 +299,7 @@ export default class VideoPlayer extends React.Component {
               position: 'absolute',
               bottom: 0,
               opacity: this.state.controlsOpacity,
+              display: this.state.controlsActive ? 'flex' : 'none',
             }}>
             <View
               style={{
