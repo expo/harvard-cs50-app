@@ -59,12 +59,12 @@ class WeekScreen extends React.Component {
     var links = _.pickBy(data, (v, k) => linkKeys.includes(k));
 
     return (
-      <ScrollView
-        containerStyle={{
+      <View
+        style={{
           alignItems: 'flex-start',
           justifyContent: 'space-between',
           flexDirection: 'column',
-          paddingTop: 20,
+          // paddingTop: 20,
         }}>
         <VideoPlayer
           sources={data.videos}
@@ -109,7 +109,7 @@ class WeekScreen extends React.Component {
             );
           })}
         </View>
-      </ScrollView>
+      </View>
     );
   }
 }
