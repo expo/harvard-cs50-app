@@ -35,6 +35,7 @@ class WeekScreen extends React.Component {
     const isLandscape = width > height;
     this.setState({ isPortrait: !isLandscape });
     this.props.navigation.setParams({ hideHeader: isLandscape });
+    ScreenOrientation.allow(ScreenOrientation.Orientation.ALL);
   }
 
   // Only on this screen, allow landscape orientations
@@ -51,6 +52,14 @@ class WeekScreen extends React.Component {
   onButtonPress = url => {
     this.props.navigation.navigate('Link', { url: url });
   };
+
+  onFullscreen() {
+    ScreenOrientation.allow(ScreenOrientation.Orientation.LANDSCAPE);
+  }
+
+  onUnFullscreen() {
+    ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
+  }
 
   render() {
     const data = this.props.navigation.state.params.data;
@@ -70,6 +79,8 @@ class WeekScreen extends React.Component {
           sources={data.videos}
           id={data.title}
           isPortrait={this.state.isPortrait}
+          onFullscreen={this.onFullscreen.bind(this)}
+          onUnFullscreen={this.onUnFullscreen.bind(this)}
         />
         {/*
         <View

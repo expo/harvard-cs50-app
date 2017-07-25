@@ -332,12 +332,14 @@ export default class VideoPlayer extends React.Component {
               <Text style={[overlayTextStyle, { marginRight: 5 }]}>
                 {this._getMMSSFromMillis(this.state.playbackInstanceDuration)}
               </Text>
-              {Platform.OS === 'ios' &&
-                <Control
-                  callback={() =>
-                    this._playbackObject.presentIOSFullscreenPlayer()}>
-                  <Text style={[overlayTextStyle, { marginRight: 5 }]}>FS</Text>
-                </Control>}
+              <Control
+                callback={() => {
+                  this.props.isPortrait
+                    ? this.props.onFullscreen()
+                    : this.props.onUnFullscreen();
+                }}>
+                <Text style={[overlayTextStyle, { marginRight: 5 }]}>FS</Text>
+              </Control>
             </View>
           </Animated.View>
         </View>
