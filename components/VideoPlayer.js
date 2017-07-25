@@ -163,6 +163,14 @@ export default class VideoPlayer extends React.Component {
     }
   };
 
+  _toggleControls = () => {
+    if (this.state.controlsActive && !this.hidingControlsInProgress) {
+      this._hideControls(true);
+    } else {
+      this._showControls();
+    }
+  };
+
   _showControls = () => {
     this.setState({ controlsActive: true });
     Animated.timing(this.state.controlsOpacity, {
@@ -177,16 +185,18 @@ export default class VideoPlayer extends React.Component {
     this.controlsTimer = setTimeout(this._hideControls.bind(this), 4000);
   };
 
-  _hideControls = () => {
+  _hideControls = (immediate = false) => {
     if (this.controlsTimer) {
       clearTimeout(this.controlsTimer);
     }
+    this.hidingControlsInProgress = true;
     this.hideAnimation = Animated.timing(this.state.controlsOpacity, {
       toValue: 0,
-      duration: 2000,
+      duration: immediate ? 300 : 1000,
       useNativeDriver: true,
     });
     this.hideAnimation.start(({ finished }) => {
+      this.hidingControlsInProgress = false;
       if (finished) {
         this.setState({ controlsActive: false });
       }
@@ -231,7 +241,7 @@ export default class VideoPlayer extends React.Component {
       <TouchableHighlight
         {...otherProps}
         underlayColor="transparent"
-        hitSlop={{ top: 10, left: 10, bottom: 10, right: 10 }}
+        hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
         activeOpacity={0.3}
         onPress={() => {
           this._resetControlsTimer();
@@ -241,7 +251,7 @@ export default class VideoPlayer extends React.Component {
       </TouchableHighlight>;
 
     return (
-      <TouchableWithoutFeedback onPress={() => this._showControls()}>
+      <TouchableWithoutFeedback onPress={() => this._toggleControls()}>
         <View
           style={{
             marginBottom: 20,
