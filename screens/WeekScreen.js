@@ -5,6 +5,7 @@ import { Text, View, Dimensions, ScrollView } from 'react-native';
 import styles from '../styles/style';
 import VideoPlayer from '../components/VideoPlayer';
 import Row from '../components/Row';
+import { NavigationActions } from 'react-navigation';
 
 class WeekScreen extends React.Component {
   state = {
@@ -14,7 +15,9 @@ class WeekScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: `Week ${navigation.state.params.weekNum}`,
     headerTintColor: styles.headerTintColor,
-    headerStyle: styles.headerStyle,
+    headerStyle: navigation.state.params.hideHeader
+      ? { display: 'none', opacity: 0 }
+      : styles.headerStyle,
   });
 
   constructor() {
@@ -29,7 +32,9 @@ class WeekScreen extends React.Component {
 
   orientationChangeHandler(dims) {
     const { width, height } = dims.window;
-    this.setState({ isPortrait: height > width });
+    const isLandscape = width > height;
+    this.setState({ isPortrait: !isLandscape });
+    this.props.navigation.setParams({ hideHeader: isLandscape });
   }
 
   // Only on this screen, allow landscape orientations
