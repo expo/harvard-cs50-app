@@ -8,6 +8,7 @@ import {
   ScrollView,
   Button as RNButton,
   Image,
+  StatusBar,
 } from 'react-native';
 import { Text } from 'react-native-animatable';
 import loadData from '../utils/data-loader';
@@ -95,6 +96,7 @@ class HomeScreen extends React.Component {
         Dimensions.get('window').width + itemHorizontalMargin * 2 - 80;
       return (
         <View style={{ marginTop: 40 }}>
+          <StatusBar backgroundColor="blue" barStyle="dark-content" />
           <Text
             style={[
               {
