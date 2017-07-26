@@ -1,6 +1,6 @@
-import { StackNavigator } from 'react-navigation';
-import Expo, { AppLoading } from 'expo';
 import React from 'react';
+import Expo, { AppLoading } from 'expo';
+import { StackNavigator } from 'react-navigation';
 
 import HomeScreen from './screens/HomeScreen';
 import WeekScreen from './screens/WeekScreen';
@@ -10,9 +10,9 @@ import OnboardScreen from './screens/OnboardScreen';
 import { fonts } from './styles/style.js';
 import config from './utils/config';
 
-const MainNavigator = StackNavigator(
+const LecturesNavigator = StackNavigator(
   {
-    Main: {
+    Home: {
       screen: HomeScreen,
     },
     Week: {
@@ -26,7 +26,7 @@ const MainNavigator = StackNavigator(
 );
 
 const ResourceNavigator = StackNavigator({
-  ResourcesInner: {
+  Resources: {
     screen: ResourcesScreen,
   },
 });
@@ -34,7 +34,7 @@ const ResourceNavigator = StackNavigator({
 const AppNavigator = StackNavigator(
   {
     Home: {
-      screen: MainNavigator,
+      screen: LecturesNavigator,
     },
     Resources: {
       screen: ResourceNavigator,
@@ -72,6 +72,7 @@ class AppContainer extends React.Component {
 
     const fontAssets = this._cacheFonts([fonts]);
 
+    // TODO: Catch errors here
     await Promise.all([...imageAssets, ...fontAssets]);
 
     this.setState({ appIsReady: true });
