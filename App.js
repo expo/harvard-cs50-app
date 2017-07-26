@@ -6,7 +6,9 @@ import HomeScreen from './screens/HomeScreen';
 import WeekScreen from './screens/WeekScreen';
 import LinkScreen from './screens/LinkScreen';
 import ResourcesScreen from './screens/ResourcesScreen';
+import OnboardScreen from './screens/OnboardScreen';
 import { fonts } from './styles/style.js';
+import config from './utils/config';
 
 const MainNavigator = StackNavigator(
   {
@@ -44,6 +46,7 @@ const AppNavigator = StackNavigator(
 class AppContainer extends React.Component {
   state = {
     appIsReady: false,
+    firstLoad: config.firstLoad,
   };
 
   componentWillMount() {
@@ -79,7 +82,9 @@ class AppContainer extends React.Component {
       return <AppLoading />;
     }
 
-    return <AppNavigator />;
+    return this.state.firstLoad
+      ? <OnboardScreen startApp={() => this.setState({ firstLoad: false })} />
+      : <AppNavigator />;
   }
 }
 

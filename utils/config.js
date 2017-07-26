@@ -1,17 +1,19 @@
 // Prod
-const config = {
+const prod = {
   secondScreen: false,
   muteVideo: false,
   autoplayVideo: true,
   resourcesScreen: false,
+  firstLoad: false,
 };
 
-// Debug
-// const config = {
-//   secondScreen: false,
-//   resourcesScreen: false,
-//   muteVideo: false,
-//   autoplayVideo: true,
-// };
+// Dev
+const dev = {
+  secondScreen: false,
+  resourcesScreen: false,
+  muteVideo: false,
+  autoplayVideo: true,
+  firstLoad: false,
+};
 
-export default config;
+export default dev;
