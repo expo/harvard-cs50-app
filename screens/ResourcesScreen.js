@@ -20,6 +20,7 @@ class ResourcesScreen extends React.Component {
     title: 'Resources',
     headerTintColor: styles.headerTintColor,
     headerStyle: styles.headerStyle,
+    headerMode: 'float',
   };
 
   onButtonPress = url => {

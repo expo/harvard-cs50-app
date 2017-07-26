@@ -8,21 +8,38 @@ import LinkScreen from './screens/LinkScreen';
 import ResourcesScreen from './screens/ResourcesScreen';
 import { fonts } from './styles/style.js';
 
-const AppNavigator = StackNavigator({
-  Home: {
-    screen: HomeScreen,
+const MainNavigator = StackNavigator(
+  {
+    Main: {
+      screen: HomeScreen,
+    },
+    Week: {
+      screen: WeekScreen,
+    },
+    Link: {
+      screen: LinkScreen,
+    },
   },
-  Week: {
-    screen: WeekScreen,
-  },
-  Link: {
-    screen: LinkScreen,
-    headerMode: 'float',
-  },
-  Resources: {
+  { mode: 'card' }
+);
+
+const ResourceNavigator = StackNavigator({
+  ResourcesInner: {
     screen: ResourcesScreen,
   },
 });
+
+const AppNavigator = StackNavigator(
+  {
+    Home: {
+      screen: MainNavigator,
+    },
+    Resources: {
+      screen: ResourceNavigator,
+    },
+  },
+  { mode: 'modal', headerMode: 'none' }
+);
 
 class AppContainer extends React.Component {
   state = {
