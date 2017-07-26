@@ -11,6 +11,9 @@ import {
 } from 'react-native';
 import Swiper from 'react-native-swiper';
 import Expo from 'expo';
+import { colors, fontSize } from '../styles/style';
+
+// <StatusBar style what?
 
 class OnboardScreen extends React.Component {
   render() {
@@ -21,14 +24,16 @@ class OnboardScreen extends React.Component {
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
+            paddingHorizontal: 30,
           },
           style,
         ]}>
         <Text
           style={{
-            color: '#fff',
-            fontSize: 30,
-            fontWeight: 'bold',
+            color: colors.primary,
+            fontSize: fontSize(2),
+            fontFamily: 'roboto-light',
+            textAlign: 'center',
           }}>
           {text}
         </Text>
@@ -37,9 +42,9 @@ class OnboardScreen extends React.Component {
         </TouchableHighlight>
       </View>;
     return (
-      <Swiper loop={false}>
+      <Swiper loop={false} activeDotColor={colors.primary}>
         <Panel
-          style={{ backgroundColor: '#9DD6EB' }}
+          style={{ backgroundColor: colors.tertiary }}
           text="Watch lectures and access course materials"
         />
         <Panel

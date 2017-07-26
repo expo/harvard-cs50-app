@@ -13,7 +13,7 @@ const dev = {
   resourcesScreen: false,
   muteVideo: false,
   autoplayVideo: true,
-  firstLoad: false,
+  firstLoad: true,
 };
 
 export default dev;
