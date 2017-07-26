@@ -46,7 +46,7 @@ export default class VideoPlayer extends React.Component {
     // TODO: Handle rejection of the returned promise
     Audio.setAudioModeAsync({
       allowsRecordingIOS: false,
-      interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_MIX_WITH_OTHERS, // TODO(Abi): Switch back to INTERRUPTION_MODE_IOS_DO_NOT_MIX
+      interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX, // TODO(Abi): Switch back to INTERRUPTION_MODE_IOS_DO_NOT_MIX
       playsInSilentModeIOS: config.muteVideo ? false : true,
       shouldDuckAndroid: true, // TODO(Abi): Is this the common behavior on Android?
       interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,

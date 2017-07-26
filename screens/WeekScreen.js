@@ -1,15 +1,17 @@
 import React from 'react';
-import { ScreenOrientation } from 'expo';
+import { Text, View, Dimensions, TouchableHighlight } from 'react-native';
+import { ScreenOrientation, FileSystem, Video } from 'expo';
 import _ from 'lodash';
-import { Text, View, Dimensions, ScrollView } from 'react-native';
-import styles from '../styles/style';
+
 import VideoPlayer from '../components/VideoPlayer';
 import Row from '../components/Row';
-import { NavigationActions } from 'react-navigation';
+
+import styles from '../styles/style';
 
 class WeekScreen extends React.Component {
   state = {
     isPortrait: true,
+    localVideoUri: null,
   };
 
   static navigationOptions = ({ navigation }) => ({
@@ -28,6 +30,19 @@ class WeekScreen extends React.Component {
 
   saveToDisk(url) {
     console.log('Save to disk', url);
+    this.savedUrl = FileSystem.documentDirectory + 'test.mp4';
+    Expo.FileSystem
+      .downloadAsync(
+        'http://techslides.com/demos/sample-videos/small.mp4',
+        this.savedUrl
+      )
+      .then(({ uri }) => {
+        console.log('Finished downloading', uri, this.savedUrl);
+        this.setState({ localVideoUri: uri });
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 
   orientationChangeHandler(dims) {
@@ -82,7 +97,20 @@ class WeekScreen extends React.Component {
           onFullscreen={this.onFullscreen.bind(this)}
           onUnFullscreen={this.onUnFullscreen.bind(this)}
         />
-        {/*
+
+        {this.state.localVideoUri &&
+          <Video
+            source={{
+              uri: this.state.localVideoUri,
+            }}
+            resizeMode={Video.RESIZE_MODE_CONTAIN}
+            style={{
+              width: 200,
+              height: 300,
+            }}
+            shouldPlay={true}
+          />}
+
         <View
           style={{
             marginLeft: 20,
@@ -91,13 +119,14 @@ class WeekScreen extends React.Component {
           <TouchableHighlight
             style={{ display: this.state.isPortrait ? 'flex' : 'none' }}
             onPress={() => {
-              this.saveToDisk(this.props.sources['240p']);
+              {
+                /* console.log(data.videos.sources); */
+              }
+              this.saveToDisk(data.videos['240p']);
             }}>
-            <Text>
-              save for offline {this.state.isPortrait.toString()}
-            </Text>
+            <Text>save for offline</Text>
           </TouchableHighlight>
-        </View>*/}
+        </View>
         <View
           style={{
             alignItems: 'flex-start',

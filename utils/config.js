@@ -9,11 +9,11 @@ const prod = {
 
 // Dev
 const dev = {
-  secondScreen: false,
+  secondScreen: true,
   resourcesScreen: false,
   muteVideo: false,
   autoplayVideo: true,
-  firstLoad: true,
+  firstLoad: false,
 };
 
 export default dev;
