@@ -96,7 +96,7 @@ class HomeScreen extends React.Component {
         Dimensions.get('window').width + itemHorizontalMargin * 2 - 80;
       return (
         <View style={{ marginTop: 40 }}>
-          <StatusBar backgroundColor="blue" barStyle="dark-content" />
+          <StatusBar backgroundColor="blue" barStyle="light-content" />
           <Text
             style={[
               {
