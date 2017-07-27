@@ -63,24 +63,8 @@ class Row extends React.Component {
       );
     } else {
       return (
-        <View
-          style={{
-            justifyContent: 'center',
-            paddingTop: 20,
-            paddingBottom: 20,
-            marginLeft: styles.mainViewStyle.marginLeft,
-            borderBottomWidth: 1,
-            borderBottomColor: colors.primary,
-          }}>
-          <TouchableNativeFeedback
-            onPress={this.props.onPress}
-            underlayColor={colors.primary}
-            onPressIn={() => {
-              this.setState({ pressed: true });
-            }}
-            onPressOut={() => {
-              this.setState({ pressed: false });
-            }}
+        <TouchableNativeFeedback onPress={this.props.onPress}>
+          <View
             style={{
               justifyContent: 'center',
               paddingTop: 20,
@@ -109,8 +93,8 @@ class Row extends React.Component {
                 color={colors.secondary}
               />
             </View>
-          </TouchableNativeFeedback>
-        </View>
+          </View>
+        </TouchableNativeFeedback>
       );
     }
   }

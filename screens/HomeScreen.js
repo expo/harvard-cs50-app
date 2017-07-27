@@ -3,6 +3,7 @@ import {
   View,
   ListView,
   TouchableHighlight,
+  TouchableNativeFeedback,
   Platform,
   Dimensions,
   ScrollView,
@@ -19,6 +20,7 @@ import Expo from 'expo';
 import Button from '../components/Button';
 import Row from '../components/Row';
 import AnimatedIcon from '../components/AnimatedIcon';
+import WeekBox from '../components/WeekBox';
 import { Ionicons } from '@expo/vector-icons';
 
 import Carousel from 'react-native-snap-carousel';
@@ -133,47 +135,15 @@ class HomeScreen extends React.Component {
                   <Text style={{ color: colors.primary, marginTop: 10 }}>
                     THIS WEEK
                   </Text>
-                  <TouchableHighlight
-                    onPress={() => this.onWeekPress(week.weekNumber)}>
-                    <View
-                      key={`entry-${index}`}
-                      style={{
-                        paddingTop: 50,
-                        paddingBottom: 50,
-                        marginTop: 10,
-                        borderRadius: 5,
-                        borderWidth: 2,
-                        borderColor: colors.primary,
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                      }}>
-                      <View
-                        style={{
-                          width: (itemWidth - itemHorizontalMargin * 2) * 1 / 3,
-                          alignItems: 'center',
-                        }}>
-                        <Image
-                          source={require('../assets/memory.png')}
-                          fadeDuration={0}
-                          style={{ width: 50, height: 60 }}
-                        />
-                        {/* <AnimatedIcon /> */}
-                      </View>
-                      <View
-                        style={{
-                          width: (itemWidth - itemHorizontalMargin * 2) * 2 / 3,
-                          alignItems: 'flex-start',
-                        }}>
-                        <Text style={textStyle} numberOfLines={1}>
-                          {week.title.toLowerCase()}
-                        </Text>
-                        <Text style={textStyle} numberOfLines={1}>
-                          {week.desc.toLowerCase()}
-                        </Text>
-                      </View>
-                    </View>
-                  </TouchableHighlight>
+                  <WeekBox
+                    onPress={() => this.onWeekPress(week.weekNumber)}
+                    key={`entry-${index}`}
+                    imageWidth={(itemWidth - itemHorizontalMargin * 2) * 1 / 3}
+                    textWidth={(itemWidth - itemHorizontalMargin * 2) * 2 / 3}
+                    source={require('../assets/memory.png')}
+                    title={week.title.toLowerCase()}
+                    desc={week.desc.toLowerCase()}
+                  />
                 </View>
               )}
             </Carousel>}
