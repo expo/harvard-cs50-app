@@ -7,8 +7,7 @@ import {
   Platform,
   Image,
 } from 'react-native';
-import styles, { colors, fontSize } from '../styles/style';
-import { EvilIcons } from '@expo/vector-icons';
+import { colors, fontSize } from '../styles/style';
 
 class WeekBox extends React.Component {
   constructor(props) {
