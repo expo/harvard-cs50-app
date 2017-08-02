@@ -9,9 +9,9 @@ const prod = {
 
 // Dev
 const dev = {
-  secondScreen: true,
+  secondScreen: false,
   resourcesScreen: false,
-  muteVideo: false,
+  muteVideo: true,
   autoplayVideo: true,
   firstLoad: false,
 };
