@@ -1,5 +1,6 @@
 const common = {
   AMPLITUDE_API_KEY: 'XXX',
+  SENTRY_KEY: 'XXX',
 };
 
 // Prod

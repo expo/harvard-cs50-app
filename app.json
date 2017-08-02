@@ -19,6 +19,18 @@
     },
     "ios": {
       "supportsTablet": false
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "Expo",
+            "project": "CS50",
+            "authToken": "TOKEN"
+          }
+        }
+      ]
     }
   }
 }
