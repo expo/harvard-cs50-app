@@ -20,7 +20,8 @@ class Row extends React.Component {
         }}
         onPressOut={() => {
           this.setState({ pressed: false });
-        }}
+        }}>
+        <View
         style={{
           justifyContent: 'center',
           paddingTop: 20,
@@ -50,6 +51,7 @@ class Row extends React.Component {
             size={32}
             color={this.state.pressed ? colors.complementary : colors.secondary}
           />
+        </View>
         </View>
       </CrossTouchable>
     );
