@@ -13,7 +13,7 @@ export const colors = {
 
 export const fontSize = n => {
   const baseFontSize = 12;
-  const multiplier = 1.618;
+  const multiplier = Platform.OS === 'ios' ? 1.618 : 1.4;
   if (n > 0) {
     return baseFontSize * (multiplier * n);
   } else if (n === 0) {
