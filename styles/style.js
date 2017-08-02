@@ -11,6 +11,7 @@ export const colors = {
 
 // Fonts
 
+// Use Modular Scale to create harmony between various font sizes that we use (See http://www.modularscale.com/)
 export const fontSize = n => {
   const baseFontSize = 12;
   const multiplier = Platform.OS === 'ios' ? 1.618 : 1.4;
