@@ -12,18 +12,18 @@ import {
   StatusBar,
 } from 'react-native';
 import { Text } from 'react-native-animatable';
+import Expo from 'expo';
+import { Ionicons } from '@expo/vector-icons';
+import Carousel from 'react-native-snap-carousel';
+
 import loadData from '../utils/data-loader';
 import styles, { colors, fontSize } from '../styles/style';
 import config from '../utils/config';
-import Expo from 'expo';
-
 import Button from '../components/Button';
 import Row from '../components/Row';
 import AnimatedIcon from '../components/AnimatedIcon';
 import WeekBox from '../components/WeekBox';
-import { Ionicons } from '@expo/vector-icons';
-
-import Carousel from 'react-native-snap-carousel';
+import CrossTouchable from '../components/CrossTouchable';
 
 class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -33,13 +33,13 @@ class HomeScreen extends React.Component {
       headerBackTitle: 'Back',
       headerStyle: styles.headerStyle,
       headerRight: (
-        <TouchableHighlight
+        <CrossTouchable
           style={{ paddingRight: 20 }}
           onPress={() => {
             navigation.navigate('Resources');
           }}>
           <Ionicons name="md-list-box" size={28} color={colors.tertiary} />
-        </TouchableHighlight>
+        </CrossTouchable>
       ),
     };
   };
