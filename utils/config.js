@@ -1,5 +1,10 @@
+const common = {
+  AMPLITUDE_API_KEY: 'XXX',
+};
+
 // Prod
 const prod = {
+  ...common,
   secondScreen: false,
   muteVideo: false,
   autoplayVideo: true,
@@ -9,6 +14,7 @@ const prod = {
 
 // Dev
 const dev = {
+  ...common,
   secondScreen: false,
   resourcesScreen: false,
   muteVideo: true,

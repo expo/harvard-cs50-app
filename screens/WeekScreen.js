@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, Dimensions, TouchableHighlight } from 'react-native';
 import { ScreenOrientation, FileSystem, Video } from 'expo';
+import Analytics from '../utils/Analytics';
 import _ from 'lodash';
 
 import VideoPlayer from '../components/VideoPlayer';
@@ -57,6 +58,7 @@ class WeekScreen extends React.Component {
   componentDidMount() {
     ScreenOrientation.allow(ScreenOrientation.Orientation.ALL);
     Dimensions.addEventListener('change', this.orientationChangeHandler);
+    Analytics.track(Analytics.events.USER_WATCHED_VIDEO);
   }
 
   componentWillUnmount() {
