@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, WebView } from 'react-native';
+import { WebView } from 'react-native';
 import styles from '../styles/style';
 
 class LinkScreen extends React.Component {

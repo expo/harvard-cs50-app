@@ -4,7 +4,9 @@ import {
   Platform,
 } from 'react-native';
 
-const CrossTouchable =
-  Platform.OS === 'ios' ? TouchableHighlight : TouchableNativeFeedback;
+const CrossTouchable = Platform.select({
+  ios: TouchableHighlight,
+  android: TouchableNativeFeedback,
+});
 
 export default CrossTouchable;

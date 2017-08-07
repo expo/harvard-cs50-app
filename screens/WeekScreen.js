@@ -5,6 +5,7 @@ import {
   Dimensions,
   TouchableHighlight,
   NetInfo,
+  ActivityIndicator,
 } from 'react-native';
 import { ScreenOrientation, FileSystem, Video } from 'expo';
 import _ from 'lodash';
@@ -16,7 +17,9 @@ import prettyMs from 'pretty-ms';
 import VideoPlayer from '../components/VideoPlayer';
 import Row from '../components/Row';
 import Analytics from '../utils/Analytics';
-import styles from '../styles/style';
+import styles, { colors, fontSize } from '../styles/style';
+
+import { Foundation, FontAwesome, MaterialIcons } from '@expo/vector-icons';
 
 var STATES = {
   NOTSTARTED: 1,
@@ -200,6 +203,35 @@ class WeekScreen extends React.Component {
           isPortrait={this.state.isPortrait}
           onFullscreen={this.onFullscreen.bind(this)}
           onUnFullscreen={this.onUnFullscreen.bind(this)}
+          trackImage={require('../assets/icons/track.png')}
+          thumbImage={require('../assets/icons/thumb.png')}
+          playIcon={
+            <Foundation
+              name={'play-video'}
+              size={36}
+              color={colors.complementary}
+            />
+          }
+          pauseIcon={
+            <Foundation name={'pause'} size={36} color={colors.complementary} />
+          }
+          spinner={
+            <ActivityIndicator color={colors.complementary} size={'large'} />
+          }
+          fullscreenEnterIcon={
+            <MaterialIcons
+              name={'fullscreen'}
+              size={30}
+              color={colors.complementary}
+            />
+          }
+          fullscreenExitIcon={
+            <MaterialIcons
+              name={'fullscreen-exit'}
+              size={30}
+              color={colors.complementary}
+            />
+          }
         />
 
         {this.state.localVideoUri &&

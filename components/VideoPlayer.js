@@ -17,9 +17,22 @@ import {
 import StoredValue from '../utils/StoredValue';
 import config from '../utils/config';
 import { colors, fontSize } from '../styles/style';
-import { Foundation, FontAwesome } from '@expo/vector-icons';
+
+var CONTROL_STATES = {
+  SHOWN: 1,
+  SHOWING: 2,
+  HIDDEN: 3,
+  HIDING: 4,
+};
 
 export default class VideoPlayer extends React.Component {
+  static defaultProps = {
+    showingDuration: 200,
+    hidingFastDuration: 200,
+    hidingSlowDuration: 1000,
+    hidingTimerDuration: 4000,
+  };
+
   constructor() {
     super();
     this._togglePlay = this._togglePlay.bind(this);
@@ -38,6 +51,7 @@ export default class VideoPlayer extends React.Component {
       fullscreen: false,
       isSeeking: false,
       controlsOpacity: new Animated.Value(0),
+      controlsState: CONTROL_STATES.HIDDEN,
     };
   }
 
@@ -60,7 +74,9 @@ export default class VideoPlayer extends React.Component {
         console.log('Setting the playback start to ', value);
         if (config.autoplayVideo) {
           this._playbackObject.playFromPositionAsync(parseInt(value));
-          this._playbackObject.setStatusAsync({ isMuted: true }); // TODO: Convert to settings
+          this._playbackObject.setStatusAsync({
+            isMuted: config.muteVideo ? true : false,
+          }); // TODO: Convert to settings
         }
       } else {
         console.log('No storedPlaybackTime exists.');
@@ -72,19 +88,14 @@ export default class VideoPlayer extends React.Component {
     }
   }
 
-  _getMMSSFromMillis(millis) {
-    const totalSeconds = millis / 1000;
-    const seconds = Math.floor(totalSeconds % 60);
-    const minutes = Math.floor(totalSeconds / 60);
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isPortrait !== this.props.isPortrait) {
+      this.setState({ fullscreen: !nextProps.isPortrait });
+    }
+  }
 
-    const padWithZero = number => {
-      const string = number.toString();
-      if (number < 10) {
-        return '0' + string;
-      }
-      return string;
-    };
-    return padWithZero(minutes) + ':' + padWithZero(seconds);
+  componentWillUnmount() {
+    clearTimeout(this.controlsTimer);
   }
 
   _playbackCallback(playbackStatus) {
@@ -123,12 +134,7 @@ export default class VideoPlayer extends React.Component {
     }
   }
 
-  _togglePlay() {
-    this.state.isPlaying
-      ? this._playbackObject.pauseAsync()
-      : this._playbackObject.playAsync();
-  }
-
+  // Seeking
   _getSeekSliderPosition() {
     if (
       this._playbackObject != null &&
@@ -163,60 +169,108 @@ export default class VideoPlayer extends React.Component {
     }
   };
 
+  _onSeekBarTap = value => {};
+
+  // Controls view
+  _getMMSSFromMillis(millis) {
+    const totalSeconds = millis / 1000;
+    const seconds = Math.floor(totalSeconds % 60);
+    const minutes = Math.floor(totalSeconds / 60);
+
+    const padWithZero = number => {
+      const string = number.toString();
+      if (number < 10) {
+        return '0' + string;
+      }
+      return string;
+    };
+    return padWithZero(minutes) + ':' + padWithZero(seconds);
+  }
+
+  // Controls Behavior
+
+  _togglePlay() {
+    this.state.isPlaying
+      ? this._playbackObject.pauseAsync()
+      : this._playbackObject.playAsync();
+  }
+
   _toggleControls = () => {
-    if (this.state.controlsActive && !this.hidingControlsInProgress) {
-      this._hideControls(true);
-    } else {
-      this._showControls();
+    console.log('view tapped outside an actual control');
+    switch (this.state.controlsState) {
+      case CONTROL_STATES.SHOWN:
+        this.setState({ controlsState: CONTROL_STATES.HIDING });
+        this._hideControls(true);
+        break;
+      case CONTROL_STATES.HIDDEN:
+        this._showControls();
+        this.setState({ controlsState: CONTROL_STATES.SHOWING });
+        break;
+      case CONTROL_STATES.HIDING:
+        this.setState({ controlsState: CONTROL_STATES.SHOWING });
+        this._showControls();
+        break;
+      case CONTROL_STATES.SHOWING:
+        break;
     }
   };
 
   _showControls = () => {
-    this.setState({ controlsActive: true });
-    Animated.timing(this.state.controlsOpacity, {
+    this.showingAnimation = Animated.timing(this.state.controlsOpacity, {
       toValue: 1,
-      duration: 200,
+      duration: this.props.showingAnimation,
       useNativeDriver: true,
-    }).start();
+    });
 
-    if (this.controlsTimer) {
-      clearTimeout(this.controlsTimer);
-    }
-    this.controlsTimer = setTimeout(this._hideControls.bind(this), 4000);
+    this.showingAnimation.start(({ finished }) => {
+      if (finished) {
+        this.setState({ controlsState: CONTROL_STATES.SHOWN });
+        this.controlsTimer = setTimeout(
+          this._onTimerDone.bind(this),
+          this.props.hidingTimerDuration
+        );
+      }
+    });
   };
 
   _hideControls = (immediate = false) => {
     if (this.controlsTimer) {
       clearTimeout(this.controlsTimer);
     }
-    this.hidingControlsInProgress = true;
     this.hideAnimation = Animated.timing(this.state.controlsOpacity, {
       toValue: 0,
-      duration: immediate ? 300 : 1000,
+      duration: immediate
+        ? this.props.hidingFastDuration
+        : this.props.hidingSlowDuration,
       useNativeDriver: true,
     });
     this.hideAnimation.start(({ finished }) => {
-      this.hidingControlsInProgress = false;
       if (finished) {
-        this.setState({ controlsActive: false });
+        this.setState({ controlsState: CONTROL_STATES.HIDDEN });
       }
     });
   };
 
+  _onTimerDone = () => {
+    this.setState({ controlsState: CONTROL_STATES.HIDING });
+    this._hideControls();
+  };
+
   _resetControlsTimer = () => {
+    // TODO: Handle the fact that a control can be touched, when in CONTROL_STATES.HIDING
     if (this.controlsTimer) {
       clearTimeout(this.controlsTimer);
     }
-    if (this.hideAnimation) {
-      this.hideAnimation.stop();
-    }
-    this.setState({ controlsOpacity: new Animated.Value(1) });
-    this.controlsTimer = setTimeout(this._hideControls.bind(this), 4000);
+    this.controlsTimer = setTimeout(
+      this._onTimerDone.bind(this),
+      this.props.hidingTimerDuration
+    );
   };
 
   render() {
-    var videoWidth = Dimensions.get('window').width;
-    var videoHeight = videoWidth * (9 / 16);
+    const videoWidth = Dimensions.get('window').width;
+    const videoHeight = videoWidth * (9 / 16);
+    const centerIconWidth = 48;
 
     const showSpinner =
       this.state.isBuffering ||
@@ -230,7 +284,6 @@ export default class VideoPlayer extends React.Component {
       (this.state.isSeeking && this.state.shouldPlayAtEndOfSeek);
 
     // Example HLS url: https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8
-
     const overlayTextStyle = {
       color: colors.complementary,
       fontFamily: 'roboto-light',
@@ -271,37 +324,41 @@ export default class VideoPlayer extends React.Component {
             shouldPlay={config.autoplayVideo}
           />
 
-          <ActivityIndicator
-            animating={showSpinner}
-            color={colors.complementary}
-            size={'large'}
-            style={{
-              position: 'absolute',
-              left: videoWidth / 2 - 36 / 2,
-              top: videoHeight / 2 - 36 / 2,
-            }}
-          />
+          {showSpinner &&
+            <View
+              style={{
+                position: 'absolute',
+                left: (videoWidth - centerIconWidth) / 2,
+                top: (videoHeight - centerIconWidth) / 2,
+              }}>
+              {this.props.spinner}
+            </View>}
 
           {!showSpinner &&
             !hidePlayPauseButton &&
             <Animated.View
-              pointerEvents={this.state.controlsActive ? 'auto' : 'none'}
+              pointerEvents={
+                this.state.controlsState === CONTROL_STATES.HIDDEN
+                  ? 'none'
+                  : 'auto'
+              }
               style={{
                 opacity: this.state.controlsOpacity,
                 position: 'absolute',
-                left: videoWidth / 2 - 24,
-                top: videoHeight / 2 - 24,
+                left: (videoWidth - centerIconWidth) / 2,
+                top: (videoHeight - centerIconWidth) / 2,
               }}>
               <Control callback={() => this._togglePlay()}>
-                <Foundation
-                  name={showPauseButton ? 'pause' : 'play'}
-                  size={48}
-                  color={colors.complementary}
-                />
+                {showPauseButton ? this.props.pauseIcon : this.props.playIcon}
               </Control>
             </Animated.View>}
+
           <Animated.View
-            pointerEvents={this.state.controlsActive ? 'auto' : 'none'}
+            pointerEvents={
+              this.state.controlsState === CONTROL_STATES.HIDDEN
+                ? 'none'
+                : 'auto'
+            }
             style={{
               alignItems: 'stretch',
               flex: 2,
@@ -322,8 +379,8 @@ export default class VideoPlayer extends React.Component {
               </Text>
               <Slider
                 style={{ flex: 2, marginRight: 10, marginLeft: 10 }}
-                trackImage={require('../assets/icons/track.png')}
-                thumbImage={require('../assets/icons/thumb.png')}
+                trackImage={this.props.trackImage}
+                thumbImage={this.props.thumbImage}
                 value={this._getSeekSliderPosition()}
                 onValueChange={this._onSeekSliderValueChange}
                 onSlidingComplete={this._onSeekSliderSlidingComplete}
@@ -338,7 +395,9 @@ export default class VideoPlayer extends React.Component {
                     ? this.props.onFullscreen()
                     : this.props.onUnFullscreen();
                 }}>
-                <Text style={[overlayTextStyle, { marginRight: 5 }]}>FS</Text>
+                {this.state.fullscreen
+                  ? this.props.fullscreenExitIcon
+                  : this.props.fullscreenEnterIcon}
               </Control>
             </View>
           </Animated.View>
