@@ -7,12 +7,13 @@ import {
   TouchableWithoutFeedback,
   Animated,
   Text,
-  Slider,
   ActivityIndicator,
+  Slider,
 } from 'react-native';
 import config from '../utils/config';
 import { colors, fontSize } from '../styles/style';
-import { Foundation, FontAwesome, MaterialIcons } from '@expo/vector-icons';
+import { Foundation, MaterialIcons } from '@expo/vector-icons';
+import PropTypes from 'prop-types';
 
 var CONTROL_STATES = {
   SHOWN: 1,
@@ -22,6 +23,16 @@ var CONTROL_STATES = {
 };
 
 export default class VideoPlayer extends React.Component {
+  static propTypes = {
+    /**
+   * How long should the fadeIn animation for the controls run? (in milliseconds)
+   * Default value is 200.
+   *
+   */
+    showingDuration: PropTypes.number,
+    // TODO: Fill out remaining prop types
+  };
+
   static defaultProps = {
     showingDuration: 200,
     hidingFastDuration: 200,
@@ -191,7 +202,16 @@ export default class VideoPlayer extends React.Component {
     }
   };
 
-  _onSeekBarTap = value => {};
+  _onSeekBarTap = evt => {
+    console.log(evt.nativeEvent.locationX);
+    console.log(this.state.sliderWidth);
+    console.log('where did the tap happen?');
+  };
+
+  _onSliderLayout = evt => {
+    console.log('Slider layout');
+    this.setState({ sliderWidth: evt.nativeEvent.width });
+  };
 
   // Controls view
   _getMMSSFromMillis(millis) {
@@ -301,6 +321,8 @@ export default class VideoPlayer extends React.Component {
     const videoHeight = videoWidth * (9 / 16);
     const centerIconWidth = 48;
 
+    // console.log('Rendering the component right now');
+
     const showSpinner =
       this.state.isBuffering ||
       this.state.isLoading ||
@@ -356,6 +378,7 @@ export default class VideoPlayer extends React.Component {
     return (
       <TouchableWithoutFeedback onPress={this._toggleControls.bind(this)}>
         <View
+          onLayout={() => console.log('blah')}
           style={{
             marginBottom: 20,
             backgroundColor: 'black',
@@ -433,15 +456,18 @@ export default class VideoPlayer extends React.Component {
               <Text style={[overlayTextStyle, { marginLeft: 5 }]}>
                 {this._getMMSSFromMillis(this.state.playbackInstancePosition)}
               </Text>
-              <Slider
-                style={{ flex: 2, marginRight: 10, marginLeft: 10 }}
-                trackImage={this.props.trackImage}
-                thumbImage={this.props.thumbImage}
-                value={this._getSeekSliderPosition()}
-                onValueChange={this._onSeekSliderValueChange}
-                onSlidingComplete={this._onSeekSliderSlidingComplete}
-                disabled={this.state.isLoading}
-              />
+              <TouchableWithoutFeedback onPress={this._onSeekBarTap.bind(this)}>
+                <Slider
+                  style={{ flex: 2, marginRight: 10, marginLeft: 10 }}
+                  trackImage={this.props.trackImage}
+                  thumbImage={this.props.thumbImage}
+                  value={this._getSeekSliderPosition()}
+                  onValueChange={this._onSeekSliderValueChange}
+                  onSlidingComplete={this._onSeekSliderSlidingComplete}
+                  disabled={this.state.isLoading}
+                  onLayout={this._onSliderLayout.bind(this)}
+                />
+              </TouchableWithoutFeedback>
               <Text style={[overlayTextStyle, { marginRight: 5 }]}>
                 {this._getMMSSFromMillis(this.state.playbackInstanceDuration)}
               </Text>
