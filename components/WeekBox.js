@@ -16,7 +16,6 @@ class WeekBox extends React.Component {
     return (
       <CrossTouchable onPress={this.props.onPress}>
         <View
-          key={this.props.key}
           style={{
             paddingTop: 50,
             paddingBottom: 50,

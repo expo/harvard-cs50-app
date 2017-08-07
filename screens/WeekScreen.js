@@ -18,6 +18,7 @@ import VideoPlayer from '../components/VideoPlayer';
 import Row from '../components/Row';
 import Analytics from '../utils/Analytics';
 import styles, { colors, fontSize } from '../styles/style';
+import StoredValue from '../utils/StoredValue';
 
 import { Foundation, FontAwesome, MaterialIcons } from '@expo/vector-icons';
 
@@ -115,11 +116,6 @@ class Downloader extends React.Component {
 reactMixin(Downloader.prototype, TimerMixin);
 
 class WeekScreen extends React.Component {
-  state = {
-    isPortrait: true,
-    localVideoUri: null,
-  };
-
   static navigationOptions = ({ navigation }) => ({
     title: `Week ${navigation.state.params.weekNum}`,
     headerTintColor: styles.headerTintColor,
@@ -128,8 +124,20 @@ class WeekScreen extends React.Component {
       : styles.headerStyle,
   });
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
+    const data = this.props.navigation.state.params.data;
+    const linkKeys = ['slides', 'source code', 'notes'];
+    const links = _.pickBy(data, (v, k) => linkKeys.includes(k));
+
+    this.state = {
+      isPortrait: true,
+      localVideoUri: null,
+      data: data,
+      links: links,
+    };
+
     this.orientationChangeHandler = this.orientationChangeHandler.bind(this);
     this.saveToDisk = this.saveToDisk.bind(this);
   }
@@ -164,6 +172,20 @@ class WeekScreen extends React.Component {
     ScreenOrientation.allow(ScreenOrientation.Orientation.ALL);
     Dimensions.addEventListener('change', this.orientationChangeHandler);
     Analytics.track(Analytics.events.USER_WATCHED_VIDEO);
+    this.storedPlaybackTime = new StoredValue(
+      this.state.data.title + ':playbackTime'
+    );
+
+    this.storedPlaybackTime
+      .get()
+      .then(value => {
+        if (value !== null) {
+          this.setState({ playFromPositionMillis: parseInt(value) });
+        }
+      })
+      .catch(e => {
+        console.log('Error retrieving stored playback value', e);
+      });
   }
 
   componentWillUnmount() {
@@ -183,12 +205,20 @@ class WeekScreen extends React.Component {
     ScreenOrientation.allow(ScreenOrientation.Orientation.PORTRAIT);
   }
 
+  _playbackCallback(playbackStatus) {
+    if (playbackStatus.isLoaded) {
+      var positionMillis = playbackStatus.positionMillis.toString();
+      this.storedPlaybackTime
+        .set(positionMillis)
+        .then(val => {})
+        .catch(error => {
+          console.log('Error in saving stored value', error);
+          // TODO: Send to Sentry
+        });
+    }
+  }
+
   render() {
-    const data = this.props.navigation.state.params.data;
-
-    var linkKeys = ['slides', 'source code', 'notes'];
-    var links = _.pickBy(data, (v, k) => linkKeys.includes(k));
-
     // Video player sources
     // Example HLS url: https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8
 
@@ -198,16 +228,16 @@ class WeekScreen extends React.Component {
           alignItems: 'flex-start',
           justifyContent: 'space-between',
           flexDirection: 'column',
-          // paddingTop: 20,
         }}>
         <VideoPlayer
-          uri={data.videos['240p']}
-          id={data.title}
+          uri={this.state.data.videos['240p']}
           isPortrait={this.state.isPortrait}
           onFullscreen={this.onFullscreen.bind(this)}
           onUnFullscreen={this.onUnFullscreen.bind(this)}
           trackImage={require('../assets/icons/track.png')}
           thumbImage={require('../assets/icons/thumb.png')}
+          playbackCallback={this._playbackCallback.bind(this)}
+          playFromPositionMillis={this.state.playFromPositionMillis}
           playIcon={
             <Foundation
               name={'play-video'}
@@ -268,7 +298,7 @@ class WeekScreen extends React.Component {
           <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 20 }}>
             course materials
           </Text>
-          {_.map(links, (url, name) => {
+          {_.map(this.state.links, (url, name) => {
             return (
               <Row
                 key={url}

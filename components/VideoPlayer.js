@@ -9,7 +9,6 @@ import {
   Text,
   Slider,
 } from 'react-native';
-import StoredValue from '../utils/StoredValue';
 import config from '../utils/config';
 import { colors, fontSize } from '../styles/style';
 
@@ -65,33 +64,22 @@ export default class VideoPlayer extends React.Component {
       // TODO: Handle rejection of the returned promise
       // Show a message to the user that Audio could not be setup
     }
-
-    // TODO: Move storedPlaybackTime out to be a prop for this videoplayer
-    this.storedPlaybackTime = new StoredValue(this.props.id + ':playbackTime');
-
-    try {
-      const value = await this.storedPlaybackTime.get();
-      if (value !== null) {
-        console.log('Setting the playback start to ', value);
-        if (config.autoplayVideo) {
-          this._playbackInstance.playFromPositionAsync(parseInt(value));
-          this._playbackInstance.setStatusAsync({
-            isMuted: config.muteVideo ? true : false,
-          }); // TODO: Convert to settings
-        }
-      } else {
-        console.log('No storedPlaybackTime exists.');
-      }
-    } catch (error) {
-      console.log(error);
-      // Don't do anything in the UI because this just means the user hasn't previously watched this video
-      // TODO: Send error using Sentry
-    }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.isPortrait !== this.props.isPortrait) {
       this.setState({ fullscreen: !nextProps.isPortrait });
+    }
+
+    if (
+      nextProps.playFromPositionMillis !== this.props.playFromPositionMillis &&
+      config.autoplayVideo &&
+      this._playbackInstance !== null
+    ) {
+      // TODO: Ignore errors here?
+      this._playbackInstance.playFromPositionAsync(
+        nextProps.playFromPositionMillis
+      );
     }
   }
 
@@ -100,6 +88,14 @@ export default class VideoPlayer extends React.Component {
   }
 
   _playbackCallback(playbackStatus) {
+    try {
+      this.props.playbackCallback &&
+        this.props.playbackCallback(playbackStatus);
+    } catch (e) {
+      // TODO
+      console.error('Error in user playbackCallback', e);
+    }
+
     if (!playbackStatus.isLoaded) {
       // TODO: Handle playback errors
       if (playbackStatus.error) {
@@ -120,19 +116,8 @@ export default class VideoPlayer extends React.Component {
         volume: playbackStatus.volume,
       });
 
-      // TODO: Move this out
-      var currentPos = playbackStatus.positionMillis.toString();
-      this.storedPlaybackTime
-        .set(currentPos)
-        .then(val => {
-          //   console.log('Saved successfully to AsyncStorage', val);
-        })
-        .catch(error => {
-          console.log('Error in saving stored value', error);
-        });
-
       if (playbackStatus.didJustFinish && !playbackStatus.isLooping) {
-        // The player has just finished playing and will stop. Maybe you want to play something else?
+        // TODO: Show a replace button
       }
     }
   }
@@ -191,7 +176,6 @@ export default class VideoPlayer extends React.Component {
   }
 
   // Controls Behavior
-
   _togglePlay() {
     this.state.isPlaying
       ? this._playbackInstance.pauseAsync()
@@ -333,6 +317,7 @@ export default class VideoPlayer extends React.Component {
               height: videoHeight,
             }}
             shouldPlay={config.autoplayVideo}
+            isMuted={config.muteVideo}
           />
 
           {showSpinner && <Spinner spinner={this.props.spinner} />}
