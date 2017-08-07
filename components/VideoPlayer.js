@@ -8,9 +8,11 @@ import {
   Animated,
   Text,
   Slider,
+  ActivityIndicator,
 } from 'react-native';
 import config from '../utils/config';
 import { colors, fontSize } from '../styles/style';
+import { Foundation, FontAwesome, MaterialIcons } from '@expo/vector-icons';
 
 var CONTROL_STATES = {
   SHOWN: 1,
@@ -25,20 +27,41 @@ export default class VideoPlayer extends React.Component {
     hidingFastDuration: 200,
     hidingSlowDuration: 1000,
     hidingTimerDuration: 4000,
+    playIcon: (
+      <Foundation name={'play-video'} size={36} color={colors.complementary} />
+    ),
+    pauseIcon: (
+      <Foundation name={'pause'} size={36} color={colors.complementary} />
+    ),
+    spinner: <ActivityIndicator color={colors.complementary} size={'large'} />,
+    fullscreenEnterIcon: (
+      <MaterialIcons
+        name={'fullscreen'}
+        size={30}
+        color={colors.complementary}
+      />
+    ),
+    fullscreenExitIcon: (
+      <MaterialIcons
+        name={'fullscreen-exit'}
+        size={30}
+        color={colors.complementary}
+      />
+    ),
+    replayIcon: (
+      <MaterialIcons name={'replay'} size={30} color={colors.complementary} />
+    ),
   };
 
   constructor() {
     super();
     this.state = {
       // All of this state comes from the playbackCallback
-      muted: false,
       playbackInstancePosition: null,
       playbackInstanceDuration: null,
       shouldPlay: false,
       isPlaying: false,
       isBuffering: false,
-      volume: 1.0,
-      poster: false,
       // Other state
       isLoading: true,
       fullscreen: false,
@@ -118,8 +141,6 @@ export default class VideoPlayer extends React.Component {
         shouldPlay: playbackStatus.shouldPlay,
         isPlaying: playbackStatus.isPlaying,
         isBuffering: playbackStatus.isBuffering,
-        muted: playbackStatus.isMuted,
-        volume: playbackStatus.volume,
       });
 
       if (playbackStatus.didJustFinish && !playbackStatus.isLooping) {
