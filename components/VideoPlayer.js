@@ -47,6 +47,8 @@ export default class VideoPlayer extends React.Component {
       // shouldPlayAtEndOfSeek
       controlsOpacity: new Animated.Value(0),
       controlsState: CONTROL_STATES.HIDDEN,
+      // Replay state,
+      replayState: false,
     };
   }
 
@@ -117,7 +119,7 @@ export default class VideoPlayer extends React.Component {
       });
 
       if (playbackStatus.didJustFinish && !playbackStatus.isLooping) {
-        // TODO: Show a replace button
+        this.setState({ replayState: true });
       }
     }
   }
@@ -176,6 +178,15 @@ export default class VideoPlayer extends React.Component {
   }
 
   // Controls Behavior
+
+  _replay() {
+    this._playbackInstance.setStatusAsync({
+      shouldPlay: true,
+      positionMillis: 0,
+    });
+    this.setState({ replayState: false });
+  }
+
   _togglePlay() {
     this.state.isPlaying
       ? this._playbackInstance.pauseAsync()
@@ -288,14 +299,14 @@ export default class VideoPlayer extends React.Component {
         {children}
       </TouchableHighlight>;
 
-    const Spinner = ({ spinner }) =>
+    const CenterIcon = ({ children }) =>
       <View
         style={{
           position: 'absolute',
           left: (videoWidth - centerIconWidth) / 2,
           top: (videoHeight - centerIconWidth) / 2,
         }}>
-        {spinner}
+        {children}
       </View>;
 
     return (
@@ -320,7 +331,17 @@ export default class VideoPlayer extends React.Component {
             isMuted={config.muteVideo}
           />
 
-          {showSpinner && <Spinner spinner={this.props.spinner} />}
+          {showSpinner &&
+            <CenterIcon>
+              {this.props.spinner}
+            </CenterIcon>}
+
+          {this.state.replayState &&
+            <CenterIcon>
+              <Control callback={this._replay.bind(this)}>
+                {this.props.replayIcon}
+              </Control>
+            </CenterIcon>}
 
           {!showSpinner &&
             !hidePlayPauseButton &&

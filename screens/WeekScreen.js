@@ -265,6 +265,13 @@ class WeekScreen extends React.Component {
               color={colors.complementary}
             />
           }
+          replayIcon={
+            <MaterialIcons
+              name={'replay'}
+              size={30}
+              color={colors.complementary}
+            />
+          }
         />
 
         {this.state.localVideoUri &&
