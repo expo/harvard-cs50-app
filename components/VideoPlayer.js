@@ -49,6 +49,9 @@ export default class VideoPlayer extends React.Component {
       controlsState: CONTROL_STATES.HIDDEN,
       // Replay state,
       replayState: false,
+      // Error state,
+      errorState: false,
+      error: null,
     };
   }
 
@@ -89,6 +92,8 @@ export default class VideoPlayer extends React.Component {
     clearTimeout(this.controlsTimer);
   }
 
+  // Handle events during playback
+
   _playbackCallback(playbackStatus) {
     try {
       this.props.playbackCallback &&
@@ -99,14 +104,13 @@ export default class VideoPlayer extends React.Component {
     }
 
     if (!playbackStatus.isLoaded) {
-      // TODO: Handle playback errors
       if (playbackStatus.error) {
-        console.log(
-          `Encountered a fatal error during playback: ${playbackStatus.error}`
-        );
+        this.setState({
+          errorState: true,
+          error: `Encountered a fatal error during playback: ${playbackStatus.error}`,
+        });
       }
     } else {
-      // TODO: Handle playback errors
       this.setState({
         playbackInstancePosition: playbackStatus.positionMillis,
         playbackInstanceDuration: playbackStatus.durationMillis,
@@ -122,6 +126,13 @@ export default class VideoPlayer extends React.Component {
         this.setState({ replayState: true });
       }
     }
+  }
+
+  _errorCallback(message) {
+    this.setState({
+      errorState: true,
+      error: message,
+    });
   }
 
   // Seeking
@@ -309,8 +320,20 @@ export default class VideoPlayer extends React.Component {
         {children}
       </View>;
 
+    const ErrorText = ({ text }) =>
+      <View
+        style={{
+          position: 'absolute',
+          top: videoHeight / 2,
+          width: videoWidth,
+        }}>
+        <Text style={[overlayTextStyle, { textAlign: 'center' }]}>
+          {text}
+        </Text>
+      </View>;
+
     return (
-      <TouchableWithoutFeedback onPress={() => this._toggleControls()}>
+      <TouchableWithoutFeedback onPress={this._toggleControls.bind(this)}>
         <View
           style={{
             marginBottom: 20,
@@ -323,6 +346,7 @@ export default class VideoPlayer extends React.Component {
             ref={component => (this._playbackInstance = component)}
             resizeMode={Video.RESIZE_MODE_CONTAIN}
             callback={this._playbackCallback.bind(this)}
+            onError={this._errorCallback.bind(this)}
             style={{
               width: videoWidth,
               height: videoHeight,
@@ -342,6 +366,8 @@ export default class VideoPlayer extends React.Component {
                 {this.props.replayIcon}
               </Control>
             </CenterIcon>}
+
+          {this.state.errorState && <ErrorText text={this.state.error} />}
 
           {!showSpinner &&
             !hidePlayPauseButton &&

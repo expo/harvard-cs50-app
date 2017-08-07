@@ -41,10 +41,10 @@ class Downloader extends React.Component {
   constructor(props) {
     super(props);
     NetInfo.fetch().then(reach => {
-      console.log('Initial: ' + reach);
+      // console.log('Initial: ' + reach);
     });
     NetInfo.addEventListener('change', reach => {
-      console.log('Change: ' + reach);
+      // console.log('Change: ' + reach);
       // TODO: Change to STATES.STALLED
     });
   }
@@ -208,13 +208,15 @@ class WeekScreen extends React.Component {
   _playbackCallback(playbackStatus) {
     if (playbackStatus.isLoaded) {
       var positionMillis = playbackStatus.positionMillis.toString();
-      this.storedPlaybackTime
-        .set(positionMillis)
-        .then(val => {})
-        .catch(error => {
-          console.log('Error in saving stored value', error);
-          // TODO: Send to Sentry
-        });
+      if (this.storedPlaybackTime) {
+        this.storedPlaybackTime
+          .set(positionMillis)
+          .then(val => {})
+          .catch(error => {
+            console.log('Error in saving stored value', error);
+            // TODO: Send to Sentry
+          });
+      }
     }
   }
 
