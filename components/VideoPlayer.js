@@ -1,18 +1,13 @@
 import React from 'react';
-import { Audio, Video, Asset } from 'expo';
-import _ from 'lodash';
+import { Audio, Video } from 'expo';
 import {
   View,
   Dimensions,
-  Image,
   TouchableHighlight,
   TouchableWithoutFeedback,
   Animated,
   Text,
   Slider,
-  Easing,
-  ActivityIndicator,
-  Platform,
 } from 'react-native';
 import StoredValue from '../utils/StoredValue';
 import config from '../utils/config';
@@ -35,21 +30,22 @@ export default class VideoPlayer extends React.Component {
 
   constructor() {
     super();
-    this._togglePlay = this._togglePlay.bind(this);
-    this._playbackCallback = this._playbackCallback.bind(this);
     this.state = {
+      // All of this state comes from the playbackCallback
       muted: false,
       playbackInstancePosition: null,
       playbackInstanceDuration: null,
       shouldPlay: false,
       isPlaying: false,
       isBuffering: false,
-      isLoading: true,
-      controlsActive: false,
       volume: 1.0,
       poster: false,
+      // Other state
+      isLoading: true,
       fullscreen: false,
+      // Seekbar related state
       isSeeking: false,
+      // shouldPlayAtEndOfSeek
       controlsOpacity: new Animated.Value(0),
       controlsState: CONTROL_STATES.HIDDEN,
     };
@@ -57,15 +53,20 @@ export default class VideoPlayer extends React.Component {
 
   async componentDidMount() {
     // Set audio mode to play even in silent mode (like the YouTube app)
-    // TODO: Handle rejection of the returned promise
-    Audio.setAudioModeAsync({
-      allowsRecordingIOS: false,
-      interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX, // TODO(Abi): Switch back to INTERRUPTION_MODE_IOS_DO_NOT_MIX
-      playsInSilentModeIOS: config.muteVideo ? false : true,
-      shouldDuckAndroid: true, // TODO(Abi): Is this the common behavior on Android?
-      interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
-    });
+    try {
+      Audio.setAudioModeAsync({
+        allowsRecordingIOS: false,
+        interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX, // TODO(Abi): Switch back to INTERRUPTION_MODE_IOS_DO_NOT_MIX
+        playsInSilentModeIOS: config.muteVideo ? false : true,
+        shouldDuckAndroid: true, // TODO(Abi): Is this the common behavior on Android?
+        interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
+      });
+    } catch (e) {
+      // TODO: Handle rejection of the returned promise
+      // Show a message to the user that Audio could not be setup
+    }
 
+    // TODO: Move storedPlaybackTime out to be a prop for this videoplayer
     this.storedPlaybackTime = new StoredValue(this.props.id + ':playbackTime');
 
     try {
@@ -73,8 +74,8 @@ export default class VideoPlayer extends React.Component {
       if (value !== null) {
         console.log('Setting the playback start to ', value);
         if (config.autoplayVideo) {
-          this._playbackObject.playFromPositionAsync(parseInt(value));
-          this._playbackObject.setStatusAsync({
+          this._playbackInstance.playFromPositionAsync(parseInt(value));
+          this._playbackInstance.setStatusAsync({
             isMuted: config.muteVideo ? true : false,
           }); // TODO: Convert to settings
         }
@@ -100,13 +101,14 @@ export default class VideoPlayer extends React.Component {
 
   _playbackCallback(playbackStatus) {
     if (!playbackStatus.isLoaded) {
-      // Update your UI for the unloaded state
+      // TODO: Handle playback errors
       if (playbackStatus.error) {
         console.log(
           `Encountered a fatal error during playback: ${playbackStatus.error}`
         );
       }
     } else {
+      // TODO: Handle playback errors
       this.setState({
         playbackInstancePosition: playbackStatus.positionMillis,
         playbackInstanceDuration: playbackStatus.durationMillis,
@@ -118,6 +120,7 @@ export default class VideoPlayer extends React.Component {
         volume: playbackStatus.volume,
       });
 
+      // TODO: Move this out
       var currentPos = playbackStatus.positionMillis.toString();
       this.storedPlaybackTime
         .set(currentPos)
@@ -137,7 +140,7 @@ export default class VideoPlayer extends React.Component {
   // Seeking
   _getSeekSliderPosition() {
     if (
-      this._playbackObject != null &&
+      this._playbackInstance != null &&
       this.state.playbackInstancePosition != null &&
       this.state.playbackInstanceDuration != null
     ) {
@@ -150,21 +153,21 @@ export default class VideoPlayer extends React.Component {
   }
 
   _onSeekSliderValueChange = value => {
-    if (this._playbackObject != null && !this.state.isSeeking) {
+    if (this._playbackInstance != null && !this.state.isSeeking) {
       this.setState({ isSeeking: true });
       this.setState({ shouldPlayAtEndOfSeek: this.state.shouldPlay });
-      this._playbackObject.pauseAsync();
+      this._playbackInstance.pauseAsync();
     }
   };
 
   _onSeekSliderSlidingComplete = async value => {
-    if (this._playbackObject != null) {
+    if (this._playbackInstance != null) {
       this.setState({ isSeeking: false });
       const seekPosition = value * this.state.playbackInstanceDuration;
       if (this.state.shouldPlayAtEndOfSeek) {
-        this._playbackObject.playFromPositionAsync(seekPosition);
+        this._playbackInstance.playFromPositionAsync(seekPosition);
       } else {
-        this._playbackObject.setPositionAsync(seekPosition);
+        this._playbackInstance.setPositionAsync(seekPosition);
       }
     }
   };
@@ -191,12 +194,11 @@ export default class VideoPlayer extends React.Component {
 
   _togglePlay() {
     this.state.isPlaying
-      ? this._playbackObject.pauseAsync()
-      : this._playbackObject.playAsync();
+      ? this._playbackInstance.pauseAsync()
+      : this._playbackInstance.playAsync();
   }
 
   _toggleControls = () => {
-    console.log('view tapped outside an actual control');
     switch (this.state.controlsState) {
       case CONTROL_STATES.SHOWN:
         this.setState({ controlsState: CONTROL_STATES.HIDING });
@@ -283,7 +285,6 @@ export default class VideoPlayer extends React.Component {
       this.state.isPlaying ||
       (this.state.isSeeking && this.state.shouldPlayAtEndOfSeek);
 
-    // Example HLS url: https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8
     const overlayTextStyle = {
       color: colors.complementary,
       fontFamily: 'roboto-light',
@@ -303,6 +304,16 @@ export default class VideoPlayer extends React.Component {
         {children}
       </TouchableHighlight>;
 
+    const Spinner = ({ spinner }) =>
+      <View
+        style={{
+          position: 'absolute',
+          left: (videoWidth - centerIconWidth) / 2,
+          top: (videoHeight - centerIconWidth) / 2,
+        }}>
+        {spinner}
+      </View>;
+
     return (
       <TouchableWithoutFeedback onPress={() => this._toggleControls()}>
         <View
@@ -312,11 +323,11 @@ export default class VideoPlayer extends React.Component {
           }}>
           <Video
             source={{
-              uri: this.props.sources['240p'],
+              uri: this.props.uri,
             }}
-            ref={component => (this._playbackObject = component)}
+            ref={component => (this._playbackInstance = component)}
             resizeMode={Video.RESIZE_MODE_CONTAIN}
-            callback={this._playbackCallback}
+            callback={this._playbackCallback.bind(this)}
             style={{
               width: videoWidth,
               height: videoHeight,
@@ -324,15 +335,7 @@ export default class VideoPlayer extends React.Component {
             shouldPlay={config.autoplayVideo}
           />
 
-          {showSpinner &&
-            <View
-              style={{
-                position: 'absolute',
-                left: (videoWidth - centerIconWidth) / 2,
-                top: (videoHeight - centerIconWidth) / 2,
-              }}>
-              {this.props.spinner}
-            </View>}
+          {showSpinner && <Spinner spinner={this.props.spinner} />}
 
           {!showSpinner &&
             !hidePlayPauseButton &&
@@ -348,7 +351,7 @@ export default class VideoPlayer extends React.Component {
                 left: (videoWidth - centerIconWidth) / 2,
                 top: (videoHeight - centerIconWidth) / 2,
               }}>
-              <Control callback={() => this._togglePlay()}>
+              <Control callback={this._togglePlay.bind(this)}>
                 {showPauseButton ? this.props.pauseIcon : this.props.playIcon}
               </Control>
             </Animated.View>}

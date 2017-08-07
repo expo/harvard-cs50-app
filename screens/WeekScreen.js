@@ -189,6 +189,9 @@ class WeekScreen extends React.Component {
     var linkKeys = ['slides', 'source code', 'notes'];
     var links = _.pickBy(data, (v, k) => linkKeys.includes(k));
 
+    // Video player sources
+    // Example HLS url: https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8
+
     return (
       <View
         style={{
@@ -198,7 +201,7 @@ class WeekScreen extends React.Component {
           // paddingTop: 20,
         }}>
         <VideoPlayer
-          sources={data.videos}
+          uri={data.videos['240p']}
           id={data.title}
           isPortrait={this.state.isPortrait}
           onFullscreen={this.onFullscreen.bind(this)}
