@@ -22,6 +22,53 @@ var CONTROL_STATES = {
   HIDING: 4,
 };
 
+const PlayIcon = () =>
+  <Foundation
+    name={'play'}
+    size={36}
+    color={colors.complementary}
+    style={{ textAlign: 'center' }}
+  />;
+
+const PauseIcon = () =>
+  <Foundation
+    name={'pause'}
+    size={36}
+    color={colors.complementary}
+    style={{ textAlign: 'center' }}
+  />;
+
+const Spinner = () =>
+  <ActivityIndicator
+    color={colors.complementary}
+    size={'large'}
+    style={{ textAlign: 'center' }}
+  />;
+
+const FullscreenEnterIcon = () =>
+  <MaterialIcons
+    name={'fullscreen'}
+    size={30}
+    color={colors.complementary}
+    style={{ textAlign: 'center' }}
+  />;
+
+const FullscreenExitIcon = () =>
+  <MaterialIcons
+    name={'fullscreen-exit'}
+    size={30}
+    color={colors.complementary}
+    style={{ textAlign: 'center' }}
+  />;
+
+const ReplayIcon = () =>
+  <MaterialIcons
+    name={'replay'}
+    size={30}
+    color={colors.complementary}
+    style={{ textAlign: 'center' }}
+  />;
+
 export default class VideoPlayer extends React.Component {
   static propTypes = {
     /**
@@ -31,6 +78,10 @@ export default class VideoPlayer extends React.Component {
    */
     showingDuration: PropTypes.number,
     // TODO: Fill out remaining prop types
+    /**
+     * Callback to get `playbackStatus` objects for the underlying video element
+     */
+    playbackCallback: PropTypes.func,
   };
 
   static defaultProps = {
@@ -38,28 +89,12 @@ export default class VideoPlayer extends React.Component {
     hidingFastDuration: 200,
     hidingSlowDuration: 1000,
     hidingTimerDuration: 4000,
-    playIcon: null,
-    pauseIcon: (
-      <Foundation name={'pause'} size={36} color={colors.complementary} />
-    ),
-    spinner: <ActivityIndicator color={colors.complementary} size={'large'} />,
-    fullscreenEnterIcon: (
-      <MaterialIcons
-        name={'fullscreen'}
-        size={30}
-        color={colors.complementary}
-      />
-    ),
-    fullscreenExitIcon: (
-      <MaterialIcons
-        name={'fullscreen-exit'}
-        size={30}
-        color={colors.complementary}
-      />
-    ),
-    replayIcon: (
-      <MaterialIcons name={'replay'} size={30} color={colors.complementary} />
-    ),
+    playIcon: PlayIcon,
+    pauseIcon: PauseIcon,
+    spinner: Spinner,
+    fullscreenEnterIcon: FullscreenEnterIcon,
+    fullscreenExitIcon: FullscreenExitIcon,
+    replayIcon: ReplayIcon,
   };
 
   constructor() {
@@ -316,28 +351,10 @@ export default class VideoPlayer extends React.Component {
     );
   };
 
-  _initializeIcons() {
-    console.log('initializing play icon?');
-    if (!this.props.playIcon) {
-      console.log('yes, init');
-      this.props.playIcon = (
-        <Foundation
-          name={'play-video'}
-          size={36}
-          color={colors.complementary}
-        />
-      );
-    }
-  }
-
   render() {
     const videoWidth = Dimensions.get('window').width;
     const videoHeight = videoWidth * (9 / 16);
     const centerIconWidth = 48;
-
-    this._initializeIcons();
-
-    // console.log('Rendering the component right now');
 
     const showSpinner =
       this.state.isBuffering ||
@@ -356,7 +373,14 @@ export default class VideoPlayer extends React.Component {
       fontSize: fontSize(0),
     };
 
-    const Control = ({ callback, children, ...otherProps }) =>
+    const PlayIcon = this.props.playIcon;
+    const PauseIcon = this.props.pauseIcon;
+    const Spinner = this.props.spinner;
+    const FullscreenEnterIcon = this.props.fullscreenEnterIcon;
+    const FullscreenExitIcon = this.props.fullscreenExitIcon;
+    const ReplayIcon = this.props.replayIcon;
+
+    const Control = ({ callback, children, center, ...otherProps }) =>
       <TouchableHighlight
         {...otherProps}
         underlayColor="transparent"
@@ -365,8 +389,26 @@ export default class VideoPlayer extends React.Component {
         onPress={() => {
           this._resetControlsTimer();
           callback();
-        }}>
-        {children}
+        }}
+        style={
+          center
+            ? {
+                width: centerIconWidth,
+                height: centerIconWidth,
+              }
+            : {}
+        }>
+        <View
+          style={
+            center
+              ? {
+                  backgroundColor: 'rgba(0, 0, 0, 0.4)',
+                  justifyContent: 'center',
+                }
+              : {}
+          }>
+          {children}
+        </View>
       </TouchableHighlight>;
 
     const CenterIcon = ({ children }) =>
@@ -375,7 +417,7 @@ export default class VideoPlayer extends React.Component {
           position: 'absolute',
           left: (videoWidth - centerIconWidth) / 2,
           top: (videoHeight - centerIconWidth) / 2,
-          backgroundColor: 'red', //'rgba(0, 0, 0, 0.4)',
+          backgroundColor: 'rgba(0, 0, 0, 0.4)',
           padding: 3,
         }}>
         {children}
@@ -419,13 +461,13 @@ export default class VideoPlayer extends React.Component {
 
           {showSpinner &&
             <CenterIcon>
-              {this.props.spinner}
+              <Spinner />
             </CenterIcon>}
 
           {this.state.replayState &&
             <CenterIcon>
-              <Control callback={this._replay.bind(this)}>
-                {this.props.replayIcon}
+              <Control center={true} callback={this._replay.bind(this)}>
+                <ReplayIcon />
               </Control>
             </CenterIcon>}
 
@@ -445,8 +487,8 @@ export default class VideoPlayer extends React.Component {
                 left: (videoWidth - centerIconWidth) / 2,
                 top: (videoHeight - centerIconWidth) / 2,
               }}>
-              <Control callback={this._togglePlay.bind(this)}>
-                {showPauseButton ? this.props.pauseIcon : this.props.playIcon}
+              <Control center={true} callback={this._togglePlay.bind(this)}>
+                {showPauseButton ? <PauseIcon /> : <PlayIcon />}
               </Control>
             </Animated.View>}
 
@@ -496,8 +538,8 @@ export default class VideoPlayer extends React.Component {
                     : this.props.onUnFullscreen();
                 }}>
                 {this.state.fullscreen
-                  ? this.props.fullscreenExitIcon
-                  : this.props.fullscreenEnterIcon}
+                  ? <FullscreenExitIcon />
+                  : <FullscreenEnterIcon />}
               </Control>
             </View>
           </Animated.View>

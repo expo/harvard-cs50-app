@@ -20,6 +20,8 @@ import Analytics from '../utils/Analytics';
 import styles, { colors, fontSize } from '../styles/style';
 import StoredValue from '../utils/StoredValue';
 
+import { Foundation, MaterialIcons } from '@expo/vector-icons';
+
 var STATES = {
   NOTSTARTED: 1,
   DOWNLOADING: 2,
@@ -222,6 +224,9 @@ class WeekScreen extends React.Component {
     // Video player sources
     // Example HLS url: https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8
 
+    const PlayIcon = () =>
+      <Foundation name={'asterisk'} size={36} color={colors.complementary} />;
+
     return (
       <View
         style={{
@@ -238,6 +243,7 @@ class WeekScreen extends React.Component {
           thumbImage={require('../assets/icons/thumb.png')}
           playbackCallback={this._playbackCallback.bind(this)}
           playFromPositionMillis={this.state.playFromPositionMillis}
+          /* playIcon={PlayIcon} */
         />
 
         {this.state.localVideoUri &&
