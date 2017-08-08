@@ -42,6 +42,7 @@
     "eslint-plugin-flowtype": "^2.34.0",
     "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-react": "^7.0.1",
-    "prettier": "^1.4.0"
+    "prettier": "^1.4.0",
+    "react-docgen-markdown-renderer": "^1.0.1"
   }
 }
