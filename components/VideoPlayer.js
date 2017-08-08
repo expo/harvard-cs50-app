@@ -38,9 +38,7 @@ export default class VideoPlayer extends React.Component {
     hidingFastDuration: 200,
     hidingSlowDuration: 1000,
     hidingTimerDuration: 4000,
-    playIcon: (
-      <Foundation name={'play-video'} size={36} color={colors.complementary} />
-    ),
+    playIcon: null,
     pauseIcon: (
       <Foundation name={'pause'} size={36} color={colors.complementary} />
     ),
@@ -67,25 +65,27 @@ export default class VideoPlayer extends React.Component {
   constructor() {
     super();
     this.state = {
+      // Global states
+      replayState: false, // Rename to shouldReplay
+      fullscreen: false, // Rename to isFullscreen
+
+      // Playback-related states
+      isLoading: true,
       // All of this state comes from the playbackCallback
       playbackInstancePosition: null,
       playbackInstanceDuration: null,
       shouldPlay: false,
       isPlaying: false,
       isBuffering: false,
-      // Other state
-      isLoading: true,
-      fullscreen: false,
       // Seekbar related state
       isSeeking: false,
-      // shouldPlayAtEndOfSeek
-      controlsOpacity: new Animated.Value(0),
-      controlsState: CONTROL_STATES.HIDDEN,
-      // Replay state,
-      replayState: false,
       // Error state,
       errorState: false,
       error: null,
+
+      // Controls display state
+      controlsOpacity: new Animated.Value(0),
+      controlsState: CONTROL_STATES.HIDDEN,
     };
   }
 
@@ -316,10 +316,26 @@ export default class VideoPlayer extends React.Component {
     );
   };
 
+  _initializeIcons() {
+    console.log('initializing play icon?');
+    if (!this.props.playIcon) {
+      console.log('yes, init');
+      this.props.playIcon = (
+        <Foundation
+          name={'play-video'}
+          size={36}
+          color={colors.complementary}
+        />
+      );
+    }
+  }
+
   render() {
     const videoWidth = Dimensions.get('window').width;
     const videoHeight = videoWidth * (9 / 16);
     const centerIconWidth = 48;
+
+    this._initializeIcons();
 
     // console.log('Rendering the component right now');
 
@@ -359,6 +375,8 @@ export default class VideoPlayer extends React.Component {
           position: 'absolute',
           left: (videoWidth - centerIconWidth) / 2,
           top: (videoHeight - centerIconWidth) / 2,
+          backgroundColor: 'red', //'rgba(0, 0, 0, 0.4)',
+          padding: 3,
         }}>
         {children}
       </View>;
