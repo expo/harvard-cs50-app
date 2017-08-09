@@ -42,7 +42,7 @@ const Spinner = () =>
   <ActivityIndicator
     color={colors.complementary}
     size={'large'}
-    style={{ textAlign: 'center' }}
+    //style={{ textAlign: 'center' }}
   />;
 
 const FullscreenEnterIcon = () =>
@@ -69,6 +69,16 @@ const ReplayIcon = () =>
     style={{ textAlign: 'center' }}
   />;
 
+var PLAYBACK_STATES = {
+  LOADING: 'LOADING',
+  PLAYING: 'PLAYING',
+  PAUSED: 'PAUSED',
+  BUFFERING: 'BUFFERING',
+  SEEKING: 'SEEKING',
+  ERROR: 'ERROR',
+  ENDED: 'ENDED',
+};
+
 export default class VideoPlayer extends React.Component {
   static propTypes = {
     /**
@@ -82,6 +92,7 @@ export default class VideoPlayer extends React.Component {
      * Callback to get `playbackStatus` objects for the underlying video element
      */
     playbackCallback: PropTypes.func,
+    // playIcon: PropTypes.element,
   };
 
   static defaultProps = {
@@ -104,18 +115,14 @@ export default class VideoPlayer extends React.Component {
       replayState: false, // Rename to shouldReplay
       fullscreen: false, // Rename to isFullscreen
 
-      // Playback-related states
-      isLoading: true,
-      // All of this state comes from the playbackCallback
+      playbackState: PLAYBACK_STATES.LOADING,
+
+      // State comes from the playbackCallback
       playbackInstancePosition: null,
       playbackInstanceDuration: null,
       shouldPlay: false,
-      isPlaying: false,
-      isBuffering: false,
-      // Seekbar related state
-      isSeeking: false,
-      // Error state,
-      errorState: false,
+
+      // Error message
       error: null,
 
       // Controls display state
@@ -175,29 +182,54 @@ export default class VideoPlayer extends React.Component {
     if (!playbackStatus.isLoaded) {
       if (playbackStatus.error) {
         this.setState({
-          errorState: true,
+          playbackState: PLAYBACK_STATES.ERROR,
           error: `Encountered a fatal error during playback: ${playbackStatus.error}`,
         });
       }
     } else {
+      let newPlaybackState = this.state.playbackState;
+
+      if (
+        newPlaybackState !== PLAYBACK_STATES.SEEKING &&
+        newPlaybackState !== PLAYBACK_STATES.ENDED
+      ) {
+        if (playbackStatus.didJustFinish && !playbackStatus.isLooping) {
+          newPlaybackState = PLAYBACK_STATES.ENDED;
+        } else {
+          if (playbackStatus.isPlaying) {
+            newPlaybackState = PLAYBACK_STATES.PLAYING;
+          } else {
+            if (playbackStatus.isBuffering) {
+              newPlaybackState = PLAYBACK_STATES.BUFFERING;
+            } else {
+              newPlaybackState = PLAYBACK_STATES.PAUSED;
+            }
+          }
+        }
+      }
+
+      if (this.state.playbackState !== newPlaybackState) {
+        console.log(
+          'playback state changing from ',
+          this.state.playbackState,
+          ' -> ',
+          newPlaybackState
+        );
+        this.setState({ playbackState: newPlaybackState });
+      }
+
       this.setState({
         playbackInstancePosition: playbackStatus.positionMillis,
         playbackInstanceDuration: playbackStatus.durationMillis,
-        isLoading: false,
         shouldPlay: playbackStatus.shouldPlay,
-        isPlaying: playbackStatus.isPlaying,
-        isBuffering: playbackStatus.isBuffering,
       });
-
-      if (playbackStatus.didJustFinish && !playbackStatus.isLooping) {
-        this.setState({ replayState: true });
-      }
     }
   }
 
   _errorCallback(message) {
+    // TODO: Handle soft errors
     this.setState({
-      errorState: true,
+      playbackState: PLAYBACK_STATES.ERROR,
       error: message,
     });
   }
@@ -218,29 +250,47 @@ export default class VideoPlayer extends React.Component {
   }
 
   _onSeekSliderValueChange = value => {
-    if (this._playbackInstance != null && !this.state.isSeeking) {
-      this.setState({ isSeeking: true });
-      this.setState({ shouldPlayAtEndOfSeek: this.state.shouldPlay });
-      this._playbackInstance.pauseAsync();
+    if (
+      this._playbackInstance != null &&
+      this.state.playbackState !== PLAYBACK_STATES.SEEKING
+    ) {
+      this.setState({
+        playbackState: PLAYBACK_STATES.SEEKING,
+        shouldPlayAtEndOfSeek: this.state.shouldPlay,
+      });
+      this._playbackInstance.setStatusAsync({ shouldPlay: false });
     }
   };
 
   _onSeekSliderSlidingComplete = async value => {
     if (this._playbackInstance != null) {
-      this.setState({ isSeeking: false });
-      const seekPosition = value * this.state.playbackInstanceDuration;
-      if (this.state.shouldPlayAtEndOfSeek) {
-        this._playbackInstance.playFromPositionAsync(seekPosition);
-      } else {
-        this._playbackInstance.setPositionAsync(seekPosition);
-      }
+      this._playbackInstance
+        .setStatusAsync({
+          positionMillis: value * this.state.playbackInstanceDuration,
+          shouldPlay: this.state.shouldPlayAtEndOfSeek,
+        })
+        .then(() => {
+          const nextPlaybackState = this.state.shouldPlayAtEndOfSeek
+            ? PLAYBACK_STATES.BUFFERING
+            : PLAYBACK_STATES.PAUSED;
+
+          console.log(
+            'playback state changing from ',
+            this.state.playbackState,
+            ' -> ',
+            nextPlaybackState
+          );
+
+          this.setState({
+            playbackState: nextPlaybackState,
+          });
+        });
     }
   };
 
   _onSeekBarTap = evt => {
-    console.log(evt.nativeEvent.locationX);
-    console.log(this.state.sliderWidth);
-    console.log('where did the tap happen?');
+    // console.log(evt.nativeEvent.locationX);
+    // console.log(this.state.sliderWidth);
   };
 
   _onSliderLayout = evt => {
@@ -267,17 +317,20 @@ export default class VideoPlayer extends React.Component {
   // Controls Behavior
 
   _replay() {
-    this._playbackInstance.setStatusAsync({
-      shouldPlay: true,
-      positionMillis: 0,
-    });
-    this.setState({ replayState: false });
+    this._playbackInstance
+      .setStatusAsync({
+        shouldPlay: true,
+        positionMillis: 0,
+      })
+      .then(() => {
+        this.setState({ playbackState: PLAYBACK_STATES.PLAYING });
+      });
   }
 
   _togglePlay() {
-    this.state.isPlaying
-      ? this._playbackInstance.pauseAsync()
-      : this._playbackInstance.playAsync();
+    this.state.playbackState == PLAYBACK_STATES.PLAYING
+      ? this._playbackInstance.setStatusAsync({ shouldPlay: false })
+      : this._playbackInstance.setStatusAsync({ shouldPlay: true });
   }
 
   _toggleControls = () => {
@@ -356,16 +409,16 @@ export default class VideoPlayer extends React.Component {
     const videoHeight = videoWidth * (9 / 16);
     const centerIconWidth = 48;
 
-    const showSpinner =
-      this.state.isBuffering ||
-      this.state.isLoading ||
-      (this.state.shouldPlay && !this.state.isPlaying);
+    // const showSpinner =
+    //   this.state.isBuffering ||
+    //   this.state.isLoading ||
+    //   (this.state.shouldPlay && !this.state.isPlaying);
 
-    const hidePlayPauseButton = this.state.isSeeking;
+    // const hidePlayPauseButton = this.state.isSeeking;
 
-    const showPauseButton =
-      this.state.isPlaying ||
-      (this.state.isSeeking && this.state.shouldPlayAtEndOfSeek);
+    // const showPauseButton =
+    //   this.state.isPlaying ||
+    //   (this.state.isSeeking && this.state.shouldPlayAtEndOfSeek);
 
     const overlayTextStyle = {
       color: colors.complementary,
@@ -459,22 +512,24 @@ export default class VideoPlayer extends React.Component {
             isMuted={config.muteVideo}
           />
 
-          {showSpinner &&
+          {(this.state.playbackState == PLAYBACK_STATES.BUFFERING ||
+            this.state.playbackState == PLAYBACK_STATES.LOADING) &&
             <CenterIcon>
               <Spinner />
             </CenterIcon>}
 
-          {this.state.replayState &&
+          {this.state.playbackState == PLAYBACK_STATES.ENDED &&
             <CenterIcon>
               <Control center={true} callback={this._replay.bind(this)}>
                 <ReplayIcon />
               </Control>
             </CenterIcon>}
 
-          {this.state.errorState && <ErrorText text={this.state.error} />}
+          {this.state.playbackState == PLAYBACK_STATES.ERROR &&
+            <ErrorText text={this.state.error} />}
 
-          {!showSpinner &&
-            !hidePlayPauseButton &&
+          {(this.state.playbackState == PLAYBACK_STATES.PLAYING ||
+            this.state.playbackState == PLAYBACK_STATES.PAUSED) &&
             <Animated.View
               pointerEvents={
                 this.state.controlsState === CONTROL_STATES.HIDDEN
@@ -488,7 +543,9 @@ export default class VideoPlayer extends React.Component {
                 top: (videoHeight - centerIconWidth) / 2,
               }}>
               <Control center={true} callback={this._togglePlay.bind(this)}>
-                {showPauseButton ? <PauseIcon /> : <PlayIcon />}
+                {this.state.playbackState == PLAYBACK_STATES.PLAYING
+                  ? <PauseIcon />
+                  : <PlayIcon />}
               </Control>
             </Animated.View>}
 
