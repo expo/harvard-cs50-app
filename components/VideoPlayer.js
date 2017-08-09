@@ -78,9 +78,12 @@ var PLAYBACK_STATES = {
   PAUSED: 'PAUSED',
   BUFFERING: 'BUFFERING',
   SEEKING: 'SEEKING',
+  SEEKED: 'SEEKED',
   ERROR: 'ERROR',
   ENDED: 'ENDED',
 };
+
+const UPDATE_DELAY = 200;
 
 export default class VideoPlayer extends React.Component {
   static propTypes = {
@@ -205,6 +208,7 @@ export default class VideoPlayer extends React.Component {
 
       if (
         newPlaybackState !== PLAYBACK_STATES.SEEKING &&
+        newPlaybackState !== PLAYBACK_STATES.SEEKED &&
         newPlaybackState !== PLAYBACK_STATES.ENDED
       ) {
         if (playbackStatus.didJustFinish && !playbackStatus.isLooping) {
@@ -272,16 +276,28 @@ export default class VideoPlayer extends React.Component {
 
   _onSeekSliderSlidingComplete = async value => {
     if (this._playbackInstance != null) {
+      this._setPlaybackState(PLAYBACK_STATES.SEEKED);
       this._playbackInstance
         .setStatusAsync({
           positionMillis: value * this.state.playbackInstanceDuration,
           shouldPlay: this.state.shouldPlayAtEndOfSeek,
         })
-        .then(() => {
-          const nextPlaybackState = this.state.shouldPlayAtEndOfSeek
-            ? PLAYBACK_STATES.BUFFERING
-            : PLAYBACK_STATES.PAUSED;
-          this._setPlaybackState(nextPlaybackState);
+        .then(playbackStatus => {
+          // const nextPlaybackState = this.state.shouldPlayAtEndOfSeek
+          //   ? PLAYBACK_STATES.BUFFERING
+          //   : PLAYBACK_STATES.PAUSED;
+
+          let newPlaybackState = PLAYBACK_STATES.BUFFERING;
+          if (playbackStatus.isPlaying) {
+            newPlaybackState = PLAYBACK_STATES.PLAYING;
+          } else {
+            if (playbackStatus.isBuffering) {
+              newPlaybackState = PLAYBACK_STATES.BUFFERING;
+            } else {
+              newPlaybackState = PLAYBACK_STATES.PAUSED;
+            }
+          }
+          this._setPlaybackState(newPlaybackState);
         });
     }
   };
@@ -511,7 +527,9 @@ export default class VideoPlayer extends React.Component {
           />
 
           {((this.state.playbackState == PLAYBACK_STATES.BUFFERING &&
-            Date.now() - this.state.lastPlaybackStateUpdate > 500) ||
+            Date.now() - this.state.lastPlaybackStateUpdate > UPDATE_DELAY) ||
+            (this.state.playbackState == PLAYBACK_STATES.SEEKED &&
+              Date.now() - this.state.lastPlaybackStateUpdate > UPDATE_DELAY) ||
             this.state.playbackState == PLAYBACK_STATES.LOADING) &&
             <CenterIcon>
               <Spinner />
