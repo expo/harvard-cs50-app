@@ -69,6 +69,9 @@ const ReplayIcon = () =>
     style={{ textAlign: 'center' }}
   />;
 
+const TRACK_IMAGE = require('../assets/icons/track.png');
+const THUMB_IMAGE = require('../assets/icons/thumb.png');
+
 var PLAYBACK_STATES = {
   LOADING: 'LOADING',
   PLAYING: 'PLAYING',
@@ -106,16 +109,17 @@ export default class VideoPlayer extends React.Component {
     fullscreenEnterIcon: FullscreenEnterIcon,
     fullscreenExitIcon: FullscreenExitIcon,
     replayIcon: ReplayIcon,
+    trackImage: TRACK_IMAGE,
+    thumbImage: THUMB_IMAGE,
   };
 
   constructor() {
     super();
     this.state = {
-      // Global states
-      replayState: false, // Rename to shouldReplay
       fullscreen: false, // Rename to isFullscreen
 
       playbackState: PLAYBACK_STATES.LOADING,
+      lastPlaybackStateUpdate: Date.now(),
 
       // State comes from the playbackCallback
       playbackInstancePosition: null,
@@ -170,6 +174,16 @@ export default class VideoPlayer extends React.Component {
 
   // Handle events during playback
 
+  _setPlaybackState(playbackState) {
+    console.log(
+      'playback state changing from ',
+      this.state.playbackState,
+      ' -> ',
+      playbackState
+    );
+    this.setState({ playbackState, lastPlaybackStateUpdate: Date.now() });
+  }
+
   _playbackCallback(playbackStatus) {
     try {
       this.props.playbackCallback &&
@@ -209,13 +223,7 @@ export default class VideoPlayer extends React.Component {
       }
 
       if (this.state.playbackState !== newPlaybackState) {
-        console.log(
-          'playback state changing from ',
-          this.state.playbackState,
-          ' -> ',
-          newPlaybackState
-        );
-        this.setState({ playbackState: newPlaybackState });
+        this._setPlaybackState(newPlaybackState);
       }
 
       this.setState({
@@ -228,8 +236,8 @@ export default class VideoPlayer extends React.Component {
 
   _errorCallback(message) {
     // TODO: Handle soft errors
+    this._setPlaybackState(PLAYBACK_STATES.ERROR);
     this.setState({
-      playbackState: PLAYBACK_STATES.ERROR,
       error: message,
     });
   }
@@ -254,8 +262,8 @@ export default class VideoPlayer extends React.Component {
       this._playbackInstance != null &&
       this.state.playbackState !== PLAYBACK_STATES.SEEKING
     ) {
+      this._setPlaybackState(PLAYBACK_STATES.SEEKING);
       this.setState({
-        playbackState: PLAYBACK_STATES.SEEKING,
         shouldPlayAtEndOfSeek: this.state.shouldPlay,
       });
       this._playbackInstance.setStatusAsync({ shouldPlay: false });
@@ -273,17 +281,7 @@ export default class VideoPlayer extends React.Component {
           const nextPlaybackState = this.state.shouldPlayAtEndOfSeek
             ? PLAYBACK_STATES.BUFFERING
             : PLAYBACK_STATES.PAUSED;
-
-          console.log(
-            'playback state changing from ',
-            this.state.playbackState,
-            ' -> ',
-            nextPlaybackState
-          );
-
-          this.setState({
-            playbackState: nextPlaybackState,
-          });
+          this._setPlaybackState(nextPlaybackState);
         });
     }
   };
@@ -512,7 +510,8 @@ export default class VideoPlayer extends React.Component {
             isMuted={config.muteVideo}
           />
 
-          {(this.state.playbackState == PLAYBACK_STATES.BUFFERING ||
+          {((this.state.playbackState == PLAYBACK_STATES.BUFFERING &&
+            Date.now() - this.state.lastPlaybackStateUpdate > 500) ||
             this.state.playbackState == PLAYBACK_STATES.LOADING) &&
             <CenterIcon>
               <Spinner />

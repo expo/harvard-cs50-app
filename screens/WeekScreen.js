@@ -239,8 +239,6 @@ class WeekScreen extends React.Component {
           isPortrait={this.state.isPortrait}
           onFullscreen={this.onFullscreen.bind(this)}
           onUnFullscreen={this.onUnFullscreen.bind(this)}
-          trackImage={require('../assets/icons/track.png')}
-          thumbImage={require('../assets/icons/thumb.png')}
           playbackCallback={this._playbackCallback.bind(this)}
           playFromPositionMillis={this.state.playFromPositionMillis}
           /* playIcon={PlayIcon} */
