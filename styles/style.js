@@ -48,7 +48,7 @@ export const headerStyle = {
 // Margins for all views
 
 export const mainViewStyle = {
-  marginLeft: 20,
+  marginLeft: 30,
   marginRight: 20,
 };
 

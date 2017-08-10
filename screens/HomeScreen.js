@@ -85,7 +85,7 @@ class HomeScreen extends React.Component {
     return (
       <Row
         text={rowData.title + ' / ' + rowData.desc}
-        onPress={this.onWeekPress(rowID).bind(this)}
+        onPress={this.onWeekPress.bind(this, [rowID])}
       />
     );
   }
@@ -94,7 +94,7 @@ class HomeScreen extends React.Component {
     const BrowseSection = ({ weekNumber }) => {
       const itemHorizontalMargin = 10;
       const itemWidth =
-        Dimensions.get('window').width + itemHorizontalMargin * 2 - 80;
+        Dimensions.get('window').width + itemHorizontalMargin * 2 - 60;
       return (
         <View style={{ marginTop: 40 }}>
           <StatusBar backgroundColor="blue" barStyle="light-content" />
@@ -105,6 +105,7 @@ class HomeScreen extends React.Component {
                 letterSpacing: -1,
                 color: colors.primary,
                 fontFamily: 'roboto-black',
+                marginBottom: 15,
               },
               styles.mainViewStyle,
             ]}>
@@ -116,7 +117,7 @@ class HomeScreen extends React.Component {
               ref={carousel => {
                 this._carousel = carousel;
               }}
-              inactiveSlideOpacity={1}
+              inactiveSlideOpacity={0.5}
               inactiveSlideScale={1}
               enableMomentum={false}
               firstItem={4}
@@ -126,23 +127,29 @@ class HomeScreen extends React.Component {
                 <View
                   key={week.title}
                   style={{
-                    borderTopColor: colors.primary,
-                    borderTopWidth: 1,
                     width: itemWidth,
-                    marginHorizontal: itemHorizontalMargin,
+                    paddingHorizontal: itemHorizontalMargin,
                   }}>
-                  <Text style={{ color: colors.primary, marginTop: 10 }}>
-                    THIS WEEK
-                  </Text>
-                  <WeekBox
-                    onPress={() => this.onWeekPress(week.weekNumber)}
-                    key={`entry-${index}`}
-                    imageWidth={(itemWidth - itemHorizontalMargin * 2) * 1 / 3}
-                    textWidth={(itemWidth - itemHorizontalMargin * 2) * 2 / 3}
-                    source={require('../assets/memory.png')}
-                    title={week.title.toLowerCase()}
-                    desc={week.desc.toLowerCase()}
-                  />
+                  <View
+                    style={{
+                      borderTopColor: colors.primary,
+                      borderTopWidth: 1,
+                    }}>
+                    <Text style={{ color: colors.primary, marginTop: 10 }}>
+                      THIS WEEK
+                    </Text>
+                    <WeekBox
+                      onPress={() => this.onWeekPress(week.weekNumber)}
+                      key={`entry-${index}`}
+                      imageWidth={
+                        (itemWidth - itemHorizontalMargin * 2) * 1 / 3
+                      }
+                      textWidth={(itemWidth - itemHorizontalMargin * 2) * 2 / 3}
+                      source={require('../assets/memory.png')}
+                      title={week.title.toLowerCase()}
+                      desc={week.desc.toLowerCase()}
+                    />
+                  </View>
                 </View>
               )}
             </Carousel>}
