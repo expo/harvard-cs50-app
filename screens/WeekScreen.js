@@ -130,9 +130,17 @@ class WeekScreen extends React.Component {
     const data = this.props.navigation.state.params.data;
     const linkKeys = ['slides', 'source code', 'notes'];
     const links = _.pickBy(data, (v, k) => linkKeys.includes(k));
-    const linksArr = _.map(links, (v, k) => ({
-      title: k,
-      url: v,
+
+    const ICONS = {
+      notes: 'sticky-note-o',
+      slides: 'slideshare',
+      'source code': 'code',
+    };
+
+    const linksArr = _.map(links, (url, title) => ({
+      title,
+      url,
+      icon: ICONS[title],
     }));
 
     this.state = {
@@ -268,10 +276,11 @@ class WeekScreen extends React.Component {
             Course Materials
           </Text>
 
-          {this.state.linksArr.map(({ title, url }) =>
+          {this.state.linksArr.map(({ title, url, icon }) =>
             <Row
               key={title}
               text={title}
+              icon={icon}
               onPress={() => this.onButtonPress(url)}
               style={{
                 alignSelf: 'stretch',

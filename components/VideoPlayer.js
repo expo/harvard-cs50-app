@@ -518,7 +518,7 @@ export default class VideoPlayer extends React.Component {
             marginBottom: 20,
             backgroundColor: 'black',
           }}>
-          <Video
+          {/* <Video
             source={{
               uri: this.props.uri,
             }}
@@ -532,6 +532,13 @@ export default class VideoPlayer extends React.Component {
             }}
             shouldPlay={config.autoplayVideo}
             isMuted={config.muteVideo}
+          /> */}
+
+          <View
+            style={{
+              width: videoWidth,
+              height: videoHeight,
+            }}
           />
 
           {((this.state.playbackState == PLAYBACK_STATES.BUFFERING &&

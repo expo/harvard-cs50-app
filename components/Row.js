@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, TouchableWithoutFeedback } from 'react-native';
 import styles, { colors, fontSize } from '../styles/style';
-import { EvilIcons } from '@expo/vector-icons';
+import { EvilIcons, FontAwesome } from '@expo/vector-icons';
 import CrossTouchable from './CrossTouchable';
 
 class Row extends React.Component {
@@ -45,17 +45,38 @@ class Row extends React.Component {
                 justifyContent: 'space-between',
                 flexDirection: 'row',
               }}>
-              <Text
+              <View
                 style={{
-                  fontFamily: 'roboto-regular',
-                  fontSize: fontSize(1),
-                  color: this.state.pressed
-                    ? colors.complementary
-                    : colors.secondary,
-                  alignSelf: 'flex-start',
+                  justifyContent: 'flex-start',
+                  flexDirection: 'row',
+                  alignItems: 'center',
                 }}>
-                {this.props.text}
-              </Text>
+                {this.props.icon &&
+                  <FontAwesome
+                    name={this.props.icon}
+                    size={18}
+                    color={
+                      this.state.pressed
+                        ? colors.complementary
+                        : colors.secondary
+                    }
+                    style={{
+                      marginLeft: 2,
+                    }}
+                  />}
+                <Text
+                  style={{
+                    fontFamily: 'roboto-regular',
+                    fontSize: fontSize(1),
+                    color: this.state.pressed
+                      ? colors.complementary
+                      : colors.secondary,
+                    alignSelf: 'flex-start',
+                    marginLeft: 15,
+                  }}>
+                  {this.props.text}
+                </Text>
+              </View>
               <EvilIcons
                 name="chevron-right"
                 size={32}
