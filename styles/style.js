@@ -45,6 +45,15 @@ export const headerStyle = {
   height: Platform.OS === 'ios' ? 80 : 100,
 };
 
+// H1
+
+export const h1Style = {
+  fontSize: fontSize(2),
+  letterSpacing: -1,
+  color: colors.primary,
+  fontFamily: 'roboto-black',
+};
+
 // Margins for all views
 
 export const mainViewStyle = {
@@ -61,4 +70,5 @@ export default (styles = {
   headerTintColor,
   headerStyle,
   mainViewStyle,
+  h1Style,
 });

@@ -5,9 +5,9 @@ import {
   Dimensions,
   TouchableHighlight,
   NetInfo,
-  ActivityIndicator,
+  ScrollView,
 } from 'react-native';
-import { ScreenOrientation, FileSystem, Video } from 'expo';
+import { ScreenOrientation, FileSystem } from 'expo';
 import _ from 'lodash';
 import * as Progress from 'react-native-progress';
 import reactMixin from 'react-mixin';
@@ -130,12 +130,17 @@ class WeekScreen extends React.Component {
     const data = this.props.navigation.state.params.data;
     const linkKeys = ['slides', 'source code', 'notes'];
     const links = _.pickBy(data, (v, k) => linkKeys.includes(k));
+    const linksArr = _.map(links, (v, k) => ({
+      title: k,
+      url: v,
+    }));
 
     this.state = {
       isPortrait: true,
       localVideoUri: null,
-      data: data,
-      links: links,
+      data,
+      links,
+      linksArr,
     };
 
     this.orientationChangeHandler = this.orientationChangeHandler.bind(this);
@@ -224,54 +229,59 @@ class WeekScreen extends React.Component {
     // Video player sources
     // Example HLS url: https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8
 
-    // <VideoPlayer
-    //   uri={this.state.data.videos['240p']}
-    //   isPortrait={this.state.isPortrait}
-    //   onFullscreen={this.onFullscreen.bind(this)}
-    //   onUnFullscreen={this.onUnFullscreen.bind(this)}
-    //   playbackCallback={this._playbackCallback.bind(this)}
-    //   playFromPositionMillis={this.state.playFromPositionMillis}
-    //   /* playIcon={PlayIcon} */
-    // />
-
     const PlayIcon = () =>
       <Foundation name={'asterisk'} size={36} color={colors.complementary} />;
 
     return (
       <View
         style={{
-          alignItems: 'flex-start',
           justifyContent: 'space-between',
           flexDirection: 'column',
         }}>
-        <Downloader
-          style={{
-            display: this.state.isPortrait ? 'flex' : 'none',
-            marginBottom: 40,
-          }}
+        <VideoPlayer
+          uri={this.state.data.videos['240p']}
+          isPortrait={this.state.isPortrait}
+          onFullscreen={this.onFullscreen.bind(this)}
+          onUnFullscreen={this.onUnFullscreen.bind(this)}
+          playbackCallback={this._playbackCallback.bind(this)}
+          playFromPositionMillis={this.state.playFromPositionMillis}
+          /* playIcon={PlayIcon} */
         />
-        <View
-          style={{
-            alignItems: 'flex-start',
+        <View>
+          <Downloader
+            style={{
+              display: this.state.isPortrait ? 'flex' : 'none',
+              marginBottom: 40,
+            }}
+          />
+          <View>
+            <Text>Switch playback rate</Text>
+          </View>
+        </View>
+        <ScrollView
+          contentContainerStyle={{
             justifyContent: 'space-between',
             flexDirection: 'column',
             display: this.state.isPortrait ? 'flex' : 'none',
-            marginLeft: 20,
-            marginRight: 20,
           }}>
-          <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 20 }}>
-            course materials
+          <Text style={[styles.h1Style, styles.mainViewStyle]}>
+            Course Materials
           </Text>
-          {_.map(this.state.links, (url, name) => {
-            return (
-              <Row
-                key={url}
-                text={name}
-                onPress={() => this.onButtonPress(url)}
-              />
-            );
-          })}
-        </View>
+
+          {this.state.linksArr.map(({ title, url }) =>
+            <Row
+              key={title}
+              text={title}
+              onPress={() => this.onButtonPress(url)}
+              style={{
+                alignSelf: 'stretch',
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}
+            />
+          )}
+        </ScrollView>
       </View>
     );
   }

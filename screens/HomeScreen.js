@@ -91,6 +91,9 @@ class HomeScreen extends React.Component {
   }
 
   render() {
+    // Images associated with lecture
+    // require('../assets/memory.png')
+
     const BrowseSection = ({ weekNumber }) => {
       const itemHorizontalMargin = 10;
       const itemWidth =
@@ -135,12 +138,17 @@ class HomeScreen extends React.Component {
                       borderTopColor: colors.primary,
                       borderTopWidth: 1,
                     }}>
-                    <Text style={{ color: colors.primary, marginTop: 10 }}>
+                    <Text
+                      style={{
+                        color: colors.primary,
+                        marginTop: 10,
+                        marginBottom: 10,
+                      }}>
                       THIS WEEK
                     </Text>
                     <WeekBox
                       onPress={() => this.onWeekPress(week.weekNumber)}
-                      key={`entry-${index}`}
+                      key={'entry-${index}'}
                       imageWidth={
                         (itemWidth - itemHorizontalMargin * 2) * 1 / 3
                       }

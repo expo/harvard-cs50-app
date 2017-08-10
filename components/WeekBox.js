@@ -11,18 +11,29 @@ import { colors, fontSize } from '../styles/style';
 import CrossTouchable from './CrossTouchable';
 
 class WeekBox extends React.Component {
+  state = {
+    active: false,
+  };
   render() {
-    const textStyle = { color: colors.primary, fontSize: fontSize(2) };
+    const textStyle = {
+      color: this.state.active ? colors.grey : colors.primary,
+      fontSize: fontSize(2),
+    };
     return (
-      <CrossTouchable onPress={this.props.onPress}>
+      <TouchableHighlight
+        onPress={this.props.onPress}
+        style={{
+          borderRadius: 2,
+          borderWidth: 2,
+          borderColor: colors.primary,
+        }}
+        onShowUnderlay={() => this.setState({ active: true })}
+        onHideUnderlay={() => this.setState({ active: false })}
+        underlayColor={colors.secondary}>
         <View
           style={{
             paddingTop: 50,
             paddingBottom: 50,
-            marginTop: 10,
-            borderRadius: 5,
-            borderWidth: 2,
-            borderColor: colors.primary,
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
@@ -52,7 +63,7 @@ class WeekBox extends React.Component {
             </Text>
           </View>
         </View>
-      </CrossTouchable>
+      </TouchableHighlight>
     );
   }
 }
