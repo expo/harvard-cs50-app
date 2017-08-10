@@ -163,20 +163,27 @@ class HomeScreen extends React.Component {
           <BrowseSection weekNumber={this.state.weekNumber} />
           {/* All weeks section */}
           <View style={{ marginTop: 60 }}>
-            <Text
+            <View
               style={[
                 {
-                  fontFamily: 'roboto-black',
-                  fontSize: fontSize(1),
-                  color: colors.primary,
-                  paddingBottom: 10,
                   borderBottomWidth: 1,
                   borderBottomColor: colors.primary,
                 },
                 styles.mainViewStyle,
               ]}>
-              all weeks
-            </Text>
+              <Text
+                style={[
+                  {
+                    fontFamily: 'roboto-black',
+                    color: colors.primary,
+                    paddingBottom: 10,
+                    fontSize: fontSize(2),
+                    letterSpacing: -1,
+                  },
+                ]}>
+                All Weeks
+              </Text>
+            </View>
             <ListView
               contentContainerStyle={{
                 flexDirection: 'column',
