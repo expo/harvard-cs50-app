@@ -99,6 +99,8 @@ export default class VideoPlayer extends React.Component {
      */
     playbackCallback: PropTypes.func,
     // playIcon: PropTypes.element,
+
+    errorCallback: PropTypes.func,
   };
 
   static defaultProps = {
@@ -114,6 +116,9 @@ export default class VideoPlayer extends React.Component {
     replayIcon: ReplayIcon,
     trackImage: TRACK_IMAGE,
     thumbImage: THUMB_IMAGE,
+    errorCallback: error => {
+      console.log('Error: ', error.message, error.type, error.obj);
+    },
   };
 
   constructor() {
@@ -149,8 +154,11 @@ export default class VideoPlayer extends React.Component {
         interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
       });
     } catch (e) {
-      // TODO: Handle rejection of the returned promise
-      // Show a message to the user that Audio could not be setup
+      this.props.errorCallback({
+        type: 'NON_FATAL',
+        message: 'Audio mode intialization issue',
+        obj: e,
+      });
     }
   }
 

@@ -85,14 +85,13 @@ class HomeScreen extends React.Component {
     return (
       <Row
         text={rowData.title + ' / ' + rowData.desc}
-        onPress={() => this.onWeekPress(rowID)}
+        onPress={this.onWeekPress(rowID).bind(this)}
       />
     );
   }
 
   render() {
     const BrowseSection = ({ weekNumber }) => {
-      const textStyle = { color: colors.primary, fontSize: fontSize(2) };
       const itemHorizontalMargin = 10;
       const itemWidth =
         Dimensions.get('window').width + itemHorizontalMargin * 2 - 80;
@@ -130,7 +129,7 @@ class HomeScreen extends React.Component {
                     borderTopColor: colors.primary,
                     borderTopWidth: 1,
                     width: itemWidth,
-                    paddingHorizontal: itemHorizontalMargin,
+                    marginHorizontal: itemHorizontalMargin,
                   }}>
                   <Text style={{ color: colors.primary, marginTop: 10 }}>
                     THIS WEEK

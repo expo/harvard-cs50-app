@@ -7,6 +7,8 @@ export const colors = {
   secondary: '#A41034',
   tertiary: '#FD9E71',
   complementary: Platform.OS === 'ios' ? '#FFFFFF' : '#A41034', // Android doesn't need duplicate feedback for Touchables
+  grey: '#CCC',
+  transparent: 'rgba(0,0,0,0)',
 };
 
 // Fonts
@@ -26,6 +28,7 @@ export const fontSize = n => {
 
 export const fonts = {
   'roboto-light': require('../assets/fonts/Roboto-Light.ttf'),
+  'roboto-regular': require('../assets/fonts/Roboto-Regular.ttf'),
   'roboto-bold': require('../assets/fonts/Roboto-Bold.ttf'),
   'roboto-black': require('../assets/fonts/Roboto-Black.ttf'),
 };

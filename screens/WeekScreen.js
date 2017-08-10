@@ -224,6 +224,16 @@ class WeekScreen extends React.Component {
     // Video player sources
     // Example HLS url: https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8
 
+    // <VideoPlayer
+    //   uri={this.state.data.videos['240p']}
+    //   isPortrait={this.state.isPortrait}
+    //   onFullscreen={this.onFullscreen.bind(this)}
+    //   onUnFullscreen={this.onUnFullscreen.bind(this)}
+    //   playbackCallback={this._playbackCallback.bind(this)}
+    //   playFromPositionMillis={this.state.playFromPositionMillis}
+    //   /* playIcon={PlayIcon} */
+    // />
+
     const PlayIcon = () =>
       <Foundation name={'asterisk'} size={36} color={colors.complementary} />;
 
@@ -234,29 +244,6 @@ class WeekScreen extends React.Component {
           justifyContent: 'space-between',
           flexDirection: 'column',
         }}>
-        <VideoPlayer
-          uri={this.state.data.videos['240p']}
-          isPortrait={this.state.isPortrait}
-          onFullscreen={this.onFullscreen.bind(this)}
-          onUnFullscreen={this.onUnFullscreen.bind(this)}
-          playbackCallback={this._playbackCallback.bind(this)}
-          playFromPositionMillis={this.state.playFromPositionMillis}
-          /* playIcon={PlayIcon} */
-        />
-
-        {this.state.localVideoUri &&
-          <Video
-            source={{
-              uri: this.state.localVideoUri,
-            }}
-            resizeMode={Video.RESIZE_MODE_CONTAIN}
-            style={{
-              width: 200,
-              height: 300,
-            }}
-            shouldPlay={true}
-          />}
-
         <Downloader
           style={{
             display: this.state.isPortrait ? 'flex' : 'none',
