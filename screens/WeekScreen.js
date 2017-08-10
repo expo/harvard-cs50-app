@@ -245,6 +245,7 @@ class WeekScreen extends React.Component {
         style={{
           justifyContent: 'space-between',
           flexDirection: 'column',
+          minHeight: Dimensions.get('window').height,
         }}>
         <VideoPlayer
           uri={this.state.data.videos['240p']}
@@ -272,7 +273,12 @@ class WeekScreen extends React.Component {
             flexDirection: 'column',
             display: this.state.isPortrait ? 'flex' : 'none',
           }}>
-          <Text style={[styles.h1Style, styles.mainViewStyle]}>
+          <Text
+            style={[
+              styles.h1Style,
+              styles.mainViewStyle,
+              { marginBottom: 30 },
+            ]}>
             Course Materials
           </Text>
 

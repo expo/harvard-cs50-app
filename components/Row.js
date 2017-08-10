@@ -72,7 +72,7 @@ class Row extends React.Component {
                       ? colors.complementary
                       : colors.secondary,
                     alignSelf: 'flex-start',
-                    marginLeft: 15,
+                    marginLeft: this.props.icon ? 15 : 0,
                   }}>
                   {this.props.text}
                 </Text>
