@@ -2,13 +2,9 @@ import React from 'react';
 import {
   View,
   ListView,
-  TouchableHighlight,
-  TouchableNativeFeedback,
-  Platform,
+  TouchableOpacity,
   Dimensions,
   ScrollView,
-  Button as RNButton,
-  Image,
   StatusBar,
 } from 'react-native';
 import { Text } from 'react-native-animatable';
@@ -33,13 +29,13 @@ class HomeScreen extends React.Component {
       headerBackTitle: 'Back',
       headerStyle: styles.headerStyle,
       headerRight: (
-        <CrossTouchable
-          style={{ paddingRight: 20 }}
+        <TouchableOpacity
+          style={{ marginRight: 20 }}
           onPress={() => {
             navigation.navigate('Resources');
           }}>
           <Ionicons name="md-list-box" size={28} color={colors.tertiary} />
-        </CrossTouchable>
+        </TouchableOpacity>
       ),
     };
   };

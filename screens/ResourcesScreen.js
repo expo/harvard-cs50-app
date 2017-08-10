@@ -1,8 +1,9 @@
 import React from 'react';
-import { ScrollView, Text } from 'react-native';
+import { ScrollView, Text, TouchableOpacity } from 'react-native';
+
 import Row from '../components/Row';
-import CrossTouchable from '../components/CrossTouchable';
-import { colors } from '../styles/style';
+import colors from '../styles/colors';
+import styles from '../styles/style';
 
 const RESOURCES = [
   { name: 'Discuss', url: 'https://cs50.net/discuss' },
@@ -25,7 +26,7 @@ class ResourcesScreen extends React.Component {
       headerStyle: styles.headerStyle,
       headerMode: 'float',
       headerRight: (
-        <CrossTouchable
+        <TouchableOpacity
           style={{ paddingRight: 20 }}
           hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
           onPress={() => {
@@ -33,8 +34,11 @@ class ResourcesScreen extends React.Component {
             // to go back anywhere
             navigation.goBack(null);
           }}>
-          <Text style={{ color: colors.tertiary }}>Close</Text>
-        </CrossTouchable>
+          <Text
+            style={{ color: colors.tertiary, fontSize: styles.fontSize(0) }}>
+            Close
+          </Text>
+        </TouchableOpacity>
       ),
     };
   };
