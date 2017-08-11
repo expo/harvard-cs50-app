@@ -43,10 +43,12 @@ const mainViewStyle = {
 
 // TODO: Something for vertical rhythm
 
-export default {
+const styles = {
   fontSize,
   headerTintColor,
   headerStyle,
   mainViewStyle,
   h1Style,
 };
+
+export default styles;

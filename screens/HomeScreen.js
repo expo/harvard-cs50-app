@@ -117,43 +117,61 @@ class HomeScreen extends React.Component {
               inactiveSlideOpacity={0.5}
               inactiveSlideScale={1}
               enableMomentum={false}
-              firstItem={4}
+              firstItem={weekNumber}
               sliderWidth={Dimensions.get('window').width}
               itemWidth={itemWidth}>
-              {this.state.data.map((week, index) =>
-                <View
-                  key={week.title}
-                  style={{
-                    width: itemWidth,
-                    paddingHorizontal: itemHorizontalMargin,
-                  }}>
+              {this.state.data.map(week => {
+                var headingText = 'WEEK ' + week.weekNumber;
+                switch (week.weekNumber) {
+                  case weekNumber:
+                    headingText = 'THIS WEEK';
+                    break;
+                  case weekNumber - 1:
+                    headingText = 'LAST WEEK';
+                    break;
+                  case weekNumber + 1:
+                    headingText = 'NEXT WEEK';
+                  default:
+                    break;
+                }
+
+                return (
                   <View
+                    key={week.title}
                     style={{
-                      borderTopColor: colors.primary,
-                      borderTopWidth: 1,
+                      width: itemWidth,
+                      paddingHorizontal: itemHorizontalMargin,
                     }}>
-                    <Text
+                    <View
                       style={{
-                        color: colors.primary,
-                        marginTop: 10,
-                        marginBottom: 10,
+                        borderTopColor: colors.primary,
+                        borderTopWidth: 1,
                       }}>
-                      THIS WEEK
-                    </Text>
-                    <WeekBox
-                      onPress={() => this.onWeekPress(week.weekNumber)}
-                      key={'entry-${index}'}
-                      imageWidth={
-                        (itemWidth - itemHorizontalMargin * 2) * 1 / 3
-                      }
-                      textWidth={(itemWidth - itemHorizontalMargin * 2) * 2 / 3}
-                      source={require('../assets/memory.png')}
-                      title={week.title.toLowerCase()}
-                      desc={week.desc.toLowerCase()}
-                    />
+                      <Text
+                        style={{
+                          color: colors.primary,
+                          marginTop: 10,
+                          marginBottom: 10,
+                        }}>
+                        {headingText}
+                      </Text>
+                      <WeekBox
+                        onPress={() => this.onWeekPress(week.weekNumber)}
+                        key={'entry-${index}'}
+                        imageWidth={
+                          (itemWidth - itemHorizontalMargin * 2) * 1 / 3
+                        }
+                        textWidth={
+                          (itemWidth - itemHorizontalMargin * 2) * 2 / 3
+                        }
+                        source={require('../assets/memory.png')}
+                        title={week.title.toLowerCase()}
+                        desc={week.desc.toLowerCase()}
+                      />
+                    </View>
                   </View>
-                </View>
-              )}
+                );
+              })}
             </Carousel>}
         </View>
       );
