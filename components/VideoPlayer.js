@@ -428,7 +428,7 @@ export default class VideoPlayer extends React.Component {
   render() {
     const videoWidth = Dimensions.get('window').width;
     const videoHeight = videoWidth * (9 / 16);
-    const centerIconWidth = 48;
+    const centerIconWidth = 60;
 
     // const showSpinner =
     //   this.state.isBuffering ||
@@ -443,7 +443,7 @@ export default class VideoPlayer extends React.Component {
 
     const overlayTextStyle = {
       color: colors.complementary,
-      fontFamily: 'roboto-light',
+      fontFamily: 'roboto-regular',
       fontSize: styles.fontSize(0),
     };
 
@@ -478,6 +478,8 @@ export default class VideoPlayer extends React.Component {
               ? {
                   backgroundColor: 'rgba(0, 0, 0, 0.4)',
                   justifyContent: 'center',
+                  borderRadius: centerIconWidth,
+                  flex: 1,
                 }
               : {}
           }>
@@ -491,8 +493,6 @@ export default class VideoPlayer extends React.Component {
           position: 'absolute',
           left: (videoWidth - centerIconWidth) / 2,
           top: (videoHeight - centerIconWidth) / 2,
-          backgroundColor: 'rgba(0, 0, 0, 0.4)',
-          padding: 3,
         }}>
         {children}
       </View>;
