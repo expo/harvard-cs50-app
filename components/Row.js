@@ -62,6 +62,7 @@ class Row extends React.Component {
                     }
                     style={{
                       marginLeft: 2,
+                      textAlign: 'center',
                     }}
                   />}
                 <Text

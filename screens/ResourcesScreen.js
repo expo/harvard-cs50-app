@@ -6,16 +6,32 @@ import colors from '../styles/colors';
 import styles from '../styles/style';
 
 const RESOURCES = [
-  { name: 'Discuss', url: 'https://cs50.net/discuss' },
-  { name: 'Gradebook', url: 'http://cs50.net/gradebook' },
-  { name: 'Study', url: 'https://study.cs50.net/' },
-  { name: 'Reference', url: 'https://reference.cs50.net' },
-  { name: 'Style Guide', url: 'https://manual.cs50.net/style/' },
-  { name: 'Final project', url: 'https://cs50.harvard.edu/project' },
-  { name: 'Seminars', url: 'https://manual.cs50.net/seminars/' },
-  { name: 'Staff', url: 'https://cs50.harvard.edu/staff' },
-  { name: 'Sections', url: 'https://cs50.harvard.edu/sections' },
-  { name: 'FAQs', url: 'https://cs50.harvard.edu/faqs' },
+  { name: 'Discuss', url: 'https://cs50.net/discuss', icon: 'wechat' },
+  { name: 'Gradebook', url: 'http://cs50.net/gradebook', icon: 'thumbs-up' },
+  { name: 'Study', url: 'https://study.cs50.net/', icon: 'book' },
+  { name: 'Reference', url: 'https://reference.cs50.net', icon: 'list-ul' },
+  {
+    name: 'Style Guide',
+    url: 'https://manual.cs50.net/style/',
+    icon: 'deviantart',
+  },
+  {
+    name: 'Final project',
+    url: 'https://cs50.harvard.edu/project',
+    icon: 'flask',
+  },
+  {
+    name: 'Seminars',
+    url: 'https://manual.cs50.net/seminars/',
+    icon: 'graduation-cap',
+  },
+  { name: 'Staff', url: 'https://cs50.harvard.edu/staff', icon: 'child' },
+  { name: 'Sections', url: 'https://cs50.harvard.edu/sections', icon: 'group' },
+  {
+    name: 'FAQs',
+    url: 'https://cs50.harvard.edu/faqs',
+    icon: 'question-circle-o',
+  },
 ];
 
 class ResourcesScreen extends React.Component {
@@ -50,15 +66,14 @@ class ResourcesScreen extends React.Component {
   render() {
     return (
       <ScrollView>
-        {RESOURCES.map(resource => {
-          return (
-            <Row
-              key={resource.url}
-              text={resource.name}
-              onPress={() => this.onButtonPress(resource.url)}
-            />
-          );
-        })}
+        {RESOURCES.map(({ url, name, icon }) =>
+          <Row
+            key={url}
+            text={name}
+            onPress={() => this.onButtonPress(url)}
+            icon={icon}
+          />
+        )}
       </ScrollView>
     );
   }
