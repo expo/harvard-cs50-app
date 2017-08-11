@@ -40,11 +40,7 @@ const PauseIcon = () =>
   />;
 
 const Spinner = () =>
-  <ActivityIndicator
-    color={colors.complementary}
-    size={'large'}
-    //style={{ textAlign: 'center' }}
-  />;
+  <ActivityIndicator color={colors.complementary} size={'large'} />;
 
 const FullscreenEnterIcon = () =>
   <MaterialIcons
@@ -307,18 +303,20 @@ export default class VideoPlayer extends React.Component {
             }
           }
           this._setPlaybackState(newPlaybackState);
+        })
+        .catch(message => {
+          console.log('Error while seeking', message);
         });
     }
   };
 
   _onSeekBarTap = evt => {
-    // console.log(evt.nativeEvent.locationX);
-    // console.log(this.state.sliderWidth);
+    const value = evt.nativeEvent.locationX / this.state.sliderWidth;
+    this._onSeekSliderSlidingComplete(value);
   };
 
   _onSliderLayout = evt => {
-    console.log('Slider layout');
-    this.setState({ sliderWidth: evt.nativeEvent.width });
+    this.setState({ sliderWidth: evt.nativeEvent.layout.width });
   };
 
   // Controls view
@@ -514,33 +512,31 @@ export default class VideoPlayer extends React.Component {
     return (
       <TouchableWithoutFeedback onPress={this._toggleControls.bind(this)}>
         <View
-          onLayout={() => console.log('blah')}
           style={{
             marginBottom: 20,
             backgroundColor: 'black',
           }}>
-          {/* <Video
+          <Video
             source={{
               uri: this.props.uri,
             }}
             ref={component => (this._playbackInstance = component)}
             resizeMode={Video.RESIZE_MODE_CONTAIN}
             callback={this._playbackCallback.bind(this)}
-            onError={this._errorCallback.bind(this)}
             style={{
               width: videoWidth,
               height: videoHeight,
             }}
             shouldPlay={config.autoplayVideo}
             isMuted={config.muteVideo}
-          /> */}
+          />
 
-          <View
+          {/* <View
             style={{
               width: videoWidth,
               height: videoHeight,
             }}
-          />
+          /> */}
 
           {((this.state.playbackState == PLAYBACK_STATES.BUFFERING &&
             Date.now() - this.state.lastPlaybackStateUpdate > UPDATE_DELAY) ||
@@ -606,7 +602,9 @@ export default class VideoPlayer extends React.Component {
               <Text style={[overlayTextStyle, { marginLeft: 5 }]}>
                 {this._getMMSSFromMillis(this.state.playbackInstancePosition)}
               </Text>
-              <TouchableWithoutFeedback onPress={this._onSeekBarTap.bind(this)}>
+              <TouchableWithoutFeedback
+                onLayout={this._onSliderLayout.bind(this)}
+                onPress={this._onSeekBarTap.bind(this)}>
                 <Slider
                   style={{ flex: 2, marginRight: 10, marginLeft: 10 }}
                   trackImage={this.props.trackImage}
@@ -615,7 +613,6 @@ export default class VideoPlayer extends React.Component {
                   onValueChange={this._onSeekSliderValueChange}
                   onSlidingComplete={this._onSeekSliderSlidingComplete}
                   disabled={this.state.isLoading}
-                  onLayout={this._onSliderLayout.bind(this)}
                 />
               </TouchableWithoutFeedback>
               <Text style={[overlayTextStyle, { marginRight: 5 }]}>

@@ -9,16 +9,16 @@ class WeekBox extends React.Component {
   };
   render() {
     const textStyle = {
-      color: this.state.active ? colors.grey : colors.primary,
+      color: this.state.active ? colors.grey : colors.tertiary,
       fontSize: styles.fontSize(2),
     };
     return (
       <TouchableHighlight
         onPress={this.props.onPress}
         style={{
-          borderRadius: 2,
+          borderRadius: 5,
           borderWidth: 2,
-          borderColor: colors.primary,
+          backgroundColor: colors.secondary,
         }}
         onShowUnderlay={() => this.setState({ active: true })}
         onHideUnderlay={() => this.setState({ active: false })}

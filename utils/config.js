@@ -16,7 +16,7 @@ const prod = {
 // Dev
 const dev = {
   ...common,
-  secondScreen: false,
+  secondScreen: true,
   resourcesScreen: false,
   muteVideo: true,
   autoplayVideo: true,
