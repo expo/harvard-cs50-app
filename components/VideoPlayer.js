@@ -203,10 +203,12 @@ export default class VideoPlayer extends React.Component {
 
     if (!playbackStatus.isLoaded) {
       if (playbackStatus.error) {
+        this._setPlaybackState(PLAYBACK_STATES.ERROR);
         this.setState({
-          playbackState: PLAYBACK_STATES.ERROR,
           error: `Encountered a fatal error during playback: ${playbackStatus.error}`,
         });
+        this.props.onErrorOrWarning && this.props.onErrorOrWarning();
+        // TODO: Send to Sentry
       }
     } else {
       let newPlaybackState = this.state.playbackState;
@@ -241,14 +243,6 @@ export default class VideoPlayer extends React.Component {
         shouldPlay: playbackStatus.shouldPlay,
       });
     }
-  }
-
-  _errorCallback(message) {
-    // TODO: Handle soft errors
-    this._setPlaybackState(PLAYBACK_STATES.ERROR);
-    this.setState({
-      error: message,
-    });
   }
 
   // Seeking
@@ -336,7 +330,6 @@ export default class VideoPlayer extends React.Component {
   }
 
   // Controls Behavior
-
   _replay() {
     this._playbackInstance
       .setStatusAsync({
