@@ -206,8 +206,8 @@ class WeekScreen extends React.Component {
     Dimensions.removeEventListener('change', this.orientationChangeHandler);
   }
 
-  onButtonPress = url => {
-    this.props.navigation.navigate('Link', { url: url });
+  onRowPress = (url, title) => {
+    this.props.navigation.navigate('Link', { url, title: _.capitalize(title) });
   };
 
   onFullscreen() {
@@ -287,7 +287,7 @@ class WeekScreen extends React.Component {
               key={title}
               text={title}
               icon={icon}
-              onPress={() => this.onButtonPress(url)}
+              onPress={this.onRowPress.bind(this, url, title)}
               style={{
                 alignSelf: 'stretch',
                 flex: 1,
