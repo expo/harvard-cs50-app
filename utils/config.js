@@ -17,10 +17,10 @@ const prod = {
 const dev = {
   ...common,
   secondScreen: false,
-  resourcesScreen: false,
+  resourcesScreen: true,
   muteVideo: true,
   autoplayVideo: true,
   firstLoad: false,
 };
 
-export default prod;
+export default dev;

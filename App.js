@@ -32,6 +32,9 @@ const ResourceNavigator = StackNavigator({
   Resources: {
     screen: ResourcesScreen,
   },
+  Link: {
+    screen: LinkScreen,
+  },
 });
 
 const AppNavigator = StackNavigator(

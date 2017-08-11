@@ -40,6 +40,7 @@ class ResourcesScreen extends React.Component {
       title: 'Resources',
       headerTintColor: styles.headerTintColor,
       headerStyle: styles.headerStyle,
+      headerBackTitle: 'Back',
       headerMode: 'float',
       headerRight: (
         <TouchableOpacity
@@ -59,8 +60,8 @@ class ResourcesScreen extends React.Component {
     };
   };
 
-  onButtonPress = url => {
-    this.props.navigation.navigate('Link', { url: url });
+  onPress = (url, title) => {
+    this.props.navigation.navigate('Link', { url, title });
   };
 
   render() {
@@ -70,7 +71,7 @@ class ResourcesScreen extends React.Component {
           <Row
             key={url}
             text={name}
-            onPress={() => this.onButtonPress(url)}
+            onPress={this.onPress.bind(this, url, name)}
             icon={icon}
           />
         )}
