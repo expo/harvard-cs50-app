@@ -1,14 +1,7 @@
 import React from 'react';
-import {
-  Text,
-  TouchableHighlight,
-  TouchableNativeFeedback,
-  View,
-  Platform,
-  Image,
-} from 'react-native';
-import { colors, fontSize } from '../styles/style';
-import CrossTouchable from './CrossTouchable';
+import { Text, View, Image, TouchableHighlight } from 'react-native';
+import styles from '../styles/style';
+import colors from '../styles/colors';
 
 class WeekBox extends React.Component {
   state = {
@@ -17,7 +10,7 @@ class WeekBox extends React.Component {
   render() {
     const textStyle = {
       color: this.state.active ? colors.grey : colors.primary,
-      fontSize: fontSize(2),
+      fontSize: styles.fontSize(2),
     };
     return (
       <TouchableHighlight

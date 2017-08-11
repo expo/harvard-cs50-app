@@ -13,13 +13,11 @@ import { Ionicons } from '@expo/vector-icons';
 import Carousel from 'react-native-snap-carousel';
 
 import loadData from '../utils/data-loader';
-import styles, { colors, fontSize } from '../styles/style';
+import styles from '../styles/style';
+import colors from '../styles/colors';
 import config from '../utils/config';
-import Button from '../components/Button';
 import Row from '../components/Row';
-import AnimatedIcon from '../components/AnimatedIcon';
 import WeekBox from '../components/WeekBox';
-import CrossTouchable from '../components/CrossTouchable';
 
 class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -100,7 +98,7 @@ class HomeScreen extends React.Component {
           <Text
             style={[
               {
-                fontSize: fontSize(2),
+                fontSize: styles.fontSize(2),
                 letterSpacing: -1,
                 color: colors.primary,
                 fontFamily: 'roboto-black',
@@ -181,7 +179,7 @@ class HomeScreen extends React.Component {
                     fontFamily: 'roboto-black',
                     color: colors.primary,
                     paddingBottom: 10,
-                    fontSize: fontSize(2),
+                    fontSize: styles.fontSize(2),
                     letterSpacing: -1,
                   },
                 ]}>

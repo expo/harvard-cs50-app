@@ -6,11 +6,12 @@ import _ from 'lodash';
 import VideoPlayer from '../components/VideoPlayer';
 import Row from '../components/Row';
 import Analytics from '../utils/Analytics';
-import styles, { colors, fontSize } from '../styles/style';
+import styles from '../styles/style';
+import colors from '../styles/colors';
 import StoredValue from '../utils/StoredValue';
 import Downloader from '../components/Downloader';
 
-import { Foundation, MaterialIcons } from '@expo/vector-icons';
+import { Foundation } from '@expo/vector-icons';
 
 class WeekScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -47,9 +48,6 @@ class WeekScreen extends React.Component {
       links,
       linksArr,
     };
-
-    this.orientationChangeHandler = this.orientationChangeHandler.bind(this);
-    this.saveToDisk = this.saveToDisk.bind(this);
   }
 
   orientationChangeHandler(dims) {
@@ -63,7 +61,10 @@ class WeekScreen extends React.Component {
   // Only on this screen, allow landscape orientations
   componentDidMount() {
     ScreenOrientation.allow(ScreenOrientation.Orientation.ALL);
-    Dimensions.addEventListener('change', this.orientationChangeHandler);
+    Dimensions.addEventListener(
+      'change',
+      this.orientationChangeHandler.bind(this)
+    );
     Analytics.track(Analytics.events.USER_WATCHED_VIDEO);
     this.storedPlaybackTime = new StoredValue(
       this.state.data.title + ':playbackTime'

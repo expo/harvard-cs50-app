@@ -1,20 +1,10 @@
 import React from 'react';
-import {
-  View,
-  ListView,
-  TouchableHighlight,
-  Button as RNButton,
-  Image,
-  StyleSheet,
-  StatusBar,
-  Text,
-} from 'react-native';
+import { View, TouchableHighlight, Text } from 'react-native';
 import Swiper from 'react-native-swiper';
 import Expo, { DangerZone } from 'expo';
 const { Lottie } = DangerZone;
-import { colors, fontSize } from '../styles/style';
-
-// <StatusBar style what?
+import styles from '../styles/style';
+import colors from '../styles/colors';
 
 class OnboardScreen extends React.Component {
   state = {
@@ -64,7 +54,7 @@ class OnboardScreen extends React.Component {
         <Text
           style={{
             color: colors.primary,
-            fontSize: fontSize(2),
+            fontSize: styles.fontSize(2),
             fontFamily: 'roboto-light',
             textAlign: 'center',
           }}>

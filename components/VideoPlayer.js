@@ -11,7 +11,8 @@ import {
   Slider,
 } from 'react-native';
 import config from '../utils/config';
-import { colors, fontSize } from '../styles/style';
+import styles from '../styles/style';
+import colors from '../styles/colors';
 import { Foundation, MaterialIcons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 
@@ -445,7 +446,7 @@ export default class VideoPlayer extends React.Component {
     const overlayTextStyle = {
       color: colors.complementary,
       fontFamily: 'roboto-light',
-      fontSize: fontSize(0),
+      fontSize: styles.fontSize(0),
     };
 
     const PlayIcon = this.props.playIcon;

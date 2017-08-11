@@ -1,8 +1,9 @@
 import React from 'react';
 import { Text, View, TouchableWithoutFeedback } from 'react-native';
-import styles, { colors, fontSize } from '../styles/style';
+import styles from '../styles/style';
 import { EvilIcons, FontAwesome } from '@expo/vector-icons';
 import CrossTouchable from './CrossTouchable';
+import colors from '../styles/colors';
 
 class Row extends React.Component {
   state = {
@@ -69,7 +70,7 @@ class Row extends React.Component {
                 <Text
                   style={{
                     fontFamily: 'roboto-regular',
-                    fontSize: fontSize(1),
+                    fontSize: styles.fontSize(1),
                     color: this.state.pressed
                       ? colors.complementary
                       : colors.secondary,

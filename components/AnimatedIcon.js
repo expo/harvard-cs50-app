@@ -2,7 +2,7 @@ import React from 'react';
 import Expo from 'expo';
 const THREE = require('three');
 import ExpoTHREE from 'expo-three';
-import { colors } from '../styles/style';
+import colors from '../styles/colors';
 
 // THREE warns us about some GL extensions that `Expo.GLView` doesn't support
 // yet. This is ok, most things will still work, and we'll support those

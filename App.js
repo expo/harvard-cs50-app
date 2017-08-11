@@ -7,7 +7,7 @@ import WeekScreen from './screens/WeekScreen';
 import LinkScreen from './screens/LinkScreen';
 import ResourcesScreen from './screens/ResourcesScreen';
 import OnboardScreen from './screens/OnboardScreen';
-import { fonts } from './styles/style.js';
+import fonts from './styles/fonts';
 import config from './utils/config';
 
 import Sentry from 'sentry-expo';
@@ -75,11 +75,13 @@ class AppContainer extends React.Component {
 
   async _loadAssetsAsync() {
     const imageAssets = this._cacheImages([require('./assets/memory.png')]);
-
     const fontAssets = this._cacheFonts([fonts]);
 
-    // TODO: Catch errors here
-    await Promise.all([...imageAssets, ...fontAssets]);
+    try {
+      await Promise.all([...imageAssets, ...fontAssets]);
+    } catch (e) {
+      console.log('Error downloading assets');
+    }
 
     this.setState({ appIsReady: true });
   }
