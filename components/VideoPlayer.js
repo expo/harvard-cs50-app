@@ -15,6 +15,8 @@ import styles from '../styles/style';
 import colors from '../styles/colors';
 import { Foundation, MaterialIcons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
+import reactMixin from 'react-mixin';
+import TimerMixin from 'react-timer-mixin';
 
 var CONTROL_STATES = {
   SHOWN: 1,
@@ -174,7 +176,7 @@ export default class VideoPlayer extends React.Component {
   }
 
   componentWillUnmount() {
-    clearTimeout(this.controlsTimer);
+    this.clearTimeout(this.controlsTimer);
   }
 
   // Handle events during playback
@@ -373,17 +375,14 @@ export default class VideoPlayer extends React.Component {
     this.showingAnimation.start(({ finished }) => {
       if (finished) {
         this.setState({ controlsState: CONTROL_STATES.SHOWN });
-        this.controlsTimer = setTimeout(
-          this._onTimerDone.bind(this),
-          this.props.hidingTimerDuration
-        );
+        this._resetControlsTimer();
       }
     });
   };
 
   _hideControls = (immediate = false) => {
     if (this.controlsTimer) {
-      clearTimeout(this.controlsTimer);
+      this.clearTimeout(this.controlsTimer);
     }
     this.hideAnimation = Animated.timing(this.state.controlsOpacity, {
       toValue: 0,
@@ -407,9 +406,9 @@ export default class VideoPlayer extends React.Component {
   _resetControlsTimer = () => {
     // TODO: Handle the fact that a control can be touched, when in CONTROL_STATES.HIDING
     if (this.controlsTimer) {
-      clearTimeout(this.controlsTimer);
+      this.clearTimeout(this.controlsTimer);
     }
-    this.controlsTimer = setTimeout(
+    this.controlsTimer = this.setTimeout(
       this._onTimerDone.bind(this),
       this.props.hidingTimerDuration
     );
@@ -625,3 +624,5 @@ export default class VideoPlayer extends React.Component {
     );
   }
 }
+
+reactMixin(VideoPlayer.prototype, TimerMixin);
