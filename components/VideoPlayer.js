@@ -76,10 +76,14 @@ var PLAYBACK_STATES = {
   PLAYING: 'PLAYING',
   PAUSED: 'PAUSED',
   BUFFERING: 'BUFFERING',
-  SEEKING: 'SEEKING',
-  SEEKED: 'SEEKED',
   ERROR: 'ERROR',
   ENDED: 'ENDED',
+};
+
+var SEEK_STATES = {
+  NOT_SEEKING: 'NOT_SEEKING',
+  SEEKING: 'SEEKING',
+  SEEKED: 'SEEKED',
 };
 
 const UPDATE_DELAY = 200;
@@ -130,6 +134,7 @@ export default class VideoPlayer extends React.Component {
       lastPlaybackStateUpdate: Date.now(),
 
       //Seeking state
+      seekState: SEEK_STATES.NOT_SEEKING,
 
       // State comes from the playbackCallback
       playbackInstancePosition: null,
@@ -215,9 +220,8 @@ export default class VideoPlayer extends React.Component {
       let newPlaybackState = this.state.playbackState;
 
       if (
-        newPlaybackState !== PLAYBACK_STATES.SEEKING &&
-        newPlaybackState !== PLAYBACK_STATES.SEEKED &&
-        newPlaybackState !== PLAYBACK_STATES.ENDED
+        this.state.seekState === SEEK_STATES.NOT_SEEKING &&
+        this.state.playbackState !== PLAYBACK_STATES.ENDED
       ) {
         if (playbackStatus.didJustFinish && !playbackStatus.isLooping) {
           newPlaybackState = PLAYBACK_STATES.ENDED;
@@ -264,19 +268,24 @@ export default class VideoPlayer extends React.Component {
   _onSeekSliderValueChange = value => {
     if (
       this._playbackInstance != null &&
-      this.state.playbackState !== PLAYBACK_STATES.SEEKING
+      this.state.seekState !== SEEK_STATES.SEEKING
     ) {
-      this._setPlaybackState(PLAYBACK_STATES.SEEKING);
+      // this._setPlaybackState(PLAYBACK_STATES.SEEKING);
       this.setState({
+        seekState: SEEK_STATES.SEEKING,
         shouldPlayAtEndOfSeek: this.state.shouldPlay,
       });
+      // Pause the video
       this._playbackInstance.setStatusAsync({ shouldPlay: false });
     }
   };
 
   _onSeekSliderSlidingComplete = async value => {
     if (this._playbackInstance != null) {
-      this._setPlaybackState(PLAYBACK_STATES.SEEKED);
+      // this._setPlaybackState(PLAYBACK_STATES.SEEKED);
+      this.setState({
+        seekState: SEEK_STATES.SEEKED,
+      });
       this._playbackInstance
         .setStatusAsync({
           positionMillis: value * this.state.playbackInstanceDuration,
@@ -286,6 +295,8 @@ export default class VideoPlayer extends React.Component {
           // const nextPlaybackState = this.state.shouldPlayAtEndOfSeek
           //   ? PLAYBACK_STATES.BUFFERING
           //   : PLAYBACK_STATES.PAUSED;
+
+          this.setState({ seekState: SEEK_STATES.NOT_SEEKING });
 
           let newPlaybackState = PLAYBACK_STATES.BUFFERING;
           if (playbackStatus.isPlaying) {
@@ -531,25 +542,15 @@ export default class VideoPlayer extends React.Component {
 
           {((this.state.playbackState == PLAYBACK_STATES.BUFFERING &&
             Date.now() - this.state.lastPlaybackStateUpdate > UPDATE_DELAY) ||
-            (this.state.playbackState == PLAYBACK_STATES.SEEKED &&
-              Date.now() - this.state.lastPlaybackStateUpdate > UPDATE_DELAY) ||
+            this.state.seekState == SEEK_STATES.SEEKED ||
             this.state.playbackState == PLAYBACK_STATES.LOADING) &&
             <CenterIcon>
               <Spinner />
             </CenterIcon>}
 
-          {this.state.playbackState == PLAYBACK_STATES.ENDED &&
-            <CenterIcon>
-              <Control center={true} callback={this._replay.bind(this)}>
-                <ReplayIcon />
-              </Control>
-            </CenterIcon>}
-
-          {this.state.playbackState == PLAYBACK_STATES.ERROR &&
-            <ErrorText text={this.state.error} />}
-
-          {(this.state.playbackState == PLAYBACK_STATES.PLAYING ||
-            this.state.playbackState == PLAYBACK_STATES.PAUSED) &&
+          {this.state.seekState == SEEK_STATES.NOT_SEEKING &&
+            (this.state.playbackState == PLAYBACK_STATES.PLAYING ||
+              this.state.playbackState == PLAYBACK_STATES.PAUSED) &&
             <Animated.View
               pointerEvents={
                 this.state.controlsState === CONTROL_STATES.HIDDEN
@@ -568,6 +569,16 @@ export default class VideoPlayer extends React.Component {
                   : <PlayIcon />}
               </Control>
             </Animated.View>}
+
+          {this.state.playbackState == PLAYBACK_STATES.ENDED &&
+            <CenterIcon>
+              <Control center={true} callback={this._replay.bind(this)}>
+                <ReplayIcon />
+              </Control>
+            </CenterIcon>}
+
+          {this.state.playbackState == PLAYBACK_STATES.ERROR &&
+            <ErrorText text={this.state.error} />}
 
           <Animated.View
             pointerEvents={
