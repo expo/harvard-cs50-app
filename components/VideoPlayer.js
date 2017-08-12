@@ -130,11 +130,13 @@ export default class VideoPlayer extends React.Component {
   constructor() {
     super();
     this.state = {
+      // Playback state
       playbackState: PLAYBACK_STATES.LOADING,
       lastPlaybackStateUpdate: Date.now(),
 
       //Seeking state
       seekState: SEEK_STATES.NOT_SEEKING,
+      lastSeekStateUpdate: Date.now(),
 
       // State comes from the playbackCallback
       playbackInstancePosition: null,
@@ -196,6 +198,21 @@ export default class VideoPlayer extends React.Component {
       playbackState
     );
     this.setState({ playbackState, lastPlaybackStateUpdate: Date.now() });
+  }
+
+  _setSeekState(seekState) {
+    console.log(
+      'seek state changing from ',
+      this.state.seekState,
+      ' -> ',
+      seekState
+    );
+    this.setState({ seekState, lastSeekStateUpdate: Date.now() });
+    if (seekState === SEEK_STATES.SEEKING) {
+      this.controlsTimer && this.clearTimeout(this.controlsTimer);
+    } else {
+      this._resetControlsTimer();
+    }
   }
 
   _playbackCallback(playbackStatus) {
@@ -270,9 +287,8 @@ export default class VideoPlayer extends React.Component {
       this._playbackInstance != null &&
       this.state.seekState !== SEEK_STATES.SEEKING
     ) {
-      // this._setPlaybackState(PLAYBACK_STATES.SEEKING);
+      this._setSeekState(SEEK_STATES.SEEKING);
       this.setState({
-        seekState: SEEK_STATES.SEEKING,
         shouldPlayAtEndOfSeek: this.state.shouldPlay,
       });
       // Pause the video
@@ -282,10 +298,8 @@ export default class VideoPlayer extends React.Component {
 
   _onSeekSliderSlidingComplete = async value => {
     if (this._playbackInstance != null) {
-      // this._setPlaybackState(PLAYBACK_STATES.SEEKED);
-      this.setState({
-        seekState: SEEK_STATES.SEEKED,
-      });
+      this._setSeekState(SEEK_STATES.SEEKED);
+      // TODO: Set buffering here
       this._playbackInstance
         .setStatusAsync({
           positionMillis: value * this.state.playbackInstanceDuration,
@@ -296,7 +310,7 @@ export default class VideoPlayer extends React.Component {
           //   ? PLAYBACK_STATES.BUFFERING
           //   : PLAYBACK_STATES.PAUSED;
 
-          this.setState({ seekState: SEEK_STATES.NOT_SEEKING });
+          this._setSeekState(SEEK_STATES.NOT_SEEKING);
 
           let newPlaybackState = PLAYBACK_STATES.BUFFERING;
           if (playbackStatus.isPlaying) {
