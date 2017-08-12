@@ -98,6 +98,9 @@ export default class VideoPlayer extends React.Component {
     // playIcon: PropTypes.element,
 
     errorCallback: PropTypes.func,
+
+    switchToLandscape: PropTypes.func,
+    switchToPortrait: PropTypes.func,
   };
 
   static defaultProps = {
@@ -121,8 +124,6 @@ export default class VideoPlayer extends React.Component {
   constructor() {
     super();
     this.state = {
-      fullscreen: false, // Rename to isFullscreen
-
       playbackState: PLAYBACK_STATES.LOADING,
       lastPlaybackStateUpdate: Date.now(),
 
@@ -160,10 +161,6 @@ export default class VideoPlayer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.isPortrait !== this.props.isPortrait) {
-      this.setState({ fullscreen: !nextProps.isPortrait });
-    }
-
     if (
       nextProps.playFromPositionMillis !== this.props.playFromPositionMillis &&
       config.autoplayVideo &&
@@ -614,12 +611,12 @@ export default class VideoPlayer extends React.Component {
               <Control
                 callback={() => {
                   this.props.isPortrait
-                    ? this.props.onFullscreen()
-                    : this.props.onUnFullscreen();
+                    ? this.props.switchToLandscape()
+                    : this.props.switchToPortrait();
                 }}>
-                {this.state.fullscreen
-                  ? <FullscreenExitIcon />
-                  : <FullscreenEnterIcon />}
+                {this.props.isPortrait
+                  ? <FullscreenEnterIcon />
+                  : <FullscreenExitIcon />}
               </Control>
             </View>
           </Animated.View>
