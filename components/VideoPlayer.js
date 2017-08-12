@@ -129,12 +129,14 @@ export default class VideoPlayer extends React.Component {
       playbackState: PLAYBACK_STATES.LOADING,
       lastPlaybackStateUpdate: Date.now(),
 
+      //Seeking state
+
       // State comes from the playbackCallback
       playbackInstancePosition: null,
       playbackInstanceDuration: null,
       shouldPlay: false,
 
-      // Error message
+      // Error message if we are in PLAYBACK_STATES.ERROR
       error: null,
 
       // Controls display state
