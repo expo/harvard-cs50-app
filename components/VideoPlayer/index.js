@@ -10,13 +10,14 @@ import {
   ActivityIndicator,
   Slider,
 } from 'react-native';
-import config from '../utils/config';
-import styles from '../styles/style';
-import colors from '../styles/colors';
 import { Foundation, MaterialIcons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import reactMixin from 'react-mixin';
 import TimerMixin from 'react-timer-mixin';
+
+import config from '../../utils/config';
+import styles from '../../styles/style';
+import colors from '../../styles/colors';
 
 var CONTROL_STATES = {
   SHOWN: 1,
@@ -68,8 +69,8 @@ const ReplayIcon = () =>
     style={{ textAlign: 'center' }}
   />;
 
-const TRACK_IMAGE = require('../assets/icons/track.png');
-const THUMB_IMAGE = require('../assets/icons/thumb.png');
+const TRACK_IMAGE = require('../../assets/icons/track.png');
+const THUMB_IMAGE = require('../../assets/icons/thumb.png');
 
 var PLAYBACK_STATES = {
   LOADING: 'LOADING',
@@ -192,22 +193,31 @@ export default class VideoPlayer extends React.Component {
 
   _setPlaybackState(playbackState) {
     console.log(
-      'playback state changing from ',
+      '[playback]',
       this.state.playbackState,
       ' -> ',
-      playbackState
+      playbackState,
+      ' [seek] ',
+      this.state.seekState,
+      ' [shouldPlay] ',
+      this.state.shouldPlay
     );
     this.setState({ playbackState, lastPlaybackStateUpdate: Date.now() });
   }
 
   _setSeekState(seekState) {
     console.log(
-      'seek state changing from ',
+      '[seek]',
       this.state.seekState,
       ' -> ',
-      seekState
+      seekState,
+      ' [playback] ',
+      this.state.playbackState,
+      ' [shouldPlay] ',
+      this.state.shouldPlay
     );
     this.setState({ seekState, lastSeekStateUpdate: Date.now() });
+    // Don't hide the controls/seekbar when the state is seeking
     if (seekState === SEEK_STATES.SEEKING) {
       this.controlsTimer && this.clearTimeout(this.controlsTimer);
     } else {
@@ -282,15 +292,18 @@ export default class VideoPlayer extends React.Component {
     return 0;
   }
 
-  _onSeekSliderValueChange = value => {
+  _onSeekSliderValueChange = () => {
     if (
       this._playbackInstance != null &&
       this.state.seekState !== SEEK_STATES.SEEKING
     ) {
       this._setSeekState(SEEK_STATES.SEEKING);
-      this.setState({
-        shouldPlayAtEndOfSeek: this.state.shouldPlay,
-      });
+      // A seek might have finished but since we are not in NOT_SEEKING yet, the `shouldPlay` flag
+      // is still false, but we really want it be the stored value from before the previous seek
+      this.shouldPlayAtEndOfSeek =
+        this.state.seekState === SEEK_STATES.SEEKED
+          ? this.shouldPlayAtEndOfSeek
+          : this.state.shouldPlay;
       // Pause the video
       this._playbackInstance.setStatusAsync({ shouldPlay: false });
     }
@@ -299,19 +312,14 @@ export default class VideoPlayer extends React.Component {
   _onSeekSliderSlidingComplete = async value => {
     if (this._playbackInstance != null) {
       this._setSeekState(SEEK_STATES.SEEKED);
-      // TODO: Set buffering here
+      this._setPlaybackState(PLAYBACK_STATES.BUFFERING);
       this._playbackInstance
         .setStatusAsync({
           positionMillis: value * this.state.playbackInstanceDuration,
-          shouldPlay: this.state.shouldPlayAtEndOfSeek,
+          shouldPlay: this.shouldPlayAtEndOfSeek,
         })
         .then(playbackStatus => {
-          // const nextPlaybackState = this.state.shouldPlayAtEndOfSeek
-          //   ? PLAYBACK_STATES.BUFFERING
-          //   : PLAYBACK_STATES.PAUSED;
-
           this._setSeekState(SEEK_STATES.NOT_SEEKING);
-
           let newPlaybackState = PLAYBACK_STATES.BUFFERING;
           if (playbackStatus.isPlaying) {
             newPlaybackState = PLAYBACK_STATES.PLAYING;
@@ -332,6 +340,7 @@ export default class VideoPlayer extends React.Component {
 
   _onSeekBarTap = evt => {
     const value = evt.nativeEvent.locationX / this.state.sliderWidth;
+    this._onSeekSliderValueChange();
     this._onSeekSliderSlidingComplete(value);
   };
 
@@ -446,17 +455,6 @@ export default class VideoPlayer extends React.Component {
     const videoHeight = videoWidth * (9 / 16);
     const centerIconWidth = 60;
 
-    // const showSpinner =
-    //   this.state.isBuffering ||
-    //   this.state.isLoading ||
-    //   (this.state.shouldPlay && !this.state.isPlaying);
-
-    // const hidePlayPauseButton = this.state.isSeeking;
-
-    // const showPauseButton =
-    //   this.state.isPlaying ||
-    //   (this.state.isSeeking && this.state.shouldPlayAtEndOfSeek);
-
     const overlayTextStyle = {
       color: colors.complementary,
       fontFamily: 'roboto-regular',
@@ -556,7 +554,6 @@ export default class VideoPlayer extends React.Component {
 
           {((this.state.playbackState == PLAYBACK_STATES.BUFFERING &&
             Date.now() - this.state.lastPlaybackStateUpdate > UPDATE_DELAY) ||
-            this.state.seekState == SEEK_STATES.SEEKED ||
             this.state.playbackState == PLAYBACK_STATES.LOADING) &&
             <CenterIcon>
               <Spinner />
