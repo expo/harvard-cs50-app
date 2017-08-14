@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, Dimensions, ScrollView } from 'react-native';
-import { ScreenOrientation } from 'expo';
+import { ScreenOrientation, Video } from 'expo';
 import _ from 'lodash';
 
 import VideoPlayer from '../components/VideoPlayer';
@@ -10,6 +10,7 @@ import styles from '../styles/style';
 import colors from '../styles/colors';
 import StoredValue from '../utils/StoredValue';
 import Downloader from '../components/Downloader';
+import config from '../utils/config';
 
 import { Foundation } from '@expo/vector-icons';
 
@@ -119,9 +120,6 @@ class WeekScreen extends React.Component {
     // Video player sources
     // Example HLS url: https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8
 
-    const PlayIcon = () =>
-      <Foundation name={'asterisk'} size={36} color={colors.complementary} />;
-
     return (
       <View
         style={{
@@ -132,11 +130,15 @@ class WeekScreen extends React.Component {
         <VideoPlayer
           uri={this.state.data.videos['240p']}
           isPortrait={this.state.isPortrait}
+          videoProps={{
+            shouldPlay: config.autoplayVideo,
+            isMuted: config.muteVideo,
+            resizeMode: Video.RESIZE_MODE_CONTAIN,
+          }}
           switchToLandscape={this.switchToLandscape.bind(this)}
           switchToPortrait={this.switchToPortrait.bind(this)}
           playbackCallback={this._playbackCallback.bind(this)}
           playFromPositionMillis={this.state.playFromPositionMillis}
-          /* playIcon={PlayIcon} */
         />
         <View>
           <Downloader

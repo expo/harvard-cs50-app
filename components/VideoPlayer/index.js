@@ -13,6 +13,8 @@ import PropTypes from 'prop-types';
 import reactMixin from 'react-mixin';
 import TimerMixin from 'react-timer-mixin';
 
+// Default assets
+
 import {
   PlayIcon,
   PauseIcon,
@@ -24,10 +26,7 @@ import {
 const TRACK_IMAGE = require('./assets/track.png');
 const THUMB_IMAGE = require('./assets/thumb.png');
 
-const config = {
-  autoplayVideo: true,
-  muteVideo: true,
-};
+// UI states
 
 var CONTROL_STATES = {
   SHOWN: 'SHOWN',
@@ -51,7 +50,10 @@ var SEEK_STATES = {
   SEEKED: 'SEEKED',
 };
 
-const UPDATE_DELAY = 200;
+// Don't show the Spinner for very short periods of buffering
+const BUFFERING_SHOW_DELAY = 200;
+
+const DEBUG = true;
 
 export default class VideoPlayer extends React.Component {
   static propTypes = {
@@ -61,6 +63,7 @@ export default class VideoPlayer extends React.Component {
    *
    */
     showingDuration: PropTypes.number,
+
     // TODO: Fill out remaining prop types
     /**
      * Callback to get `playbackStatus` objects for the underlying video element
@@ -77,6 +80,12 @@ export default class VideoPlayer extends React.Component {
      * Style to use for the all the text in the videoplayer including seek bar times and error messages
      */
     textStyle: PropTypes.object,
+
+    /**
+     * Props to use into the underlying <Video>. Useful for configuring autoplay, playback speed, and other Video properties.
+     * See Expo documentation on <Video>.
+     */
+    videoProps: PropTypes.object,
   };
 
   static defaultProps = {
@@ -102,8 +111,8 @@ export default class VideoPlayer extends React.Component {
     },
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       // Playback state
       playbackState: PLAYBACK_STATES.LOADING,
@@ -111,7 +120,6 @@ export default class VideoPlayer extends React.Component {
 
       //Seeking state
       seekState: SEEK_STATES.NOT_SEEKING,
-      lastSeekStateUpdate: Date.now(),
 
       // State comes from the playbackCallback
       playbackInstancePosition: null,
@@ -132,9 +140,9 @@ export default class VideoPlayer extends React.Component {
     try {
       Audio.setAudioModeAsync({
         allowsRecordingIOS: false,
-        interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX, // TODO(Abi): Switch back to INTERRUPTION_MODE_IOS_DO_NOT_MIX
-        playsInSilentModeIOS: config.muteVideo ? false : true,
-        shouldDuckAndroid: true, // TODO(Abi): Is this the common behavior on Android?
+        interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
+        playsInSilentModeIOS: true,
+        shouldDuckAndroid: true,
         interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
       });
     } catch (e) {
@@ -148,58 +156,61 @@ export default class VideoPlayer extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (
-      nextProps.playFromPositionMillis !== this.props.playFromPositionMillis &&
-      config.autoplayVideo &&
-      this._playbackInstance !== null
+      this._playbackInstance !== null &&
+      nextProps.playFromPositionMillis !== this.props.playFromPositionMillis
     ) {
       // TODO: Ignore errors here?
-      this._playbackInstance.playFromPositionAsync(
-        nextProps.playFromPositionMillis
-      );
+      this._playbackInstance
+        .playFromPositionAsync(nextProps.playFromPositionMillis)
+        .catch(e => {
+          this.props.errorCallback({
+            type: 'NON_FATAL',
+            message: 'Play from position intialization issue',
+            obj: e,
+          });
+        });
     }
   }
 
-  componentWillUnmount() {
-    this.clearTimeout(this.controlsTimer);
-  }
-
   // Handle events during playback
-
   _setPlaybackState(playbackState) {
-    console.log(
-      '[playback]',
-      this.state.playbackState,
-      ' -> ',
-      playbackState,
-      ' [seek] ',
-      this.state.seekState,
-      ' [shouldPlay] ',
-      this.state.shouldPlay
-    );
-
-    this.setState({ playbackState });
+    DEBUG &&
+      console.log(
+        '[playback]',
+        this.state.playbackState,
+        ' -> ',
+        playbackState,
+        ' [seek] ',
+        this.state.seekState,
+        ' [shouldPlay] ',
+        this.state.shouldPlay
+      );
 
     if (this.state.playbackState != playbackState) {
-      this.setState({ lastPlaybackStateUpdate: Date.now() });
+      this.setState({ playbackState, lastPlaybackStateUpdate: Date.now() });
     }
   }
 
   _setSeekState(seekState) {
-    console.log(
-      '[seek]',
-      this.state.seekState,
-      ' -> ',
-      seekState,
-      ' [playback] ',
-      this.state.playbackState,
-      ' [shouldPlay] ',
-      this.state.shouldPlay
-    );
-    this.setState({ seekState, lastSeekStateUpdate: Date.now() });
-    // Don't hide the controls/seekbar when the state is seeking
+    DEBUG &&
+      console.log(
+        '[seek]',
+        this.state.seekState,
+        ' -> ',
+        seekState,
+        ' [playback] ',
+        this.state.playbackState,
+        ' [shouldPlay] ',
+        this.state.shouldPlay
+      );
+
+    this.setState({ seekState });
+
+    // Don't keep the controls timer running when the state is seeking
     if (seekState === SEEK_STATES.SEEKING) {
       this.controlsTimer && this.clearTimeout(this.controlsTimer);
     } else {
+      // Start the controls timer anew
       this._resetControlsTimer();
     }
   }
@@ -209,7 +220,6 @@ export default class VideoPlayer extends React.Component {
       this.props.playbackCallback &&
         this.props.playbackCallback(playbackStatus);
     } catch (e) {
-      // TODO
       console.error('Error in user playbackCallback', e);
     }
 
@@ -225,6 +235,7 @@ export default class VideoPlayer extends React.Component {
     } else {
       let newPlaybackState = this.state.playbackState;
 
+      // Figure out what state should be next
       if (
         this.state.seekState === SEEK_STATES.NOT_SEEKING &&
         this.state.playbackState !== PLAYBACK_STATES.ENDED
@@ -243,10 +254,7 @@ export default class VideoPlayer extends React.Component {
           }
         }
       }
-
-      if (this.state.playbackState !== newPlaybackState) {
-        this._setPlaybackState(newPlaybackState);
-      }
+      this._setPlaybackState(newPlaybackState);
 
       this.setState({
         playbackInstancePosition: playbackStatus.positionMillis,
@@ -277,7 +285,7 @@ export default class VideoPlayer extends React.Component {
       this.state.seekState !== SEEK_STATES.SEEKING
     ) {
       this._setSeekState(SEEK_STATES.SEEKING);
-      // A seek might have finished but since we are not in NOT_SEEKING yet, the `shouldPlay` flag
+      // A seek might have finished (SEEKED) but since we are not in NOT_SEEKING yet, the `shouldPlay` flag
       // is still false, but we really want it be the stored value from before the previous seek
       this.shouldPlayAtEndOfSeek =
         this.state.seekState === SEEK_STATES.SEEKED
@@ -290,6 +298,7 @@ export default class VideoPlayer extends React.Component {
 
   _onSeekSliderSlidingComplete = async value => {
     if (this._playbackInstance != null) {
+      // Seeking is done, so go to SEEKED, and set playbackState to BUFFERING
       this._setSeekState(SEEK_STATES.SEEKED);
       this._setPlaybackState(PLAYBACK_STATES.BUFFERING);
       this._playbackInstance
@@ -298,8 +307,10 @@ export default class VideoPlayer extends React.Component {
           shouldPlay: this.shouldPlayAtEndOfSeek,
         })
         .then(playbackStatus => {
+          // The underlying <Video> has successfully updated playback position
           this._setSeekState(SEEK_STATES.NOT_SEEKING);
           let newPlaybackState = PLAYBACK_STATES.BUFFERING;
+          // TODO: Differentiate between playing, buffering and paused
           if (playbackStatus.isPlaying) {
             newPlaybackState = PLAYBACK_STATES.PLAYING;
           } else {
@@ -312,6 +323,7 @@ export default class VideoPlayer extends React.Component {
           this._setPlaybackState(newPlaybackState);
         })
         .catch(message => {
+          // TODO: Handle error, Send to Sentry in WeekScreen
           console.log('Error while seeking', message);
         });
     }
@@ -323,6 +335,7 @@ export default class VideoPlayer extends React.Component {
     this._onSeekSliderSlidingComplete(value);
   };
 
+  // Capture the width of the seekbar slider for use in `_onSeekbarTap`
   _onSliderLayout = evt => {
     this.setState({ sliderWidth: evt.nativeEvent.layout.width });
   };
@@ -351,7 +364,7 @@ export default class VideoPlayer extends React.Component {
         positionMillis: 0,
       })
       .then(() => {
-        // Set this to get out of ENDED state
+        // Update playbackState to get out of ENDED state
         this.setState({ playbackState: PLAYBACK_STATES.PLAYING });
       });
   }
@@ -442,6 +455,8 @@ export default class VideoPlayer extends React.Component {
     const FullscreenExitIcon = this.props.fullscreenExitIcon;
     const ReplayIcon = this.props.replayIcon;
 
+    const { ref, callback, style, ...otherVideoProps } = this.props.videoProps;
+
     const Control = ({ callback, children, center, ...otherProps }) =>
       <TouchableHighlight
         {...otherProps}
@@ -491,7 +506,7 @@ export default class VideoPlayer extends React.Component {
         style={{
           position: 'absolute',
           top: videoHeight / 2,
-          width: videoWidth,
+          width: videoWidth - 40,
           marginHorizontal: 40,
         }}>
         <Text style={[this.props.textStyle, { textAlign: 'center' }]}>
@@ -503,7 +518,6 @@ export default class VideoPlayer extends React.Component {
       <TouchableWithoutFeedback onPress={this._toggleControls.bind(this)}>
         <View
           style={{
-            marginBottom: 20,
             backgroundColor: 'black',
           }}>
           <Video
@@ -511,23 +525,24 @@ export default class VideoPlayer extends React.Component {
               uri: this.props.uri,
             }}
             ref={component => (this._playbackInstance = component)}
-            resizeMode={Video.RESIZE_MODE_CONTAIN}
             callback={this._playbackCallback.bind(this)}
             style={{
               width: videoWidth,
               height: videoHeight,
             }}
-            shouldPlay={config.autoplayVideo}
-            isMuted={config.muteVideo}
+            {...otherVideoProps}
           />
 
+          {/* Spinner */}
           {((this.state.playbackState == PLAYBACK_STATES.BUFFERING &&
-            Date.now() - this.state.lastPlaybackStateUpdate > UPDATE_DELAY) ||
+            Date.now() - this.state.lastPlaybackStateUpdate >
+              BUFFERING_SHOW_DELAY) ||
             this.state.playbackState == PLAYBACK_STATES.LOADING) &&
             <CenteredView>
               <Spinner />
             </CenteredView>}
 
+          {/* Play/pause buttons */}
           {this.state.seekState == SEEK_STATES.NOT_SEEKING &&
             (this.state.playbackState == PLAYBACK_STATES.PLAYING ||
               this.state.playbackState == PLAYBACK_STATES.PAUSED) &&
@@ -547,6 +562,7 @@ export default class VideoPlayer extends React.Component {
               </Control>
             </CenteredView>}
 
+          {/* Replay button to show at the end of a video */}
           {this.state.playbackState == PLAYBACK_STATES.ENDED &&
             <CenteredView>
               <Control center={true} callback={this._replay.bind(this)}>
@@ -554,9 +570,11 @@ export default class VideoPlayer extends React.Component {
               </Control>
             </CenteredView>}
 
+          {/* Error display */}
           {this.state.playbackState == PLAYBACK_STATES.ERROR &&
             <ErrorText text={this.state.error} />}
 
+          {/* Bottom bar */}
           <Animated.View
             pointerEvents={
               this.state.controlsState === CONTROL_STATES.HIDDEN
@@ -578,9 +596,12 @@ export default class VideoPlayer extends React.Component {
                 alignItems: 'center',
                 justifyContent: 'space-between',
               }}>
+              {/* Current time display */}
               <Text style={[this.props.textStyle, { marginLeft: 5 }]}>
                 {this._getMMSSFromMillis(this.state.playbackInstancePosition)}
               </Text>
+
+              {/* Seek bar */}
               <TouchableWithoutFeedback
                 onLayout={this._onSliderLayout.bind(this)}
                 onPress={this._onSeekBarTap.bind(this)}>
@@ -591,12 +612,20 @@ export default class VideoPlayer extends React.Component {
                   value={this._getSeekSliderPosition()}
                   onValueChange={this._onSeekSliderValueChange}
                   onSlidingComplete={this._onSeekSliderSlidingComplete}
-                  disabled={this.state.isLoading}
+                  disabled={
+                    this.state.playbackState === PLAYBACK_STATES.LOADING ||
+                    this.state.playbackState === PLAYBACK_STATES.ENDED ||
+                    this.state.playbackState === PLAYBACK_STATES.ERROR
+                  }
                 />
               </TouchableWithoutFeedback>
+
+              {/* Duration display */}
               <Text style={[this.props.textStyle, { marginRight: 5 }]}>
                 {this._getMMSSFromMillis(this.state.playbackInstanceDuration)}
               </Text>
+
+              {/* Fullscreen control */}
               <Control
                 callback={() => {
                   this.props.isPortrait
