@@ -3,7 +3,7 @@ import { Audio, Video } from 'expo';
 import {
   View,
   Dimensions,
-  TouchableHighlight,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   Animated,
   Text,
@@ -148,7 +148,7 @@ export default class VideoPlayer extends React.Component {
     } catch (e) {
       this.props.errorCallback({
         type: 'NON_FATAL',
-        message: 'Audio mode intialization issue',
+        message: 'setAudioModeAsync error',
         obj: e,
       });
     }
@@ -165,7 +165,7 @@ export default class VideoPlayer extends React.Component {
         .catch(e => {
           this.props.errorCallback({
             type: 'NON_FATAL',
-            message: 'Play from position intialization issue',
+            message: 'playFromPositionMillis error',
             obj: e,
           });
         });
@@ -174,19 +174,19 @@ export default class VideoPlayer extends React.Component {
 
   // Handle events during playback
   _setPlaybackState(playbackState) {
-    DEBUG &&
-      console.log(
-        '[playback]',
-        this.state.playbackState,
-        ' -> ',
-        playbackState,
-        ' [seek] ',
-        this.state.seekState,
-        ' [shouldPlay] ',
-        this.state.shouldPlay
-      );
-
     if (this.state.playbackState != playbackState) {
+      DEBUG &&
+        console.log(
+          '[playback]',
+          this.state.playbackState,
+          ' -> ',
+          playbackState,
+          ' [seek] ',
+          this.state.seekState,
+          ' [shouldPlay] ',
+          this.state.shouldPlay
+        );
+
       this.setState({ playbackState, lastPlaybackStateUpdate: Date.now() });
     }
   }
@@ -220,17 +220,17 @@ export default class VideoPlayer extends React.Component {
       this.props.playbackCallback &&
         this.props.playbackCallback(playbackStatus);
     } catch (e) {
-      console.error('Error in user playbackCallback', e);
+      console.error('Uncaught error when calling props.playbackCallback', e);
     }
 
     if (!playbackStatus.isLoaded) {
       if (playbackStatus.error) {
         this._setPlaybackState(PLAYBACK_STATES.ERROR);
+        const errorMsg = `Encountered a fatal error during playback: ${playbackStatus.error}`;
         this.setState({
-          error: `Encountered a fatal error during playback: ${playbackStatus.error}`,
+          error: errorMsg,
         });
-        this.props.onErrorOrWarning && this.props.onErrorOrWarning();
-        // TODO: Send to Sentry
+        this.props.errorCallback({ type: 'FATAL', message: errorMsg, obj: {} });
       }
     } else {
       let newPlaybackState = this.state.playbackState;
@@ -323,8 +323,7 @@ export default class VideoPlayer extends React.Component {
           this._setPlaybackState(newPlaybackState);
         })
         .catch(message => {
-          // TODO: Handle error, Send to Sentry in WeekScreen
-          console.log('Error while seeking', message);
+          DEBUG && console.log('Seek error: ', message);
         });
     }
   };
@@ -455,18 +454,33 @@ export default class VideoPlayer extends React.Component {
     const FullscreenExitIcon = this.props.fullscreenExitIcon;
     const ReplayIcon = this.props.replayIcon;
 
-    const { ref, callback, style, ...otherVideoProps } = this.props.videoProps;
+    const {
+      ref,
+      callback,
+      style,
+      source,
+      ...otherVideoProps
+    } = this.props.videoProps;
 
-    const Control = ({ callback, children, center, ...otherProps }) =>
-      <TouchableHighlight
+    // TODO: Best way to throw errors
+    if (!source) {
+      console.error('Source is a required property');
+    }
+
+    const Control = ({ callback, center, style, children, ...otherProps }) =>
+      <TouchableOpacity
         {...otherProps}
-        underlayColor="transparent"
         hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
-        activeOpacity={0.3}
         onPress={() => {
           this._resetControlsTimer();
           callback();
-        }}>
+        }}
+        style={[
+          {
+            flex: center ? 1 : -1,
+          },
+          style,
+        ]}>
         <View
           style={
             center
@@ -480,7 +494,7 @@ export default class VideoPlayer extends React.Component {
           }>
           {children}
         </View>
-      </TouchableHighlight>;
+      </TouchableOpacity>;
 
     const CenteredView = ({ children, style, ...otherProps }) =>
       <Animated.View
@@ -507,7 +521,8 @@ export default class VideoPlayer extends React.Component {
           position: 'absolute',
           top: videoHeight / 2,
           width: videoWidth - 40,
-          marginHorizontal: 40,
+          marginRight: 20,
+          marginLeft: 20,
         }}>
         <Text style={[this.props.textStyle, { textAlign: 'center' }]}>
           {text}
@@ -521,9 +536,7 @@ export default class VideoPlayer extends React.Component {
             backgroundColor: 'black',
           }}>
           <Video
-            source={{
-              uri: this.props.uri,
-            }}
+            source={source}
             ref={component => (this._playbackInstance = component)}
             callback={this._playbackCallback.bind(this)}
             style={{
@@ -582,61 +595,54 @@ export default class VideoPlayer extends React.Component {
                 : 'auto'
             }
             style={{
-              alignItems: 'stretch',
-              flex: 2,
-              justifyContent: 'flex-start',
-              width: videoWidth,
               position: 'absolute',
               bottom: 0,
+              width: videoWidth,
               opacity: this.state.controlsOpacity,
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
             }}>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
+            {/* Current time display */}
+            <Text style={[this.props.textStyle, { marginLeft: 5 }]}>
+              {this._getMMSSFromMillis(this.state.playbackInstancePosition)}
+            </Text>
+
+            {/* Seek bar */}
+            <TouchableWithoutFeedback
+              onLayout={this._onSliderLayout.bind(this)}
+              onPress={this._onSeekBarTap.bind(this)}>
+              <Slider
+                style={{ marginRight: 10, marginLeft: 10, flex: 1 }}
+                trackImage={this.props.trackImage}
+                thumbImage={this.props.thumbImage}
+                value={this._getSeekSliderPosition()}
+                onValueChange={this._onSeekSliderValueChange}
+                onSlidingComplete={this._onSeekSliderSlidingComplete}
+                disabled={
+                  this.state.playbackState === PLAYBACK_STATES.LOADING ||
+                  this.state.playbackState === PLAYBACK_STATES.ENDED ||
+                  this.state.playbackState === PLAYBACK_STATES.ERROR
+                }
+              />
+            </TouchableWithoutFeedback>
+
+            {/* Duration display */}
+            <Text style={[this.props.textStyle, { marginRight: 5 }]}>
+              {this._getMMSSFromMillis(this.state.playbackInstanceDuration)}
+            </Text>
+
+            {/* Fullscreen control */}
+            <Control
+              callback={() => {
+                this.props.isPortrait
+                  ? this.props.switchToLandscape()
+                  : this.props.switchToPortrait();
               }}>
-              {/* Current time display */}
-              <Text style={[this.props.textStyle, { marginLeft: 5 }]}>
-                {this._getMMSSFromMillis(this.state.playbackInstancePosition)}
-              </Text>
-
-              {/* Seek bar */}
-              <TouchableWithoutFeedback
-                onLayout={this._onSliderLayout.bind(this)}
-                onPress={this._onSeekBarTap.bind(this)}>
-                <Slider
-                  style={{ flex: 2, marginRight: 10, marginLeft: 10 }}
-                  trackImage={this.props.trackImage}
-                  thumbImage={this.props.thumbImage}
-                  value={this._getSeekSliderPosition()}
-                  onValueChange={this._onSeekSliderValueChange}
-                  onSlidingComplete={this._onSeekSliderSlidingComplete}
-                  disabled={
-                    this.state.playbackState === PLAYBACK_STATES.LOADING ||
-                    this.state.playbackState === PLAYBACK_STATES.ENDED ||
-                    this.state.playbackState === PLAYBACK_STATES.ERROR
-                  }
-                />
-              </TouchableWithoutFeedback>
-
-              {/* Duration display */}
-              <Text style={[this.props.textStyle, { marginRight: 5 }]}>
-                {this._getMMSSFromMillis(this.state.playbackInstanceDuration)}
-              </Text>
-
-              {/* Fullscreen control */}
-              <Control
-                callback={() => {
-                  this.props.isPortrait
-                    ? this.props.switchToLandscape()
-                    : this.props.switchToPortrait();
-                }}>
-                {this.props.isPortrait
-                  ? <FullscreenEnterIcon />
-                  : <FullscreenExitIcon />}
-              </Control>
-            </View>
+              {this.props.isPortrait
+                ? <FullscreenEnterIcon />
+                : <FullscreenExitIcon />}
+            </Control>
           </Animated.View>
         </View>
       </TouchableWithoutFeedback>

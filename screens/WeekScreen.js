@@ -112,6 +112,11 @@ class WeekScreen extends React.Component {
     }
   }
 
+  _errorCallback(error) {
+    // TODO: Send to Sentry
+    console.log('Error: ', error.message, error.type, error.obj);
+  }
+
   onRowPress = (url, title) => {
     this.props.navigation.navigate('Link', { url, title: _.capitalize(title) });
   };
@@ -128,16 +133,19 @@ class WeekScreen extends React.Component {
           minHeight: Dimensions.get('window').height,
         }}>
         <VideoPlayer
-          uri={this.state.data.videos['240p']}
-          isPortrait={this.state.isPortrait}
           videoProps={{
             shouldPlay: config.autoplayVideo,
             isMuted: config.muteVideo,
             resizeMode: Video.RESIZE_MODE_CONTAIN,
+            source: {
+              uri: this.state.data.videos['240p'],
+            },
           }}
+          isPortrait={this.state.isPortrait}
           switchToLandscape={this.switchToLandscape.bind(this)}
           switchToPortrait={this.switchToPortrait.bind(this)}
           playbackCallback={this._playbackCallback.bind(this)}
+          errorCallback={this._errorCallback.bind(this)}
           playFromPositionMillis={this.state.playFromPositionMillis}
         />
         <View>
