@@ -24,12 +24,6 @@ import {
 const TRACK_IMAGE = require('./assets/track.png');
 const THUMB_IMAGE = require('./assets/thumb.png');
 
-const overlayTextStyle = {
-  color: '#FFFFFF',
-  fontFamily: 'roboto-regular',
-  fontSize: 12,
-};
-
 const config = {
   autoplayVideo: true,
   muteVideo: true,
@@ -78,6 +72,11 @@ export default class VideoPlayer extends React.Component {
 
     switchToLandscape: PropTypes.func,
     switchToPortrait: PropTypes.func,
+
+    /**
+     * Style to use for the all the text in the videoplayer including seek bar times and error messages
+     */
+    textStyle: PropTypes.object,
   };
 
   static defaultProps = {
@@ -95,6 +94,11 @@ export default class VideoPlayer extends React.Component {
     thumbImage: THUMB_IMAGE,
     errorCallback: error => {
       console.log('Error: ', error.message, error.type, error.obj);
+    },
+    textStyle: {
+      color: '#FFFFFF',
+      fontFamily: 'roboto-regular',
+      fontSize: 12,
     },
   };
 
@@ -490,7 +494,7 @@ export default class VideoPlayer extends React.Component {
           width: videoWidth,
           marginHorizontal: 40,
         }}>
-        <Text style={[overlayTextStyle, { textAlign: 'center' }]}>
+        <Text style={[this.props.textStyle, { textAlign: 'center' }]}>
           {text}
         </Text>
       </View>;
@@ -574,7 +578,7 @@ export default class VideoPlayer extends React.Component {
                 alignItems: 'center',
                 justifyContent: 'space-between',
               }}>
-              <Text style={[overlayTextStyle, { marginLeft: 5 }]}>
+              <Text style={[this.props.textStyle, { marginLeft: 5 }]}>
                 {this._getMMSSFromMillis(this.state.playbackInstancePosition)}
               </Text>
               <TouchableWithoutFeedback
@@ -590,7 +594,7 @@ export default class VideoPlayer extends React.Component {
                   disabled={this.state.isLoading}
                 />
               </TouchableWithoutFeedback>
-              <Text style={[overlayTextStyle, { marginRight: 5 }]}>
+              <Text style={[this.props.textStyle, { marginRight: 5 }]}>
                 {this._getMMSSFromMillis(this.state.playbackInstanceDuration)}
               </Text>
               <Control
