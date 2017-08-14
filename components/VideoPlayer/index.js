@@ -58,23 +58,39 @@ const DEBUG = true;
 export default class VideoPlayer extends React.Component {
   static propTypes = {
     /**
-   * How long should the fadeIn animation for the controls run? (in milliseconds)
-   * Default value is 200.
-   *
-   */
-    showingDuration: PropTypes.number,
-
-    // TODO: Fill out remaining prop types
+     * How long should the fadeIn animation for the controls run? (in milliseconds)
+     * Default value is 200.
+     *
+     */
+    fadeInDuration: PropTypes.number,
     /**
-     * Callback to get `playbackStatus` objects for the underlying video element
+     * How long should the fadeOut animation run? (in milliseconds)
+     * Default value is 1000.
+     *
+     */
+    fadeOutDuration: PropTypes.number,
+    /**
+     * How long should the fadeOut animation run when the screen is tapped when the controls are visible? (in milliseconds)
+     * Default value is 200.
+     *
+     */
+    quickFadeOutDuration: PropTypes.number,
+    /**
+     * If the user has not interacted with the controls, how long should the controls stay visible? (in milliseconds)
+     * Default value is 4000.
+     *
+     */
+    hideControlsTimerDuration: PropTypes.number,
+
+    /**
+     * Callback that gets passed `playbackStatus` objects for the underlying video element
      */
     playbackCallback: PropTypes.func,
-    // playIcon: PropTypes.element,
 
+    /**
+    * Error callback (lots of errors are non-fatal and the video will continue to play)
+    */
     errorCallback: PropTypes.func,
-
-    switchToLandscape: PropTypes.func,
-    switchToPortrait: PropTypes.func,
 
     /**
      * Style to use for the all the text in the videoplayer including seek bar times and error messages
@@ -86,13 +102,20 @@ export default class VideoPlayer extends React.Component {
      * See Expo documentation on <Video>.
      */
     videoProps: PropTypes.object,
+
+    // Dealing with fullscreen
+    isPortrait: PropTypes.bool,
+    switchToLandscape: PropTypes.func,
+    switchToPortrait: PropTypes.func,
   };
 
   static defaultProps = {
-    showingDuration: 200,
-    hidingFastDuration: 200,
-    hidingSlowDuration: 1000,
-    hidingTimerDuration: 4000,
+    // Animations
+    fadeInDuration: 200,
+    fadeOutDuration: 1000,
+    quickFadeOutDuration: 200,
+    hideControlsTimerDuration: 4000,
+    // Appearance (assets and styles)
     playIcon: PlayIcon,
     pauseIcon: PauseIcon,
     spinner: Spinner,
@@ -101,13 +124,15 @@ export default class VideoPlayer extends React.Component {
     replayIcon: ReplayIcon,
     trackImage: TRACK_IMAGE,
     thumbImage: THUMB_IMAGE,
-    errorCallback: error => {
-      console.log('Error: ', error.message, error.type, error.obj);
-    },
     textStyle: {
       color: '#FFFFFF',
       fontFamily: 'roboto-regular',
       fontSize: 12,
+    },
+    // Callbacks
+    playbackCallback: () => {},
+    errorCallback: error => {
+      console.log('Error: ', error.message, error.type, error.obj);
     },
   };
 
@@ -117,18 +142,14 @@ export default class VideoPlayer extends React.Component {
       // Playback state
       playbackState: PLAYBACK_STATES.LOADING,
       lastPlaybackStateUpdate: Date.now(),
-
       //Seeking state
       seekState: SEEK_STATES.NOT_SEEKING,
-
       // State comes from the playbackCallback
       playbackInstancePosition: null,
       playbackInstanceDuration: null,
       shouldPlay: false,
-
       // Error message if we are in PLAYBACK_STATES.ERROR
       error: null,
-
       // Controls display state
       controlsOpacity: new Animated.Value(0),
       controlsState: CONTROL_STATES.HIDDEN,
@@ -217,8 +238,7 @@ export default class VideoPlayer extends React.Component {
 
   _playbackCallback(playbackStatus) {
     try {
-      this.props.playbackCallback &&
-        this.props.playbackCallback(playbackStatus);
+      this.props.playbackCallback(playbackStatus);
     } catch (e) {
       console.error('Uncaught error when calling props.playbackCallback', e);
     }
@@ -233,34 +253,27 @@ export default class VideoPlayer extends React.Component {
         this.props.errorCallback({ type: 'FATAL', message: errorMsg, obj: {} });
       }
     } else {
-      let newPlaybackState = this.state.playbackState;
-
-      // Figure out what state should be next
-      if (
-        this.state.seekState === SEEK_STATES.NOT_SEEKING &&
-        this.state.playbackState !== PLAYBACK_STATES.ENDED
-      ) {
-        if (playbackStatus.didJustFinish && !playbackStatus.isLooping) {
-          newPlaybackState = PLAYBACK_STATES.ENDED;
-        } else {
-          if (playbackStatus.isPlaying) {
-            newPlaybackState = PLAYBACK_STATES.PLAYING;
-          } else {
-            if (playbackStatus.isBuffering) {
-              newPlaybackState = PLAYBACK_STATES.BUFFERING;
-            } else {
-              newPlaybackState = PLAYBACK_STATES.PAUSED;
-            }
-          }
-        }
-      }
-      this._setPlaybackState(newPlaybackState);
-
+      // Update current position, duration, and `shouldPlay`
       this.setState({
         playbackInstancePosition: playbackStatus.positionMillis,
         playbackInstanceDuration: playbackStatus.durationMillis,
         shouldPlay: playbackStatus.shouldPlay,
       });
+
+      // Figure out what state should be next (only if we are not seeking, other the seek action handlers control the playback state,
+      // not this callback)
+      if (
+        this.state.seekState === SEEK_STATES.NOT_SEEKING &&
+        this.state.playbackState !== PLAYBACK_STATES.ENDED
+      ) {
+        if (playbackStatus.didJustFinish && !playbackStatus.isLooping) {
+          this._setPlaybackState(PLAYBACK_STATES.ENDED);
+        } else {
+          this._setPlaybackState(
+            this._isPlayingOrBufferingOrPaused(playbackStatus)
+          );
+        }
+      }
     }
   }
 
@@ -309,23 +322,26 @@ export default class VideoPlayer extends React.Component {
         .then(playbackStatus => {
           // The underlying <Video> has successfully updated playback position
           this._setSeekState(SEEK_STATES.NOT_SEEKING);
-          let newPlaybackState = PLAYBACK_STATES.BUFFERING;
-          // TODO: Differentiate between playing, buffering and paused
-          if (playbackStatus.isPlaying) {
-            newPlaybackState = PLAYBACK_STATES.PLAYING;
-          } else {
-            if (playbackStatus.isBuffering) {
-              newPlaybackState = PLAYBACK_STATES.BUFFERING;
-            } else {
-              newPlaybackState = PLAYBACK_STATES.PAUSED;
-            }
-          }
-          this._setPlaybackState(newPlaybackState);
+          this._setPlaybackState(
+            this._isPlayingOrBufferingOrPaused(playbackStatus)
+          );
         })
         .catch(message => {
           DEBUG && console.log('Seek error: ', message);
         });
     }
+  };
+
+  _isPlayingOrBufferingOrPaused = playbackStatus => {
+    if (playbackStatus.isPlaying) {
+      return PLAYBACK_STATES.PLAYING;
+    }
+
+    if (playbackStatus.isBuffering) {
+      return PLAYBACK_STATES.BUFFERING;
+    }
+
+    return PLAYBACK_STATES.PAUSED;
   };
 
   _onSeekBarTap = evt => {
@@ -377,18 +393,22 @@ export default class VideoPlayer extends React.Component {
   _toggleControls = () => {
     switch (this.state.controlsState) {
       case CONTROL_STATES.SHOWN:
+        // If the controls are currently shown, a tap should hide controls quickly
         this.setState({ controlsState: CONTROL_STATES.HIDING });
         this._hideControls(true);
         break;
       case CONTROL_STATES.HIDDEN:
+        // If the controls are currently, show controls with fade-in animation
         this._showControls();
         this.setState({ controlsState: CONTROL_STATES.SHOWING });
         break;
       case CONTROL_STATES.HIDING:
+        // If controls are fading out, a tap should reverse, and show controls
         this.setState({ controlsState: CONTROL_STATES.SHOWING });
         this._showControls();
         break;
       case CONTROL_STATES.SHOWING:
+        // A tap when the controls are fading in should do nothing
         break;
     }
   };
@@ -396,7 +416,7 @@ export default class VideoPlayer extends React.Component {
   _showControls = () => {
     this.showingAnimation = Animated.timing(this.state.controlsOpacity, {
       toValue: 1,
-      duration: this.props.showingAnimation,
+      duration: this.props.fadeInDuration,
       useNativeDriver: true,
     });
 
@@ -415,8 +435,8 @@ export default class VideoPlayer extends React.Component {
     this.hideAnimation = Animated.timing(this.state.controlsOpacity, {
       toValue: 0,
       duration: immediate
-        ? this.props.hidingFastDuration
-        : this.props.hidingSlowDuration,
+        ? this.props.quickFadeOutDuration
+        : this.props.fadeOutDuration,
       useNativeDriver: true,
     });
     this.hideAnimation.start(({ finished }) => {
@@ -427,6 +447,7 @@ export default class VideoPlayer extends React.Component {
   };
 
   _onTimerDone = () => {
+    // After the controls timer runs out, fade away the controls slowly
     this.setState({ controlsState: CONTROL_STATES.HIDING });
     this._hideControls();
   };
@@ -438,7 +459,7 @@ export default class VideoPlayer extends React.Component {
     }
     this.controlsTimer = this.setTimeout(
       this._onTimerDone.bind(this),
-      this.props.hidingTimerDuration
+      this.props.hideControlsTimerDuration
     );
   };
 

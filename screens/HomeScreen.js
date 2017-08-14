@@ -45,7 +45,7 @@ class HomeScreen extends React.Component {
       rowHasChanged: (row1, row2) => row1 !== row2,
     });
     this.state = {
-      weekNumber: 1,
+      weekNumber: 4,
       dataSource: ds.cloneWithRows([]),
       data: null,
     };
@@ -59,7 +59,7 @@ class HomeScreen extends React.Component {
     });
 
     if (config.secondScreen) {
-      this.onWeekPress(0);
+      this.onWeekPress(this.state.weekNumber);
     }
 
     if (config.resourcesScreen) {
