@@ -7,70 +7,40 @@ import {
   TouchableWithoutFeedback,
   Animated,
   Text,
-  ActivityIndicator,
   Slider,
 } from 'react-native';
-import { Foundation, MaterialIcons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import reactMixin from 'react-mixin';
 import TimerMixin from 'react-timer-mixin';
 
-import config from '../../utils/config';
-import styles from '../../styles/style';
-import colors from '../../styles/colors';
+import {
+  PlayIcon,
+  PauseIcon,
+  Spinner,
+  FullscreenEnterIcon,
+  FullscreenExitIcon,
+  ReplayIcon,
+} from './assets/icons';
+const TRACK_IMAGE = require('./assets/track.png');
+const THUMB_IMAGE = require('./assets/thumb.png');
 
-var CONTROL_STATES = {
-  SHOWN: 1,
-  SHOWING: 2,
-  HIDDEN: 3,
-  HIDING: 4,
+const overlayTextStyle = {
+  color: '#FFFFFF',
+  fontFamily: 'roboto-regular',
+  fontSize: 12,
 };
 
-const PlayIcon = () =>
-  <Foundation
-    name={'play'}
-    size={36}
-    color={colors.complementary}
-    style={{ textAlign: 'center' }}
-  />;
+const config = {
+  autoplayVideo: true,
+  muteVideo: true,
+};
 
-const PauseIcon = () =>
-  <Foundation
-    name={'pause'}
-    size={36}
-    color={colors.complementary}
-    style={{ textAlign: 'center' }}
-  />;
-
-const Spinner = () =>
-  <ActivityIndicator color={colors.complementary} size={'large'} />;
-
-const FullscreenEnterIcon = () =>
-  <MaterialIcons
-    name={'fullscreen'}
-    size={30}
-    color={colors.complementary}
-    style={{ textAlign: 'center' }}
-  />;
-
-const FullscreenExitIcon = () =>
-  <MaterialIcons
-    name={'fullscreen-exit'}
-    size={30}
-    color={colors.complementary}
-    style={{ textAlign: 'center' }}
-  />;
-
-const ReplayIcon = () =>
-  <MaterialIcons
-    name={'replay'}
-    size={30}
-    color={colors.complementary}
-    style={{ textAlign: 'center' }}
-  />;
-
-const TRACK_IMAGE = require('../../assets/icons/track.png');
-const THUMB_IMAGE = require('../../assets/icons/thumb.png');
+var CONTROL_STATES = {
+  SHOWN: 'SHOWN',
+  SHOWING: 'SHOWING',
+  HIDDEN: 'HIDDEN',
+  HIDING: 'HIDDING',
+};
 
 var PLAYBACK_STATES = {
   LOADING: 'LOADING',
@@ -202,7 +172,12 @@ export default class VideoPlayer extends React.Component {
       ' [shouldPlay] ',
       this.state.shouldPlay
     );
-    this.setState({ playbackState, lastPlaybackStateUpdate: Date.now() });
+
+    this.setState({ playbackState });
+
+    if (this.state.playbackState != playbackState) {
+      this.setState({ lastPlaybackStateUpdate: Date.now() });
+    }
   }
 
   _setSeekState(seekState) {
@@ -454,12 +429,6 @@ export default class VideoPlayer extends React.Component {
     const videoWidth = Dimensions.get('window').width;
     const videoHeight = videoWidth * (9 / 16);
     const centerIconWidth = 60;
-
-    const overlayTextStyle = {
-      color: colors.complementary,
-      fontFamily: 'roboto-regular',
-      fontSize: styles.fontSize(0),
-    };
 
     const PlayIcon = this.props.playIcon;
     const PauseIcon = this.props.pauseIcon;
