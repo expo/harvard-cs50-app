@@ -347,6 +347,7 @@ export default class VideoPlayer extends React.Component {
         positionMillis: 0,
       })
       .then(() => {
+        // Set this to get out of ENDED state
         this.setState({ playbackState: PLAYBACK_STATES.PLAYING });
       });
   }
@@ -428,7 +429,7 @@ export default class VideoPlayer extends React.Component {
   render() {
     const videoWidth = Dimensions.get('window').width;
     const videoHeight = videoWidth * (9 / 16);
-    const centerIconWidth = 60;
+    const centeredContentWidth = 60;
 
     const PlayIcon = this.props.playIcon;
     const PauseIcon = this.props.pauseIcon;
@@ -446,22 +447,14 @@ export default class VideoPlayer extends React.Component {
         onPress={() => {
           this._resetControlsTimer();
           callback();
-        }}
-        style={
-          center
-            ? {
-                width: centerIconWidth,
-                height: centerIconWidth,
-              }
-            : {}
-        }>
+        }}>
         <View
           style={
             center
               ? {
                   backgroundColor: 'rgba(0, 0, 0, 0.4)',
                   justifyContent: 'center',
-                  borderRadius: centerIconWidth,
+                  borderRadius: centeredContentWidth,
                   flex: 1,
                 }
               : {}
@@ -470,15 +463,24 @@ export default class VideoPlayer extends React.Component {
         </View>
       </TouchableHighlight>;
 
-    const CenterIcon = ({ children }) =>
-      <View
-        style={{
-          position: 'absolute',
-          left: (videoWidth - centerIconWidth) / 2,
-          top: (videoHeight - centerIconWidth) / 2,
-        }}>
+    const CenteredView = ({ children, style, ...otherProps }) =>
+      <Animated.View
+        {...otherProps}
+        style={[
+          {
+            position: 'absolute',
+            left: (videoWidth - centeredContentWidth) / 2,
+            top: (videoHeight - centeredContentWidth) / 2,
+            width: centeredContentWidth,
+            height: centeredContentWidth,
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          },
+          style,
+        ]}>
         {children}
-      </View>;
+      </Animated.View>;
 
     const ErrorText = ({ text }) =>
       <View
@@ -486,6 +488,7 @@ export default class VideoPlayer extends React.Component {
           position: 'absolute',
           top: videoHeight / 2,
           width: videoWidth,
+          marginHorizontal: 40,
         }}>
         <Text style={[overlayTextStyle, { textAlign: 'center' }]}>
           {text}
@@ -514,24 +517,17 @@ export default class VideoPlayer extends React.Component {
             isMuted={config.muteVideo}
           />
 
-          {/* <View
-            style={{
-              width: videoWidth,
-              height: videoHeight,
-            }}
-          /> */}
-
           {((this.state.playbackState == PLAYBACK_STATES.BUFFERING &&
             Date.now() - this.state.lastPlaybackStateUpdate > UPDATE_DELAY) ||
             this.state.playbackState == PLAYBACK_STATES.LOADING) &&
-            <CenterIcon>
+            <CenteredView>
               <Spinner />
-            </CenterIcon>}
+            </CenteredView>}
 
           {this.state.seekState == SEEK_STATES.NOT_SEEKING &&
             (this.state.playbackState == PLAYBACK_STATES.PLAYING ||
               this.state.playbackState == PLAYBACK_STATES.PAUSED) &&
-            <Animated.View
+            <CenteredView
               pointerEvents={
                 this.state.controlsState === CONTROL_STATES.HIDDEN
                   ? 'none'
@@ -539,23 +535,20 @@ export default class VideoPlayer extends React.Component {
               }
               style={{
                 opacity: this.state.controlsOpacity,
-                position: 'absolute',
-                left: (videoWidth - centerIconWidth) / 2,
-                top: (videoHeight - centerIconWidth) / 2,
               }}>
               <Control center={true} callback={this._togglePlay.bind(this)}>
                 {this.state.playbackState == PLAYBACK_STATES.PLAYING
                   ? <PauseIcon />
                   : <PlayIcon />}
               </Control>
-            </Animated.View>}
+            </CenteredView>}
 
           {this.state.playbackState == PLAYBACK_STATES.ENDED &&
-            <CenterIcon>
+            <CenteredView>
               <Control center={true} callback={this._replay.bind(this)}>
                 <ReplayIcon />
               </Control>
-            </CenterIcon>}
+            </CenteredView>}
 
           {this.state.playbackState == PLAYBACK_STATES.ERROR &&
             <ErrorText text={this.state.error} />}
