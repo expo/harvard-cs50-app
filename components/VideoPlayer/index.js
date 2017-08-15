@@ -163,6 +163,8 @@ export default class VideoPlayer extends React.Component {
   }
 
   async componentDidMount() {
+    this._setupNetInfoListener();
+
     // Set audio mode to play even in silent mode (like the YouTube app)
     try {
       Audio.setAudioModeAsync({
@@ -196,6 +198,18 @@ export default class VideoPlayer extends React.Component {
           });
         });
     }
+  }
+
+  // Listen for changes in network connectivity
+  _setupNetInfoListener() {
+    NetInfo.fetch().then(reach => {
+      DEBUG && console.log('[networkState]', reach);
+      this.setState({ networkState: reach });
+    });
+    NetInfo.addEventListener('change', reach => {
+      DEBUG && console.log('[networkState]', reach);
+      this.setState({ networkState: reach });
+    });
   }
 
   // Handle events during playback
@@ -274,9 +288,21 @@ export default class VideoPlayer extends React.Component {
         if (playbackStatus.didJustFinish && !playbackStatus.isLooping) {
           this._setPlaybackState(PLAYBACK_STATES.ENDED);
         } else {
-          this._setPlaybackState(
-            this._isPlayingOrBufferingOrPaused(playbackStatus)
-          );
+          // If the video is buffering but there is no Internet, you go to the ERROR state
+          if (
+            this.state.networkState === 'none' &&
+            playbackStatus.isBuffering
+          ) {
+            this._setPlaybackState(PLAYBACK_STATES.ERROR);
+            this.setState({
+              error:
+                'You are probably offline. Please make sure you are connected to the Internet to watch this video',
+            });
+          } else {
+            this._setPlaybackState(
+              this._isPlayingOrBufferingOrPaused(playbackStatus)
+            );
+          }
         }
       }
     }
