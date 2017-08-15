@@ -345,9 +345,18 @@ export default class VideoPlayer extends React.Component {
   };
 
   _onSeekBarTap = evt => {
-    const value = evt.nativeEvent.locationX / this.state.sliderWidth;
-    this._onSeekSliderValueChange();
-    this._onSeekSliderSlidingComplete(value);
+    if (
+      !(
+        this.state.playbackState === PLAYBACK_STATES.LOADING ||
+        this.state.playbackState === PLAYBACK_STATES.ENDED ||
+        this.state.playbackState === PLAYBACK_STATES.ERROR ||
+        this.state.controlsState !== CONTROL_STATES.SHOWN
+      )
+    ) {
+      const value = evt.nativeEvent.locationX / this.state.sliderWidth;
+      this._onSeekSliderValueChange();
+      this._onSeekSliderSlidingComplete(value);
+    }
   };
 
   // Capture the width of the seekbar slider for use in `_onSeekbarTap`
@@ -453,7 +462,6 @@ export default class VideoPlayer extends React.Component {
   };
 
   _resetControlsTimer = () => {
-    // TODO: Handle the fact that a control can be touched, when in CONTROL_STATES.HIDING
     if (this.controlsTimer) {
       this.clearTimeout(this.controlsTimer);
     }
@@ -643,7 +651,8 @@ export default class VideoPlayer extends React.Component {
                 disabled={
                   this.state.playbackState === PLAYBACK_STATES.LOADING ||
                   this.state.playbackState === PLAYBACK_STATES.ENDED ||
-                  this.state.playbackState === PLAYBACK_STATES.ERROR
+                  this.state.playbackState === PLAYBACK_STATES.ERROR ||
+                  this.state.controlsState !== CONTROL_STATES.SHOWN
                 }
               />
             </TouchableWithoutFeedback>
