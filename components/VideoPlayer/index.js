@@ -496,28 +496,23 @@ export default class VideoPlayer extends React.Component {
       console.error('Source is a required property');
     }
 
-    const Control = ({ callback, center, style, children, ...otherProps }) =>
+    const Control = ({ callback, center, children, ...otherProps }) =>
       <TouchableOpacity
         {...otherProps}
         hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
         onPress={() => {
           this._resetControlsTimer();
           callback();
-        }}
-        style={[
-          {
-            flex: center ? 1 : -1,
-          },
-          style,
-        ]}>
+        }}>
         <View
           style={
             center
               ? {
                   backgroundColor: 'rgba(0, 0, 0, 0.4)',
                   justifyContent: 'center',
+                  width: centeredContentWidth,
+                  height: centeredContentWidth,
                   borderRadius: centeredContentWidth,
-                  flex: 1,
                 }
               : {}
           }>
