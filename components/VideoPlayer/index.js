@@ -659,6 +659,7 @@ export default class VideoPlayer extends React.Component {
 
             {/* Fullscreen control */}
             <Control
+              center={false}
               callback={() => {
                 this.props.isPortrait
                   ? this.props.switchToLandscape()
