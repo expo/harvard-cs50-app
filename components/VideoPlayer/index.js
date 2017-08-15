@@ -100,9 +100,14 @@ export default class VideoPlayer extends React.Component {
 
     /**
      * Props to use into the underlying <Video>. Useful for configuring autoplay, playback speed, and other Video properties.
-     * See Expo documentation on <Video>.
+     * See Expo documentation on <Video>. `source` is required.
      */
     videoProps: PropTypes.object,
+
+    /**
+     * Position within video to play from
+     */
+    playFromPositionMillis: PropTypes.number,
 
     // Dealing with fullscreen
     isPortrait: PropTypes.bool,
@@ -181,7 +186,6 @@ export default class VideoPlayer extends React.Component {
       this._playbackInstance !== null &&
       nextProps.playFromPositionMillis !== this.props.playFromPositionMillis
     ) {
-      // TODO: Ignore errors here?
       this._playbackInstance
         .playFromPositionAsync(nextProps.playFromPositionMillis)
         .catch(e => {
@@ -492,6 +496,7 @@ export default class VideoPlayer extends React.Component {
     const FullscreenExitIcon = this.props.fullscreenExitIcon;
     const ReplayIcon = this.props.replayIcon;
 
+    // Do not let the user override `ref`, `callback`, and `style`
     const {
       ref,
       callback,
@@ -500,9 +505,9 @@ export default class VideoPlayer extends React.Component {
       ...otherVideoProps
     } = this.props.videoProps;
 
-    // TODO: Best way to throw errors
+    // TODO: Best way to throw required property missing error
     if (!source) {
-      console.error('Source is a required property');
+      console.error('`source` is a required property');
     }
 
     const Control = ({ callback, center, children, ...otherProps }) =>
