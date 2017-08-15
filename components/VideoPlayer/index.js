@@ -8,6 +8,7 @@ import {
   Animated,
   Text,
   Slider,
+  NetInfo,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import reactMixin from 'react-mixin';
@@ -313,7 +314,13 @@ export default class VideoPlayer extends React.Component {
     if (this._playbackInstance != null) {
       // Seeking is done, so go to SEEKED, and set playbackState to BUFFERING
       this._setSeekState(SEEK_STATES.SEEKED);
-      this._setPlaybackState(PLAYBACK_STATES.BUFFERING);
+      // If the video is going to play after seek, the user expects a spinner.
+      // Otherwise, the user expects the play button
+      this._setPlaybackState(
+        this.shouldPlayAtEndOfSeek
+          ? PLAYBACK_STATES.BUFFERING
+          : PLAYBACK_STATES.PAUSED
+      );
       this._playbackInstance
         .setStatusAsync({
           positionMillis: value * this.state.playbackInstanceDuration,
@@ -321,6 +328,7 @@ export default class VideoPlayer extends React.Component {
         })
         .then(playbackStatus => {
           // The underlying <Video> has successfully updated playback position
+          // TODO: If `shouldPlayAtEndOfSeek` is false, should we still set the playbackState to PAUSED?
           this._setSeekState(SEEK_STATES.NOT_SEEKING);
           this._setPlaybackState(
             this._isPlayingOrBufferingOrPaused(playbackStatus)
@@ -580,7 +588,8 @@ export default class VideoPlayer extends React.Component {
             </CenteredView>}
 
           {/* Play/pause buttons */}
-          {this.state.seekState == SEEK_STATES.NOT_SEEKING &&
+          {(this.state.seekState == SEEK_STATES.NOT_SEEKING ||
+            this.state.seekState == SEEK_STATES.SEEKED) &&
             (this.state.playbackState == PLAYBACK_STATES.PLAYING ||
               this.state.playbackState == PLAYBACK_STATES.PAUSED) &&
             <CenteredView
