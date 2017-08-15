@@ -329,6 +329,7 @@ export default class VideoPlayer extends React.Component {
         .then(playbackStatus => {
           // The underlying <Video> has successfully updated playback position
           // TODO: If `shouldPlayAtEndOfSeek` is false, should we still set the playbackState to PAUSED?
+          // But because we setStatusAsync(shouldPlay: false), so the playbackStatus return value will be PAUSED.
           this._setSeekState(SEEK_STATES.NOT_SEEKING);
           this._setPlaybackState(
             this._isPlayingOrBufferingOrPaused(playbackStatus)
