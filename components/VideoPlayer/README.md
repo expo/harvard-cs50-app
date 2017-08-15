@@ -1,38 +1,9 @@
 
-Videoplayer controls builds on top of the Expo Video component. All of the colors, timing, images and types are customizable.
+Videoplayer controls builds on top of the Expo Video component. All of the colors, timing, images and types are customizable. The behavior generally follows YouTube (examples of where this is relevant: controls fading in/out, what shows over the player when seeking, etc.).
 
-spinner
-
-play
-
-pause
-
-fullscreen-enter
-
-fullscreen-exit
-
-track
-
-seek handle
-
-text
-
-The fullscreen mode makes it take up the whole screen.
+## Examples
 
 
-The behavior generally follows YouTube.
+## Props
 
-The following values for the controls fading in/out can be customized:
-
-// TODO: 
-
-showingDuration: 200,
-hidingFastDuration: 200,
-hidingSlowDuration: 1000,
-hidingTimerDuration: 4000,
-
-
-Overall, behavior can be controlled by:
-
-alwaysShow
-
+The props are [documented here](docs.md).

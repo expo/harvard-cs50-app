@@ -3,16 +3,14 @@ const fs = require('fs');
 const reactDocgen = require('react-docgen');
 const ReactDocGenMarkdownRenderer = require('react-docgen-markdown-renderer');
 
-const componentPath = path.resolve(path.join(__dirname, 'VideoPlayer.js'));
+const componentPath = path.resolve(path.join(__dirname, '..', 'index.js'));
 
 const renderer = new ReactDocGenMarkdownRenderer({
-  componentsBasePath: __dirname,
+  componentsBasePath: path.resolve(path.join(__dirname, '..')),
 });
 
 fs.readFile(componentPath, (error, content) => {
-  const documentationPath =
-    path.basename(componentPath, path.extname(componentPath)) +
-    renderer.extension;
+  const documentationPath = 'docs' + renderer.extension;
   const doc = reactDocgen.parse(content);
   fs.writeFile(
     documentationPath,
