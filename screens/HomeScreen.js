@@ -5,9 +5,9 @@ import {
   TouchableOpacity,
   Dimensions,
   ScrollView,
+  Text,
   StatusBar,
 } from 'react-native';
-import { Text } from 'react-native-animatable';
 import Expo from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import Carousel from 'react-native-snap-carousel';
