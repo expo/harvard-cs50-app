@@ -4,6 +4,8 @@ import * as Progress from 'react-native-progress';
 import prettyMs from 'pretty-ms';
 import reactMixin from 'react-mixin';
 import TimerMixin from 'react-timer-mixin';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import colors from '../styles/colors';
 
 var STATES = {
   NOTSTARTED: 1,
@@ -71,16 +73,41 @@ class Downloader extends React.Component {
   }
 
   render() {
+    const Status = ({ iconName, text }) =>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'flex-start',
+        }}>
+        <MaterialIcons
+          style={{ marginRight: 5 }}
+          name={iconName}
+          size={28}
+          color={colors.tertiary}
+        />
+        <Text style={{ color: colors.tertiary }}>
+          {text}
+        </Text>
+      </View>;
+
     return (
       <View
         style={{
-          marginLeft: 20,
-          marginRight: 20,
+          marginLeft: 30,
+          marginRight: 30,
+          paddingTop: 10,
+          paddingBottom: 10,
         }}>
         {this.state.state === STATES.NOTSTARTED &&
           <View>
             <TouchableHighlight onPress={this.saveToDisk.bind(this)}>
-              <Text>save for offline</Text>
+              <View>
+                <Status
+                  iconName={'play-for-work'}
+                  text={'Download for offline viewing'}
+                />
+              </View>
             </TouchableHighlight>
           </View>}
         {this.state.state === STATES.DOWNLOADING &&
@@ -88,23 +115,31 @@ class Downloader extends React.Component {
             style={{
               display: 'flex',
               flexDirection: 'row',
-              justifyContent: 'space-between',
+              justifyContent: 'flex-start',
               alignItems: 'center',
             }}>
+            <View style={{ marginRight: 5 }}>
+              {/* <Progress.Circle size={30} progress={this.state.progress} /> */}
+              <Progress.Pie
+                size={30}
+                progress={this.state.progress}
+                color={colors.tertiary}
+              />
+            </View>
             <View>
-              <Text>Downloading lecture for offline viewing</Text>
-              <Text>
+              <Text style={{ color: colors.tertiary }}>
+                Downloading for offline viewing...
+              </Text>
+              <Text style={{ color: colors.tertiary }}>
                 {this.state.timeRemaining} remaining
               </Text>
             </View>
-            <View>
-              <Progress.Circle size={30} progress={this.state.progress} />
-            </View>
           </View>}
         {this.state.state === STATES.DOWNLOADED &&
-          <View>
-            <Text>Lecture available for offline viewing</Text>
-          </View>}
+          <Status
+            iconName={'offline-pin'}
+            text={'Lecture available for offline viewing'}
+          />}
       </View>
     );
   }

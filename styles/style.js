@@ -40,6 +40,8 @@ const mainViewStyle = {
   marginRight: 20,
 };
 
+const layoutStyle = mainViewStyle;
+
 // TODO: Something for vertical rhythm
 
 const styles = {

@@ -148,16 +148,17 @@ class WeekScreen extends React.Component {
           errorCallback={this._errorCallback.bind(this)}
           playFromPositionMillis={this.state.playFromPositionMillis}
         />
-        <View>
+        <View style={{ backgroundColor: colors.primary, marginBottom: 20 }}>
           <Downloader
-            style={{
-              display: this.state.isPortrait ? 'flex' : 'none',
-              marginBottom: 40,
-            }}
+            style={[
+              {
+                display: this.state.isPortrait ? 'flex' : 'none',
+                marginBottom: 40,
+                marginLeft: 30,
+              },
+              styles.layoutStyle,
+            ]}
           />
-          <View>
-            <Text>Switch playback rate</Text>
-          </View>
         </View>
         <ScrollView
           contentContainerStyle={{
