@@ -2,8 +2,8 @@ import React from 'react';
 import { Text, View, Dimensions, ScrollView } from 'react-native';
 import { ScreenOrientation, Video } from 'expo';
 import _ from 'lodash';
+import VideoPlayer from 'abi-expo-videoplayer';
 
-import VideoPlayer from '../components/VideoPlayer';
 import Row from '../components/Row';
 import Analytics from '../utils/Analytics';
 import styles from '../styles/style';

@@ -31,7 +31,8 @@
     "react-timer-mixin": "^0.13.3",
     "react-xml-parser": "^1.0.2",
     "sentry-expo": "^1.6.0",
-    "three": "^0.85.0"
+    "three": "^0.85.0",
+    "abi-expo-videoplayer": "*"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
