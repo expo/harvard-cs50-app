@@ -26,7 +26,6 @@ const headerStyle = {
 };
 
 // H1
-
 const h1Style = {
   fontSize: fontSize(2),
   letterSpacing: -1,

@@ -9,7 +9,7 @@ class WeekBox extends React.Component {
   };
   render() {
     const textStyle = {
-      color: this.state.active ? colors.grey : colors.tertiary,
+      color: this.state.active ? colors.complementary : colors.primary,
       fontSize: styles.fontSize(2),
     };
     return (
@@ -18,7 +18,8 @@ class WeekBox extends React.Component {
         style={{
           borderRadius: 5,
           borderWidth: 2,
-          backgroundColor: colors.secondary,
+          borderColor: colors.primary,
+          //backgroundColor: colors.secondary,
         }}
         onShowUnderlay={() => this.setState({ active: true })}
         onHideUnderlay={() => this.setState({ active: false })}
