@@ -26,13 +26,18 @@ class HomeScreen extends React.Component {
       headerTintColor: styles.headerTintColor,
       headerBackTitle: 'Back',
       headerStyle: styles.headerStyle,
+      headerTitleStyle: {
+        fontFamily: 'roboto-black',
+        fontSize: styles.fontSize(1),
+        letterSpacing: -0.4,
+      },
       headerRight: (
         <TouchableOpacity
           style={{ marginRight: 20 }}
           onPress={() => {
             navigation.navigate('Resources');
           }}>
-          <Ionicons name="md-list-box" size={28} color={colors.tertiary} />
+          <Ionicons name="md-list-box" size={28} color={colors.secondary} />
         </TouchableOpacity>
       ),
     };
@@ -94,7 +99,7 @@ class HomeScreen extends React.Component {
         Dimensions.get('window').width + itemHorizontalMargin * 2 - 60;
       return (
         <View style={{ marginTop: 40 }}>
-          <StatusBar backgroundColor="blue" barStyle="light-content" />
+          <StatusBar barStyle="dark-content" />
           <Text
             style={[
               {
@@ -178,7 +183,7 @@ class HomeScreen extends React.Component {
     };
 
     return (
-      <View>
+      <View style={{ backgroundColor: 'white' }}>
         <ScrollView>
           <BrowseSection weekNumber={this.state.weekNumber} />
           {/* All weeks section */}

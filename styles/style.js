@@ -18,10 +18,14 @@ const fontSize = n => {
 
 // Header styles
 
-const headerTintColor = colors.tertiary;
+const headerTintColor = colors.secondary;
 
 const headerStyle = {
-  backgroundColor: colors.primary,
+  borderBottomWidth: 1,
+  borderColor: colors.secondary,
+  backgroundColor: 'white',
+  // fontFamily: 'roboto-black',
+  // color: colors.primary,
   height: Platform.OS === 'ios' ? 80 : 100,
 };
 

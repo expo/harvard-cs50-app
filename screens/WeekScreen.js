@@ -131,6 +131,7 @@ class WeekScreen extends React.Component {
           justifyContent: 'space-between',
           flexDirection: 'column',
           minHeight: Dimensions.get('window').height,
+          backgroundColor: 'white',
         }}>
         <VideoPlayer
           videoProps={{
@@ -165,6 +166,7 @@ class WeekScreen extends React.Component {
             justifyContent: 'space-between',
             flexDirection: 'column',
             display: this.state.isPortrait ? 'flex' : 'none',
+            backgroundColor: 'white',
           }}>
           <Text
             style={[

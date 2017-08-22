@@ -51,8 +51,7 @@ class ResourcesScreen extends React.Component {
             // to go back anywhere
             navigation.goBack(null);
           }}>
-          <Text
-            style={{ color: colors.tertiary, fontSize: styles.fontSize(0) }}>
+          <Text style={{ color: colors.primary, fontSize: styles.fontSize(0) }}>
             Close
           </Text>
         </TouchableOpacity>
@@ -66,7 +65,7 @@ class ResourcesScreen extends React.Component {
 
   render() {
     return (
-      <ScrollView>
+      <ScrollView style={{ backgroundColor: 'white' }}>
         {RESOURCES.map(({ url, name, icon }) =>
           <Row
             key={url}
