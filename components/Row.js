@@ -1,8 +1,9 @@
 import React from 'react';
 import { Text, View, TouchableWithoutFeedback } from 'react-native';
-import styles from '../styles/style';
 import { EvilIcons, FontAwesome } from '@expo/vector-icons';
+
 import CrossTouchable from './CrossTouchable';
+import styles from '../styles/style';
 import colors from '../styles/colors';
 
 class Row extends React.Component {
@@ -21,7 +22,8 @@ class Row extends React.Component {
           this.setState({ pressed: false });
         }}
         onPress={evt => {
-          this.setState({ pressed: true });
+          // Disable until we can figure out a way to reverse the coloring when the transition ends
+          /* this.setState({ pressed: true }); */
           this.props.onPress(evt);
         }}>
         <View
