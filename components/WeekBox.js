@@ -66,18 +66,10 @@ class WeekBox extends React.Component {
               width: 100,
               height: 100,
               alignItems: 'center',
-              //borderWidth: 1,
-              //borderColor: 'black',
               marginLeft: 10,
               marginRight: 10,
             }}>
             <Icon />
-            {/* <Image
-              source={require('../assets/memory.png')}
-              fadeDuration={0}
-              style={{ width: 50, height: 60 }}
-            /> */}
-            {/* <AnimatedIcon /> */}
           </View>
           <View
             style={{
