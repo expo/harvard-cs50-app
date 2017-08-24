@@ -1,14 +1,17 @@
+// Roboto
 // const fonts = {
-//   'roboto-light': require('../assets/fonts/Roboto-Light.ttf'),
-//   'roboto-regular': require('../assets/fonts/Roboto-Regular.ttf'),
-//   'roboto-bold': require('../assets/fonts/Roboto-Bold.ttf'),
-//   'roboto-black': require('../assets/fonts/Roboto-Black.ttf'),
+//   'custom-light': require('../assets/fonts/Roboto-Light.ttf'),
+//   'custom-regular': require('../assets/fonts/Roboto-Regular.ttf'),
+//   'custom-bold': require('../assets/fonts/Roboto-Bold.ttf'),
+//   'custom-black': require('../assets/fonts/Roboto-Black.ttf'),
 // };
+
+// Stratum
 const fonts = {
-  'roboto-light': require('../assets/fonts/stratum2-regular-webfont.ttf'),
-  'roboto-regular': require('../assets/fonts/stratum2-medium-webfont.ttf'),
-  'roboto-bold': require('../assets/fonts/stratum2-bold-webfont.ttf'),
-  'roboto-black': require('../assets/fonts/stratum2-bold-webfont.ttf'),
+  'custom-light': require('../assets/fonts/stratum2-regular-webfont.ttf'),
+  'custom-regular': require('../assets/fonts/stratum2-medium-webfont.ttf'),
+  'custom-bold': require('../assets/fonts/stratum2-bold-webfont.ttf'),
+  'custom-black': require('../assets/fonts/stratum2-bold-webfont.ttf'),
 };
 
 export default fonts;

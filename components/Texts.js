@@ -6,14 +6,14 @@ const generateTextComponent = ({ style = {}, children, ...otherProps }, font) =>
     {children}
   </Text>;
 
-export class BoldText extends React.Component {
-  render = () => generateTextComponent(this.props, 'roboto-bold');
-}
-
 export class LightText extends React.Component {
-  render = () => generateTextComponent(this.props, 'roboto-light');
+  render = () => generateTextComponent(this.props, 'custom-light');
 }
 
 export class RegularText extends React.Component {
-  render = () => generateTextComponent(this.props, 'roboto-regular');
+  render = () => generateTextComponent(this.props, 'custom-regular');
+}
+
+export class BoldText extends React.Component {
+  render = () => generateTextComponent(this.props, 'custom-bold');
 }

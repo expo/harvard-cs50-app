@@ -20,7 +20,7 @@ const fontSize = n => {
 const headerTintColor = colors.secondary;
 
 const headerTitleStyle = {
-  fontFamily: 'roboto-black',
+  fontFamily: 'custom-black',
   fontSize: fontSize(1),
   letterSpacing: -0.4,
 };
@@ -37,7 +37,7 @@ const h1Style = {
   fontSize: fontSize(2),
   letterSpacing: -1,
   color: colors.primary,
-  fontFamily: 'roboto-black',
+  fontFamily: 'custom-black',
 };
 
 // Margins for all views

@@ -55,7 +55,6 @@ class OnboardScreen extends React.Component {
           style={{
             color: colors.primary,
             fontSize: styles.fontSize(2),
-            fontFamily: 'roboto-light',
             textAlign: 'center',
           }}>
           {text}
