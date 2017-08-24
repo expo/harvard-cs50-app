@@ -10,6 +10,13 @@ import OnboardScreen from './screens/OnboardScreen';
 import fonts from './styles/fonts';
 import config from './utils/config';
 
+import {
+  EvilIcons,
+  FontAwesome,
+  MaterialIcons,
+  Ionicons,
+} from '@expo/vector-icons';
+
 //import Sentry from 'sentry-expo';
 //Sentry.config(config.SENTRY_KEY).install();
 
@@ -75,7 +82,13 @@ class AppContainer extends React.Component {
 
   async _loadAssetsAsync() {
     const imageAssets = this._cacheImages([require('./assets/memory.png')]);
-    const fontAssets = this._cacheFonts([fonts]);
+    const fontAssets = this._cacheFonts([
+      fonts,
+      EvilIcons.font,
+      FontAwesome.font,
+      Ionicons.font,
+      MaterialIcons.font,
+    ]);
 
     try {
       await Promise.all([...imageAssets, ...fontAssets]);

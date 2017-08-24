@@ -4,7 +4,7 @@ import * as Progress from 'react-native-progress';
 import prettyMs from 'pretty-ms';
 import reactMixin from 'react-mixin';
 import TimerMixin from 'react-timer-mixin';
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import colors from '../styles/colors';
 
 var STATES = {

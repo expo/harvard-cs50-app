@@ -13,8 +13,6 @@ import Downloader from '../components/Downloader';
 import RateSwitcher from '../components/RateSwitcher';
 import config from '../utils/config';
 
-import { Foundation } from '@expo/vector-icons';
-
 class WeekScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: `Week ${navigation.state.params.weekNum}`,
