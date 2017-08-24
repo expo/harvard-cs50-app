@@ -10,8 +10,8 @@ import OnboardScreen from './screens/OnboardScreen';
 import fonts from './styles/fonts';
 import config from './utils/config';
 
-import Sentry from 'sentry-expo';
-Sentry.config(config.SENTRY_KEY).install();
+//import Sentry from 'sentry-expo';
+//Sentry.config(config.SENTRY_KEY).install();
 
 const LecturesNavigator = StackNavigator(
   {

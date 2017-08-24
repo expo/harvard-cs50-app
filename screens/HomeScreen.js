@@ -172,6 +172,7 @@ class HomeScreen extends React.Component {
                         source={require('../assets/memory.png')}
                         title={week.title.toLowerCase()}
                         desc={week.desc.toLowerCase()}
+                        weekNumber={week.weekNumber}
                       />
                     </View>
                   </View>

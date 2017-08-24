@@ -4,7 +4,7 @@
     "description": "A companion app for CS50",
     "slug": "harvard-cs50",
     "privacy": "public",
-    "sdkVersion": "19.0.0",
+    "sdkVersion": "20.0.0",
     "version": "1.0.0",
     "orientation": "portrait",
     "primaryColor": "#6E001C",
@@ -21,16 +21,6 @@
       "supportsTablet": false
     },
     "hooks": {
-      "postPublish": [
-        {
-          "file": "sentry-expo/upload-sourcemaps",
-          "config": {
-            "organization": "Expo",
-            "project": "CS50",
-            "authToken": "TOKEN"
-          }
-        }
-      ]
     }
   }
 }

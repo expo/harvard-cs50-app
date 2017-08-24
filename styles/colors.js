@@ -1,4 +1,8 @@
-import { Platform } from 'react-native';
+//import { Platform } from 'react-native';
+
+const Platform = {
+  OS: 'ios',
+};
 
 const colors = {
   primary: '#A41034', // crimson: #6E001C
