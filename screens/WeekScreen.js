@@ -13,6 +13,9 @@ import Downloader from '../components/Downloader';
 import RateSwitcher from '../components/RateSwitcher';
 import config from '../utils/config';
 
+const TRACK_IMAGE = require('../assets/videoplayer/track.png');
+const THUMB_IMAGE = require('../assets/videoplayer/thumb.png');
+
 class WeekScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: `Week ${navigation.state.params.weekNum}`,
@@ -159,6 +162,13 @@ class WeekScreen extends React.Component {
           playbackCallback={this._playbackCallback.bind(this)}
           errorCallback={this._errorCallback.bind(this)}
           playFromPositionMillis={this.state.playFromPositionMillis}
+          thumbImage={THUMB_IMAGE}
+          trackImage={TRACK_IMAGE}
+          textStyle={{
+            color: colors.tertiary,
+            fontFamily: 'custom-regular',
+            fontSize: 12,
+          }}
         />
         <View style={{ backgroundColor: colors.primary, marginBottom: 20 }}>
           <Downloader
