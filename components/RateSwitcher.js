@@ -1,8 +1,9 @@
 import React from 'react';
-import { Text, TouchableHighlight } from 'react-native';
+import { View, Text, TouchableHighlight } from 'react-native';
 
 import styles from '../styles/style';
 import colors from '../styles/colors';
+import { RegularText } from './Texts';
 
 class RateSwitcher extends React.Component {
   state = {
@@ -35,9 +36,11 @@ class RateSwitcher extends React.Component {
           this.props.changeRate(nextRate);
           this.setState({ rate: nextRate });
         }}>
-        <Text style={textStyle}>
-          {this.state.rate + 'x'}
-        </Text>
+        <View>
+          <RegularText style={textStyle}>
+            {this.state.rate + 'x'}
+          </RegularText>
+        </View>
       </TouchableHighlight>
     );
   }

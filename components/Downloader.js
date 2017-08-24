@@ -7,6 +7,8 @@ import TimerMixin from 'react-timer-mixin';
 import { MaterialIcons } from '@expo/vector-icons';
 import colors from '../styles/colors';
 
+import { RegularText } from './Texts';
+
 var STATES = {
   NOTSTARTED: 1,
   DOWNLOADING: 2,
@@ -86,9 +88,9 @@ class Downloader extends React.Component {
           size={28}
           color={colors.tertiary}
         />
-        <Text style={{ color: colors.tertiary }}>
+        <RegularText style={{ color: colors.tertiary }}>
           {text}
-        </Text>
+        </RegularText>
       </View>;
 
     return (
@@ -127,12 +129,12 @@ class Downloader extends React.Component {
               />
             </View>
             <View>
-              <Text style={{ color: colors.tertiary }}>
+              <RegularText style={{ color: colors.tertiary }}>
                 Downloading for offline viewing...
-              </Text>
-              <Text style={{ color: colors.tertiary }}>
+              </RegularText>
+              <RegularText style={{ color: colors.tertiary }}>
                 {this.state.timeRemaining} remaining
-              </Text>
+              </RegularText>
             </View>
           </View>}
         {this.state.state === STATES.DOWNLOADED &&

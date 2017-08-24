@@ -3,8 +3,9 @@ import colors from './colors';
 
 // Use Modular Scale to create harmony between various font sizes that we use (See http://www.modularscale.com/)
 const fontSize = n => {
-  const baseFontSize = 12;
-  const multiplier = Platform.OS === 'ios' ? 1.618 : 1.4;
+  const baseFontSize = 16;
+  // Major second
+  const multiplier = 1.125;
   if (n > 0) {
     return baseFontSize * (multiplier * n);
   } else if (n === 0) {
@@ -13,19 +14,21 @@ const fontSize = n => {
     return baseFontSize / (multiplier * Math.abs(n));
   }
 };
-// TODO: Add font families
-// Setup default fontFamily for all <Text> to be Roboto-Light
 
 // Header styles
 
 const headerTintColor = colors.secondary;
 
+const headerTitleStyle = {
+  fontFamily: 'roboto-black',
+  fontSize: fontSize(1),
+  letterSpacing: -0.4,
+};
+
 const headerStyle = {
   borderBottomWidth: 1,
   borderColor: colors.secondary,
   backgroundColor: 'white',
-  // fontFamily: 'roboto-black',
-  // color: colors.primary,
   height: Platform.OS === 'ios' ? 80 : 100,
 };
 
@@ -51,6 +54,7 @@ const layoutStyle = mainViewStyle;
 const styles = {
   fontSize,
   headerTintColor,
+  headerTitleStyle,
   headerStyle,
   mainViewStyle,
   h1Style,

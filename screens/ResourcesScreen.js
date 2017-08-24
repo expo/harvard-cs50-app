@@ -2,6 +2,8 @@ import React from 'react';
 import { ScrollView, Text, TouchableOpacity } from 'react-native';
 
 import Row from '../components/Row';
+import { RegularText } from '../components/Texts';
+
 import colors from '../styles/colors';
 import styles from '../styles/style';
 
@@ -39,6 +41,7 @@ class ResourcesScreen extends React.Component {
     return {
       title: 'Resources',
       headerTintColor: styles.headerTintColor,
+      headerTitleStyle: styles.headerTitleStyle,
       headerStyle: styles.headerStyle,
       headerBackTitle: 'Back',
       headerMode: 'float',
@@ -51,9 +54,10 @@ class ResourcesScreen extends React.Component {
             // to go back anywhere
             navigation.goBack(null);
           }}>
-          <Text style={{ color: colors.primary, fontSize: styles.fontSize(0) }}>
+          <RegularText
+            style={{ color: colors.primary, fontSize: styles.fontSize(0) }}>
             Close
-          </Text>
+          </RegularText>
         </TouchableOpacity>
       ),
     };

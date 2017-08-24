@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, Image, TouchableHighlight } from 'react-native';
 import styles from '../styles/style';
 import colors from '../styles/colors';
+import { RegularText } from '../components/Texts';
 
 import AlgorithmsIcon from '../components/svgs/algorithms';
 import ArraysIcon from '../components/svgs/Arrays';
@@ -77,14 +78,14 @@ class WeekBox extends React.Component {
               alignItems: 'flex-start',
               marginRight: 20,
             }}>
-            <Text style={textStyle} numberOfLines={1}>
+            <RegularText style={textStyle} numberOfLines={1}>
               {this.props.desc}
-            </Text>
-            <Text
+            </RegularText>
+            <RegularText
               style={[textStyle, { fontSize: styles.fontSize(1) }]}
               numberOfLines={1}>
               {this.props.title}
-            </Text>
+            </RegularText>
           </View>
         </View>
       </TouchableHighlight>

@@ -17,6 +17,7 @@ class WeekScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: `Week ${navigation.state.params.weekNum}`,
     headerTintColor: styles.headerTintColor,
+    headerTitleStyle: styles.headerTitleStyle,
     headerStyle: navigation.state.params.hideHeader
       ? { display: 'none', opacity: 0 }
       : styles.headerStyle,

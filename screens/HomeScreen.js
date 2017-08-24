@@ -18,6 +18,7 @@ import colors from '../styles/colors';
 import config from '../utils/config';
 import Row from '../components/Row';
 import WeekBox from '../components/WeekBox';
+import { BoldText, LightText } from '../components/Texts';
 
 class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -26,11 +27,7 @@ class HomeScreen extends React.Component {
       headerTintColor: styles.headerTintColor,
       headerBackTitle: 'Back',
       headerStyle: styles.headerStyle,
-      headerTitleStyle: {
-        fontFamily: 'roboto-black',
-        fontSize: styles.fontSize(1),
-        letterSpacing: -0.4,
-      },
+      headerTitleStyle: styles.headerTitleStyle,
       headerRight: (
         <TouchableOpacity
           style={{ marginRight: 20 }}
@@ -100,19 +97,18 @@ class HomeScreen extends React.Component {
       return (
         <View style={{ marginTop: 40 }}>
           <StatusBar barStyle="dark-content" />
-          <Text
+          <BoldText
             style={[
               {
                 fontSize: styles.fontSize(2),
                 letterSpacing: -1,
                 color: colors.primary,
-                fontFamily: 'roboto-black',
                 marginBottom: 15,
               },
               styles.mainViewStyle,
             ]}>
             Browse Lectures
-          </Text>
+          </BoldText>
           {this.state.data &&
             <Carousel
               containerCustomStyle={{ marginTop: 20 }}
@@ -152,14 +148,14 @@ class HomeScreen extends React.Component {
                         borderTopColor: colors.primary,
                         borderTopWidth: 1,
                       }}>
-                      <Text
+                      <LightText
                         style={{
                           color: colors.primary,
                           marginTop: 10,
                           marginBottom: 10,
                         }}>
                         {headingText}
-                      </Text>
+                      </LightText>
                       <WeekBox
                         onPress={() => this.onWeekPress(week.weekNumber)}
                         key={'entry-${index}'}
@@ -197,18 +193,15 @@ class HomeScreen extends React.Component {
                 },
                 styles.mainViewStyle,
               ]}>
-              <Text
-                style={[
-                  {
-                    fontFamily: 'roboto-black',
-                    color: colors.primary,
-                    paddingBottom: 10,
-                    fontSize: styles.fontSize(2),
-                    letterSpacing: -1,
-                  },
-                ]}>
+              <BoldText
+                style={{
+                  color: colors.primary,
+                  paddingBottom: 10,
+                  fontSize: styles.fontSize(2),
+                  letterSpacing: -1,
+                }}>
                 All Weeks
-              </Text>
+              </BoldText>
             </View>
             <ListView
               contentContainerStyle={{

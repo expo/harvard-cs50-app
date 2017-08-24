@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, TouchableWithoutFeedback } from 'react-native';
 import { EvilIcons, FontAwesome } from '@expo/vector-icons';
 
+import { RegularText } from './Texts';
 import CrossTouchable from './CrossTouchable';
 import styles from '../styles/style';
 import colors from '../styles/colors';
@@ -69,9 +70,8 @@ class Row extends React.Component {
                       width: 20,
                     }}
                   />}
-                <Text
+                <RegularText
                   style={{
-                    fontFamily: 'roboto-regular',
                     fontSize: styles.fontSize(1),
                     color: this.state.pressed
                       ? colors.complementary
@@ -80,7 +80,7 @@ class Row extends React.Component {
                     marginLeft: this.props.icon ? 15 : 0,
                   }}>
                   {this.props.text}
-                </Text>
+                </RegularText>
               </View>
               <EvilIcons
                 name="chevron-right"
