@@ -10,6 +10,7 @@ import styles from '../styles/style';
 import colors from '../styles/colors';
 import StoredValue from '../utils/StoredValue';
 import Downloader from '../components/Downloader';
+import RateSwitcher from '../components/RateSwitcher';
 import config from '../utils/config';
 
 import { Foundation } from '@expo/vector-icons';
@@ -121,6 +122,14 @@ class WeekScreen extends React.Component {
     this.props.navigation.navigate('Link', { url, title: _.capitalize(title) });
   };
 
+  changeRate(rate) {
+    this._playbackInstance &&
+      this._playbackInstance.setStatusAsync({
+        rate: rate,
+        shouldCorrectPitch: true,
+      });
+  }
+
   render() {
     // Video player sources
     // Example HLS url: https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8
@@ -141,6 +150,9 @@ class WeekScreen extends React.Component {
             source: {
               uri: this.state.data.videos['240p'],
             },
+            ref: component => {
+              this._playbackInstance = component;
+            },
           }}
           isPortrait={this.state.isPortrait}
           switchToLandscape={this.switchToLandscape.bind(this)}
@@ -160,6 +172,7 @@ class WeekScreen extends React.Component {
               styles.layoutStyle,
             ]}
           />
+          <RateSwitcher changeRate={this.changeRate.bind(this)} />
         </View>
         <ScrollView
           contentContainerStyle={{
