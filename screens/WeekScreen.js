@@ -15,6 +15,51 @@ import config from '../utils/config';
 
 const TRACK_IMAGE = require('../assets/videoplayer/track.png');
 const THUMB_IMAGE = require('../assets/videoplayer/thumb.png');
+import { Foundation, MaterialIcons } from '@expo/vector-icons';
+
+const ICON_COLOR = colors.tertiary;
+const CENTER_ICON_SIZE = 36;
+const BOTTOM_BAR_ICON_SIZE = 30;
+
+const PlayIcon = () =>
+  <Foundation
+    name={'play'}
+    size={CENTER_ICON_SIZE}
+    color={ICON_COLOR}
+    style={{ textAlign: 'center' }}
+  />;
+
+const PauseIcon = () =>
+  <Foundation
+    name={'pause'}
+    size={CENTER_ICON_SIZE}
+    color={ICON_COLOR}
+    style={{ textAlign: 'center' }}
+  />;
+
+export const FullscreenEnterIcon = () =>
+  <MaterialIcons
+    name={'fullscreen'}
+    size={BOTTOM_BAR_ICON_SIZE}
+    color={ICON_COLOR}
+    style={{ textAlign: 'center' }}
+  />;
+
+export const FullscreenExitIcon = () =>
+  <MaterialIcons
+    name={'fullscreen-exit'}
+    size={BOTTOM_BAR_ICON_SIZE}
+    color={ICON_COLOR}
+    style={{ textAlign: 'center' }}
+  />;
+
+export const ReplayIcon = () =>
+  <MaterialIcons
+    name={'replay'}
+    size={CENTER_ICON_SIZE}
+    color={ICON_COLOR}
+    style={{ textAlign: 'center' }}
+  />;
 
 class WeekScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -164,14 +209,21 @@ class WeekScreen extends React.Component {
           playFromPositionMillis={this.state.playFromPositionMillis}
           thumbImage={THUMB_IMAGE}
           trackImage={TRACK_IMAGE}
+          playIcon={PlayIcon}
+          pauseIcon={PauseIcon}
+          fullscreenEnterIcon={FullscreenEnterIcon}
+          fullscreenExitIcon={FullscreenExitIcon}
+          replayIcon={ReplayIcon}
           textStyle={{
             color: colors.tertiary,
             fontFamily: 'custom-regular',
+            textAlign: 'left',
             fontSize: 12,
           }}
         />
         <View style={{ backgroundColor: colors.primary, marginBottom: 20 }}>
           <Downloader
+            id={this.state.data.title}
             style={[
               {
                 display: this.state.isPortrait ? 'flex' : 'none',
