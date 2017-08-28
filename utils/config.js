@@ -19,7 +19,7 @@ const dev = {
   secondScreen: true,
   resourcesScreen: false,
   muteVideo: true,
-  autoplayVideo: false,
+  autoplayVideo: true,
   firstLoad: false,
 };
 
