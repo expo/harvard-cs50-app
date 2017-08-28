@@ -10,7 +10,7 @@
     "svg-process": "node_modules/.bin/babel-node utils/svg-processor.js"
   },
   "dependencies": {
-    "abi-expo-videoplayer": "^0.1.4",
+    "abi-expo-videoplayer": "^0.1.6",
     "eslint-plugin-prettier": "^2.1.1",
     "expo": "^20.0.0",
     "expo-three": "^1.0.0",
@@ -24,8 +24,12 @@
     "react-native-snap-carousel": "^2.3.1",
     "react-native-swiper": "^1.5.4",
     "react-navigation": "^1.0.0-beta.11",
+    "react-redux": "^5.0.6",
     "react-timer-mixin": "^0.13.3",
     "react-xml-parser": "^1.0.2",
+    "redux": "^3.7.2",
+    "redux-persist": "^4.9.1",
+    "redux-watch": "^1.1.1",
     "sentry-expo": "^1.6.0",
     "svgo": "^0.7.2",
     "three": "^0.85.0"
