@@ -39,6 +39,11 @@ const RESOURCES = [
     url: 'https://gist.github.com/abi/05c7a199ced36d56da5a2fe3a4a52829',
     icon: 'heart',
   },
+  {
+    name: 'This app is open source.',
+    url: 'https://github.com/expo/harvard-cs50-app',
+    icon: 'github-alt',
+  },
 ];
 
 class ResourcesScreen extends React.Component {
