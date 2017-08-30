@@ -199,17 +199,22 @@ class WeekScreen extends React.Component {
             fontSize: 12,
           }}
         />
-        <View style={{ backgroundColor: colors.primary, marginBottom: 20 }}>
+        <View
+          style={{
+            backgroundColor: colors.primary,
+            marginBottom: 20,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            paddingLeft: styles.mainViewStyle.marginLeft,
+            paddingRight: styles.mainViewStyle.marginRight,
+          }}>
           <Downloader
             id={this.state.data.weekNumber}
-            style={[
-              {
-                display: this.state.isPortrait ? 'flex' : 'none',
-                marginBottom: 40,
-                marginLeft: 30,
-              },
-              styles.layoutStyle,
-            ]}
+            style={{
+              display: this.state.isPortrait ? 'flex' : 'none',
+              marginBottom: 40,
+            }}
           />
           <RateSwitcher changeRate={this.changeRate.bind(this)} />
         </View>

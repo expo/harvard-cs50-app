@@ -11,11 +11,6 @@ class RateSwitcher extends React.Component {
   };
 
   render() {
-    const textStyle = {
-      fontSize: styles.fontSize(0),
-      color: colors.tertiary,
-    };
-
     const rates = {
       '1': 1.5,
       '1.5': 2,
@@ -25,7 +20,6 @@ class RateSwitcher extends React.Component {
     return (
       <TouchableHighlight
         style={{
-          marginLeft: 10,
           borderRadius: 5,
           padding: 5,
           borderWidth: 1,
@@ -36,8 +30,17 @@ class RateSwitcher extends React.Component {
           this.props.changeRate(nextRate);
           this.setState({ rate: nextRate });
         }}>
-        <View>
-          <RegularText style={textStyle}>
+        <View
+          style={{
+            width: 30,
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+          }}>
+          <RegularText
+            style={{
+              fontSize: styles.fontSize(0),
+              color: colors.tertiary,
+            }}>
             {this.state.rate + 'x'}
           </RegularText>
         </View>
