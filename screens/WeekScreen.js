@@ -2,21 +2,21 @@ import React from 'react';
 import { Text, View, Dimensions, ScrollView } from 'react-native';
 import { ScreenOrientation, Video } from 'expo';
 import _ from 'lodash';
+import { connect } from 'react-redux';
 import VideoPlayer from 'abi-expo-videoplayer';
 
 import Row from '../components/Row';
 import Analytics from '../utils/Analytics';
 import styles from '../styles/style';
 import colors from '../styles/colors';
-import StoredValue from '../utils/StoredValue';
 import Downloader from '../components/Downloader';
 import RateSwitcher from '../components/RateSwitcher';
 import config from '../utils/config';
 
 const TRACK_IMAGE = require('../assets/videoplayer/track.png');
 const THUMB_IMAGE = require('../assets/videoplayer/thumb.png');
-import { Foundation, MaterialIcons } from '@expo/vector-icons';
 
+import { Foundation, MaterialIcons } from '@expo/vector-icons';
 const ICON_COLOR = colors.tertiary;
 const CENTER_ICON_SIZE = 36;
 const BOTTOM_BAR_ICON_SIZE = 30;
@@ -96,6 +96,7 @@ class WeekScreen extends React.Component {
       data,
       links,
       linksArr,
+      playFromPositionMillis: this.props.playback,
     };
   }
 
@@ -116,20 +117,6 @@ class WeekScreen extends React.Component {
       this.orientationChangeHandler.bind(this)
     );
     Analytics.track(Analytics.events.USER_WATCHED_VIDEO);
-    this.storedPlaybackTime = new StoredValue(
-      this.state.data.title + ':playbackTime'
-    );
-
-    this.storedPlaybackTime
-      .get()
-      .then(value => {
-        if (value !== null) {
-          this.setState({ playFromPositionMillis: parseInt(value) });
-        }
-      })
-      .catch(e => {
-        console.log('Error retrieving stored playback value', e);
-      });
   }
 
   componentWillUnmount() {
@@ -147,16 +134,7 @@ class WeekScreen extends React.Component {
 
   _playbackCallback(playbackStatus) {
     if (playbackStatus.isLoaded) {
-      var positionMillis = playbackStatus.positionMillis.toString();
-      if (this.storedPlaybackTime) {
-        this.storedPlaybackTime
-          .set(positionMillis)
-          .then(val => {})
-          .catch(error => {
-            console.log('Error in saving stored value', error);
-            // TODO: Send to Sentry
-          });
-      }
+      this.props.updatePlaybackTime(playbackStatus.positionMillis);
     }
   }
 
@@ -200,13 +178,13 @@ class WeekScreen extends React.Component {
             ref: component => {
               this._playbackInstance = component;
             },
+            positionMillis: this.state.playFromPositionMillis,
           }}
           isPortrait={this.state.isPortrait}
           switchToLandscape={this.switchToLandscape.bind(this)}
           switchToPortrait={this.switchToPortrait.bind(this)}
           playbackCallback={this._playbackCallback.bind(this)}
           errorCallback={this._errorCallback.bind(this)}
-          playFromPositionMillis={this.state.playFromPositionMillis}
           thumbImage={THUMB_IMAGE}
           trackImage={TRACK_IMAGE}
           playIcon={PlayIcon}
@@ -223,7 +201,7 @@ class WeekScreen extends React.Component {
         />
         <View style={{ backgroundColor: colors.primary, marginBottom: 20 }}>
           <Downloader
-            id={this.state.data.title}
+            id={this.state.data.weekNumber}
             style={[
               {
                 display: this.state.isPortrait ? 'flex' : 'none',
@@ -271,4 +249,22 @@ class WeekScreen extends React.Component {
   }
 }
 
-export default WeekScreen;
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    updatePlaybackTime: time => {
+      dispatch({
+        type: 'PLAYBACK',
+        id: ownProps.navigation.state.params.data.weekNumber,
+        time,
+      });
+    },
+  };
+};
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    playback: state.playback[ownProps.navigation.state.params.data.weekNumber],
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(WeekScreen);

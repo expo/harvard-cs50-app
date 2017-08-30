@@ -1,79 +1,19 @@
 import React from 'react';
-import { Text, View, TouchableHighlight, NetInfo } from 'react-native';
+import { Text, View, TouchableHighlight } from 'react-native';
 import * as Progress from 'react-native-progress';
 import prettyMs from 'pretty-ms';
 import reactMixin from 'react-mixin';
 import TimerMixin from 'react-timer-mixin';
+import { connect } from 'react-redux';
 import { MaterialIcons } from '@expo/vector-icons';
+
 import colors from '../styles/colors';
-
 import { RegularText } from './Texts';
+import { STATES } from '../utils/DownloadManager';
 
-var STATES = {
-  NOTSTARTED: 1,
-  DOWNLOADING: 2,
-  STALLED: 3,
-  DOWNLOADED: 4,
-};
+// console.log(DownloadManager);
 
 class Downloader extends React.Component {
-  state = {
-    progress: 0,
-    timeRemaining: '10 hours',
-    state: STATES.NOTSTARTED,
-    totalBytes: 10000,
-    currentBytes: 0,
-  };
-
-  constructor(props) {
-    super(props);
-    NetInfo.fetch().then(reach => {
-      // console.log('Initial: ' + reach);
-    });
-    NetInfo.addEventListener('change', reach => {
-      // console.log('Change: ' + reach);
-      // TODO: Change to STATES.STALLED
-    });
-  }
-
-  saveToDisk() {
-    this.setState({ state: STATES.DOWNLOADING });
-
-    // this.savedUrl = FileSystem.documentDirectory + 'test.mp4';
-    // Expo.FileSystem
-    //   .downloadAsync(
-    //     'http://techslides.com/demos/sample-videos/small.mp4',
-    //     this.savedUrl
-    //   )
-    //   .then(({ uri }) => {
-    //     console.log('Finished downloading', uri, this.savedUrl);
-    //     this.setState({ localVideoUri: uri });
-    //   })
-    //   .catch(error => {
-    //     console.error(error);
-    //   });
-
-    this.setInterval(() => {
-      let currentBytes = this.state.currentBytes;
-      const totalBytes = this.state.totalBytes;
-
-      currentBytes = currentBytes + 500;
-      if (currentBytes > totalBytes) {
-        currentBytes = totalBytes;
-      }
-
-      const speedBytesPerMs = 1;
-      const timeRemainingMs = (totalBytes - currentBytes) / speedBytesPerMs;
-
-      this.setState({
-        progress: currentBytes / totalBytes,
-        currentBytes: currentBytes,
-        timeRemaining: prettyMs(timeRemainingMs),
-        state: this.state.progress < 1 ? STATES.DOWNLOADING : STATES.DOWNLOADED,
-      });
-    }, 500);
-  }
-
   render() {
     const Status = ({ iconName, text }) =>
       <View
@@ -101,9 +41,9 @@ class Downloader extends React.Component {
           paddingTop: 10,
           paddingBottom: 10,
         }}>
-        {this.state.state === STATES.NOTSTARTED &&
+        {this.props.downloadState.state === STATES.NOTSTARTED &&
           <View>
-            <TouchableHighlight onPress={this.saveToDisk.bind(this)}>
+            <TouchableHighlight onPress={this.props.download}>
               <View>
                 <Status
                   iconName={'play-for-work'}
@@ -112,7 +52,7 @@ class Downloader extends React.Component {
               </View>
             </TouchableHighlight>
           </View>}
-        {this.state.state === STATES.DOWNLOADING &&
+        {this.props.downloadState.state === STATES.DOWNLOADING &&
           <View
             style={{
               display: 'flex',
@@ -124,7 +64,10 @@ class Downloader extends React.Component {
               {/* <Progress.Circle size={30} progress={this.state.progress} /> */}
               <Progress.Pie
                 size={30}
-                progress={this.state.progress}
+                progress={
+                  this.props.downloadState.currentBytes /
+                  this.props.downloadState.totalBytes
+                }
                 color={colors.tertiary}
               />
             </View>
@@ -133,15 +76,17 @@ class Downloader extends React.Component {
                 Downloading for offline viewing...
               </RegularText>
               <RegularText style={{ color: colors.tertiary }}>
-                {this.state.timeRemaining} remaining
+                {/* {this.state.timeRemaining}  */} remaining
               </RegularText>
             </View>
           </View>}
-        {this.state.state === STATES.DOWNLOADED &&
+        {this.props.downloadState.state === STATES.DOWNLOADED &&
           <Status
             iconName={'offline-pin'}
             text={'Lecture available for offline viewing'}
           />}
+        {this.props.downloadState.state === STATES.ERROR &&
+          <Status iconName={'error'} text={this.state.error.toString()} />}
       </View>
     );
   }
@@ -149,4 +94,22 @@ class Downloader extends React.Component {
 
 reactMixin(Downloader.prototype, TimerMixin);
 
-export default Downloader;
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    download: status => {
+      dispatch({
+        type: 'OFFLINE',
+        id: ownProps.id,
+        status: { state: STATES.START_DOWNLOAD },
+      });
+    },
+  };
+};
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    downloadState: state.offline[ownProps.id] || { state: STATES.NOTSTARTED },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Downloader);

@@ -11,8 +11,8 @@ import {
 import Expo from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import Carousel from 'react-native-snap-carousel';
+import { connect } from 'react-redux';
 
-import loadData from '../utils/data-loader';
 import styles from '../styles/style';
 import colors from '../styles/colors';
 import config from '../utils/config';
@@ -40,26 +40,20 @@ class HomeScreen extends React.Component {
     };
   };
 
-  constructor() {
-    super();
-    this._loadData();
+  constructor(props) {
+    super(props);
     var ds = new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2,
     });
+
     this.state = {
-      weekNumber: 4,
-      dataSource: ds.cloneWithRows([]),
-      data: null,
+      weekNumber: 0,
+      dataSource: ds.cloneWithRows(props.data),
+      data: props.data,
     };
   }
 
-  async _loadData() {
-    var data = await loadData();
-    this.setState({ data });
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(data),
-    });
-
+  componentDidMount() {
     if (config.secondScreen) {
       this.onWeekPress(this.state.weekNumber);
     }
@@ -87,9 +81,6 @@ class HomeScreen extends React.Component {
   }
 
   render() {
-    // Images associated with lecture
-    // require('../assets/memory.png')
-
     const BrowseSection = ({ weekNumber }) => {
       const itemHorizontalMargin = 10;
       const itemWidth =
@@ -219,4 +210,10 @@ class HomeScreen extends React.Component {
   }
 }
 
-export default HomeScreen;
+const mapStateToProps = state => {
+  return {
+    data: state.courseData,
+  };
+};
+
+export default connect(mapStateToProps)(HomeScreen);
