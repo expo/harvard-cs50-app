@@ -33,6 +33,16 @@ class Downloader extends React.Component {
         </RegularText>
       </View>;
 
+    let progress = 0;
+    if (
+      this.props.downloadState.currentBytes &&
+      this.props.downloadState.totalBytes
+    ) {
+      progress =
+        this.props.downloadState.currentBytes /
+        this.props.downloadState.totalBytes;
+    }
+
     return (
       <View
         style={{
@@ -50,7 +60,9 @@ class Downloader extends React.Component {
               </View>
             </TouchableHighlight>
           </View>}
-        {this.props.downloadState.state === STATES.DOWNLOADING &&
+        {(this.props.downloadState.state === STATES.DOWNLOADING ||
+          this.props.downloadState.state === STATES.STALLED ||
+          this.props.downloadState.state === STATES.START_DOWNLOAD) &&
           <View
             style={{
               display: 'flex',
@@ -62,10 +74,7 @@ class Downloader extends React.Component {
               {/* <Progress.Circle size={30} progress={this.state.progress} /> */}
               <Progress.Pie
                 size={30}
-                progress={
-                  this.props.downloadState.currentBytes /
-                  this.props.downloadState.totalBytes
-                }
+                progress={progress}
                 color={colors.tertiary}
               />
             </View>
@@ -73,9 +82,9 @@ class Downloader extends React.Component {
               <RegularText style={{ color: colors.tertiary }}>
                 Downloading for offline viewing...
               </RegularText>
-              <RegularText style={{ color: colors.tertiary }}>
-                {/* {this.state.timeRemaining}  */} remaining
-              </RegularText>
+              {/* <RegularText style={{ color: colors.tertiary }}>
+                {this.state.timeRemaining} remaining
+              </RegularText> */}
             </View>
           </View>}
         {this.props.downloadState.state === STATES.DOWNLOADED &&
