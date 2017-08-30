@@ -34,6 +34,11 @@ const RESOURCES = [
     url: 'https://cs50.harvard.edu/faqs',
     icon: 'question-circle-o',
   },
+  {
+    name: 'Credits',
+    url: 'https://gist.github.com/abi/05c7a199ced36d56da5a2fe3a4a52829',
+    icon: 'heart',
+  },
 ];
 
 class ResourcesScreen extends React.Component {

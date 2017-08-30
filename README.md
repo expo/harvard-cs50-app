@@ -18,3 +18,6 @@ database left by Knut M. Synstad from the Noun Project
 javascript by Oliviu Stoian from the Noun Project
 celebration hat by Surya from the Noun Project
 C File by Hea Poh Lin from the Noun Project
+pause by Raphaël Buquet from the Noun Project
+play by Raphaël Buquet from the Noun Project
+minimize by Garrett Knoll from the Noun Project
