@@ -23,4 +23,4 @@ const dev = {
   firstLoad: false,
 };
 
-export default dev;
+export default prod;
