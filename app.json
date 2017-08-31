@@ -11,14 +11,19 @@
     "icon": "./assets/icons/app.png",
     "loading": {
       "icon": "./assets/icons/app.png",
-      "backgroundImage": "./assets/icons/loading-bg.png",
       "hideExponentText": true
     },
     "packagerOpts": {
       "assetExts": ["ttf", "mp4", "xml"]
     },
+    "scheme": "harvardcs50",
     "ios": {
-      "supportsTablet": false
+      "supportsTablet": false,
+      "bundleIdentifier": "exp.host.cs50",
+      "buildNumber": "1"
+    },
+    "android": {
+      "package": "exp.host.cs50"
     },
     "hooks": {
     }
