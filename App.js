@@ -10,6 +10,7 @@ import Store from './state/Store';
 import fonts from './styles/fonts';
 import config from './utils/config';
 import DownloadManager from './utils/DownloadManager';
+import Data from './data/Data';
 
 import {
   EvilIcons,
@@ -66,8 +67,7 @@ class AppContainer extends React.Component {
         ...imageAssets,
         ...fontAssets,
       ]);
-      let data = await loadData();
-      Store.dispatch({ type: 'SET_DATA', data });
+      Store.dispatch({ type: 'SET_DATA', data: Data });
     } catch (e) {
       console.log('Error downloading assets', e);
     }
