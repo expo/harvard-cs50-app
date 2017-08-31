@@ -156,7 +156,6 @@ class HomeScreen extends React.Component {
                         textWidth={
                           (itemWidth - itemHorizontalMargin * 2) * 2 / 3
                         }
-                        source={require('../assets/memory.png')}
                         title={week.title.toLowerCase()}
                         desc={week.desc.toLowerCase()}
                         weekNumber={week.weekNumber}

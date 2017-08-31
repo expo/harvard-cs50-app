@@ -49,7 +49,6 @@ class WeekBox extends React.Component {
           borderRadius: 5,
           borderWidth: 2,
           borderColor: colors.primary,
-          //backgroundColor: colors.secondary,
         }}
         onShowUnderlay={() => this.setState({ active: true })}
         onHideUnderlay={() => this.setState({ active: false })}
