@@ -5,10 +5,9 @@ Try it here: https://expo.io/@abiraja/harvard-cs50
 
 Still a work in progress, and requires visual polish.
 
-## Icon Credits
-
-| array by Thesaurustool from the Noun Project                |
+| Icon Credits |
 |-------------------------------------------------------------|
+| array by Thesaurustool from the Noun Project                |
 | Sagittarius Cat by Denis Sazhin from the Noun Project       |
 | memory card by ProSymbols from the Noun Project             |
 | Binary Tree by H Alberto Gongora from the Noun Project      |
