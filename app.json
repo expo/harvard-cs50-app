@@ -7,7 +7,7 @@
     "sdkVersion": "20.0.0",
     "version": "1.0.0",
     "orientation": "portrait",
-    "primaryColor": "#6E001C",
+    "primaryColor": "#A51C30",
     "icon": "./assets/icons/app.png",
     "loading": {
       "icon": "./assets/icons/app.png",

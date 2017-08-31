@@ -20,7 +20,7 @@ const dev = {
   resourcesScreen: false,
   muteVideo: true,
   autoplayVideo: true,
-  firstLoad: false,
+  firstLoad: true,
 };
 
 export default prod;
