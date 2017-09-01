@@ -26,6 +26,16 @@
       "package": "exp.host.cs50"
     },
     "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "expoio",
+            "project": "cs50",
+            "authToken": "06185d7f08a14ca7b210cff3378517156e0f4d49b0b14404ace66eee5b4009b9"
+          }
+        }
+      ]
     }
   }
 }
