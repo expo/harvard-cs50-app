@@ -17,7 +17,7 @@ const reducer = (state = 0, action) => {
     let entry = {};
     switch (type) {
       case 'OFFLINE':
-        entry[id] = action.status;
+        entry[id] = action.state;
         let newState = {
           ...state,
           offline: { ...state.offline, ...entry },

@@ -18,7 +18,7 @@ const prod = {
 // Dev
 const dev = {
   ...common,
-  secondScreen: false,
+  secondScreen: true,
   resourcesScreen: false,
   muteVideo: false,
   autoplayVideo: true,
@@ -26,4 +26,4 @@ const dev = {
   sentryEnabledInDev: true,
 };
 
-export default prod;
+export default dev;

@@ -1,13 +1,29 @@
-import { AppState } from 'react-native';
+import { AppState, NetInfo } from 'react-native';
 import { FileSystem } from 'expo';
 import _ from 'lodash';
+
+const DOWNLOADING = ({ totalBytes, currentBytes, savable }) => ({
+  currentBytes,
+  totalBytes,
+  savable,
+  state: 'DOWNLOADING',
+});
+
+const DOWNLOADED = ({ uri }) => ({
+  uri,
+  state: 'DOWNLOADED',
+});
+
+const ERROR = ({ message }) => ({
+  message,
+  state: 'ERROR',
+});
 
 export const STATES = {
   NOTSTARTED: 'NOTSTARTED',
   START_DOWNLOAD: 'START_DOWNLOAD',
-  DOWNLOADING: 'DOWNLOADING', // totalBytes, currentBytes
-  STALLED: 'STALLED', // savable
-  DOWNLOADED: 'DOWNLOADED', // fileUrl
+  DOWNLOADING: 'DOWNLOADING',
+  DOWNLOADED: 'DOWNLOADED',
   ERROR: 'ERROR',
 };
 
@@ -16,62 +32,24 @@ export default class DownloadManager {
     this._store = store;
     this._data = store.getState().courseData;
     this._firstRun = true;
-    this._downloads = {};
+    // Store DownloadResumable objects for active downloads
+    this._downloadResumables = {};
     this._previousAppState = 'active';
 
     this._store.subscribe(() => {
       this._startNewDownloads();
     });
 
-    this._restartInterruptedDownloads();
-    this._resumeAllDownloads();
+    this._onAppStart();
 
     AppState.addEventListener('change', this._handleAppStateChange);
+    NetInfo.addEventListener('change', this._handleNetworkStateChange);
   }
 
+  // TODO: Call teardown in parent
   teardown() {
     AppState.removeEventListener('change', this._handleAppStateChange);
-  }
-
-  // NetInfo.fetch().then(reach => {
-  //   // console.log('Initial: ' + reach);
-  // });
-  // NetInfo.addEventListener('change', reach => {
-  //   // console.log('Change: ' + reach);
-  //   // TODO: Change to STATES.STALLED
-  // });
-
-  _handleAppStateChange = nextAppState => {
-    console.log('[app state]', nextAppState);
-    if (nextAppState === 'active' && this._previousAppState !== 'active') {
-      this._resumeAllDownloads();
-    } else if (
-      nextAppState !== 'active' &&
-      this._previousAppState === 'active'
-    ) {
-      this._stopAllDownloads();
-    }
-    this._previousAppState = nextAppState;
-  };
-
-  _restartInterruptedDownloads() {
-    let offlineState = this._store.getState().offline;
-    for (let id of Object.keys(offlineState)) {
-      let { state } = offlineState[id];
-      if (state === STATES.DOWNLOADING) {
-        this._startDownload(id);
-      }
-    }
-  }
-
-  _startNewDownloads() {
-    let offlineState = this._store.getState().offline;
-    for (let id of Object.keys(offlineState)) {
-      let { state } = offlineState[id];
-      if (state === STATES.START_DOWNLOAD && !this._downloads[id]) {
-        this._startDownload(id);
-      }
-    }
+    NetInfo.removeEventListener('change', this._handleNetworkStateChange);
   }
 
   _getDataWithId(id) {
@@ -82,29 +60,78 @@ export default class DownloadManager {
     }
   }
 
+  updateStore(id, state) {
+    const previousState = this._store.getState().offline[id];
+    const nextState = state;
+    previousState.state !== nextState.state &&
+      console.log(id, previousState.state, ' -> ', nextState.state);
+    if (
+      previousState.state === STATES.DOWNLOADING &&
+      nextState.state === STATES.DOWNLOADING
+    ) {
+      const previousSavable = previousState.savable;
+      const nextSavable = nextState.savable;
+      if (!previousSavable && nextSavable) {
+        console.log(id, previousState.state, ' ->  SAVED');
+      }
+      if (previousSavable && !nextSavable) {
+        console.log(id, 'SAVED ->  ', nextState.state);
+      }
+    }
+    this._store.dispatch({
+      type: 'OFFLINE',
+      id,
+      state,
+    });
+  }
+
+  _onAppStart() {
+    this._startNewDownloads();
+    this._resumeAllDownloads();
+  }
+
+  _handleAppStateChange = nextAppState => {
+    console.log('[app state]', nextAppState);
+    if (nextAppState === 'active' && this._previousAppState !== 'active') {
+      this._resumeAllDownloads();
+    } else if (
+      nextAppState !== 'active' &&
+      this._previousAppState === 'active'
+    ) {
+      this._pauseAllDownloads();
+    }
+    this._previousAppState = nextAppState;
+  };
+
+  _handleNetworkStateChange = networkState => {
+    console.log('[network state]', networkState);
+  };
+
+  _startNewDownloads() {
+    _(this._store.getState().offline).forEach(async ({ state }, id) => {
+      if (state === STATES.START_DOWNLOAD && !this._downloadResumables[id]) {
+        this._startDownloadForId(id);
+      }
+    });
+  }
+
   _createDownloadProgressHandler(id) {
     return ({ totalBytesWritten, totalBytesExpectedToWrite }) => {
-      const speedBytesPerMs = 1;
-      const timeRemainingMs =
-        (totalBytesExpectedToWrite - totalBytesWritten) / speedBytesPerMs;
-      //   console.log('status ', id, totalBytesWritten, totalBytesExpectedToWrite);
-      this._store.dispatch({
-        type: 'OFFLINE',
-        id: id,
-        status: {
+      this.updateStore(
+        id,
+        DOWNLOADING({
           totalBytes: totalBytesExpectedToWrite,
           currentBytes: totalBytesWritten,
-          state: STATES.DOWNLOADING,
-          //STATES.DOWNLOADING({totalBytesExpectedToWrite, currentBytes})
-        },
-      });
+        })
+      );
     };
   }
 
-  async _startDownload(id) {
+  async _startDownloadForId(id) {
     const data = this._getDataWithId(id);
     const videoUri = data.videos['240p'];
     const fileUri = FileSystem.documentDirectory + id + '.mp4';
+
     // TODO: Catch errors
     const { exists } = await FileSystem.getInfoAsync(fileUri);
     if (exists) {
@@ -117,74 +144,67 @@ export default class DownloadManager {
       {},
       this._createDownloadProgressHandler(id)
     );
+    this._downloadResumables[id] = downloadResumable;
 
-    this._startDownloadFromResumable(downloadResumable, id);
-  }
-
-  async _startDownloadFromResumable(downloadResumable, id, resume = false) {
-    this._downloads[id] = downloadResumable;
     try {
-      if (resume) {
-        const url = await downloadResumable.resumeAsync();
-        if (!url) {
-          return;
-        }
-      } else {
-        const url = await downloadResumable.downloadAsync();
-        if (!url) {
-          return;
-        }
+      const uri = await downloadResumable.downloadAsync();
+      if (uri) {
+        this._handleSucccessfulDownload(id, uri);
       }
-      this._store.dispatch({
-        type: 'OFFLINE',
-        id,
-        status: {
-          state: STATES.DOWNLOADED,
-        },
-      });
-      // Remove from downloads
-      delete this._downloads[id];
     } catch (e) {
       console.log(e);
     }
   }
 
-  async _stopAllDownloads() {
-    for (let id of Object.keys(this._downloads)) {
-      let downloadResumable = this._downloads[id];
+  async _startDownloadFromStore(id, savable) {
+    const downloadFromStore = JSON.parse(savable);
+    if (downloadFromStore !== null) {
+      downloadResumable = new FileSystem.DownloadResumable(
+        downloadFromStore.url,
+        downloadFromStore.fileUri,
+        downloadFromStore.options,
+        this._createDownloadProgressHandler(id),
+        downloadFromStore.resumeData
+      );
+      this._downloadResumables[id] = downloadResumable;
+      try {
+        const uri = await downloadResumable.resumeAsync();
+        if (uri) {
+          this._handleSucccessfulDownload(id, uri);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }
+
+  _handleSucccessfulDownload(id, uri) {
+    this._updateStore(id, DOWNLOADED({ uri }));
+    delete this._downloadResumables[id];
+  }
+
+  async _pauseAllDownloads() {
+    _(this._downloadResumables).forEach(async (downloadResumable, id) => {
+      // TODO: Catch errors
       await downloadResumable.pauseAsync();
       const savable = JSON.stringify(downloadResumable.savable());
-      this._store.dispatch({
-        type: 'OFFLINE',
-        id,
-        status: {
-          state: STATES.STALLED,
-          savable,
-        },
-      });
-    }
-    this._downloads = {};
+      this.updateStore(id, DOWNLOADING({ savable }));
+    });
+    this._downloadResumables = {};
   }
 
   async _resumeAllDownloads() {
     // TODO: Catch errors
-
-    let offlineState = this._store.getState().offline;
-    for (let id of Object.keys(offlineState)) {
-      let { state, savable } = offlineState[id];
-      if (state === STATES.STALLED && savable) {
-        const downloadFromStore = JSON.parse(savable);
-        if (downloadFromStore !== null) {
-          downloadResumable = new FileSystem.DownloadResumable(
-            downloadFromStore.url,
-            downloadFromStore.fileUri,
-            downloadFromStore.options,
-            this._createDownloadProgressHandler(id),
-            downloadFromStore.resumeData
-          );
-          this._startDownloadFromResumable(downloadResumable, id, true);
+    _(
+      this._store.getState().offline
+    ).forEach(async ({ state, savable }, id) => {
+      if (state === STATES.DOWNLOADING) {
+        if (savable) {
+          this._startDownloadFromStore(id, savable);
+        } else {
+          this._startDownloadForId(id);
         }
       }
-    }
+    });
   }
 }

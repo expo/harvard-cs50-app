@@ -42,7 +42,7 @@ class HomeScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    var ds = new ListView.DataSource({
+    let ds = new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2,
     });
 
@@ -54,12 +54,8 @@ class HomeScreen extends React.Component {
   }
 
   componentDidMount() {
-    // if (config.secondScreen) {
-    //   this.onWeekPress(this.state.weekNumber);
-    // }
-    // if (config.resourcesScreen) {
-    //   this.props.navigation.navigate('Resources');
-    // }
+    config.secondScreen && this.onWeekPress(this.state.weekNumber);
+    config.resourcesScreen && this.props.navigation.navigate('Resources');
   }
 
   onWeekPress(weekNumber) {

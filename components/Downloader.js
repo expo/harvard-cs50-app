@@ -107,7 +107,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch({
         type: 'OFFLINE',
         id: ownProps.id,
-        status: { state: STATES.START_DOWNLOAD },
+        state: { state: STATES.START_DOWNLOAD },
       });
     },
   };
