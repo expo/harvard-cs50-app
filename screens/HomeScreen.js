@@ -54,13 +54,12 @@ class HomeScreen extends React.Component {
   }
 
   componentDidMount() {
-    if (config.secondScreen) {
-      this.onWeekPress(this.state.weekNumber);
-    }
-
-    if (config.resourcesScreen) {
-      this.props.navigation.navigate('Resources');
-    }
+    // if (config.secondScreen) {
+    //   this.onWeekPress(this.state.weekNumber);
+    // }
+    // if (config.resourcesScreen) {
+    //   this.props.navigation.navigate('Resources');
+    // }
   }
 
   onWeekPress(weekNumber) {

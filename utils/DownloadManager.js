@@ -5,22 +5,13 @@ import _ from 'lodash';
 export const STATES = {
   NOTSTARTED: 'NOTSTARTED',
   START_DOWNLOAD: 'START_DOWNLOAD',
-  DOWNLOADING: 'DOWNLOADING',
-  STALLED: 'STALLED',
-  DOWNLOADED: 'DOWNLOADED',
+  DOWNLOADING: 'DOWNLOADING', // totalBytes, currentBytes
+  STALLED: 'STALLED', // savable
+  DOWNLOADED: 'DOWNLOADED', // fileUrl
   ERROR: 'ERROR',
 };
 
 export default class DownloadManager {
-  STATES = {
-    NOTSTARTED: 'NOTSTARTED',
-    START_DOWNLOAD: 'START_DOWNLOAD',
-    DOWNLOADING: 'DOWNLOADING',
-    STALLED: 'STALLED',
-    DOWNLOADED: 'DOWNLOADED',
-    ERROR: 'ERROR',
-  };
-
   constructor(store) {
     this._store = store;
     this._data = store.getState().courseData;
@@ -104,6 +95,7 @@ export default class DownloadManager {
           totalBytes: totalBytesExpectedToWrite,
           currentBytes: totalBytesWritten,
           state: STATES.DOWNLOADING,
+          //STATES.DOWNLOADING({totalBytesExpectedToWrite, currentBytes})
         },
       });
     };
