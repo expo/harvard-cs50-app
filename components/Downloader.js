@@ -11,8 +11,6 @@ import colors from '../styles/colors';
 import { RegularText } from './Texts';
 import { STATES } from '../utils/DownloadManager';
 
-// console.log(DownloadManager);
-
 class Downloader extends React.Component {
   render() {
     const Status = ({ iconName, text }) =>
@@ -49,7 +47,8 @@ class Downloader extends React.Component {
           paddingTop: 10,
           paddingBottom: 10,
         }}>
-        {this.props.downloadState.state === STATES.NOTSTARTED &&
+        {(!this.props.downloadState ||
+          this.props.downloadState.state === STATES.NOTSTARTED) &&
           <View>
             <TouchableHighlight onPress={this.props.download}>
               <View>
@@ -61,7 +60,6 @@ class Downloader extends React.Component {
             </TouchableHighlight>
           </View>}
         {(this.props.downloadState.state === STATES.DOWNLOADING ||
-          this.props.downloadState.state === STATES.STALLED ||
           this.props.downloadState.state === STATES.START_DOWNLOAD) &&
           <View
             style={{
@@ -71,7 +69,6 @@ class Downloader extends React.Component {
               alignItems: 'center',
             }}>
             <View style={{ marginRight: 5 }}>
-              {/* <Progress.Circle size={30} progress={this.state.progress} /> */}
               <Progress.Pie
                 size={30}
                 progress={progress}
@@ -82,9 +79,6 @@ class Downloader extends React.Component {
               <RegularText style={{ color: colors.tertiary }}>
                 Downloading for offline viewing...
               </RegularText>
-              {/* <RegularText style={{ color: colors.tertiary }}>
-                {this.state.timeRemaining} remaining
-              </RegularText> */}
             </View>
           </View>}
         {this.props.downloadState.state === STATES.DOWNLOADED &&
@@ -93,7 +87,10 @@ class Downloader extends React.Component {
             text={'Lecture available for offline viewing'}
           />}
         {this.props.downloadState.state === STATES.ERROR &&
-          <Status iconName={'error'} text={this.state.error.toString()} />}
+          <Status
+            iconName={'error'}
+            text={this.props.downloadState.message.toString()}
+          />}
       </View>
     );
   }
@@ -103,7 +100,7 @@ reactMixin(Downloader.prototype, TimerMixin);
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    download: status => {
+    download: () => {
       dispatch({
         type: 'OFFLINE',
         id: ownProps.id,

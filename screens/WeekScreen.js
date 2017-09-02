@@ -4,6 +4,7 @@ import { ScreenOrientation, Video } from 'expo';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import VideoPlayer from 'abi-expo-videoplayer';
+import Sentry from 'sentry-expo';
 
 import Row from '../components/Row';
 import Analytics from '../utils/Analytics';
@@ -12,6 +13,7 @@ import colors from '../styles/colors';
 import Downloader from '../components/Downloader';
 import RateSwitcher from '../components/RateSwitcher';
 import config from '../utils/config';
+import { STATES } from '../utils/DownloadManager';
 
 const TRACK_IMAGE = require('../assets/videoplayer/track.png');
 const THUMB_IMAGE = require('../assets/videoplayer/thumb.png');
@@ -71,32 +73,30 @@ class WeekScreen extends React.Component {
       : styles.headerStyle,
   });
 
+  ICONS = {
+    notes: 'sticky-note-o',
+    slides: 'slideshare',
+    'source code': 'code',
+  };
+
   constructor(props) {
     super(props);
 
     const data = this.props.navigation.state.params.data;
-    const linkKeys = ['slides', 'source code', 'notes'];
-    const links = _.pickBy(data, (v, k) => linkKeys.includes(k));
 
-    const ICONS = {
-      notes: 'sticky-note-o',
-      slides: 'slideshare',
-      'source code': 'code',
-    };
-
-    const linksArr = _.map(links, (url, title) => ({
-      title,
-      url,
-      icon: ICONS[title],
-    }));
+    let links = _.pickBy(data, (v, k) =>
+      ['slides', 'source code', 'notes'].includes(k)
+    );
 
     this.state = {
-      isPortrait: true,
-      localVideoUri: null,
       data,
       links,
-      linksArr,
-      playFromPositionMillis: this.props.playback,
+      isPortrait: true,
+      playback: this.props.playback,
+      uri:
+        this.props.offline.state === STATES.DOWNLOADING
+          ? this.props.offline.uri.uri
+          : data.videos['240p'],
     };
   }
 
@@ -139,7 +139,7 @@ class WeekScreen extends React.Component {
   }
 
   _errorCallback(error) {
-    // TODO: Send to Sentry
+    Sentry.captureException(error);
     console.log('Error: ', error.message, error.type, error.obj);
   }
 
@@ -173,12 +173,12 @@ class WeekScreen extends React.Component {
             isMuted: config.muteVideo,
             resizeMode: Video.RESIZE_MODE_CONTAIN,
             source: {
-              uri: this.state.data.videos['240p'],
+              uri: this.state.uri,
             },
             ref: component => {
               this._playbackInstance = component;
             },
-            positionMillis: this.state.playFromPositionMillis,
+            positionMillis: this.state.playback,
           }}
           isPortrait={this.state.isPortrait}
           switchToLandscape={this.switchToLandscape.bind(this)}
@@ -234,11 +234,11 @@ class WeekScreen extends React.Component {
             Course Materials
           </Text>
 
-          {this.state.linksArr.map(({ title, url, icon }) =>
+          {_.map(this.state.links, (url, title) =>
             <Row
               key={title}
               text={title}
-              icon={icon}
+              icon={this.ICONS[title]}
               onPress={this.onRowPress.bind(this, url, title)}
               style={{
                 alignSelf: 'stretch',
@@ -267,8 +267,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
+  const id = ownProps.navigation.state.params.data.weekNumber;
   return {
-    playback: state.playback[ownProps.navigation.state.params.data.weekNumber],
+    playback: state.playback[id],
+    offline: state.playback[id],
   };
 };
 
