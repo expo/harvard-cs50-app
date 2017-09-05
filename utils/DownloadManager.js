@@ -32,7 +32,8 @@ export default class DownloadManager {
   constructor(store) {
     this._store = store;
     this._downloadResumables = {};
-    this._previousAppState = 'active';
+    this._previousAppState = AppState.currentState;
+    console.log('previous state', this._previousAppState);
 
     // Subscribe to the store to scan for `START_DOWNLOAD` state changes, which is how the Downloader component
     // informs us that the user wants to download the file
@@ -47,14 +48,25 @@ export default class DownloadManager {
     // TODO: Periodally pause all downloads and resume them
   }
 
-  // TODO: Call teardown in parent
   teardown() {
     AppState.removeEventListener('change', this._handleAppStateChange);
     NetInfo.removeEventListener('change', this._handleNetworkStateChange);
   }
 
   _onAppStart() {
-    // TODO: For all error'ed downloads, set the state to be DOWNLOADING
+    // Reset ERROR'ed out Downloads
+    _(this._store.getState().offline).forEach(async ({ state }, id) => {
+      if (state === STATES.ERROR) {
+        this._updateStore(
+          id,
+          DOWNLOADING({
+            totalBytes: 1,
+            currentBytes: 0,
+          })
+        );
+      }
+    });
+
     this._startNewDownloads();
     this._resumeAllDownloads();
   }
@@ -63,13 +75,14 @@ export default class DownloadManager {
     console.log('[app state]', nextAppState);
     if (nextAppState === 'active' && this._previousAppState !== 'active') {
       this._resumeAllDownloads();
+      this._previousAppState = nextAppState;
     } else if (
       nextAppState !== 'active' &&
       this._previousAppState === 'active'
     ) {
       this._pauseAllDownloads();
+      this._previousAppState = nextAppState;
     }
-    this._previousAppState = nextAppState;
   };
 
   _handleNetworkStateChange = networkState => {
@@ -137,9 +150,9 @@ export default class DownloadManager {
         await FileSystem.deleteAsync(fileUri);
       }
     } catch (e) {
+      console.log('File overwrite error', e);
       Sentry.captureException(e);
       Sentry.captureMessage('File overwrite error');
-
       this._updateStore(id, ERROR({ message: 'Error downloading file' }));
       return;
     }
@@ -155,8 +168,6 @@ export default class DownloadManager {
       const uri = await downloadResumable.downloadAsync();
       if (uri) {
         this._updateStore(id, DOWNLOADED({ uri }));
-      } else {
-        this._updateStore(id, ERROR({ message: 'Error downloading file' }));
       }
       delete this._downloadResumables[id];
     } catch (e) {
@@ -182,8 +193,6 @@ export default class DownloadManager {
         const uri = await downloadResumable.resumeAsync();
         if (uri) {
           this._updateStore(id, DOWNLOADED({ uri }));
-        } else {
-          this._updateStore(id, ERROR({ message: 'Error downloading file' }));
         }
       } catch (e) {
         console.log('File download error', e);
@@ -197,6 +206,13 @@ export default class DownloadManager {
   async _startNewDownloads() {
     _(this._store.getState().offline).forEach(async ({ state }, id) => {
       if (state === STATES.START_DOWNLOAD && !this._downloadResumables[id]) {
+        this._updateStore(
+          id,
+          DOWNLOADING({
+            totalBytes: 1,
+            currentBytes: 0,
+          })
+        );
         this._startDownloadForId(id);
       }
     });

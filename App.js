@@ -34,6 +34,10 @@ class AppContainer extends React.Component {
     this._loadAssetsAsync();
   }
 
+  componentWillUnmount() {
+    this._downloadManager && this._downloadManager.teardown();
+  }
+
   _cacheFonts(fonts) {
     return fonts.map(font => Font.loadAsync(font));
   }

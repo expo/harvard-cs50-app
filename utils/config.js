@@ -20,7 +20,7 @@ const dev = {
   ...common,
   secondScreen: true,
   resourcesScreen: false,
-  muteVideo: false,
+  muteVideo: true,
   autoplayVideo: true,
   firstLoad: false,
   sentryEnabledInDev: true,

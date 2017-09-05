@@ -94,7 +94,7 @@ class WeekScreen extends React.Component {
       isPortrait: true,
       playback: this.props.playback,
       uri:
-        this.props.offline.state === STATES.DOWNLOADING
+        this.props.offline && this.props.offline.state === STATES.DOWNLOADED
           ? this.props.offline.uri.uri
           : data.videos['240p'],
     };
@@ -270,7 +270,7 @@ const mapStateToProps = (state, ownProps) => {
   const id = ownProps.navigation.state.params.data.weekNumber;
   return {
     playback: state.playback[id],
-    offline: state.playback[id],
+    offline: state.offline[id],
   };
 };
 

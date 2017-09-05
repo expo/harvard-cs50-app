@@ -8,6 +8,7 @@ const reducer = (state = 0, action) => {
 
   if (type === REHYDRATE) {
     if (persistedStateIsInvalid(action.payload)) {
+      console.log(getInitialState());
       return getInitialState();
     } else {
       console.log(action.payload);
