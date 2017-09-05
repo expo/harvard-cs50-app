@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableHighlight } from 'react-native';
+import { Text, View, TouchableHighlight, TouchableOpacity } from 'react-native';
 import * as Progress from 'react-native-progress';
 import prettyMs from 'pretty-ms';
 import reactMixin from 'react-mixin';
@@ -87,10 +87,17 @@ class Downloader extends React.Component {
             text={'Lecture available for offline viewing'}
           />}
         {this.props.downloadState.state === STATES.ERROR &&
-          <Status
-            iconName={'error'}
-            text={this.props.downloadState.message.toString()}
-          />}
+          <TouchableHighlight onPress={this.props.download}>
+            <View>
+              <Status
+                iconName={'error'}
+                text={
+                  this.props.downloadState.message.toString() +
+                  '. Tap to retry.'
+                }
+              />
+            </View>
+          </TouchableHighlight>}
       </View>
     );
   }
