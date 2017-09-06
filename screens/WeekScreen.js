@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, Dimensions, ScrollView } from 'react-native';
-import { ScreenOrientation, Video } from 'expo';
+import { ScreenOrientation, Video, WebBrowser } from 'expo';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import VideoPlayer from 'abi-expo-videoplayer';
@@ -239,7 +239,11 @@ class WeekScreen extends React.Component {
               key={title}
               text={title}
               icon={this.ICONS[title]}
-              onPress={this.onRowPress.bind(this, url, title)}
+              onPress={
+                title == 'slides'
+                  ? WebBrowser.openBrowserAsync.bind(this, url)
+                  : this.onRowPress.bind(this, url, title)
+              }
               style={{
                 alignSelf: 'stretch',
                 flex: 1,

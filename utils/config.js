@@ -26,4 +26,4 @@ const dev = {
   sentryEnabledInDev: true,
 };
 
-export default dev;
+export default prod;
