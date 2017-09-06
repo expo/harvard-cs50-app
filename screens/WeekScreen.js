@@ -3,7 +3,7 @@ import { Text, View, Dimensions, ScrollView } from 'react-native';
 import { ScreenOrientation, Video, WebBrowser } from 'expo';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import VideoPlayer from 'abi-expo-videoplayer';
+import VideoPlayer from '@expo/videoplayer';
 import Sentry from 'sentry-expo';
 
 import Row from '../components/Row';
