@@ -3,6 +3,8 @@ import { persistStore, autoRehydrate } from 'redux-persist';
 import { REHYDRATE } from 'redux-persist/constants';
 import { AsyncStorage } from 'react-native';
 
+const CURRENT_REDUX_VERSION = 1;
+
 const reducer = (state = 0, action) => {
   const { type, id } = action;
 
@@ -11,6 +13,11 @@ const reducer = (state = 0, action) => {
       console.log(getInitialState());
       return getInitialState();
     } else {
+      // if (CURRENT_REDUX_VERSION != action.payload._version) {
+      //   // Run migrations
+      //   // Copy playback, courseData
+      //   // For offline, you can change the states, etc.
+      // }
       console.log(action.payload);
       return action.payload;
     }
@@ -42,7 +49,12 @@ const reducer = (state = 0, action) => {
 };
 
 const getInitialState = () => {
-  return { offline: {}, playback: {}, courseData: {} };
+  return {
+    offline: {},
+    playback: {},
+    courseData: {},
+    _version: CURRENT_REDUX_VERSION,
+  };
 };
 
 function persistedStateIsInvalid(state) {
