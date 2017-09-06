@@ -28,6 +28,7 @@ class HomeScreen extends React.Component {
       headerBackTitle: 'Back',
       headerStyle: styles.headerStyle,
       headerTitleStyle: styles.headerTitleStyle,
+      headerLeft: <View />,
       headerRight: (
         <TouchableOpacity
           style={{ marginRight: 20 }}
@@ -60,7 +61,7 @@ class HomeScreen extends React.Component {
 
   onWeekPress(weekNumber) {
     var weekData = this.state.data[weekNumber];
-    this.props.navigation.navigate('Week', {
+    this.props.navigation.navigate('LecturesWeek', {
       data: weekData,
       weekNum: weekNumber,
     });
