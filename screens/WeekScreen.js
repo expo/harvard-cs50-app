@@ -140,7 +140,7 @@ class WeekScreen extends React.Component {
 
   _errorCallback(error) {
     Sentry.captureException(error);
-    console.log('Error: ', error.message, error.type, error.obj);
+    console.log('Video error: ', error.message, error.type, error.obj);
   }
 
   onRowPress = (url, title) => {
