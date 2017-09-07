@@ -128,13 +128,20 @@ export default class DownloadManager {
 
   _createDownloadProgressHandler(id) {
     return ({ totalBytesWritten, totalBytesExpectedToWrite }) => {
-      this._updateStore(
-        id,
-        DOWNLOADING({
-          totalBytes: totalBytesExpectedToWrite,
-          currentBytes: totalBytesWritten,
-        })
-      );
+      let previousState = this._store.getState().offline[id].state;
+      if (
+        previousState === STATES.DOWNLOADING ||
+        previousState === STATES.START_DOWNLOAD
+      ) {
+        // DOWNLOADING can only transition from START_DOWNLOAD/DOWNLOADING
+        this._updateStore(
+          id,
+          DOWNLOADING({
+            totalBytes: totalBytesExpectedToWrite,
+            currentBytes: totalBytesWritten,
+          })
+        );
+      }
     };
   }
 
@@ -162,7 +169,7 @@ export default class DownloadManager {
         videoUri,
         fileUri,
         {},
-        this._createDownloadProgressHandler(id)
+        _.throttle(this._createDownloadProgressHandler(id), 200)
       );
       this._downloadResumables[id] = downloadResumable;
       const uri = await downloadResumable.downloadAsync();
