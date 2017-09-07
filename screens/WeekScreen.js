@@ -156,9 +156,6 @@ class WeekScreen extends React.Component {
   }
 
   render() {
-    // Video player sources
-    // Example HLS url: https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8
-
     return (
       <View
         style={{
