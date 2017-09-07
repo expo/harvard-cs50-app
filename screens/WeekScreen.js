@@ -234,23 +234,26 @@ class WeekScreen extends React.Component {
             Course Materials
           </Text>
 
-          {_.map(this.state.links, (url, title) =>
-            <Row
-              key={title}
-              text={title}
-              icon={this.ICONS[title]}
-              onPress={
-                title == 'slides'
-                  ? WebBrowser.openBrowserAsync.bind(this, url)
-                  : this.onRowPress.bind(this, url, title)
-              }
-              style={{
-                alignSelf: 'stretch',
-                flex: 1,
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-              }}
-            />
+          {_.map(
+            this.state.links,
+            (url, title) =>
+              !(this.state.data.weekNumber === 0 && title == 'source code') &&
+              <Row
+                key={title}
+                text={title}
+                icon={this.ICONS[title]}
+                onPress={
+                  title == 'slides'
+                    ? WebBrowser.openBrowserAsync.bind(this, url)
+                    : this.onRowPress.bind(this, url, title)
+                }
+                style={{
+                  alignSelf: 'stretch',
+                  flex: 1,
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}
+              />
           )}
         </ScrollView>
       </View>
