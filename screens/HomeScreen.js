@@ -61,7 +61,7 @@ class HomeScreen extends React.Component {
 
   onWeekPress(weekNumber) {
     var weekData = this.state.data[weekNumber];
-    this.props.navigation.navigate('LecturesWeek', {
+    this.props.navigation.navigate('Week', {
       data: weekData,
       weekNum: weekNumber,
     });
