@@ -169,12 +169,13 @@ export default class DownloadManager {
       if (uri) {
         this._updateStore(id, DOWNLOADED({ uri }));
       }
-      delete this._downloadResumables[id];
     } catch (e) {
       console.log('File download error', e);
       Sentry.captureMessage('File download error');
       Sentry.captureException(e);
       this._updateStore(id, ERROR({ message: 'Error downloading file' }));
+    } finally {
+      delete this._downloadResumables[id];
     }
   }
 
@@ -199,6 +200,8 @@ export default class DownloadManager {
         Sentry.captureMessage('File download error');
         Sentry.captureException(e);
         this._updateStore(id, ERROR({ message: 'Error downloading file' }));
+      } finally {
+        delete this._downloadResumables[id];
       }
     }
   }
