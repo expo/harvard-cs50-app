@@ -3,7 +3,9 @@ A companion app for the Harvard CS50 class.
 
 Try it here: https://expo.io/@abiraja/harvard-cs50
 
-Still a work in progress, and requires visual polish.
+Or search for Harvard CS50 on the App Store or Google Play Store.
+
+If you want to integrate this app with your course materials, you are most welcome to. Here's the [integration guide](integration-guide.md). If you need any help, drop us a note.
 
 | Icon Credits |
 |-------------------------------------------------------------|
