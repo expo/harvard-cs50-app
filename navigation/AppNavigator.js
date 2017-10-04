@@ -38,5 +38,5 @@ export default (AppNavigator = StackNavigator(
       screen: ResourceNavigator,
     },
   },
-  { mode: 'modal', headerMode: 'none' }
+  { mode: 'modal', headerMode: 'none', initialRouteParams: { year: 2017 } }
 ));

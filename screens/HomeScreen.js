@@ -28,7 +28,27 @@ class HomeScreen extends React.Component {
       headerBackTitle: 'Back',
       headerStyle: styles.headerStyle,
       headerTitleStyle: styles.headerTitleStyle,
-      headerLeft: <View />,
+      headerLeft: (
+        <TouchableOpacity
+          style={{ marginLeft: 20 }}
+          onPress={() => {
+            navigation.setParams({
+              year: navigation.state.params.year === 2016 ? 2017 : 2016,
+            });
+          }}>
+          <Text
+            style={[
+              styles.headerTitleStyle,
+              {
+                color: styles.headerTintColor,
+                fontFamily: 'custom-regular',
+                fontSize: styles.fontSize(0),
+              },
+            ]}>
+            Switch to {navigation.state.params.year === 2016 ? 2017 : 2016}
+          </Text>
+        </TouchableOpacity>
+      ),
       headerRight: (
         <TouchableOpacity
           style={{ marginRight: 20 }}
@@ -41,17 +61,35 @@ class HomeScreen extends React.Component {
     };
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (
+      nextProps.navigation.state.params.year !==
+      this.props.navigation.state.params.year
+    ) {
+      this.toggleYear(nextProps.navigation.state.params.year);
+    }
+  }
+
   constructor(props) {
     super(props);
+    this.state = {
+      weekNumber: 0,
+    };
+  }
+
+  componentWillMount() {
+    this.toggleYear(this.props.navigation.state.params.year);
+  }
+
+  toggleYear(year) {
     let ds = new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2,
     });
-
-    this.state = {
-      weekNumber: 0,
-      dataSource: ds.cloneWithRows(props.data),
-      data: props.data,
-    };
+    this.setState({
+      year: year,
+      data: this.props.data[year],
+      dataSource: ds.cloneWithRows(this.props.data[year]),
+    });
   }
 
   componentDidMount() {
@@ -60,10 +98,8 @@ class HomeScreen extends React.Component {
   }
 
   onWeekPress(weekNumber) {
-    var weekData = this.state.data[weekNumber];
     this.props.navigation.navigate('Week', {
-      data: weekData,
-      weekNum: weekNumber,
+      data: this.state.data[weekNumber],
     });
   }
 
@@ -94,7 +130,7 @@ class HomeScreen extends React.Component {
               },
               styles.mainViewStyle,
             ]}>
-            Browse Lectures
+            Lectures ({this.state.year})
           </BoldText>
           {this.state.data &&
             <Carousel

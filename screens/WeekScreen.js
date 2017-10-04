@@ -65,7 +65,8 @@ export const ReplayIcon = () =>
 
 class WeekScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: `Week ${navigation.state.params.weekNum}`,
+    title: `${navigation.state.params.data.year} / Week ${navigation.state
+      .params.data.weekNumber}`,
     headerTintColor: styles.headerTintColor,
     headerTitleStyle: styles.headerTitleStyle,
     headerStyle: navigation.state.params.hideHeader

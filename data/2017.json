@@ -1,0 +1,37 @@
+[
+    {
+        "title": "Week 0",
+        "desc": "Scratch",
+        "audio": "http: //cdn.cs50.net/2016/fall/lectures/0/week0.mp3",
+        "notes": "http: //docs.cs50.net/2016/fall/notes/0/week0.html",
+        "slides": "http: //cdn.cs50.net/2016/fall/lectures/0/week0.pdf",
+        "source code": "http: //cdn.cs50.net/2016/fall/lectures/0/src0/",
+        "subtitles": "http: //cdn.cs50.net/2016/fall/lectures/0/lang/en/week0.srt",
+        "syllabus": "http: //docs.cs50.net/2016/fall/syllabus/cs50.html",
+        "weekNumber": 0,
+        "videos": {
+            "240p": "http: //cdn.cs50.net/2016/fall/lectures/0/week0-240p.mp4",
+            "360p": "http: //cdn.cs50.net/2016/fall/lectures/0/week0-360p.mp4",
+            "720p": "http: //cdn.cs50.net/2016/fall/lectures/0/week0-720p.mp4",
+            "1080p": "http: //cdn.cs50.net/2016/fall/lectures/0/week0-1080p.mp4",
+            "4k": "http: //cdn.cs50.net/2016/fall/lectures/0/week0-4k.mp4"
+        }
+    },
+    {
+        "title": "Week 1",
+        "desc": "C",
+        "audio": "http: //cdn.cs50.net/2016/fall/lectures/1/week1.mp3",
+        "notes": "http: //docs.cs50.net/2016/fall/notes/1/week1.html",
+        "slides": "http: //cdn.cs50.net/2016/fall/lectures/1/week1.pdf",
+        "source code": "http: //cdn.cs50.net/2016/fall/lectures/1/src1/",
+        "subtitles": "http: //cdn.cs50.net/2016/fall/lectures/1/lang/en/week1.srt",
+        "weekNumber": 1,
+        "videos": {
+            "240p": "http: //cdn.cs50.net/2016/fall/lectures/1/week1-240p.mp4",
+            "360p": "http: //cdn.cs50.net/2016/fall/lectures/1/week1-360p.mp4",
+            "720p": "http: //cdn.cs50.net/2016/fall/lectures/1/week1-720p.mp4",
+            "1080p": "http: //cdn.cs50.net/2016/fall/lectures/1/week1-1080p.mp4",
+            "4k": "http: //cdn.cs50.net/2016/fall/lectures/1/week1-4k.mp4"
+        }
+    }
+]
