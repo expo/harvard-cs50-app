@@ -9,6 +9,7 @@ const LecturesNavigator = StackNavigator(
   {
     Home: {
       screen: HomeScreen,
+      initialRouteParams: { year: 2017 },
     },
     Week: {
       screen: WeekScreen,
@@ -17,7 +18,7 @@ const LecturesNavigator = StackNavigator(
       screen: LinkScreen,
     },
   },
-  { mode: 'card' }
+  { mode: 'card', initialRouteParams: { year: 2017 } }
 );
 
 const ResourceNavigator = StackNavigator({
@@ -33,6 +34,7 @@ export default (AppNavigator = StackNavigator(
   {
     Home: {
       screen: LecturesNavigator,
+      initialRouteParams: { year: 2017 },
     },
     Resources: {
       screen: ResourceNavigator,

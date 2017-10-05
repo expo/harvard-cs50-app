@@ -32,8 +32,13 @@ class HomeScreen extends React.Component {
         <TouchableOpacity
           style={{ marginLeft: 20 }}
           onPress={() => {
+            const params = navigation.state.params;
+            let year = 2016;
+            if (params) {
+              year = params.year === 2016 ? 2017 : 2016;
+            }
             navigation.setParams({
-              year: navigation.state.params.year === 2016 ? 2017 : 2016,
+              year,
             });
           }}>
           <Text
@@ -45,7 +50,10 @@ class HomeScreen extends React.Component {
                 fontSize: styles.fontSize(0),
               },
             ]}>
-            Switch to {navigation.state.params.year === 2016 ? 2017 : 2016}
+            Switch to{' '}
+            {navigation.state.params && navigation.state.params.year === 2016
+              ? 2017
+              : 2016}
           </Text>
         </TouchableOpacity>
       ),
@@ -63,15 +71,17 @@ class HomeScreen extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (
+      !this.props.navigation.state.params ||
       nextProps.navigation.state.params.year !==
-      this.props.navigation.state.params.year
+        this.props.navigation.state.params.year
     ) {
       this.toggleYear(nextProps.navigation.state.params.year);
     }
   }
 
   componentWillMount() {
-    this.toggleYear(this.props.navigation.state.params.year);
+    const params = this.props.navigation.state.params;
+    this.toggleYear(params && params.year ? params.year : 2017);
   }
 
   toggleYear(year) {
