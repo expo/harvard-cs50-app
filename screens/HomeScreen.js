@@ -70,13 +70,6 @@ class HomeScreen extends React.Component {
     }
   }
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      weekNumber: 0,
-    };
-  }
-
   componentWillMount() {
     this.toggleYear(this.props.navigation.state.params.year);
   }
@@ -89,6 +82,7 @@ class HomeScreen extends React.Component {
       year: year,
       data: this.props.data[year],
       dataSource: ds.cloneWithRows(this.props.data[year]),
+      weekNumber: year === 2016 ? 0 : 1,
     });
   }
 

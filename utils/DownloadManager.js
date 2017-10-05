@@ -92,11 +92,17 @@ export default class DownloadManager {
   // Store functions
 
   _getDataWithId(id) {
-    for (let week of this._store.getState().courseData) {
-      if (week.weekNumber.toString() == id.toString()) {
-        return week;
+    let data = null;
+    _.forOwn(this._store.getState().courseData, yearData => {
+      for (let week of yearData) {
+        if (week.id.toString() == id.toString()) {
+          data = week;
+          return;
+        }
       }
-    }
+    });
+    // TODO: If the id is not found anymore, delete that key in the store
+    return data;
   }
 
   _updateStore(id, state) {

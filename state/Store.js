@@ -76,6 +76,7 @@ Store.rehydrateAsync = () => {
         resolve();
       }
     );
+    //.purge() use to delete the existing store
   });
 };
 

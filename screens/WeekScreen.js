@@ -208,7 +208,7 @@ class WeekScreen extends React.Component {
             paddingRight: styles.mainViewStyle.marginRight,
           }}>
           <Downloader
-            id={this.state.data.weekNumber}
+            id={this.state.data.id}
             style={{
               display: this.state.isPortrait ? 'flex' : 'none',
               marginBottom: 40,
@@ -264,7 +264,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     updatePlaybackTime: time => {
       dispatch({
         type: 'PLAYBACK',
-        id: ownProps.navigation.state.params.data.weekNumber,
+        id: ownProps.navigation.state.params.data.id,
         time,
       });
     },
@@ -272,7 +272,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const id = ownProps.navigation.state.params.data.weekNumber;
+  const id = ownProps.navigation.state.params.data.id;
   return {
     playback: state.playback[id],
     offline: state.offline[id],
