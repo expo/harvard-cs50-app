@@ -3,7 +3,7 @@ A companion app for the Harvard CS50 class.
 
 Try it here: https://expo.io/@cs50/harvard-cs50
 
-Or get it on the [App Store](https://itunes.apple.com/us/app/harvard-cs50/id1277395242) or Google Play Store.
+Or get it on the [App Store](https://itunes.apple.com/us/app/harvard-cs50/id1277395242) or [Google Play Store](https://play.google.com/store/apps/details?id=exp.host.cs50).
 
 If you want to integrate this app with your course materials, you are most welcome to. Here's the [integration guide](integration-guide.md). If you need any help, drop us a note.
 
