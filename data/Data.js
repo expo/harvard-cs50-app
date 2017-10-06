@@ -1,5 +1,16 @@
+var _ = require('lodash');
 var data16 = require('./2016.json');
 var data17 = require('./2017.json');
+
+let checkDuplicateIds = data => {
+  let ids = _.map(data, 'weekNumber');
+  if (_.uniq(ids).length != ids.length) {
+    throw new Error('You have duplicate IDs in your data, which isnt allowed');
+  }
+};
+
+checkDuplicateIds(data16);
+checkDuplicateIds(data17);
 
 data16.map(el => {
   el.year = 2016;
