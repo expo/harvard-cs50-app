@@ -20,6 +20,8 @@ import Row from '../components/Row';
 import WeekBox from '../components/WeekBox';
 import { BoldText, LightText } from '../components/Texts';
 
+import CURRENT_WEEK from '../data/currentWeek';
+
 class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
@@ -92,7 +94,7 @@ class HomeScreen extends React.Component {
       year: year,
       data: this.props.data[year],
       dataSource: ds.cloneWithRows(this.props.data[year]),
-      weekNumber: year === 2016 ? 0 : 1,
+      weekNumber: year === 2016 ? 0 : CURRENT_WEEK,
     });
   }
 
