@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import * as Progress from 'react-native-progress';
 import prettyMs from 'pretty-ms';
 import reactMixin from 'react-mixin';
@@ -50,14 +50,14 @@ class Downloader extends React.Component {
         {(!this.props.downloadState ||
           this.props.downloadState.state === STATES.NOTSTARTED) &&
           <View>
-            <TouchableHighlight onPress={this.props.download}>
+            <TouchableOpacity onPress={this.props.download}>
               <View>
                 <Status
                   iconName={'play-for-work'}
                   text={'Download for offline viewing'}
                 />
               </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
           </View>}
         {(this.props.downloadState.state === STATES.DOWNLOADING ||
           this.props.downloadState.state === STATES.START_DOWNLOAD) &&
@@ -87,7 +87,7 @@ class Downloader extends React.Component {
             text={'Lecture available for offline viewing'}
           />}
         {this.props.downloadState.state === STATES.ERROR &&
-          <TouchableHighlight onPress={this.props.download}>
+          <TouchableOpacity onPress={this.props.download}>
             <View>
               <Status
                 iconName={'error'}
@@ -97,7 +97,7 @@ class Downloader extends React.Component {
                 }
               />
             </View>
-          </TouchableHighlight>}
+          </TouchableOpacity>}
       </View>
     );
   }
