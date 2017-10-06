@@ -29,7 +29,10 @@ class RateSwitcher extends React.Component {
           const nextRate = rates[this.state.rate.toString()];
           this.props.changeRate(nextRate);
           this.setState({ rate: nextRate });
-        }}>
+        }}
+        onShowUnderlay={() => this.setState({ active: true })}
+        onHideUnderlay={() => this.setState({ active: false })}
+        underlayColor={colors.tertiary}>
         <View
           style={{
             width: 30,
@@ -39,7 +42,7 @@ class RateSwitcher extends React.Component {
           <RegularText
             style={{
               fontSize: styles.fontSize(0),
-              color: colors.tertiary,
+              color: this.state.active ? colors.primary : colors.tertiary,
             }}>
             {this.state.rate + 'x'}
           </RegularText>
