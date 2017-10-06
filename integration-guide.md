@@ -2,9 +2,11 @@
 
 ## Course Data
 
-The app reads the data from a JSON object that is located in `data/Data.js`. The current data was generated from the XML files provided by Harvard in the `xml` dir. `utils/data-loader.js` transforms the XML into the data in `data/Data.js`.
+The app reads the data from a JSON object that is located in `data/`. The current data was generated from the XML files provided by Harvard in the `xml` dir. `utils/data-loader.js` transforms the XML into the data in `data/Data.js`. Currently, we have data for the 2016 edition and the 2017 edition of the class.
 
-`weekNumber` determines the current week that the class is in i.e. the week tile that is displayed when the app is started. This is set in the constructor of the `HomeScreen` component.
+`weekNumber` determines the current week that the class is in i.e. the week tile that is displayed when the app is started. This is set in `data/currentWeek.js`.
+
+If you modify the data in `data/`, and publish the app to Expo, all users with native installs will pick it up the next time they start their app.
 
 ## Video
 
