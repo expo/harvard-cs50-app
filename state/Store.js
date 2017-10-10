@@ -11,7 +11,9 @@ const reducer = (state = 0, action) => {
   if (type === REHYDRATE) {
     if (
       persistedStateIsInvalid(action.payload) ||
-      CURRENT_REDUX_VERSION.toString() != action.payload.version.toString()
+      (action.payload &&
+        action.payload.version &&
+        CURRENT_REDUX_VERSION.toString() != action.payload.version.toString())
     ) {
       console.log(getInitialState());
       console.log(
