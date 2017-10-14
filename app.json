@@ -4,7 +4,7 @@
     "description": "A companion app for CS50",
     "slug": "harvard-cs50",
     "privacy": "public",
-    "sdkVersion": "21.0.0",
+    "sdkVersion": "20.0.0",
     "version": "1.0.4",
     "orientation": "portrait",
     "primaryColor": "#A51C30",
