@@ -17,20 +17,20 @@ import SqlIcon from '../components/svgs/Sql';
 import CelebrationIcon from '../components/svgs/Celebration';
 import JavascriptIcon from '../components/svgs/Javascript';
 
-const IconMappings = [
-  ScratchIcon,
-  CIcon,
-  ArraysIcon,
-  AlgorithmsIcon,
-  MemoryIcon,
-  DatastructuresIcon,
-  HttpIcon,
-  MachinelearningIcon,
-  PythonIcon,
-  SqlIcon,
-  JavascriptIcon,
-  CelebrationIcon,
-];
+const IconMappings = {
+  scratch: ScratchIcon,
+  c: CIcon,
+  arrays: ArraysIcon,
+  algorithms: AlgorithmsIcon,
+  memory: MemoryIcon,
+  'data structures': DatastructuresIcon,
+  http: HttpIcon,
+  'machine learning': MachinelearningIcon,
+  python: PythonIcon,
+  sql: SqlIcon,
+  javascript: JavascriptIcon,
+  'the end': CelebrationIcon,
+};
 
 class WeekBox extends React.Component {
   state = {
@@ -41,7 +41,12 @@ class WeekBox extends React.Component {
       color: this.state.active ? colors.complementary : colors.primary,
       fontSize: styles.fontSize(2),
     };
-    const Icon = IconMappings[this.props.weekNumber];
+
+    let Icon = ScratchIcon;
+    if (this.props.desc.length > 0) {
+      Icon = IconMappings[this.props.desc];
+    }
+
     return (
       <TouchableHighlight
         onPress={this.props.onPress}

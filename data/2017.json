@@ -2,36 +2,150 @@
     {
         "title": "Week 0",
         "desc": "Scratch",
-        "audio": "http://cdn.cs50.net/2016/fall/lectures/0/week0.mp3",
-        "notes": "http://docs.cs50.net/2016/fall/notes/0/week0.html",
-        "slides": "http://cdn.cs50.net/2016/fall/lectures/0/week0.pdf",
-        "source code": "http://cdn.cs50.net/2016/fall/lectures/0/src0/",
-        "subtitles": "http://cdn.cs50.net/2016/fall/lectures/0/lang/en/week0.srt",
-        "syllabus": "http://docs.cs50.net/2016/fall/syllabus/cs50.html",
+        "notes": "http://docs.cs50.net/2017/fall/notes/0/lecture0.html",
+        "slides": "http://cdn.cs50.net/2017/fall/lectures/0/lecture0.pdf",
+        "source code": "https://scratch.mit.edu/studios/3003963/",
         "weekNumber": 0,
         "videos": {
-            "240p": "http://cdn.cs50.net/2016/fall/lectures/0/week0-240p.mp4",
-            "360p": "http://cdn.cs50.net/2016/fall/lectures/0/week0-360p.mp4",
-            "720p": "http://cdn.cs50.net/2016/fall/lectures/0/week0-720p.mp4",
-            "1080p": "http://cdn.cs50.net/2016/fall/lectures/0/week0-1080p.mp4",
-            "4k": "http://cdn.cs50.net/2016/fall/lectures/0/week0-4k.mp4"
+            "240p": "https://cdn.cs50.net/2017/fall/lectures/0/lecture0-240p.mp4",
+            "360p": "https://cdn.cs50.net/2017/fall/lectures/0/lecture0-360p.mp4",
+            "720p": "https://cdn.cs50.net/2017/fall/lectures/0/lecture0-720p.mp4",
+            "1080p": "https://cdn.cs50.net/2017/fall/lectures/0/lecture0-1080p.mp4",
+            "4k": "https://cdn.cs50.net/2017/fall/lectures/0/lecture0-4k.mp4"
         }
     },
     {
         "title": "Week 1",
         "desc": "C",
-        "audio": "http://cdn.cs50.net/2016/fall/lectures/1/week1.mp3",
-        "notes": "http://docs.cs50.net/2016/fall/notes/1/week1.html",
-        "slides": "http://cdn.cs50.net/2016/fall/lectures/1/week1.pdf",
-        "source code": "http://cdn.cs50.net/2016/fall/lectures/1/src1/",
-        "subtitles": "http://cdn.cs50.net/2016/fall/lectures/1/lang/en/week1.srt",
+        "notes": "http://docs.cs50.net/2017/fall/notes/1/lecture1.html",
+        "slides": "http://cdn.cs50.net/2017/fall/lectures/1/lecture1.pdf",
+        "source code": "http://cdn.cs50.net/2017/fall/lectures/1/src1/",
         "weekNumber": 1,
+        "videos": { // TODO: No videos available
+            "240p": "",
+            "360p": "",
+            "720p": "",
+            "1080p": "",
+            "4k": ""
+        }
+    },
+    {
+        "title": "Week 1 (cont.)",
+        "desc": "C",
+        "notes": "http://docs.cs50.net/2017/fall/notes/2/lecture2.html",
+        "slides": "http://cdn.cs50.net/2017/fall/lectures/2/lecture2.pdf",
+        "source code": "http://cdn.cs50.net/2017/fall/lectures/2/src2/",
+        "weekNumber": 102,
         "videos": {
-            "240p": "http://cdn.cs50.net/2016/fall/lectures/1/week1-240p.mp4",
-            "360p": "http://cdn.cs50.net/2016/fall/lectures/1/week1-360p.mp4",
-            "720p": "http://cdn.cs50.net/2016/fall/lectures/1/week1-720p.mp4",
-            "1080p": "http://cdn.cs50.net/2016/fall/lectures/1/week1-1080p.mp4",
-            "4k": "http://cdn.cs50.net/2016/fall/lectures/1/week1-4k.mp4"
+            "240p": "https://cdn.cs50.net/2017/fall/lectures/2/lecture2-240p.mp4",
+            "360p": "https://cdn.cs50.net/2017/fall/lectures/2/lecture2-360p.mp4",
+            "720p": "https://cdn.cs50.net/2017/fall/lectures/2/lecture2-720p.mp4",
+            "1080p": "https://cdn.cs50.net/2017/fall/lectures/2/lecture2-1080p.mp4",
+            "4k": "https://cdn.cs50.net/2017/fall/lectures/2/lecture2-4k.mp4"
+        }
+    },
+    {
+        "title": "Week 2",
+        "desc": "Algorithms",
+        "notes": "http://docs.cs50.net/2017/fall/notes/3/lecture3.html",
+        "slides": "http://cdn.cs50.net/2017/fall/lectures/3/lecture3.pdf",
+        "source code": "http://cdn.cs50.net/2017/fall/lectures/3/src3/",
+        "weekNumber": 2,
+        "videos": {
+            "240p": "https://cdn.cs50.net/2017/fall/lectures/3/lecture3-240p.mp4",
+            "360p": "https://cdn.cs50.net/2017/fall/lectures/3/lecture3-360p.mp4",
+            "720p": "https://cdn.cs50.net/2017/fall/lectures/3/lecture3-720p.mp4",
+            "1080p": "https://cdn.cs50.net/2017/fall/lectures/3/lecture3-1080p.mp4",
+            "4k": "https://cdn.cs50.net/2017/fall/lectures/3/lecture3-4k.mp4"
+        }
+    },
+    {
+        "title": "Week 3",
+        "desc": "Memory",
+        "notes": "http://docs.cs50.net/2017/fall/notes/4/lecture4.html",
+        "slides": "http://cdn.cs50.net/2017/fall/lectures/4/lecture4.pdf",
+        "source code": "http://cdn.cs50.net/2017/fall/lectures/4/src4.pdf",
+        "weekNumber": 3,
+        "videos": {
+            "240p": "https://cdn.cs50.net/2017/fall/lectures/4/lecture4-240p.mp4",
+            "360p": "https://cdn.cs50.net/2017/fall/lectures/4/lecture4-360p.mp4",
+            "720p": "https://cdn.cs50.net/2017/fall/lectures/4/lecture4-720p.mp4",
+            "1080p": "https://cdn.cs50.net/2017/fall/lectures/4/lecture4-1080p.mp4",
+            "4k": "https://cdn.cs50.net/2017/fall/lectures/4/lecture4-4k.mp4"
+        }
+    },
+    {
+        "title": "Week 4",
+        "desc": "Data Structures",
+        "notes": "http://docs.cs50.net/2017/fall/notes/5/lecture5.html",
+        "slides": "http://cdn.cs50.net/2017/fall/lectures/5/lecture5.pdf",
+        "source code": "http://cdn.cs50.net/2017/fall/lectures/5/src5/",
+        "weekNumber": 4,
+        "videos": {
+            "240p": "https://cdn.cs50.net/2017/fall/lectures/5/lecture5-240p.mp4",
+            "360p": "https://cdn.cs50.net/2017/fall/lectures/5/lecture5-360p.mp4",
+            "720p": "https://cdn.cs50.net/2017/fall/lectures/5/lecture5-720p.mp4",
+            "1080p": "https://cdn.cs50.net/2017/fall/lectures/5/lecture5-1080p.mp4",
+            "4k": "https://cdn.cs50.net/2017/fall/lectures/5/lecture5-4k.mp4"
+        }
+    },
+    {
+        "title": "Week 5",
+        "desc": "HTTP",
+        "notes": "http://docs.cs50.net/2017/fall/notes/6/lecture6.html",
+        "slides": "http://cdn.cs50.net/2017/fall/lectures/6/lecture6.pdf",
+        "source code": "http://cdn.cs50.net/2017/fall/lectures/6/src6/",
+        "weekNumber": 5,
+        "videos": {
+            "240p": "https://cdn.cs50.net/2017/fall/lectures/6/lecture6-240p.mp4",
+            "360p": "https://cdn.cs50.net/2017/fall/lectures/6/lecture6-360p.mp4",
+            "720p": "https://cdn.cs50.net/2017/fall/lectures/6/lecture6-720p.mp4",
+            "1080p": "https://cdn.cs50.net/2017/fall/lectures/6/lecture6-1080p.mp4",
+            "4k": "https://cdn.cs50.net/2017/fall/lectures/6/lecture6-4k.mp4"
+        }
+    },
+    {
+        "title": "Week 6",
+        "desc": "", // TODO: Dynamic programming? Machine learning?
+        "notes": "http://docs.cs50.net/2017/fall/notes/7/lecture7.html",
+        "slides": "http://cdn.cs50.net/2017/fall/lectures/7/lecture7.pdf",
+        "weekNumber": 6,
+        "videos": { // TODO: No videos available
+            "240p": "",
+            "360p": "",
+            "720p": "",
+            "1080p": "",
+            "4k": ""
+        }
+    },
+    {
+        "title": "Week 6 (cont.)",
+        "desc": "Python",
+        "notes": "http://docs.cs50.net/2017/fall/notes/8/lecture8.html",
+        "slides": "http://cdn.cs50.net/2017/fall/lectures/8/lecture8.pdf",
+        "source code": "http://cdn.cs50.net/2017/fall/lectures/8/src8/",
+        "weekNumber": 602,
+        "videos": { // TODO: No videos available yet
+            "240p": "",
+            "360p": "",
+            "720p": "",
+            "1080p": "",
+            "4k": ""
         }
     }
+    // {
+    //     "title": "Week ",
+    //     "desc": "",
+    //     "notes": "",
+    //     "slides": "",
+    //     "source code": "",
+    //     "weekNumber": ,
+    //     "videos": {
+    //         "240p": "",
+    //         "360p": "",
+    //         "720p": "",
+    //         "1080p": "",
+    //         "4k": ""
+    //     }
+    // },
 ]

@@ -105,15 +105,19 @@ class HomeScreen extends React.Component {
 
   onWeekPress(weekNumber) {
     this.props.navigation.navigate('Week', {
-      data: this.state.data[weekNumber],
+      data: this.findByWeekNumber(weekNumber),
     });
+  }
+
+  findByWeekNumber(weekNumber) {
+    return this.state.data.find(week => weekNumber === week.weekNumber);
   }
 
   renderRowView(rowData, sectionID, rowID) {
     return (
       <Row
         text={rowData.title + ' / ' + rowData.desc}
-        onPress={this.onWeekPress.bind(this, [rowID])}
+        onPress={this.onWeekPress.bind(this, rowData.weekNumber)}
       />
     );
   }
