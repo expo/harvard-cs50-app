@@ -5,7 +5,7 @@
     "slug": "harvard-cs50",
     "privacy": "public",
     "sdkVersion": "20.0.0",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "orientation": "portrait",
     "primaryColor": "#A51C30",
     "icon": "./assets/icons/app.png",
@@ -20,7 +20,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "exp.host.cs50",
-      "buildNumber": "4"
+      "buildNumber": "5"
     },
     "android": {
       "package": "exp.host.cs50"
