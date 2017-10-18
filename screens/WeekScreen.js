@@ -160,99 +160,93 @@ class WeekScreen extends React.Component {
     return (
       <View
         style={{
-          justifyContent: 'space-between',
-          flexDirection: 'column',
-          minHeight: Dimensions.get('window').height,
           backgroundColor: 'white',
+          minHeight: Dimensions.get('window').height,
         }}>
-        <VideoPlayer
-          videoProps={{
-            shouldPlay: config.autoplayVideo,
-            isMuted: config.muteVideo,
-            resizeMode: Video.RESIZE_MODE_CONTAIN,
-            source: {
-              uri: this.state.uri,
-            },
-            ref: component => {
-              this._playbackInstance = component;
-            },
-            positionMillis: this.state.playback,
-          }}
-          isPortrait={this.state.isPortrait}
-          switchToLandscape={this.switchToLandscape.bind(this)}
-          switchToPortrait={this.switchToPortrait.bind(this)}
-          playbackCallback={this._playbackCallback.bind(this)}
-          errorCallback={this._errorCallback.bind(this)}
-          thumbImage={THUMB_IMAGE}
-          trackImage={TRACK_IMAGE}
-          playIcon={PlayIcon}
-          pauseIcon={PauseIcon}
-          fullscreenEnterIcon={FullscreenEnterIcon}
-          fullscreenExitIcon={FullscreenExitIcon}
-          replayIcon={ReplayIcon}
-          textStyle={{
-            color: colors.tertiary,
-            fontFamily: 'custom-regular',
-            textAlign: 'left',
-            fontSize: 12,
-          }}
-        />
-        <View
-          style={{
-            backgroundColor: colors.primary,
-            marginBottom: 20,
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            paddingLeft: styles.mainViewStyle.marginLeft,
-            paddingRight: styles.mainViewStyle.marginRight,
-          }}>
-          <Downloader
-            id={this.state.data.id}
-            style={{
-              display: this.state.isPortrait ? 'flex' : 'none',
-              marginBottom: 40,
+        <ScrollView>
+          <VideoPlayer
+            videoProps={{
+              shouldPlay: config.autoplayVideo,
+              isMuted: config.muteVideo,
+              resizeMode: Video.RESIZE_MODE_CONTAIN,
+              source: {
+                uri: this.state.uri,
+              },
+              ref: component => {
+                this._playbackInstance = component;
+              },
+              positionMillis: this.state.playback,
+            }}
+            isPortrait={this.state.isPortrait}
+            switchToLandscape={this.switchToLandscape.bind(this)}
+            switchToPortrait={this.switchToPortrait.bind(this)}
+            playbackCallback={this._playbackCallback.bind(this)}
+            errorCallback={this._errorCallback.bind(this)}
+            thumbImage={THUMB_IMAGE}
+            trackImage={TRACK_IMAGE}
+            playIcon={PlayIcon}
+            pauseIcon={PauseIcon}
+            fullscreenEnterIcon={FullscreenEnterIcon}
+            fullscreenExitIcon={FullscreenExitIcon}
+            replayIcon={ReplayIcon}
+            textStyle={{
+              color: colors.tertiary,
+              fontFamily: 'custom-regular',
+              textAlign: 'left',
+              fontSize: 12,
             }}
           />
-          <RateSwitcher changeRate={this.changeRate.bind(this)} />
-        </View>
-        <ScrollView
-          contentContainerStyle={{
-            justifyContent: 'space-between',
-            flexDirection: 'column',
-            display: this.state.isPortrait ? 'flex' : 'none',
-            backgroundColor: 'white',
-          }}>
-          <Text
-            style={[
-              styles.h1Style,
-              styles.mainViewStyle,
-              { marginBottom: 30 },
-            ]}>
-            Course Materials
-          </Text>
+          <View
+            style={{
+              backgroundColor: colors.primary,
+              marginBottom: 20,
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              paddingLeft: styles.mainViewStyle.marginLeft,
+              paddingRight: styles.mainViewStyle.marginRight,
+            }}>
+            <Downloader
+              id={this.state.data.id}
+              style={{
+                display: this.state.isPortrait ? 'flex' : 'none',
+                marginBottom: 40,
+              }}
+            />
+            <RateSwitcher changeRate={this.changeRate.bind(this)} />
+          </View>
+          <View>
+            <Text
+              style={[
+                styles.h1Style,
+                styles.mainViewStyle,
+                { marginBottom: 30 },
+              ]}>
+              Course Materials
+            </Text>
 
-          {_.map(
-            this.state.links,
-            (url, title) =>
-              !(this.state.data.weekNumber === 0 && title == 'source code') &&
-              <Row
-                key={title}
-                text={title}
-                icon={this.ICONS[title]}
-                onPress={
-                  title == 'slides'
-                    ? WebBrowser.openBrowserAsync.bind(this, url)
-                    : this.onRowPress.bind(this, url, title)
-                }
-                style={{
-                  alignSelf: 'stretch',
-                  flex: 1,
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                }}
-              />
-          )}
+            {_.map(
+              this.state.links,
+              (url, title) =>
+                !(this.state.data.weekNumber === 0 && title == 'source code') &&
+                <Row
+                  key={title}
+                  text={title}
+                  icon={this.ICONS[title]}
+                  onPress={
+                    title == 'slides'
+                      ? WebBrowser.openBrowserAsync.bind(this, url)
+                      : this.onRowPress.bind(this, url, title)
+                  }
+                  style={{
+                    alignSelf: 'stretch',
+                    flex: 1,
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                  }}
+                />
+            )}
+          </View>
         </ScrollView>
       </View>
     );
