@@ -43,7 +43,10 @@ export default class DownloadManager {
     this._onAppStart();
 
     AppState.addEventListener('change', this._handleAppStateChange);
-    NetInfo.addEventListener('change', this._handleNetworkStateChange);
+    NetInfo.addEventListener(
+      'connectionChange',
+      this._handleNetworkStateChange
+    );
 
     // TODO: Periodally pause all downloads and resume them
   }
@@ -86,7 +89,7 @@ export default class DownloadManager {
   };
 
   _handleNetworkStateChange = networkState => {
-    console.log('[network state]', networkState);
+    console.log('[network state]', networkState.type);
   };
 
   // Store functions
