@@ -23,50 +23,56 @@ const ICON_COLOR = colors.tertiary;
 const CENTER_ICON_SIZE = 36;
 const BOTTOM_BAR_ICON_SIZE = 30;
 
-const PlayIcon = () =>
+const PlayIcon = () => (
   <Foundation
     name={'play'}
     size={CENTER_ICON_SIZE}
     color={ICON_COLOR}
     style={{ textAlign: 'center' }}
-  />;
+  />
+);
 
-const PauseIcon = () =>
+const PauseIcon = () => (
   <Foundation
     name={'pause'}
     size={CENTER_ICON_SIZE}
     color={ICON_COLOR}
     style={{ textAlign: 'center' }}
-  />;
+  />
+);
 
-export const FullscreenEnterIcon = () =>
+export const FullscreenEnterIcon = () => (
   <MaterialIcons
     name={'fullscreen'}
     size={BOTTOM_BAR_ICON_SIZE}
     color={ICON_COLOR}
     style={{ textAlign: 'center' }}
-  />;
+  />
+);
 
-export const FullscreenExitIcon = () =>
+export const FullscreenExitIcon = () => (
   <MaterialIcons
     name={'fullscreen-exit'}
     size={BOTTOM_BAR_ICON_SIZE}
     color={ICON_COLOR}
     style={{ textAlign: 'center' }}
-  />;
+  />
+);
 
-export const ReplayIcon = () =>
+export const ReplayIcon = () => (
   <MaterialIcons
     name={'replay'}
     size={CENTER_ICON_SIZE}
     color={ICON_COLOR}
     style={{ textAlign: 'center' }}
-  />;
+  />
+);
 
 class WeekScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: `${navigation.state.params.data.year} / Week ${navigation.state
-      .params.data.weekNumber}`,
+    title: `${navigation.state.params.data.year} / Week ${
+      navigation.state.params.data.weekNumber
+    }`,
     headerTintColor: styles.headerTintColor,
     headerTitleStyle: styles.headerTitleStyle,
     headerStyle: navigation.state.params.hideHeader
@@ -228,23 +234,26 @@ class WeekScreen extends React.Component {
             {_.map(
               this.state.links,
               (url, title) =>
-                !(this.state.data.weekNumber === 0 && title == 'source code') &&
-                <Row
-                  key={title}
-                  text={title}
-                  icon={this.ICONS[title]}
-                  onPress={
-                    title == 'slides'
-                      ? WebBrowser.openBrowserAsync.bind(this, url)
-                      : this.onRowPress.bind(this, url, title)
-                  }
-                  style={{
-                    alignSelf: 'stretch',
-                    flex: 1,
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                  }}
-                />
+                !(
+                  this.state.data.weekNumber === 0 && title == 'source code'
+                ) && (
+                  <Row
+                    key={title}
+                    text={title}
+                    icon={this.ICONS[title]}
+                    onPress={
+                      title == 'slides'
+                        ? WebBrowser.openBrowserAsync.bind(this, url)
+                        : this.onRowPress.bind(this, url, title)
+                    }
+                    style={{
+                      alignSelf: 'stretch',
+                      flex: 1,
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                    }}
+                  />
+                )
             )}
           </View>
         </ScrollView>

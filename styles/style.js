@@ -29,7 +29,7 @@ const headerStyle = {
   borderBottomWidth: 1,
   borderColor: colors.secondary,
   backgroundColor: 'white',
-  height: Platform.OS === 'ios' ? 80 : 100,
+  // height: Platform.OS === 'ios' ? 80 : 100,
 };
 
 // H1

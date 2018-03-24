@@ -55,7 +55,7 @@ class Row extends React.Component {
                   flexDirection: 'row',
                   alignItems: 'center',
                 }}>
-                {this.props.icon &&
+                {this.props.icon && (
                   <FontAwesome
                     name={this.props.icon}
                     size={18}
@@ -69,7 +69,8 @@ class Row extends React.Component {
                       textAlign: 'center',
                       width: 20,
                     }}
-                  />}
+                  />
+                )}
                 <RegularText
                   style={{
                     fontSize: styles.fontSize(1),

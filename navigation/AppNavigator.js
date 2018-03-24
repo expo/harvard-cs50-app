@@ -1,15 +1,14 @@
-import { StackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 
 import HomeScreen from '../screens/HomeScreen';
 import WeekScreen from '../screens/WeekScreen';
 import LinkScreen from '../screens/LinkScreen';
 import ResourcesScreen from '../screens/ResourcesScreen';
 
-const LecturesNavigator = StackNavigator(
+const LecturesNavigator = createStackNavigator(
   {
     Home: {
       screen: HomeScreen,
-      initialRouteParams: { year: 2017 },
     },
     Week: {
       screen: WeekScreen,
@@ -21,7 +20,7 @@ const LecturesNavigator = StackNavigator(
   { mode: 'card', initialRouteParams: { year: 2017 } }
 );
 
-const ResourceNavigator = StackNavigator({
+const ResourceNavigator = createStackNavigator({
   Resources: {
     screen: ResourcesScreen,
   },
@@ -30,7 +29,7 @@ const ResourceNavigator = StackNavigator({
   },
 });
 
-export default (AppNavigator = StackNavigator(
+export default createStackNavigator(
   {
     Home: {
       screen: LecturesNavigator,
@@ -41,4 +40,4 @@ export default (AppNavigator = StackNavigator(
     },
   },
   { mode: 'modal', headerMode: 'none', initialRouteParams: { year: 2017 } }
-));
+);

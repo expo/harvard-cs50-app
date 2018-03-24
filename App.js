@@ -87,11 +87,13 @@ class AppContainer extends React.Component {
       return <AppLoading />;
     }
 
-    return this.state.firstLoad
-      ? <OnboardScreen startApp={() => this.setState({ firstLoad: false })} />
-      : <Provider store={Store}>
-          <AppNavigator />
-        </Provider>;
+    return this.state.firstLoad ? (
+      <OnboardScreen startApp={() => this.setState({ firstLoad: false })} />
+    ) : (
+      <Provider store={Store}>
+        <AppNavigator />
+      </Provider>
+    );
   }
 }
 

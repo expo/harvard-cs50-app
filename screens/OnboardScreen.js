@@ -27,7 +27,7 @@ class OnboardScreen extends React.Component {
   };
 
   render() {
-    const Panel = ({ text, style, animated }) =>
+    const Panel = ({ text, style, animated }) => (
       <View
         style={[
           {
@@ -39,18 +39,19 @@ class OnboardScreen extends React.Component {
           style,
         ]}>
         {animated &&
-          this.state.animation &&
-          <Lottie
-            ref={animation => {
-              this.animation = animation;
-            }}
-            style={{
-              width: 400,
-              height: 400,
-              backgroundColor: colors.tertiary,
-            }}
-            source={this.state.animation}
-          />}
+          this.state.animation && (
+            <Lottie
+              ref={animation => {
+                this.animation = animation;
+              }}
+              style={{
+                width: 400,
+                height: 400,
+                backgroundColor: colors.tertiary,
+              }}
+              source={this.state.animation}
+            />
+          )}
         <Text
           style={{
             color: colors.primary,
@@ -62,7 +63,8 @@ class OnboardScreen extends React.Component {
         <TouchableHighlight onPress={() => this.props.startApp()}>
           <Text>Go to app</Text>
         </TouchableHighlight>
-      </View>;
+      </View>
+    );
     return (
       <Swiper loop={false} activeDotColor={colors.primary}>
         <Panel

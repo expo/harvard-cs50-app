@@ -142,7 +142,7 @@ class HomeScreen extends React.Component {
             ]}>
             Lectures ({this.state.year})
           </BoldText>
-          {this.state.data &&
+          {this.state.data && (
             <Carousel
               containerCustomStyle={{ marginTop: 20 }}
               ref={carousel => {
@@ -206,7 +206,8 @@ class HomeScreen extends React.Component {
                   </View>
                 );
               })}
-            </Carousel>}
+            </Carousel>
+          )}
         </View>
       );
     };

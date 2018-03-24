@@ -1,10 +1,14 @@
 import React from 'react';
 import { Text } from 'react-native';
 
-const generateTextComponent = ({ style = {}, children, ...otherProps }, font) =>
+const generateTextComponent = (
+  { style = {}, children, ...otherProps },
+  font
+) => (
   <Text {...otherProps} style={[{ fontFamily: font }, style]}>
     {children}
-  </Text>;
+  </Text>
+);
 
 export class LightText extends React.Component {
   render = () => generateTextComponent(this.props, 'custom-light');

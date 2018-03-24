@@ -13,7 +13,7 @@ import { STATES } from '../utils/DownloadManager';
 
 class Downloader extends React.Component {
   render() {
-    const Status = ({ iconName, text }) =>
+    const Status = ({ iconName, text }) => (
       <View
         style={{
           flexDirection: 'row',
@@ -26,10 +26,9 @@ class Downloader extends React.Component {
           size={28}
           color={colors.tertiary}
         />
-        <RegularText style={{ color: colors.tertiary }}>
-          {text}
-        </RegularText>
-      </View>;
+        <RegularText style={{ color: colors.tertiary }}>{text}</RegularText>
+      </View>
+    );
 
     let progress = 0;
     if (
@@ -48,7 +47,7 @@ class Downloader extends React.Component {
           paddingBottom: 10,
         }}>
         {(!this.props.downloadState ||
-          this.props.downloadState.state === STATES.NOTSTARTED) &&
+          this.props.downloadState.state === STATES.NOTSTARTED) && (
           <View>
             <TouchableOpacity onPress={this.props.download}>
               <View>
@@ -58,9 +57,10 @@ class Downloader extends React.Component {
                 />
               </View>
             </TouchableOpacity>
-          </View>}
+          </View>
+        )}
         {(this.props.downloadState.state === STATES.DOWNLOADING ||
-          this.props.downloadState.state === STATES.START_DOWNLOAD) &&
+          this.props.downloadState.state === STATES.START_DOWNLOAD) && (
           <View
             style={{
               display: 'flex',
@@ -80,13 +80,15 @@ class Downloader extends React.Component {
                 Downloading for offline viewing...
               </RegularText>
             </View>
-          </View>}
-        {this.props.downloadState.state === STATES.DOWNLOADED &&
+          </View>
+        )}
+        {this.props.downloadState.state === STATES.DOWNLOADED && (
           <Status
             iconName={'offline-pin'}
             text={'Lecture available for offline viewing'}
-          />}
-        {this.props.downloadState.state === STATES.ERROR &&
+          />
+        )}
+        {this.props.downloadState.state === STATES.ERROR && (
           <TouchableOpacity onPress={this.props.download}>
             <View>
               <Status
@@ -97,7 +99,8 @@ class Downloader extends React.Component {
                 }
               />
             </View>
-          </TouchableOpacity>}
+          </TouchableOpacity>
+        )}
       </View>
     );
   }

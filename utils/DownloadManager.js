@@ -254,16 +254,16 @@ export default class DownloadManager {
 
   async _resumeAllDownloads() {
     // TODO: Catch errors
-    _(
-      this._store.getState().offline
-    ).forEach(async ({ state, savable }, id) => {
-      if (state === STATES.DOWNLOADING) {
-        if (savable) {
-          this._startDownloadFromStore(id, savable);
-        } else {
-          this._startDownloadForId(id);
+    _(this._store.getState().offline).forEach(
+      async ({ state, savable }, id) => {
+        if (state === STATES.DOWNLOADING) {
+          if (savable) {
+            this._startDownloadFromStore(id, savable);
+          } else {
+            this._startDownloadForId(id);
+          }
         }
       }
-    });
+    );
   }
 }

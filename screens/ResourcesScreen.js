@@ -80,14 +80,14 @@ class ResourcesScreen extends React.Component {
   render() {
     return (
       <ScrollView style={{ backgroundColor: 'white' }}>
-        {RESOURCES.map(({ url, name, icon }) =>
+        {RESOURCES.map(({ url, name, icon }) => (
           <Row
             key={url}
             text={name}
             onPress={this.onPress.bind(this, url, name)}
             icon={icon}
           />
-        )}
+        ))}
       </ScrollView>
     );
   }
